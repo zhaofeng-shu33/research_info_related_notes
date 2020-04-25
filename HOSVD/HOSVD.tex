@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\DeclareMathOperator\E{\mathbb{E}}
+\DeclareMathOperator\Var{\mathrm{Var}}
+\def\R{\mathbb{R}}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\begin{document}
+\title{High Order SVD}
+\author{zhaofeng-shu33}
+\maketitle
+\section{Multilinear Multiplication}
+Consider a mapping from $\R^{n_1 \times n_2 \times \dots \times n_d} $ to 
+$\R^{m_1 \times m_2 \times \dots \times m_d} $ concatenated by $d$ linear mapping $M^{(k)}: \R^{n_k} \to \R^{m_k}$.
+$M^{(k)}$ is $n_k \times m_k$ matrix.
+The multilinear mapping is denoted by $(M^{(1)}, M^{(2)}, \dots, M^{(d)})$ and is defined elementwisely by
+\begin{equation}
+b_{i_1, i_2, \dots, i_d} = \sum_{j_1=1}^{n_1} \sum_{j_2 = 1}^{n_2} \dots \sum_{j_d = 1}^{n_d} a_{j_1,j_2,\dots,j_d} m^{(1)}_{i_1, j_1}
+m^{(2)}_{i_2,j_2}\dots m^{(d)}_{i_d,j_d}
+\end{equation}
+Let $\mathcal{A} =[a_{j_1,j_2,\dots,j_d}], \mathcal{B}=[b_{i_1, i_2, \dots, i_d}]$. The multiplication is written as 
+\begin{equation}
+\mathcal{B} = (M^{(1)}, M^{(2)}, \dots, M^{(d)})\cdot\mathcal{A}
+\end{equation}
+If $d=1$, it reduces to linear mapping; if $d=2$ and $m_1=m_2=1$, it reduces to quadratic form.
+
+Shorthand notation: $V_{\cdot k}\mathcal{A} = (I, \dots, V,\dots, I) \cdot \mathcal{A}$, where $V$ is at k-th position and $I$ is identity mapping.
+
+\section{Standard factor-k flatting}
+Let $\mathcal{A} \in \R^{n_1 \times n_2 \times \dots \times n_d}$, the standard factor-k flatting is $\mathcal{A}_{(k)}$ is a $n_k \times (\prod_{i=1}^d n_i)/n_k$ matrix, where $a_{i_1i_2\dots i_d} $ is put at row $i_k$ and the column position is calculated by 
+the following formula\footnote{smaller index iterates first}(not consistent across different literature):
+\begin{equation}
+j = 1 + \sum_{\substack{i=1 \\ i\neq k}}^d (n_i - 1) J_i, \textrm{ with } J_i = \prod_{\substack{m=1\\ m\neq k}}^{i-1} n_m
+\end{equation}
+It is easy to show that $(V_{\cdot k} \mathcal{A})_{(k)} = V \mathcal{A}_{(k)}$
+
+\section{High Order SVD}
+Let $\mathcal{A} \in \R^{n_1 \times n_2 \times \dots \times n_d}$ be an order $d$ tensor in $\R$ and its standard factor-k flatting be $\mathcal{A}_{(k)}$. Let $U_k (n_k \times n_k)$ be the left unitary matrix of SVD decomposition of $\mathcal{A}_{(k)}$. Then  $\mathcal{A}$
+can be decomposed as $ \mathcal{A} = (U_1, U_2, \dots, U_d) \cdot \mathcal{S}$, where $\mathcal{S}$ is the core tensor defined by
+\begin{equation}\label{eq:S}
+ \mathcal{S} = (U_1^T, U_2^T, \dots, U_d^T) \cdot \mathcal{A}
+\end{equation} 
+
+\section{Compact HOSVD}
+It can be shown that if we do compact SVD of $\mathcal{A}_{(k)}$ and use $U_k(n_k \times r_k)$ instead, we still have 
+\begin{equation}
+\mathcal{A} = (U_1, \dots, U_d) \cdot \mathcal{S}
+\end{equation}
+where $\mathcal{S}$ is of size $r_1 \times r_2\times \cdot \times r_d$ defined by \eqref{eq:S}. 
+
+The tuple $(r_1, r_2, \dots, r_d) $ is called the multilinear rank of tensor $\mathcal{A}$.
+\section{Example}
+Consider a 3-order tensor in $\R^{3\times 4 \times 2}$ with frontal slices ($X_{::k}$)
+$$
+X_{::1} = \begin{bmatrix}
+1 & 4 & 7 & 10 \\
+2 & 5 & 8 & 11 \\
+3 & 6 & 9 & 12 
+\end{bmatrix},
+X_{::2} \begin{bmatrix}
+13 & 16 & 19 & 22 \\
+14 & 17 & 20 & 23 \\
+15 & 18 & 21 & 24 
+\end{bmatrix}
+$$
+Then $$
+X_{(1)} = \begin{bmatrix}
+1 & 4 & 7 & 10 & 13 & 16 & 19 & 22 \\
+2 & 5 & 8 & 11 & 14 & 17 & 20 & 23 \\
+3 & 6 & 9 & 12 & 15 & 18 & 21 & 24
+\end{bmatrix},
+X_{(2)} = \begin{bmatrix}
+1 & 2 & 3 & 13 & 14 & 15 \\
+4 & 5 & 6& 16 & 17 & 18 \\
+7 & 8 & 9 & 19 & 20 & 21\\
+10 & 11 & 12 & 22 & 23 & 24
+\end{bmatrix}
+$$
+and 
+$$
+X_{(3)} = \begin{bmatrix}
+1 & 2 & 3 & 4 & \dots & 9 & 10 & 11 & 12 \\
+13 & 14 & 15 & 16 & \dots & 21 & 22 & 23 & 24
+\end{bmatrix}
+$$
+We can compute that $\mathcal{S}$ is of size $ 2 \times 2 \times 2 $.
+By  \eqref{eq:S} we have:
+$$
+\mathcal{S}_{::1} = 
+\begin{bmatrix}
+-70 & 0.02 \\
+-0.07 & -0.78
+\end{bmatrix},
+\mathcal{S}_{::2} = 
+\begin{bmatrix}
+0.01 &  6.9 \\
+-1.6 & -0.7
+\end{bmatrix}
+$$
+\newpage
+\section{Multilinear functional, its norm and signular vectors}
+Let $\mathcal{A} = \llbracket a_{j_1j_2\dots j_d} \rrbracket \in \R^{n_1 \times n_2 \times \dots \times n_d}$, and $\bm{x}_i \in \R^{n_i}$
+then 
+\begin{equation}
+\mathcal{A}(\bm{x}_1, \bm{x}_2, \dots, \bm{x}_d) = \sum_{j_1 = 1}^{n_1}\sum_{j_2 = 1}^{n_2} \dots
+\sum_{j_d = 1}^{n_d} a_{j_1 j_2 \dots j_d} x_{j_1} x_{j_2} \dots x_{j_d}
+\end{equation}
+the induced norm of $\mathcal{A}$ by $\ell^2$ norm of vector is defined as :
+\begin{equation}
+\norm{\mathcal{A}} = \sup \frac{\abs{\mathcal{A}(\bm{x}_1, \dots, \bm{x}_d)}}{\norm{\bm{x}_1} \dots \norm{\bm{x}_d}}
+\end{equation} 
+Multiply a d-order tensor $\mathcal{A}$ by a $d-1$ order tensor gives a vector. If the $d-1$ order tensor is produced by product of $d-1$ vectors, we use the notation $\mathcal{A}(\bm{x}_1, \dots, I_{d_i}, \dots, \bm{x}_d)$ whose j-th element is
+replaced by $\bm{x}_i$ by standard unit vector $\bm{e}_j$.
+
+A singular value $\sigma$ and singular vector pairs $\bm{x}_1, \bm{x}_2, \dots, \bm{x}_d$ are defined as:
+\begin{equation}
+\begin{array}{ccc}
+\mathcal{A}(I_{d_1}, \bm{x}_2, \bm{x}_3, \dots, \bm{x}_d) & = & \sigma \bm{x}_1 \\
+\mathcal{A}(\bm{x}_1,  I_{d_2}, \bm{x}_3,\dots, \bm{x}_d)  & = & \sigma \bm{x}_2 \\
+& \vdots & \\
+\mathcal{A}(\bm{x}_1, \bm{x}_2, \dots, \bm{x}_{d-1}, I_{d_d})  & = & \sigma \bm{x}_d \\
+\end{array}
+\end{equation}
+And we have the following proposition:
+\begin{equation}
+\sigma_{\max}(\mathcal{A}) = \norm{\mathcal{A}}
+\end{equation}
+\end{document}
