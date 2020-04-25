@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\def\E{\mathbb{E}}
+\title{Info-related notes}
+\date{2019-04-25}
+\begin{document}
+\maketitle
+\section{A simple inequality}
+Suppose $I(U; X) \leq \frac{1}{2} \epsilon^2$ and $\min_{u} P_U(u) > \gamma$, show that
+\begin{equation}
+P_{X|U}(x|u) = P_X(x) + \epsilon \sqrt{P_X(x)}\phi_u(x)
+\end{equation}
+\begin{proof}
+Since $I(U;X) = \E_{U}[D(X|U || X)] \geq \gamma D(X|U=u || X)$. Then using Pinsker's inequality,
+$\max_{x}\{ P_{X|U}-P_X \} \leq \sqrt{\frac{1}{2} D(X|U=u || X)} \leq \sqrt{\frac{1}{2\gamma}} \epsilon$
+
+\end{proof}
+\end{document}
