@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\DeclareMathOperator\E{\mathbb{E}}
+\DeclareMathOperator\Var{\mathrm{Var}}
+\newtheorem{lemma}{引理}
+\theoremstyle{definition}
+\newtheorem{definition}{定义}
+\newtheorem{example}{例}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\begin{document}
+\title{信息论与统计}
+\author{zhaofeng-shu33}
+\maketitle
+\section{概要}
+提出了一种新的衡量神经网络模型复杂度的方法---权重所含数据 的信息量$I(w;D)$ 并给出该指标的上界。通过控制信息瓶颈Lagrangian 中的乘子$\beta$的值控制了权重所含数据中信息的多少。太少模型则有冗余(underfit)，太多则变成记忆训练数据(overfit)。
+
+本文为了定量验证问题，引入权重分布的特定模型（对数正态模型和对数均匀分布模型）
+\section{最小充分统计量}
+$ Y \leftrightarrow X \leftrightarrow Z$ 构成马式链，根据$Z$ 估计 $Y$。 $Z$ 是充分统计量当$ p( X | Y,Z)=p(X|Z)$即$Y$与$X$关于$Z$条件独立，也即 $ I(Z; Y) \leq I(X; Y) $(DPI) 中取等号。因$X, Y$ 已知，$I(Z;Y)$最大为$I(X;Y)$。极大化$I(Z;Y)$等价于极小化
+$H(Y|Z)$，最小值是$H(Y|X)$。
+
+最小充分统计量是可以用其他充分统计量表出的统计量。假设$Z$是充分统计量而$Z_m$ 是最小充分统计量，则
+$I(X;Z_m) \leq I(X; Z) $ 即 $Z_m$ 是$I(X;Z)$的最小值。
+
+小结
+\begin{enumerate}
+\item 充分性：$I(Z; Y) = I(X; Y) $， 即关于$Y$的信息没有损失；
+\item 最小性： $I(Z;X)$最小，所含$X$中的信息最少。
+\end{enumerate}
+
+平衡二者可以使用 信息瓶颈(IB)Lagrangian :
+\begin{equation}
+\mathcal{L}(p(z | x) )  = H(Y|Z) + \beta I(Z;X)
+\end{equation}
+\section{invariant}
+\textbf{Nuisance}: 若随机变量$n$ 与 $y$无关($I(Y; N) = 0$)，则称其为 nuisance
+
+\textbf{invariant}: 若 估计量 $z(x)$ 与 nuisance $n$ 无关($I(N;Z) = 0$)，则称其具有 invariant 的性质。
+
+\section{用于分析神经网络}
+在神经网络结构中，$X$ 到$Z$ 的后验由网络各层权重 $w$ 决定，$x \to f_w(x):= q(\cdot | x, w)$。 其中$q$ 表示训练得到的后验分布$q(y|x,w)$。在同一训练过程中也得到了$w$的分布$q(w|D)$（可以只在一个点取值）。基于IB Lagrangian 的正规化损失函数形式为：
+\begin{equation}
+\mathcal{L}( q(w | \mathcal{D}) )  = H_{ p, q}(y|x,w) + \beta I(w;D)
+\end{equation}
+其中$p$是真实分布（未知），上式第一项是互熵损失函数，第二项是正则项，用于避免过拟合。
+上式第二项无法计算，考虑到 
+\begin{align*}
+I(w; D) & = \E_{\mathcal{D}} \mathrm{KL}(\,q(w| \mathcal{D}) || q(w)\,) \\
+& \leq \E_{\mathcal{D}} \mathrm{KL}(\,q(w| \mathcal{D}) || q(w)\,) + \mathrm{KL}(\, q(w) || p(w) \,) \\
+& = \E_{\mathcal{D}} \mathrm{KL}(\, q(w| \mathcal{D}) || p(w)\, )
+\end{align*}
+给定训练集 $\mathcal{D}$ 使用最优损失函数
+的上界：
+\begin{equation}
+\mathcal{L}( q(w | \mathcal{D}) )  = H_{ p, q}(y|x,w) + \beta \mathrm{KL}(\, q(w| \mathcal{D}) || p(w)\, )
+\end{equation}
+\end{document}

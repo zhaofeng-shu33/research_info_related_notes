@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{bm}
+\usepackage{footmisc}
+\DeclareMathOperator\E{\mathbb{E}}
+\DeclareMathOperator\Var{\mathrm{Var}}
+\def\R{\mathbb{R}}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\inner{\langle}{\rangle}
+\begin{document}
+\title{optimal feature transformation for 3 random variables}
+\author{zhaofeng-shu33}
+\maketitle
+\section{Background}
+\subsection{optimal feature transformation for 2 random variables}
+We know that for two random variable $X$ and $Y$,  we can use the \textbf{ACE} algorithm to find $f(X)$ and $g(Y)$ such that
+the Pearson correlation coefficient between $f(X)$ and $g(Y)$ is maximized.
+Mathematically, ACE algorithm is an iterative method to solve $f^*(X), g^*(Y)$ such that 
+for all $\E[f(X)]=\E[g(Y)]=0, \Var[f(X)]=\Var[g(Y)]=1$ we have $\E[f^*(X)g^*(Y)]\geq \E[f(X)g(Y)]$.
+
+The \textbf{ACE} algorithm is summaried as follows:
+
+\begin{algorithm}
+\begin{algorithmic}
+\STATE $g \leftarrow g_0$ \COMMENT{Initialization}
+\STATE $ g(y) \leftarrow g(y) - \E[g(Y)]$ \COMMENT{Center}
+\REPEAT
+\STATE $f(X) \leftarrow \E[g(Y) | X]$
+\STATE $g(Y) \leftarrow \E[f(X) | Y]$
+\STATE $ g(y) \leftarrow g(y)/\sqrt{\E[g^2(Y)]}$
+\UNTIL{ $\E[f(X)g(Y)]$ stops to increase\footnotemark}
+\end{algorithmic}
+\caption{ACE}\label{ACE}
+\end{algorithm}
+\footnotetext{normalize $f(x)$ after the loop}
+\begin{equation}\label{eq:XY}
+\E[f(X)g(Y)]=\E_{X} [ \E[g(Y)|X] f(X)] \leq \E^2[g(Y)|X]
+\end{equation}
+since $\E^2[f(X)]=1$ and the equality holds when $f(X) = \lambda \E[g(Y)|X]$.
+$\E[f(X)]$ follows from $\E[g(Y)]=0$.
+Therefore the algorithm increase the object function in each step and local maxima can be obtained.
+
+For discrete random variables, by the SVD decomposition theory we can show that the local maxima is global maxima almost surely
+\footnote{the projection of initial guess on a particular eigenspace is nonzero.} if numerical noise is considered[xiangxiang-xu]. For general random variables, the result holds[Breiman, 1985].
+\section{Problem Formulation}
+We consider the case when $f(X), g(Y), h(Z)$ have zero mean, unit variance and 
+$\E[f(X)g(Y)h(Z)]$ is required.
+As an analogy to Algorithm~\ref{ACE}, we propose the iterative scheme to calculate $f(X), g(Y), h(Z)$ as follows:
+\begin{algorithm}
+\begin{algorithmic}
+\STATE $g \leftarrow g_0, h \leftarrow h_0$
+\STATE $ g(y) \leftarrow g(y) - \E[g(Y)], h(z) \leftarrow h(z) - \E[h(Z)]$
+\REPEAT
+\STATE $f(X) \leftarrow \E[g(Y)h(Z) | X]$
+\STATE $g(Y) \leftarrow \E[f(X)h(Z) | Y]$
+\STATE $ h(Z) \leftarrow \E[f(X) g(Y) | Z]$
+\STATE $ g(y) \leftarrow g(y)/\sqrt{\E[g^2(Y)]}$
+\STATE $ h(z) \leftarrow h(z)/\sqrt{\E[h^2(Z)]}$
+\UNTIL{$\E[f(X)g(Y)h(Z)]$ stops to increase}
+\end{algorithmic}
+\caption{ACE for three random variable}\label{ACE3}
+\end{algorithm}
+
+Similar to ~\eqref{eq:XY}, by CS-inequalty we can show that Algorithm~\ref{ACE3} incrementally increases the object function.
+To show the optimality, we consider discrete cases and extend SVD theory on matrix(2-order tensor).
+\section{$\bm{B}$ matrix and its extension}
+Suppose $X$ takes values from alphabet $\mathcal{X}$ and $Y$ from $\mathcal{Y}$,
+let $ \phi(x) = f(x) \sqrt{P_X(x)}$, $\psi(x) = g(y) \sqrt{P_Y(y)}$. $\phi, \psi$ can be seen as column vectors. Then
+\begin{equation}
+\E[f(X) g(Y)] =\sum_{x=1}^{\abs{\mathcal{X}}}\sum_{y=1}^{\abs{\mathcal{Y}}} \phi(x) B(y,x) \psi(y)
+\end{equation}
+where $\bm{B}$ is a $\abs{\mathcal{Y}}\times \abs{\mathcal{X}}$ matrix defined by:
+\begin{equation}
+B(y,x) = {P_{X,Y}(x,y) \over \sqrt{P_X(x)}\sqrt{P_Y(y)}}
+\end{equation}
+Also for mean zero $f(X)$, $\Var[f(X)]=1\Rightarrow \norm{\phi}=1$. Let $u_0(y) = \sqrt{P_Y(y)},v_0(x) = \sqrt{P_X(x)}$ then 
+\begin{align}
+\label{eq:max}\max_{ \substack{\inner{\phi, v_0} = 0, \norm{\phi}=1 \\ \inner{\psi, u_0}=0, \norm{\psi} = 1}} \psi^T \bm{B} \phi
+& = \sigma_2(\bm{B}) \\
+\label{eq:min} \min_{\substack{\inner{\phi, v_0} = 0 \\ \inner{\psi, u_0}=0}} \norm{\bm{B}-\psi\phi^T}^2_F  & = \norm{\bm{B}}_F^2- \sigma_2^2(\bm{B})
+\end{align}
+where $\sigma_2(\bm{B})$ is the second largest singular value of matrix $\bm{B}$[xiangxiang-xu] and the optimal value
+between \eqref{eq:max} and \eqref{eq:min} is invariant
+up to a multiplier.
+\begin{proof}[Equivalence of \eqref{eq:max} and \eqref{eq:min}]
+Equation \eqref{eq:min} can be normalized with a scalar $\lambda$ added, that is 
+$$
+\min_{\substack{\inner{\phi, v_0} = 0 \\ \inner{\psi, u_0}=0}} \norm{\bm{B}-\psi\phi^T}^2_F =\min_{ \substack{\inner{\phi, v_0} = 0, \norm{\phi}=1 \\ \inner{\psi, u_0}=0, \norm{\psi} = 1}} 
+\norm{\bm{B}-\lambda \psi\phi^T}^2_F 
+$$
+Let $ \sigma = \displaystyle\max_{ \substack{\inner{\phi, v_0} = 0, \norm{\phi}=1 \\ \inner{\psi, u_0}=0, \norm{\psi} = 1}} \psi^T \bm{B} \phi$,
+then
+\begin{align*}
+\norm{\bm{B}-\lambda \psi\phi^T}^2_F  & = \norm{\bm{B}}_F^2 + \lambda^2 - 2 \lambda \psi^T \bm{B} \phi \\
+& \geq \norm{\bm{B}}_F^2 + \lambda^2 - 2 \lambda \sigma \\
+& \geq \norm{\bm{B}}_F^2 - \sigma^2
+\end{align*}
+The lower bound is achivable when $\lambda = \sigma$ and the maximal of $\psi^T\bm{B}\phi$ is achived. Therefore,
+$\displaystyle\min_{\substack{\inner{\phi, v_0} = 0 \\ \inner{\psi, u_0}=0}} \norm{\bm{B}-\psi\phi^T}^2_F = \norm{\bm{B}}_F^2 - \sigma^2$
+\end{proof}
+% If the length of $\phi,\psi$ is not specified, we can add a scalar $\lambda $
+Since $\norm{\bm{B}_F}^2$ is constant, the minimization problem is equivalent to maximize \textbf{H-Score}, in feature space, H-Score is defined 
+as 
+\begin{equation}
+H(f(X), g(Y)) = \E[f(X)g(Y)] - {1 \over 2} \Var[f(X)] \Var[g(Y)]
+\end{equation}
+For three random variables $X, Y, Z$, we choose $\bm{B} $ as a $ \abs{\mathcal{X}} \times 
+\abs{\mathcal{Y}} \times \abs{\mathcal{Z}}$ tensor and further denote $ \varphi(z) = h(z) \sqrt{P_Z(z)}$.
+Then 
+\begin{equation}
+\E[f(X)g(Y)h(Z)] = \sum_{x=1}^{\abs{\mathcal{X}}}\sum_{y=1}^{\abs{\mathcal{Y}}}\sum_{z=1}^{\abs{\mathcal{Z}}} B(x,y,z)\phi(x) \psi(y)\varphi(z)
+\end{equation}
+where
+\begin{equation}
+B(x, y, z) = {P_{X,Y,Z}(x,y,z) \over \sqrt{P_X(x)}\sqrt{P_Y(y)}\sqrt{P_Z(z)}}
+\end{equation}
+If we treat $\phi \otimes \psi \otimes \varphi$ as a 3-order tensor, then $\E[f(X)g(Y)h(Z)]$ is the inner product of two 3-order tensor.
+Using the same technique, we can show that to maximize $\E[f(X)g(Y)h(Z)]$ is equivalent to minimize $\norm{B-\phi \otimes \psi \otimes \varphi}_F$.
+This is to find the best rank-1 approximation of a given 3 order tensor and it is shown in \cite{high_order_power_method} that an analogous power method can be extended to high order tensor to solve the problem. The high order power method in \cite{high_order_power_method} is equivalent to the 
+the ACE algorithm for multiple random variables.
+
+Then we can introduce \textbf{extended H-Score}:
+\begin{equation}
+H(f(X), g(Y), h(Z)) = \E[f(X) g(Y) h(Z)] - {1 \over 2} \Var[f(X)] \Var[g(Y)] \Var[h(Z)]
+\end{equation}
+\section{Efficient feature transformation learning via Neural Network}
+To maximize H-Score or its extension, tranditional method like ACE is infeasible when the alphabet is large and has numerical defect when smoothing technique is used to interpolate the conditional expectation for continuous random variables. 
+
+By the success of neural networks, we can seek optimal functions within the function space generated by a certain kind of neural networks.
+\section{Comparision with pairwise ACE}
+\section{The local geometry interpretation}
+If $X, Y, Z$ are independent, that is $P_{X, Y, Z}(x,y,z) = P_X(x) P_Y(y) P_Z(z)$. In such cases $\E[f(X) g(Y) h(Z)] = 0$.
+If $X, Y, Z$ are \textit{nearly independent}. That is, for small $\epsilon$, we have 
+\begin{equation}\label{eq:disturb}
+P_{X, Y, Z}(x,y,z) = P_X(x) P_Y(y) P_Z(z) + \epsilon (\phi(x)\psi(y)\varphi(z)\sqrt{P_X(x)P_Y(y)P_Z(z)} + o(1))
+\end{equation}
+This is only one interpretation of nearly independent. 
+We require $\phi, \psi, \varphi $ has unit norm and $\epsilon$ is the magnitude outside.
+Notice that $P_{X, Y, Z} \in \mathcal{N}^{(\epsilon)}(P_X P_Y P_Z)$ for $\epsilon<1$.
+We can rewrite equation~\eqref{eq:disturb} as:
+\begin{equation}
+B(x, y, z) = \sqrt{P_X(x)}\sqrt{P_Y(y)} \sqrt{P_Z(z)} + \epsilon(\phi(x) \psi(y)  \varphi(z) + o(1) )
+\end{equation}
+By the requirement of normalization we also have:
+$$\sum_{x\in \mathcal{X}} \phi(x)\sqrt{P_X(x)}=0$$ and others.
+That is, we find vector $\phi$, orthogonal with $\sqrt{P_X}$ and also $\inner{\psi, \sqrt{P_Y}}=0, \inner{\varphi, \sqrt{P_Z}}=0$. This is the first order approximation of $P_{X, Y, Z}$.
+
+
+
+\begin{thebibliography}{9}
+\bibitem{high_order_power_method} L. de Lathauwer, B. de Moor, and J. Vandewalle, “On the
+best rank-1 and rank-(r1, . . . , rN) approximation of higherorder
+tensors,” SIAM J. Matrix Anal. Appl., vol. 21, no. 4,
+pp. 1324–1342, 2000. 
+\end{thebibliography}
+\end{document}

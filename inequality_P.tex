@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\DeclareMathOperator\E{\mathbb{E}}
+\DeclareMathOperator\Var{\mathrm{Var}}
+\newtheorem{lemma}{引理}
+\theoremstyle{definition}
+\newtheorem{definition}{定义}
+\newtheorem{example}{例}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\begin{document}
+\title{概念论常用不等式}
+\author{zhaofeng-shu33}
+\maketitle
+\section{Markov 不等式}
+设 $X$ 是非负型随机变量，则 $\Pr(X\geq a) \leq {1 \over a} \E[X]$
+若$X$ 不一定非负，可通过$e$指数的形式运用Markov不等式：$\Pr(X\geq a) = \Pr(e^{tX} \geq e^{ta}) \leq { 1 \over \exp(ta)} \E[\exp(tX)]$
+\section{Chebyshev 不等式}
+$\Pr(\abs{X-\E[X]}) \leq {1 \over a^2} \Var[X]$
+\section{Hoeffding 不等式}
+设$X_i$ 独立，$\Pr(a_i \leq X_i \leq b_i) = 1, S_n = X_1 + \dots + X_n $则有
+\begin{align}
+\label{eq:Hoeffding1}\Pr( S_n - \E[S_n] \geq t) & \leq \exp \left( - \frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2} \right) \\
+\label{eq:Hoeffding2}\Pr( \abs{S_n - \E[S_n] } \geq t) & \leq 2\exp \left( - \frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2} \right)
+\end{align}
+如果~\eqref{eq:Hoeffding1} 成立，对$X'_i= -X_i$ 应用~\eqref{eq:Hoeffding1}有
+$$\Pr( S_n - \E[S_n]  \leq -t )  \leq \exp \left( - \frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2} \right)$$
+因此~\eqref{eq:Hoeffding2} 成立。
+为证~\eqref{eq:Hoeffding1}, 使用 Hoeffding 引理
+\begin{lemma}
+设$\E[X]=0, \Pr( a \leq X \leq b) = 1 $，则
+\begin{equation}
+\E[ \exp(\lambda X) ] \leq \exp\left({\lambda^2 (b-a)^2\over 8}\right)
+\end{equation}
+\end{lemma}
+\begin{proof}[Hoeffding 不等式~\eqref{eq:Hoeffding1} 证明]
+\begin{align*}
+\Pr( S_n - \E[S_n] \geq t) & \leq \exp(-st) \E[\exp(s(S_n - \E[S_n]) ] \\
+& \leq \exp(-st) \prod_{i=1}^n \E[\exp(s(X_i -\E[X_i]))] \\
+& \leq \exp(-st) \prod_{i=1}^n \exp({s^2 (b_i - a_i)^2 \over 8 } ) \\
+& = \exp(-st + \sum_{i=1}^n { s^2 (b_i - a_i)^2 \over 8} ) 
+\end{align*}
+取 $ s = {4t \over \sum_{i = 1}^n (b_i - a_i)^2}$ 即得到~\eqref{eq:Hoeffding1} 右端。
+\end{proof}
+
+\end{document}

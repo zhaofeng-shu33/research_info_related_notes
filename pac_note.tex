@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\DeclareMathOperator\E{\mathbb{E}}
+\theoremstyle{definition}
+\newtheorem{definition}{定义}
+\newtheorem{example}{例}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\begin{document}
+\title{PAC笔记}
+\author{zhaofeng-shu33}
+\maketitle
+\section{Basics}
+\begin{definition}[PAC 可学习的概念]
+称一个概念类$C$是 PAC 可学习的，如果存在一个算法 $A$ 使得$\forall \epsilon>0, \delta>0, \mathcal{X}$ 上的分布$D$，和目标概念$c \in C$， 当$ m \geq \textrm{poly}(1/\epsilon, 1/\delta, \textrm{size}(\bm{x}), \textrm{size}(c))$
+\end{definition}
+设 $ \mathcal{X} = \mathbb{R}$ 并考虑 区间模型 $ c(x) = I[a<x<b]$。我们将说明这个模型类是 PAC可学习的，样本复杂度为
+$ m > {2 \over \epsilon} \ln\left({2 \over \delta} \right) $
+\begin{example}
+设$X \sim D$，对于实轴上$m$个样本，取包含所有正类样本点的最小区间作为$h_s: x \to I[a' < x < b']$，泛化误差为将正类样本点错分为负类样本点。
+只需说明下式成立
+\begin{equation}\label{eq:PAC}
+\Pr_{S \sim D^m} [ R(h_s) > \epsilon ] < \delta
+\end{equation}
+
+若 $\Pr(a < X < b) \leq \epsilon $， 正类样本点出现是小概率事件，~\eqref{eq:PAC} 式左端为零，自然满足。
+对于$\Pr(a < X < b) > \epsilon $，取 $ a^* < b^* $ 使得 $\Pr(a<x<a^*) = {\epsilon \over 2}, \Pr( b^*<x< b) = {\epsilon \over 2}$
+事件$R(h_s) > \epsilon$ 包含在事件没有点落在$(a,a^*)$ 中或$(b,b^*)$中。因为如果$m$个样本点有落在$(a,a^*)$还有落在$(b,b^*)$中的，那么$a'\in (a,a^*), b'\in (b,b^*)$ 分错概率为$\Pr(a<X<a')+\Pr(b'<X<b)<\epsilon $。所以
+\begin{align}
+\Pr_{S \sim D^m} [ R(h_s) > \epsilon ]  & < 2 \prod_{i=1}^m \Pr(X_i < a \textrm{ or } X_i>a^*) \\
+& = 2(1-{\epsilon \over 2})^m < 2 \exp({-\epsilon m \over 2 })
+\end{align}
+\end{example}
+
+对于假设$h$取值空间$\mathcal{H}$ 是有限的情形，若要学习的概念$c \in \mathcal{H}$，可以说明
+\begin{equation}
+m \geq {1 \over \epsilon} ( \ln \abs{\mathcal{H}} + \ln{ 1 \over \delta})
+\end{equation}
+\section{PAC Bayes}
+PAC Bayes 方法用于给损失函数定界。
+\end{document}

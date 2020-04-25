@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\DeclareMathOperator\E{\mathbb{E}}
+\begin{document}
+\title{model selection framework}
+\author{zhaofeng-shu33}
+\maketitle
+\section{empirical method}
+\begin{description}
+\item[K-fold CV] (cross validation)
+\item[LOO CV] (leave one out)
+\item[Bootstrap] (random split)
+\item[Test-set]
+\end{description}
+Empirical methods are data-driven and model-free, usually work better in practice.
+\subsection{theoretical method}
+Training error plus model complexity penalty. Compared with empirical method, no validation is needed.
+\subsection{AIC}
+\textbf{Akaike information criterion} uses the number of model parameters to describe
+model complexity penalty.
+
+\textbf{Background}: To minimize $D(P || P_{\theta})$ with unknown true distribution $P$,
+we use empical distribution $\hat{P}$ in replace 
+of $P$, the the bias item is approximately ${k \over n}$ where $n$ is the sample size. 
+Minimize $D(\hat{P} || P_{\theta}) + { k \over n}$ is equivalent to maximize joint log likelyhood function minus k.
+\subsection{BIC}
+Under model $M$, we approximate the optimal parameter $\theta$, the posterior distribution of the data $x$ can be approximated by $ p(x | M) = \int p(x | \theta, M) \pi(\theta | M) d\theta  $
+$\propto \exp(-\mathrm{BIC}/2) $ where 
+\begin{equation}
+\mathrm{BIC} = \ln(n) k - 2 \ln (\widehat{L} )
+\end{equation}
+\subsection{SRM}
+\textbf{Structural Risk Minimization} used VC dimension to calculate the complexity penalty.
+
+Consider nested hypothesis classes: $ H_1 \subseteq H_2 \subseteq H_3 \subseteq \dots H_i \subseteq $. Each hypothesis class
+is a set of functions mapping features to the labels.
+There is a target function $c_t(x)$ which is usually non-realizable. The empirical training error based on hypothesis $h \in H$ is $\hat{\epsilon}(h) = {1 \over m} \sum_{i=1}^m I [ h(x_i) \neq c_t(x_i) ] $ and the generalization error is $ \epsilon(h) = \E [ I [ h(X) \neq c_t(X) ] ]$
+\end{document}

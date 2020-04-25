@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\DeclareMathOperator\E{\mathbb{E}}
+\DeclareMathOperator\Var{\mathrm{Var}}
+\newtheorem{lemma}{引理}
+\theoremstyle{definition}
+\newtheorem{definition}{定义}
+\newtheorem{example}{例}
+\usepackage{mathtools}
+\def\P{\mathbb{P}}
+\def\Q{\mathbb{Q}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\begin{document}
+\title{用神经网络计算互信息}
+\author{zhaofeng-shu33}
+\maketitle
+\section{背景}
+K-L 散度的Donsker-Varadhan 表示：
+\begin{equation}
+D_{KL} (\P || \Q) = \sup_{T: \Omega \to R} \E_{\P}[T] - \log (\E_{\Q}[e^T])
+\end{equation}
+于是对于函数族 $ \mathcal{F}$ ，有K-L 散度的下界表示：
+\begin{equation}
+D_{KL} (\P || \Q) \geq \sup_{T \in \mathcal{F} } \E_{\P}[T] - \log (\E_{\Q}[e^T])
+\end{equation}
+\section{方法}
+选取神经网络可表示的函数族，利用$ I(X; Z) = D_{KL}(\P_{XZ} || \P_X \otimes \P_Z) $，得到互信息的下界估计
+\begin{equation}
+I(X; Z) \geq I_{\Theta}(X; Z)
+\end{equation}
+其中
+\begin{equation}
+I_{\Theta}(X; Z) = \sup_{\theta \in \Theta} \E_{\P_{XZ}}[T_{\theta}] - \log ( \E_{\P_X \otimes \P_Z} [\exp(T_{\theta})])
+\end{equation}
+更复杂的神经网络给出更紧的下界估计，可以用SGD优化神经网络的权系数参数，求期望用样本均值代替。
+
+\end{document}
