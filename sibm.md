@@ -64,18 +64,28 @@ $$
 
 Computation of critical value $\beta^*$:
 $$
-\frac{P_{\sigma |G}(\mathrm{dist}(\sigma, X)=1)}{P_{\sigma | G}(\sigma = X)}
-= \exp\left(2(\beta + \frac{\alpha \log n}{n})(B_i-2A_i)-\frac{4\alpha \log n}{n}\right)
+\begin{align}
+\frac{P_{\sigma |G}(\sigma_i != X_i)}{P_{\sigma | G}(\sigma = X)} &=
+\frac{P_{\sigma |G}(\sigma_i = \omega \cdot X_i)}{P_{\sigma | G}(\sigma_i = X)}+\frac{P_{\sigma |G}(\sigma_i = \omega^2 \cdot X_i)}{P_{\sigma | G}(\sigma = X)}\\
+&= \exp\left(3(\beta + \frac{\alpha \log n}{n})(B_i-A_i)-\frac{4\alpha \log n}{n}\right)\\
+&+ \exp\left(3(\beta + \frac{\alpha \log n}{n})(C_i-A_i)-\frac{4\alpha \log n}{n}\right)
+\end{align}
+$$
+Due to symmetry, when evaluation the expection, only
+
+need to examine $\mathbb{E}_G[\exp(3\beta (B_i - A_i))]$ when $A_i \sim B(\frac{n}{3}-1, \frac{a\log n}{n}), B_i \sim B(\frac{n}{3}, \frac{b\log n}{n})$.
+$$
+g(\beta) = \frac{1}{3}(ae^{-3\beta}+be^{3\beta}) - \frac{a+b}{3} +1
+$$
+$g'(\beta)$ has unique root $\frac{1}{6}\log \frac{a}{b}$ and $g(\beta)$ is convex. and $g(\frac{1}{6} \log \frac{a}{b}) = \frac{1}{3}(2\sqrt{ab}-a-b) + 1$.
+
+Let $g(\frac{1}{6} \log \frac{a}{b}) < 0$ we get the threshold: $\sqrt{a} - \sqrt{b} > \sqrt{3}$, which is same with Abbe's result.
+
+The smaller root of $g(\beta)=0$ is
+$$
+\beta^* = \frac{1}{3}\log \frac{a+b-3 - \sqrt{(a+b-3)^2-4ab}}{2b}
 $$
 
-
-Examine $\mathbb{E}_G[\exp(2\beta (B_i -2 A_i))]$ when $A_i \sim B(\frac{n}{3}-1, \frac{a\log n}{n}), B_i \sim B(\frac{2n}{3}, \frac{b\log n}{n})$.
-$$
-g(\beta) = \frac{2}{3}b(e^{2\beta} - 1) + \frac{1}{3}a(e^{-4\beta} - 1) +1
-$$
-$g'(\beta)$ has unique root $\frac{1}{6}\log \frac{a}{b}$ and $g(\beta)$ is convex. and $g(\frac{1}{6} \log \frac{a}{b}) = a^{1/3}b^{2/3} - \frac{2b+a}{3} + 1$.
-
-Empirically computing $\beta^*$ for this case?
 
 ## weak discovery in SIBM
 
