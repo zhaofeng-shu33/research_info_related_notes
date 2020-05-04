@@ -26,7 +26,9 @@ MNS16 (Theorem 2.5):
 
 ## Extension of Ising model to three communities
 
-$\sigma \in \{0,1,2\}^n$
+$\sigma \in \{1,\omega,\omega^2 \}^n$, root of $x^3-1$. cyclic group: $\sigma^3=1$
+
+![](./case3.png)
 
 Indicator function
 $$
@@ -47,7 +49,18 @@ $$
 
 For SBM with three communities and $p=\frac{a\log n}{n}, q=\frac{b\log n}{n}$
 
-  $\sqrt{a} - \sqrt{b} > \sqrt{3}$ is sufficient to recover the community structure.
+  $\sqrt{a} - \sqrt{b} > \sqrt{3}$ is sufficient to recover the community structure (Abbe).
+
+Define
+$$
+\begin{align}
+A_i &= |\{j \in [n]\backslash\{i\}: \{i,j\} \in E(G), X_j = X_i\}| \\
+B_i &= |\{j \in [n]\backslash\{i\}: \{i,j\} \in E(G), X_j = \omega \cdot X_i\}| \\
+C_i &= |\{j \in [n]\backslash\{i\}: \{i,j\} \in E(G), X_j = \omega^2 \cdot X_i\}|
+
+\end{align}
+$$
+
 
 Computation of critical value $\beta^*$:
 $$
@@ -60,7 +73,7 @@ Examine $\mathbb{E}_G[\exp(2\beta (B_i -2 A_i))]$ when $A_i \sim B(\frac{n}{3}-1
 $$
 g(\beta) = \frac{2}{3}b(e^{2\beta} - 1) + \frac{1}{3}a(e^{-4\beta} - 1) +1
 $$
-
+$g'(\beta)$ has unique root $\frac{1}{6}\log \frac{a}{b}$ and $g(\beta)$ is convex. and $g(\frac{1}{6} \log \frac{a}{b}) = a^{1/3}b^{2/3} - \frac{2b+a}{3} + 1$.
 
 Empirically computing $\beta^*$ for this case?
 
