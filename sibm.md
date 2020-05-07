@@ -105,21 +105,90 @@ $$
 \mathbb{E}_G \log(\Pr(\sigma = X)) &= \frac{\beta}{2}\sum_{i=1}^n(\mathbb{E}[A_i - B_i]-\frac{\alpha \log n}{n}\mathbb{E}[(\frac{n}{2}-1-A_i)-(\frac{n}{2}-B_i)])\approx \frac{(a-b)\beta}{4}n\log n
 \end{align}
 $$
-Therefore we can get $\alpha = b \beta$ as the critical value.
+Therefore we can get $\alpha = b \beta$ as the critical condition.
 
 Using the same method as above, we can get $\alpha = b \beta$ is also critical value for $k=3$.
 
 With $\mathbb{E}_G[|E|] = \frac{n\log n}{3}(\frac{a}{2} + b)$, $\mathbb{E}_G \log(\Pr(\sigma = 1))\approx (\frac{a+2b}{3}\beta - \alpha) n \log n$ and $\mathbb{E}_G \log(\Pr(\sigma = X)) \approx \frac{\beta(a-b)}{3} n \log n $
 
+To be more rigorous, we would like to estimate
+
+ $\sum_{i,j} M_{ij} I(\sigma_i, \sigma_j)$  where $M_{ij}$ is defined as
+$$
+M_{ij} =
+\begin{cases}
+(a\beta - \alpha + a\alpha \frac{\log n}{n}) \frac{\log n}{n} &\textrm{ if } X_i = X_j \\
+(b\beta - \alpha + b\alpha \frac{\log n}{n}) \frac{\log n}{n} &\textrm{ if } X_i \neq X_j 
+\end{cases}
+$$
+Let
+$$
+\Xi = \begin{bmatrix}
+u_1, u_2, u_3 \\
+v_1, v_2, v_3 \\
+w_1, w_2, w_3
+\end{bmatrix}, Q = \begin{bmatrix}
+Q_{11}, Q_{12}, Q_{13} \\
+Q_{21}, Q_{22}, Q_{23} \\
+Q_{31}, Q_{32}, Q_{33}
+\end{bmatrix}
+$$
+which has 9 non-negative variables. Besides, each row of $\Xi$ sums to $\frac{n}{3}$.
+
+The meaning of each variable:
+
+$u_1 = |\{i\in [n]: X_i =1, \sigma_i = 1\}|$, $u_2 = |\{i\in [n]: X_i =1, \sigma_i = \omega\}|$, $u_3 = |\{i\in [n]: X_i =1, \sigma_i = \omega^2\}|$,$v_1 = |\{i\in [n]: X_i =\omega, \sigma_i = 1\}|$.
+
+Suppose the subscript starts from 1: $\Xi_{ij} = |\{k \in [n]: X_k = \omega^{i-1}, \sigma_k = \omega^{j-1}\}|$.
+
+Also, $Q_{ij} = ||\Xi_{i,\cdot} - \Xi_{j,\cdot}||^2$, which is the square of L2-norm of i-th and j-th row of $\Xi$.
+
+$A =(a\beta - \alpha) \frac{\log n }{n}, B=(b\beta - \alpha) \frac{\log n}{n}$
+
+We can write
+$$
+\sum_{i,j=1}^n M_{ij} I(\sigma_i, \sigma_j) = (Q_{11}^2 + Q_{22}^2 + Q_{33}^2)(A-B) + (\sum_{i,j=1}^3 Q_{ij})B + \textrm{ high order term}
+$$
+Using the expression of $Q_{ij}$ we can show that the coeffient of $B$ is
+$$
+\begin{align}
+\sum_{i,j=1}^3 Q_{ij} = &((u_1+v_1+w_1)-(u_2+v_2+w_2))^2 \\
++ &((u_1+v_1+w_1)-(u_3+v_3+w_3))^2 + ((u_2+v_2+w_2)-(u_3+v_3+w_3))^2
+\end{align}
+$$
+which is non-negative.
+
+Therefore, when $\alpha > b \beta (B<0)$, we should let $\sum_{i,j=1}^3 Q_{ij}=0$ to maximize $\sum_{i,j} M_{ij} I(\sigma_i, \sigma_j)$.
+
+Actually we can maximize the coeffient of $A$ and $B$ respectively and these two maximal values can co-exist.
+
+There are 6 kinds of possibilities for such $\Xi \in \{e, s, r, r^2, sr, sr^2\}$. $e=\frac{n}{3}I_3$ is the identity of the group.
+$$
+r = \frac{n}{3}\begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & 0 & 0
+\end{bmatrix}, s = \frac{n}{3} \begin{bmatrix}
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
 
 
-This is the finite sample recovery critical condition for $k=2$.
+This group is isomorphic to $S_3$.
 
-Estimating the maximum of $\sum_{i,j} M_{ij} I(\sigma_i, \sigma_j)$
+This is equivalent to say when $\sigma  = f(X)$, $\Pr(X=\sigma)$ is maximized under the condition of $\alpha > b \beta$.
 
-6 indepedent random variables?
+The function $f$ is applied to $X$ pairwisely. For each element, it is selected from the symmetric group $S_3$,
 
+for example
+$$
+f=\binom{1, \omega, \omega^2}{\omega, 1, \omega^2}
+$$
+means $f(1) = \omega, f(\omega)=1, f(\omega^2) = \omega^2$.
 
+When $\alpha < b \beta$, similarly we can show that when $\sigma$ all equals to $1, \omega$ or $\omega^2$, the maximum is taken. We represent it as $f_1$.
 
 ## weak discovery in SIBM
 
