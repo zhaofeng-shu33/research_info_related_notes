@@ -90,6 +90,25 @@ $$
 
 ### Generalization of $\alpha = b \beta$
 
+Empirical deduction: This result can be got by evaluating $\mathbb{E}_G \log(\Pr(\sigma = X)) = \mathbb{E}_G \log(\Pr(\sigma = 1)) $,
+
+To be more precisely:
+
+Consider the expection of edge numbers: 
+$$
+\mathbb{E}_{G}[|E|] = \frac{a \log n}{n} \frac{n}{2}(\frac{n}{2} - 1) + \frac{b\log n}{n}\left(\frac{n}{2}\right)^2 \approx \frac{a+b}{4} n \log n
+$$
+Then 
+$$
+\begin{align}
+\mathbb{E}_G \log(\Pr(\sigma = 1)) &= \beta \mathbb{E}_{G}[|E|] - \frac{\alpha \log n}{n}(\frac{n^2-n}{2}-\mathbb{E}_{G}[|E|])-\log Z \approx (\frac{(a+b)\beta}{4} - \frac{\alpha}{2})n\log n \\
+\mathbb{E}_G \log(\Pr(\sigma = X)) &= \frac{\beta}{2}\sum_{i=1}^n(\mathbb{E}[A_i - B_i]-\frac{\alpha \log n}{n}\mathbb{E}[(\frac{n}{2}-1-A_i)-(\frac{n}{2}-B_i)])\approx \frac{(a-b)\beta}{4}n\log n
+\end{align}
+$$
+Therefore we can get $\alpha = b \beta$ as the critical value.
+
+
+
 This is the finite sample recovery critical condition for $k=2$.
 
 Estimating the maximum of $\sum_{i,j} M_{ij} I(\sigma_i, \sigma_j)$
