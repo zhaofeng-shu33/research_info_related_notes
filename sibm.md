@@ -37,7 +37,7 @@ $$
 I(\sigma_i, \sigma_j) = \begin{cases} 2 & \sigma_i = \sigma_j \\
 -1 & \sigma_i \neq \sigma_j\end{cases}
 $$
-Suppose $x_i, \dots, x_n$ are draw uniformly from $\{0,1,2\}^n$ (That is, there are $\frac{n}{3}$ items taking value $0$, $\frac{n}{3}$ items taking value 1...)
+Suppose $x_i, \dots, x_n$ are draw uniformly from $\{1,\omega,\omega^2\}^n$ (That is, there are $\frac{n}{3}$ items taking value $0$, $\frac{n}{3}$ items taking value 1...)
 
 Thus gurantee $\sum_{i=1}^n I(x_i, \sigma) = 0$ for any $\sigma$
 
@@ -67,7 +67,7 @@ $$
 Computation of critical value $\beta^*$:
 $$
 \begin{align}
-\frac{P_{\sigma |G}(\sigma_i != X_i)}{P_{\sigma | G}(\sigma = X)} &=
+\frac{P_{\sigma |G}(\sigma_i \neq X_i)}{P_{\sigma | G}(\sigma = X)} &=
 \frac{P_{\sigma |G}(\sigma_i = \omega \cdot X_i)}{P_{\sigma | G}(\sigma_i = X)}+\frac{P_{\sigma |G}(\sigma_i = \omega^2 \cdot X_i)}{P_{\sigma | G}(\sigma = X)}\\
 &= \exp\left(3(\beta + \frac{\alpha \log n}{n})(B_i-A_i)-\frac{4\alpha \log n}{n}\right)\\
 &+ \exp\left(3(\beta + \frac{\alpha \log n}{n})(C_i-A_i)-\frac{4\alpha \log n}{n}\right)
@@ -100,7 +100,7 @@ Estimating the maximum of $\sum_{i,j} M_{ij} I(\sigma_i, \sigma_j)$
 
 ## weak discovery in SIBM
 
-Let $(X, G, \{\sigma^{(1)}, \dots, \sigma^{(m)}\}) \sim SIBM(n, \frac{a}{n}, \frac{b}{n}, \alpha, \beta, m)$
+Let $(X, G, \{\sigma^{(1)}, \dots, \sigma^{(m)}\}) \sim SIBM(n, \frac{a}{n}, \frac{b}{n}, \beta, m)$
 
 If there exists an algorithm that takes $ \{\sigma^{(1)}, \dots, \sigma^{(m)}\}$ as inputs and outputs $\hat{X} =\hat{X}( \{\sigma^{(1)}, \dots, \sigma^{(m)}\})$ such
 
@@ -109,3 +109,6 @@ that
 $ P(A(\hat{X}, X) \geq 1/2 + \epsilon)  \to 1$ as $n \to \infty$
 
 For SBM with two communities, the problem is solvable if $(a-b)^2 > 2(a+b)$.
+
+Exponential time algorithm: counting K-cycles;
+
