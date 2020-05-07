@@ -107,6 +107,10 @@ $$
 $$
 Therefore we can get $\alpha = b \beta$ as the critical value.
 
+Using the same method as above, we can get $\alpha = b \beta$ is also critical value for $k=3$.
+
+With $\mathbb{E}_G[|E|] = \frac{n\log n}{3}(\frac{a}{2} + b)$, $\mathbb{E}_G \log(\Pr(\sigma = 1))\approx (\frac{a+2b}{3}\beta - \alpha) n \log n$ and $\mathbb{E}_G \log(\Pr(\sigma = X)) \approx \frac{\beta(a-b)}{3} n \log n $
+
 
 
 This is the finite sample recovery critical condition for $k=2$.
