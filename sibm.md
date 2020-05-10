@@ -141,13 +141,17 @@ $u_1 = |\{i\in [n]: X_i =1, \sigma_i = 1\}|$, $u_2 = |\{i\in [n]: X_i =1, \sigma
 
 Suppose the subscript starts from 1: $\Xi_{ij} = |\{k \in [n]: X_k = \omega^{i-1}, \sigma_k = \omega^{j-1}\}|$.
 
-Also, $Q_{ij} = ||\Xi_{i,\cdot} - \Xi_{j,\cdot}||^2$, which is the square of L2-norm of i-th and j-th row of $\Xi$.
+Also
+$$
+Q_{ij} = (\Xi_{i1} - \Xi_{i2})(\Xi_{j1} - \Xi_{j2}) + (\Xi_{i1} - \Xi_{i3})(\Xi_{j1} - \Xi_{j3}) + (\Xi_{i2} - \Xi_{i3})(\Xi_{j2} - \Xi_{j3})
+$$
+
 
 $A =(a\beta - \alpha) \frac{\log n }{n}, B=(b\beta - \alpha) \frac{\log n}{n}$
 
 We can write
 $$
-\sum_{i,j=1}^n M_{ij} I(\sigma_i, \sigma_j) = (Q_{11}^2 + Q_{22}^2 + Q_{33}^2)(A-B) + (\sum_{i,j=1}^3 Q_{ij})B + \textrm{ high order term}
+\sum_{i,j=1}^n M_{ij} I(\sigma_i, \sigma_j) = (Q_{11} + Q_{22} + Q_{33})(A-B) + (\sum_{i,j=1}^3 Q_{ij})B + \textrm{ high order term}
 $$
 Using the expression of $Q_{ij}$ we can show that the coeffient of $B$ is
 $$
@@ -196,11 +200,11 @@ $$
 X_G = \beta \sum_{\{i,j\} \in E(G)} I(\sigma_i, \sigma_j) - \frac{\alpha \log n}{n}\sum_{\{i,j\} \not\in E(G)} I(\sigma_i, \sigma_j)
 $$
 
-For $k=3$, we have $I(\sigma_i, \sigma_j) = 2 \mathrm{Re}(\sigma_i \bar{\sigma}_j)$.
+For $k=3$, we have $I(\sigma_i, \sigma_j) = 2 \mathrm{Re}(\sigma_i \bar{\sigma}_j)$. $\bar{\sigma}$ is the complex conjugate of $\sigma$. 
 
 This result cannot be extended to $k>3$ using complex plane.
 
-A simple illustration for $k=4$:
+A simple illustration for $k=4$ (the number is $\sigma_i \bar{\sigma}_j$ when $\sigma_i \neq \sigma_j$:
 
 ![](./impossible_4.svg)
 
