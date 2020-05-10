@@ -59,7 +59,6 @@ $$
 A_i &= |\{j \in [n]\backslash\{i\}: \{i,j\} \in E(G), X_j = X_i\}| \\
 B_i &= |\{j \in [n]\backslash\{i\}: \{i,j\} \in E(G), X_j = \omega \cdot X_i\}| \\
 C_i &= |\{j \in [n]\backslash\{i\}: \{i,j\} \in E(G), X_j = \omega^2 \cdot X_i\}|
-
 \end{align}
 $$
 
@@ -149,7 +148,7 @@ $$
 
 $A =(a\beta - \alpha) \frac{\log n }{n}, B=(b\beta - \alpha) \frac{\log n}{n}$
 
-We can write
+We can write (the version dose not dividing 2)
 $$
 \sum_{i,j=1}^n M_{ij} I(\sigma_i, \sigma_j) = (Q_{11} + Q_{22} + Q_{33})(A-B) + (\sum_{i,j=1}^3 Q_{ij})B + \textrm{ high order term}
 $$
@@ -209,6 +208,64 @@ A simple illustration for $k=4$ (the number is $\sigma_i \bar{\sigma}_j$ when $\
 ![](./impossible_4.svg)
 
 Needs at least a tetrahedron in 3D.
+
+But for $k=3$, we can still use the matrix conclusion for complex inner space:
+$$
+|\mathrm{Re}(\bar{\sigma}^T(A-\mathbb{E}[A|X])\sigma)| \leq cn\sqrt{\log n}
+$$
+$\sigma$ is a column complex vector here and the above result holds almost surely.
+
+Then all we need to do is to make sure that when $\sigma$ is a little bit far from the six **corner** maximum value,
+
+Then the probability is much smaller than the maximal one.
+
+Define a small neighborhood of for a corner value $\Xi^*$ (each row of $\Xi$ has only one non-zero term).
+$$
+N(\Xi^*) := \{\Xi |\, |\Xi_{i,j} - \Xi_{i,j}| \leq \frac{n}{\log^{1/3} n}, 1\leq i,j\leq 3\}
+$$
+We use the $L_{\infty}$ norm for the matrix.
+
+There are 27 different corner values.
+
+For those $\Xi$ falling into the corner neighborhood, we can show the coefficient of $(A-B)$ is very near to the maximal value $\frac{2}{3}n^2$. However, when $\Xi$ falls out of these 6 maximum corner neighboorhoods, the coefficent of $B$ is larger than $(\frac{n}{3} - 3\frac{n}{\log^{1/3} n})^2$. When $n$ is sufficient large, this gap is linear with $n^2$, thus contributing to
+$$
+\frac{P_{\sigma|G}(\sigma = \sigma')}{P_{\sigma|G}(\sigma=X)} < 3^{-n}e^{-n}
+$$
+Another case happens when the coefficient of $A-B$ has a big gap with the maximal value $\frac{2}{3}n^2$. When $\Sigma$ is not a corner value. We can find a row of $\Xi$ such that $\frac{2}{3}n^2 - Q_{ii} \geq \frac{4n^2}{3 \log^{1/3} n}$. Using this gap the above inequality also holds.
+
+
+
+We get the conclusion that when $\alpha > b \beta$, $\mathrm{dist}(\sigma^{i}, f(X)) < 3 n / \log^{1/3} (n) $ almost surely.
+
+## Proof for $\beta \in (\beta^*, \frac{1}{6}\log \frac{a}{b})$
+
+When $\beta$ in this range, we will show that one sample is enough to recover the original label $X$.
+
+For each $I$, we introduce a vector $v$ with $\mathrm{dim}(v) = |I|=k$. Each element of $v$ takes from $\{\omega, \omega^2\}$.
+
+$X^{(\sim I, v)}$ is defined as flipping $i \in I$ as : $X_i \to v_{\mathrm{index}(i)}\cdot X_i$.
+
+For example, if $I = {1,3}, n=3, v=(\omega^2, \omega)$ then $X^{(\sim I,v)} = (\omega^2 \cdot X_1, X_2, \omega \cdot X_3)$.
+
+Define $P_{\sigma|G}(\sigma = X^{(\sim I)})=\sum_{v}P_{\sigma|G}(\sigma = X^{(\sim I,v)})$
+
+Using this extra structure, we can get
+$$
+\frac{P_{\sigma|G}(\sigma = X^{(\sim I)})}{P_{\sigma |G}(\sigma =X)} \leq 2^k \exp(3(\beta + \frac{\alpha \log n}{n})(B_{I,v} - A_I)))
+$$
+where
+$$
+\begin{align}
+A_I &= |\{i \in I,j \in [n]\backslash I: \{i,j\} \in E(G), X_j = X_i\}| \\
+B_{I,v} &= |\{i \in I, j \in [n]\backslash I: \{i,j\} \in E(G), X_j = v_{\mathrm{index}(i)} \cdot X_i\}| \\
+\end{align}
+$$
+
+$$
+\mathrm{E}[\exp(3(\beta + \frac{\alpha \log n}{n})(B_{I,v} - A_I)))] \sim n^{k(g(\beta)-1)}
+$$
+
+The difference lies at the term $2^k$, which does not influence the proof using the formula of geometric series.
 
 ## weak discovery in SIBM
 
