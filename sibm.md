@@ -190,6 +190,22 @@ means $f(1) = \omega, f(\omega)=1, f(\omega^2) = \omega^2$.
 
 When $\alpha < b \beta$, similarly we can show that when $\sigma$ all equals to $1, \omega$ or $\omega^2$, the maximum is taken. We represent it as $f_1$.
 
+## How to show the concentration of $X_G$
+
+$$
+X_G = \beta \sum_{\{i,j\} \in E(G)} I(\sigma_i, \sigma_j) - \frac{\alpha \log n}{n}\sum_{\{i,j\} \not\in E(G)} I(\sigma_i, \sigma_j)
+$$
+
+For $k=3$, we have $I(\sigma_i, \sigma_j) = 2 \mathrm{Re}(\sigma_i \bar{\sigma}_j)$.
+
+This result cannot be extended to $k>3$ using complex plane.
+
+A simple illustration for $k=4$:
+
+![](./impossible_4.svg)
+
+Needs at least a tetrahedron in 3D.
+
 ## weak discovery in SIBM
 
 Let $(X, G, \{\sigma^{(1)}, \dots, \sigma^{(m)}\}) \sim SIBM(n, \frac{a}{n}, \frac{b}{n}, \beta, m)$
