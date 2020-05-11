@@ -106,7 +106,7 @@ $$
 $$
 Therefore we can get $\alpha = b \beta$ as the critical condition.
 
-Using the same method as above, we can get $\alpha = b \beta$ is also critical value for $k=3$.
+Using the same method as above, we can get that $\alpha = b \beta$ is also critical value for $k=3$.
 
 With $\mathbb{E}_G[|E|] = \frac{n\log n}{3}(\frac{a}{2} + b)$, $\mathbb{E}_G \log(\Pr(\sigma = 1))\approx (\frac{a+2b}{3}\beta - \alpha) n \log n$ and $\mathbb{E}_G \log(\Pr(\sigma = X)) \approx \frac{\beta(a-b)}{3} n \log n $
 
@@ -279,5 +279,4 @@ $ P(A(\hat{X}, X) \geq 1/2 + \epsilon)  \to 1$ as $n \to \infty$
 
 For SBM with two communities, the problem is solvable if $(a-b)^2 > 2(a+b)$.
 
-Exponential time algorithm: counting K-cycles;
-
+Not solvable if $(a-b)^2 \leq 2(a+b)$ (Mossel 2015)
