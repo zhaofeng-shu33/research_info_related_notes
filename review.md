@@ -20,3 +20,30 @@ indepedent samples $n$ which is necessary to recover $S$ with probability 1 has 
 
 ## Hypergraph stochastic block model (2020)
 
+Consider the recovery problem of k clustering for d-uniform hypergraph. That is, every edge connects $d$ nodes. This paper focus on the regime when $p,q$ while $n,k$ tends to infinity.
+
+## Weighted Stochastic Block Model(2020)
+
+Each edge is associated with a weight from a given density function $p(\cdot)$ (if the edge is within the community) or $q(\cdot)$ (if the edge joins two different communities).
+
+The result is about general weighted model and some strange assumptions have to be used to make proof possible. For example, this theory requires each cluster should have at least $\frac{n}{\beta k}$. The extra parameter $\beta$ is introduced.
+
+## Hierarchical Model proposed by Professor Huang
+
+Consider the case with 2 attributes, there are four communities $S_1, S_2, S_3, S_4$, each with equal size $|S_i|=\frac{n}{4}$.
+
+For $(i,j) \in S_i$, the probability of existence of an edge is $p$;
+
+For $i \in S_1, j \in S_2$ or $i\in S_2, j\in S_3$ or $i\in S_3, j\in S_4$ or $i\in S_4, j\in S_1$ , the probability of existence of an edge is $q$;
+
+For $i\in S_1, j\in S_3$ or $i\in S_2, j \in S_4$, the probability of existence of an edge is $r$. We require that $p>q>r$
+
+Under which condition of $p,q,r$ can we find an efficient algorithm to recover the community as $n\to \infty$?
+
+When $q=r$, the model reduces to SBM with $k=4$.
+
+![](./S4.svg)
+
+Practical Implications: We can think each node is associated with two binary attributes. When the two attributes are the same, they belong to one cluster $S_i$. When only one attribute differs, the relationship is
+
+captured by $q$; When both the two attributes differ, the quantity is described by $r$.
