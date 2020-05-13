@@ -280,3 +280,4 @@ $ P(A(\hat{X}, X) \geq 1/2 + \epsilon)  \to 1$ as $n \to \infty$
 For SBM with two communities, the problem is solvable if $(a-b)^2 > 2(a+b)$.
 
 Not solvable if $(a-b)^2 \leq 2(a+b)$ (Mossel 2015)
+
