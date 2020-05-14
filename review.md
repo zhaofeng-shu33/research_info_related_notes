@@ -47,3 +47,11 @@ When $q=r$, the model reduces to SBM with $k=4$.
 Practical Implications: We can think each node is associated with two binary attributes. When the two attributes are the same, they belong to one cluster $S_i$. When only one attribute differs, the relationship is
 
 captured by $q$; When both the two attributes differ, the quantity is described by $r$.
+
+
+
+[1] Berthet Q, Rigollet P, Srivastava P. Exact recovery in the Ising blockmodel. Ann Statist. 2019;47(4):1805-1834.
+
+[2] Cole S, Zhu Y. Exact recovery in the hypergraph stochastic block model: A spectral algorithm. Linear Algebra and its Applications. 2020;593:45-73.
+
+[3] Xu M, Jog V, Loh PL. OPTIMAL RATES FOR COMMUNITY ESTIMATION IN THE WEIGHTED STOCHASTIC BLOCK MODEL. Annals of Statistics. 2020;48(1):183-204.
