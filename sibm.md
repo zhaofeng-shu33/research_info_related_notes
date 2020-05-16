@@ -267,6 +267,39 @@ $$
 
 The difference lies at the term $2^k$, which does not influence the proof using the formula of geometric series.
 
+## Proof for $\beta > \beta^*$
+
+Define
+$$
+\tilde{g}(\beta) := \begin{cases}
+g(\beta) & \beta < \frac{1}{6}\log \frac{a}{b} \\
+g(\frac{1}{6}\log\frac{a}{b}) & \beta \geq \frac{1}{6}\log\frac{a}{b}
+\end{cases}
+$$
+$\tilde{g}(\beta) < 0 $ for $\beta > \beta^*$ when $\sqrt{a} - \sqrt{b} > \sqrt{3}$.
+
+We first show that for almost $G$
+$$
+\sum_{i = 1}^n \frac{P_{\sigma | G}(\mathrm{dist}(\sigma, X^{(\sim I,v)})=1)}{P_{\sigma |G}(\sigma = X)} < 2n^{k\tilde{g}(\beta)/2}
+$$
+Notice the coefficient $2$ is due to $v\in \{\omega, \omega^2\}$. We need only to consider the half part: $P_{\sigma | G}(X_i \neq \omega \cdot \sigma_i)$ in the numerator.
+
+In such case:
+$$
+\mathbb{E}[\tilde{D}(G)] \leq n^{1-\frac{(\sqrt{a}-\sqrt{b})^2}{3} + o(1)}
+$$
+Also $P(\tilde{D}(G) = 0) = 1 - o(1)$
+
+Proposition 5*
+
+For $t \in [\frac{1}{3}(b-a), 0]$, $B_i \sim B(\frac{n}{3}, \frac{b\log n}{n}), A_i \sim B(\frac{n}{3}, \frac{a \log n}{n})$.
+
+Then
+$$
+P(B_i - A_i \geq t \log n) \leq \exp\left(\frac{\log n}{3}(\sqrt{9t^2 + 4ab} - 3t\log\frac{\sqrt{9t^2+4ab}}{2b} - a - b + O(\frac{\log n}{n}))\right)
+$$
+
+
 ## weak discovery in SIBM
 
 Let $(X, G, \{\sigma^{(1)}, \dots, \sigma^{(m)}\}) \sim SIBM(n, \frac{a}{n}, \frac{b}{n}, \beta, m)$
