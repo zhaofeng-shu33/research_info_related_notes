@@ -296,9 +296,14 @@ For $t \in [\frac{1}{3}(b-a), 0]$, $B_i \sim B(\frac{n}{3}, \frac{b\log n}{n}), 
 
 Then
 $$
-P(B_i - A_i \geq t \log n) \leq \exp\left(\frac{\log n}{3}(\sqrt{9t^2 + 4ab} - 3t\log\frac{\sqrt{9t^2+4ab}}{2b} - a - b + O(\frac{\log n}{n}))\right)
+P(B_i - A_i \geq t \log n) \leq \exp\left(\frac{\log n}{3}(\sqrt{9t^2 + 4ab} - 3t\log\frac{\sqrt{9t^2+4ab}+3t}{2b} - a - b + O(\frac{\log n}{n}))\right)
 $$
 
+$$
+f_{\beta}(t):=\frac{1}{3}\sqrt{9t^2 + 4ab} - t\log\frac{\sqrt{9t^2+4ab}+3t}{2b} - \frac{a + b}{3} + 1 + 3 \beta t
+$$
+
+We need to show $f_{\beta}(t) \leq \tilde{g}(\beta)$ for $ t < 0$.
 
 ## weak discovery in SIBM
 
