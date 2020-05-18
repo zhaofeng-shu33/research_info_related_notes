@@ -6,7 +6,7 @@ Literature Review on Recent Developments on the topic of community discovery(the
 
 * Consider two communities
 
-* Get the critical region involing $\alpha, \beta$.
+* Get the critical region involving $\alpha, \beta$.
 
 Generating Model: Consider a partition of $V=\{1,\dots, p\}$ into $S$ and $\bar{S}$ with $|S|=\frac{p}{2}$, a determined graph $G$ is the combination of two complete graphs of $S$  and $\bar{S}$. Then we can generate a probability distribution
 $$
@@ -20,13 +20,13 @@ indepedent samples $n$ which is necessary to recover $S$ with probability 1 has 
 
 ## Hypergraph stochastic block model (2020)
 
-Consider the recovery problem of k clustering for d-uniform hypergraph. That is, every edge connects $d$ nodes. This paper focus on the regime when $p,q$ while $n,k$ tends to infinity.
+Consider the recovery problem of k clustering for d-uniform hypergraph. That is, every edge connects $d$ nodes. This paper focus on the regime when $p,q$ are fixed while $n,k$ tends to infinity (dense community).
 
 ## Weighted Stochastic Block Model(2020)
 
 Each edge is associated with a weight from a given density function $p(\cdot)$ (if the edge is within the community) or $q(\cdot)$ (if the edge joins two different communities).
 
-The result is about general weighted model and some strange assumptions have to be used to make proof possible. For example, this theory requires each cluster should have at least $\frac{n}{\beta k}$. The extra parameter $\beta$ is introduced.
+The result is about general weighted model and some strange assumptions have to be used to make proof possible. For example, this theory requires each cluster should have at least $\frac{n}{\beta k}$ nodes. The extra parameter $\beta$ is introduced.
 
 ## Hierarchical Model proposed by Professor Huang
 

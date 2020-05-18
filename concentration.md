@@ -6,7 +6,7 @@ $|\sigma^T(A-\mathbb{E}[A|X])\sigma| \leq c \sqrt{\log n}$ with high probability
 
 Then we can use some techniques to generalize this result to SBM graph([1]).
 
-For the conclusion for ER graph, it is equivalent to say the second largest eigenvalue of $A$ is order $O(\log(n))$. The proof uses a lot of linear space of matrix, which cannot be generalized to $\sum_{i,j}I(\sigma_i, \sigma_j) A_{ij}$.
+For the conclusion for ER graph, it is equivalent to say the second largest eigenvalue of $A$ is order $O(\sqrt{\log(n)})$. The proof uses a lot of linear space of matrix, which cannot be generalized to $\sum_{i,j}I(\sigma_i, \sigma_j) A_{ij}$.
 
 A proof with looser bound (not right?):
 
@@ -24,13 +24,13 @@ $$
 
 Using Chebyshev inequality we have
 $$
-\Pr(|\sum_{i,j}I(\sigma_i, \sigma_j)( M_{ij} -E[M_{ij}])| \geq \sqrt{c}) \leq \frac{\mathrm{Var}[X]}{c}
+\Pr(|\sum_{i,j}I(\sigma_i, \sigma_j)( A_{ij} -E[A_{ij}])| \geq \sqrt{c}) \leq \frac{\mathrm{Var}[X]}{c}
 $$
 Let $c = n^2 \log n$ we then have
 $$
-\Pr(|\sum_{i,j}I(\sigma_i, \sigma_j)( M_{ij} -E[M_{ij}])| \geq n\sqrt{\log n}) \leq \frac{k^2a}{n}
+\Pr(|\sum_{i,j}I(\sigma_i, \sigma_j)( A_{ij} -E[A_{ij}])| \geq n\sqrt{\log n}) \leq \frac{k^2a}{n}
 $$
-
+Problem: the probability $1-\frac{k^2 a}{n}$ is depedent on $\sigma$.
 
 [1] Distributed user profiling via spectral methods, 2010, ACM SIGMETRICS conference
 

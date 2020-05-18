@@ -305,6 +305,18 @@ $$
 
 We need to show $f_{\beta}(t) \leq \tilde{g}(\beta)$ for $ t < 0$.
 
+## Multiple sample case
+
+Algorithm:
+
+Step 1: Alignment, using the six permutation functions and select the one with maximum alignment
+
+Score.
+
+Step 2: Majority vote at each coordinate
+
+$\hat{X}_i = \max\{|\{j | \sigma^{(j)}_i = 1,1\leq j \leq m\}|,|\{j | \sigma^{(j)}_i = \omega,1\leq j \leq m\}|,|\{j | \sigma^{(j)}_i = \omega^2,1\leq j \leq m\}|\}$
+
 ## weak discovery in SIBM
 
 Let $(X, G, \{\sigma^{(1)}, \dots, \sigma^{(m)}\}) \sim SIBM(n, \frac{a}{n}, \frac{b}{n}, \beta, m)$
