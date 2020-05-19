@@ -1,4 +1,4 @@
-Literature Review on Recent Developments on the topic of community discovery(theoretical literature)
+# Literature Review on Recent Developments on the topic of community discovery(theoretical literature)
 
 ## Ising Block Model (2019)
 
@@ -55,3 +55,13 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 [2] Cole S, Zhu Y. Exact recovery in the hypergraph stochastic block model: A spectral algorithm. Linear Algebra and its Applications. 2020;593:45-73.
 
 [3] Xu M, Jog V, Loh PL. OPTIMAL RATES FOR COMMUNITY ESTIMATION IN THE WEIGHTED STOCHASTIC BLOCK MODEL. Annals of Statistics. 2020;48(1):183-204.
+
+# Literature Review on Semi-supervised SBM (Algorithm)
+
+## Signed networks Model(2020)
+
+* the edge takes values from $\{\pm 1\}$
+
+* Variational Bayesian
+
+[1] Liu, X., Song, W., Musial, K., Zhao, X., Zuo, W., Yang, B., 2020. Semi-supervised stochastic blockmodel for structure analysis of signed networks. Knowledge-Based Systems.. doi:10.1016/j.knosys.2020.105714
