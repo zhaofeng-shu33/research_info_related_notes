@@ -237,6 +237,39 @@ Another case happens when the coefficient of $A-B$ has a big gap with the maxima
 
 We get the conclusion that when $\alpha > b \beta$, $\mathrm{dist}(\sigma^{i}, f(X)) < 3 n / \log^{1/3} (n) $ almost surely.
 
+## concentration of general k(Professor Ye)
+
+In this section we assume
+$$
+I(x ,y) = \begin{cases}
+k-1 & x = y\\
+-1 & x \neq y
+\end{cases}
+$$
+Then we show that $|\sum_{i,j} I(\sigma_i, \sigma_j) (A-\mathbb{E}[A|X])| \leq cn\sqrt{\log n}$ almost surely.
+
+Since there are k communities $\{\omega^0, \omega^1, \dots, \omega^{k-1}\}$, we consider 2 communities $\omega^{r}, \omega^s$ at each step. Let 
+$$
+\gamma^{r,s}_i = \begin{cases}
+1 & \sigma_i = \omega^r \\
+-1 & \sigma_i = \omega^s \\
+0 & \textrm{ otherwise}
+\end{cases}
+$$
+Then it is not difficult to show that
+$$
+\sum_{i,j} I(\sigma_i, \sigma_j) (A-\mathbb{E}[A|X]) = \sum_{r,s} (\gamma^{r,s})^T (A-\mathbb{E}[A|X])\gamma^{r,s}
+$$
+We decompose the flatten summation to that of quandratic product.
+
+Then we can use the concentration result for the matrix norm $||A-\mathbb{E}[A|X]||$:
+
+With probability $1-n^{-r}$:
+$$
+|\sum_{r,s} (\gamma^{r,s})^T (A-\mathbb{E}[A|X])\gamma^{r,s}| \leq \sum_{r,s} ||A-\mathbb{E}[A|X]|| \cdot||\gamma^{r,s}||^2 \leq \binom{k}{2} cn\sqrt{\log n} 
+$$
+
+
 ## Proof for $\beta \in (\beta^*, \frac{1}{6}\log \frac{a}{b})$
 
 When $\beta$ in this range, we will show that one sample is enough to recover the original label $X$.
