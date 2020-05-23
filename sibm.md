@@ -2,7 +2,7 @@
 
 $X$ is draw from uniformly whose $\binom{n/2}{n}$ position takes value $+1$;
 
-Each component of $X$ is draw from Bernoulli distribituion with $p=0.5$.
+Each component of $X$ is draw from Bernoulli distribution with $p=0.5$.
 
 Abbe said they were equivalent when $n$ is large.
 
