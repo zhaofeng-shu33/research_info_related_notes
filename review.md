@@ -71,9 +71,8 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 - SBM with a fraction $\alpha$ nodes whose labels are known
 - Study the detection versus non-detection regime using a belief propagation algorithm
 
-## Belief propagation is optimal in some region when side information is provided(2016, Mossel)
+## Belief propagation is optimal in some region when side information is provided (2016, Mossel)
 
 Let $\sigma$ be true label, each component of $\sigma$ is sent into a BSC channel with probability $\alpha \in [0,1/2)$.
 
 Then we can get a noisy label $\tilde{\sigma}$. Using the side information $\tilde{\sigma}$ and consider a SBM$(\frac{a}{n}, \frac{b}{n})$.
-
