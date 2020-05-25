@@ -76,3 +76,6 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 Let $\sigma$ be true label, each component of $\sigma$ is sent into a BSC channel with probability $\alpha \in [0,1/2)$.
 
 Then we can get a noisy label $\tilde{\sigma}$. Using the side information $\tilde{\sigma}$ and consider a SBM$(\frac{a}{n}, \frac{b}{n})$.
+
+pairwise observation
+
