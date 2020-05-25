@@ -64,7 +64,7 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 * the edge takes values from $\{\pm 1\}$
 * Variational Bayesian
 
-[1] Liu, X., Song, W., Musial, K., Zhao, X., Zuo, W., Yang, B., 2020. Semi-supervised stochastic blockmodel for structure analysis of signed networks. Knowledge-Based Systems.. doi:10.1016/j.knosys.2020.105714
+
 
 ## Empirical Study of Phase transitions(2014)
 
@@ -76,3 +76,9 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 Let $\sigma$ be true label, each component of $\sigma$ is sent into a BSC channel with probability $\alpha \in [0,1/2)$.
 
 Then we can get a noisy label $\tilde{\sigma}$. Using the side information $\tilde{\sigma}$ and consider a SBM$(\frac{a}{n}, \frac{b}{n})$.
+
+[1] Liu, X., Song, W., Musial, K., Zhao, X., Zuo, W., Yang, B., 2020. Semi-supervised stochastic blockmodel for structure analysis of signed networks. Knowledge-Based Systems.. doi:10.1016/j.knosys.2020.105714
+
+[2] Zhang, Pan, Cristopher Moore, and Lenka Zdeborová. "Phase transitions in semisupervised clustering of sparse networks." *Physical Review E* 90.5 (2014): 052802.
+
+[3] Mossel, Elchanan, and Jiaming Xu. "Local algorithms for block models with side information." *Proceedings of the 2016 ACM Conference on Innovations in Theoretical Computer Science*. 2016.
