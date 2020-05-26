@@ -2,7 +2,7 @@
 
 $X$ is draw from uniformly whose $\binom{n/2}{n}$ position takes value $+1$;
 
-Each component of $X$ is draw from Bernoulli distrbituion with $p=0.5$.
+Each component of $X$ is draw from Bernoulli distribution with $p=0.5$.
 
 Abbe said they were equivalent when $n$ is large.
 
@@ -39,7 +39,7 @@ I(\sigma_i, \sigma_j) = \begin{cases} 2 & \sigma_i = \sigma_j \\
 $$
 Suppose $x_i, \dots, x_n$ are draw uniformly from $\{1,\omega,\omega^2\}^n$ (That is, there are $\frac{n}{3}$ items taking value $0$, $\frac{n}{3}$ items taking value 1...)
 
-Thus gurantee $\sum_{i=1}^n I(x_i, \sigma) = 0$ for any $\sigma$
+Thus guarantee $\sum_{i=1}^n I(x_i, \sigma) = 0$ for any $\sigma$
 
 Ising model
 $$
@@ -72,7 +72,7 @@ $$
 &+ \exp\left(3(\beta + \frac{\alpha \log n}{n})(C_i-A_i)-\frac{4\alpha \log n}{n}\right)
 \end{align}
 $$
-Due to symmetry, when evaluation the expection, only
+Due to symmetry, when evaluation the expectation, only
 
 need to examine $\mathbb{E}_G[\exp(3\beta (B_i - A_i))]$ when $A_i \sim B(\frac{n}{3}-1, \frac{a\log n}{n}), B_i \sim B(\frac{n}{3}, \frac{b\log n}{n})$.
 $$
@@ -152,7 +152,7 @@ We can write (the version dose not dividing 2)
 $$
 \sum_{i,j=1}^n M_{ij} I(\sigma_i, \sigma_j) = (Q_{11} + Q_{22} + Q_{33})(A-B) + (\sum_{i,j=1}^3 Q_{ij})B + \textrm{ high order term}
 $$
-Using the expression of $Q_{ij}$ we can show that the coeffient of $B$ is
+Using the expression of $Q_{ij}$ we can show that the coefficient of $B$ is
 $$
 \begin{align}
 \sum_{i,j=1}^3 Q_{ij} = &((u_1+v_1+w_1)-(u_2+v_2+w_2))^2 \\
@@ -163,7 +163,7 @@ which is non-negative.
 
 Therefore, when $\alpha > b \beta (B<0)$, we should let $\sum_{i,j=1}^3 Q_{ij}=0$ to maximize $\sum_{i,j} M_{ij} I(\sigma_i, \sigma_j)$.
 
-Actually we can maximize the coeffient of $A$ and $B$ respectively and these two maximal values can co-exist.
+Actually we can maximize the coefficient of $A$ and $B$ respectively and these two maximal values can co-exist.
 
 There are 6 kinds of possibilities for such $\Xi \in \{e, s, r, r^2, sr, sr^2\}$. $e=\frac{n}{3}I_3$ is the identity of the group.
 $$
@@ -183,7 +183,7 @@ This group is isomorphic to $S_3$.
 
 This is equivalent to say when $\sigma  = f(X)$, $\Pr(X=\sigma)$ is maximized under the condition of $\alpha > b \beta$.
 
-The function $f$ is applied to $X$ pairwisely. For each element, it is selected from the symmetric group $S_3$,
+The function $f$ is applied to $X$ in pairwise. For each element, it is selected from the symmetric group $S_3$,
 
 for example
 $$
@@ -227,7 +227,7 @@ We use the $L_{\infty}$ norm for the matrix.
 
 There are 27 different corner values.
 
-For those $\Xi$ falling into the corner neighborhood, we can show the coefficient of $(A-B)$ is very near to the maximal value $\frac{2}{3}n^2$. However, when $\Xi$ falls out of these 6 maximum corner neighboorhoods, the coefficent of $B$ is larger than $(\frac{n}{3} - 3\frac{n}{\log^{1/3} n})^2$. When $n$ is sufficient large, this gap is linear with $n^2$, thus contributing to
+For those $\Xi$ falling into the corner neighborhood, we can show the coefficient of $(A-B)$ is very near to the maximal value $\frac{2}{3}n^2$. However, when $\Xi$ falls out of these 6 maximum corner neighborhoods, the coefficient of $B$ is larger than $(\frac{n}{3} - 3\frac{n}{\log^{1/3} n})^2$. When $n$ is sufficient large, this gap is linear with $n^2$, thus contributing to
 $$
 \frac{P_{\sigma|G}(\sigma = \sigma')}{P_{\sigma|G}(\sigma=X)} < 3^{-n}e^{-n}
 $$
@@ -260,7 +260,7 @@ Then it is not difficult to show that
 $$
 \sum_{i,j} I(\sigma_i, \sigma_j) (A-\mathbb{E}[A|X]) = \sum_{r,s} (\gamma^{r,s})^T (A-\mathbb{E}[A|X])\gamma^{r,s}
 $$
-We decompose the flatten summation to that of quandratic product.
+We decompose the flatten summation to that of quadratic product.
 
 Then we can use the concentration result for the matrix norm $||A-\mathbb{E}[A|X]||$:
 

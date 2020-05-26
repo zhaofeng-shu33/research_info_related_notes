@@ -12,11 +12,11 @@ Generating Model: Consider a partition of $V=\{1,\dots, p\}$ into $S$ and $\bar{
 $$
 P_{\sigma | G}(\sigma = \bar{\sigma}) = \frac{1}{Z_G(\alpha, \beta)}\exp\left(\frac{\beta}{2p} \sum_{\{i,j\}\in E(G)}\bar{\sigma}_i \bar{\sigma}_j + \frac{\alpha}{2p} \sum_{\{i,j\} \not\in E(G)} \bar{\sigma}_i \bar{\sigma}_j\right), \bar{\sigma}_i \in \{\pm 1 \}
 $$
-$\beta > \alpha$ can gurantee that inner community attraction is larger than intra-community one. ($\alpha$ can be positive or negative)
+$\beta > \alpha$ can guarantee that inner community attraction is larger than intra-community one. ($\alpha$ can be positive or negative)
 
 In this paper, the critical region of $\alpha$ and $\beta$ is got. Under these two regions, the sample complexity of
 
-indepedent samples $n$ which is necessary to recover $S$ with probability 1 has been deducted.
+independent samples $n$ which is necessary to recover $S$ with probability 1 has been deducted.
 
 ## Hypergraph stochastic block model (2020)
 
@@ -60,9 +60,26 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 
 ## Signed networks Model(2020)
 
+* partially labeled node
 * the edge takes values from $\{\pm 1\}$
-
 * Variational Bayesian
+
+
+
+
+## Empirical Study of Phase transitions(2014)
+
+- SBM with a fraction $\alpha$ nodes whose labels are known
+- Study the detection versus non-detection regime using a belief propagation algorithm
+
+## Belief propagation is optimal in some region when side information is provided (2016, Mossel)
+
+Let $\sigma$ be true label, each component of $\sigma$ is sent into a BSC channel with probability $\alpha \in [0,1/2)$.
+
+Then we can get a noisy label $\tilde{\sigma}$. Using the side information $\tilde{\sigma}$ and consider a SBM$(\frac{a}{n}, \frac{b}{n})$.
 
 [1] Liu, X., Song, W., Musial, K., Zhao, X., Zuo, W., Yang, B., 2020. Semi-supervised stochastic blockmodel for structure analysis of signed networks. Knowledge-Based Systems.. doi:10.1016/j.knosys.2020.105714
 
+[2] Zhang, Pan, Cristopher Moore, and Lenka Zdeborová. "Phase transitions in semisupervised clustering of sparse networks." *Physical Review E* 90.5 (2014): 052802.
+
+[3] Mossel, Elchanan, and Jiaming Xu. "Local algorithms for block models with side information." *Proceedings of the 2016 ACM Conference on Innovations in Theoretical Computer Science*. 2016.
