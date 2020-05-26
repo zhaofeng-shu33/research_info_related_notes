@@ -65,3 +65,4 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 * Variational Bayesian
 
 [1] Liu, X., Song, W., Musial, K., Zhao, X., Zuo, W., Yang, B., 2020. Semi-supervised stochastic blockmodel for structure analysis of signed networks. Knowledge-Based Systems.. doi:10.1016/j.knosys.2020.105714
+

@@ -342,13 +342,17 @@ We need to show $f_{\beta}(t) \leq \tilde{g}(\beta)$ for $ t < 0$.
 
 Algorithm:
 
-Step 1: Alignment, using the six permutation functions and select the one with maximum alignment
+Step 1: Alignment, assuming $\sigma^{(1)}$is ground truth. Using the six permutation functions and select the one with maximum alignment(after permutation nearest to $\sigma^{(1)})$ . It can be shown that $d(f(\sigma^{(j)}), \sigma^{(1)}) \leq \frac{n}{3}$.
+
+
 
 Score.
 
 Step 2: Majority vote at each coordinate
 
 $\hat{X}_i = \max\{|\{j | \sigma^{(j)}_i = 1,1\leq j \leq m\}|,|\{j | \sigma^{(j)}_i = \omega,1\leq j \leq m\}|,|\{j | \sigma^{(j)}_i = \omega^2,1\leq j \leq m\}|\}$
+
+
 
 ## weak discovery in SIBM
 
