@@ -66,6 +66,7 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 
 
 
+
 ## Empirical Study of Phase transitions(2014)
 
 - SBM with a fraction $\alpha$ nodes whose labels are known
