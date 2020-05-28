@@ -82,3 +82,14 @@ Then we can get a noisy label $\tilde{\sigma}$. Using the side information $\til
 [2] Zhang, Pan, Cristopher Moore, and Lenka Zdeborová. "Phase transitions in semisupervised clustering of sparse networks." *Physical Review E* 90.5 (2014): 052802.
 
 [3] Mossel, Elchanan, and Jiaming Xu. "Local algorithms for block models with side information." *Proceedings of the 2016 ACM Conference on Innovations in Theoretical Computer Science*. 2016.
+
+
+
+# Information Theoretic Approach in Community Detection
+
+## pairwise measurement
+
+general theory about pairwise measurement model, which leads to $\sqrt{a} - \sqrt{b} > \sqrt{2}$ when applied to SBM model.
+
+[1] Chen, Yuxin, Changho Suh, and Andrea J. Goldsmith. "Information recovery from pairwise measurements." *IEEE Transactions on Information Theory* 62.10 (2016): 5881-5905.
+
