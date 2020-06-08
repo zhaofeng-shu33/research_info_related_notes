@@ -94,13 +94,7 @@ The sample complexity( the number of edges required) to almost exactly recover t
 
 is of order $\frac{n\log n}{\mathrm{Hel}^{\mathrm{min}}_{1/2}}$.
 
-Some problems:  the edges are bound by $\frac{1}{n(n-1)}$. If the squared Hellinger distance
-
-is too small, the result is meanless. 
-
 Also, the information measure is difficult to estimate from one sampling of data.
-
-general theory about pairwise measurement model, which leads to $\sqrt{a} - \sqrt{b} > \sqrt{2}$ when applied to SBM model. (I think the general theory can not lead to $\sqrt{a} - \sqrt{b} > \sqrt{2}$)
 
 [1] Chen, Yuxin, Changho Suh, and Andrea J. Goldsmith. "Information recovery from pairwise measurements." *IEEE Transactions on Information Theory* 62.10 (2016): 5881-5905.
 
