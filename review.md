@@ -90,7 +90,7 @@ Then we can get a noisy label $\tilde{\sigma}$. Using the side information $\til
 
 ## pairwise measurement
 
-The sample complexity( the number of edges required) to almost exactly recover the labels up to a constant
+The sample complexity (the number of edges required) to almost exactly recover the labels up to a constant
 
 is of order $\frac{n\log n}{\mathrm{Hel}^{\mathrm{min}}_{1/2}}$.
 
@@ -98,3 +98,16 @@ Also, the information measure is difficult to estimate from one sampling of data
 
 [1] Chen, Yuxin, Changho Suh, and Andrea J. Goldsmith. "Information recovery from pairwise measurements." *IEEE Transactions on Information Theory* 62.10 (2016): 5881-5905.
 
+## New model based on pairwise measurement
+
+Consider ER graph with $p_{\textrm{obj}} \geq \log n /n$. Every node of the graph has a label $x_i$ coming from a cyclic group with order $M$. Suppose for every edge of the graph, there is an observation value $y$ coming from $\{0, 1, \dots, M\}$ and is prescribed by $p(y_{ij} | x_i - x_j = l) = P_{l}(y_{ij})$.  Also the discrete 
+
+conditional distribution is only dependent on $l$.  Also for each node there are multiple independent samples (the number of sample is T) with probability $p(y_i | x_i = l)= P_l(y_i)$. The transfer probability is the same with that of edges. Notice node sample is different with edge sample. For each edge we only have one observation but for each node we have multiple observations. Then we investigate the error probability of ML algorithm $\psi$ to recover $X$. Also notice that the error probability is chosen as the maximum error:
+$$
+P_e(\psi) := P\{\textrm{dist}(\psi(y), x) \neq 0 | x \}
+$$
+The chosen of multiple observations for each node is to balance the contribution of nodes and that of edges. Compared to the original pairwise measurements model, we added noisy node observations, making the new model semi-supervised learning.
+
+Some ideas to transform node observation to edge observation: Add new nodes with label zero. And add one edge from the new node to each old node.
+
+Problems: the transformation is deterministic and the expanded graph does not satisfy the condition any more.
