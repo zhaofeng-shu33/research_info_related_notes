@@ -5,14 +5,34 @@ There are two methods to compute this quantity. One is using direct integration.
 Since 
 
 $$
-P_{XY}(x,y) = P_X(x)P_Y(y) + \epsilon \sqrt{P_X(x)P_Y(y)} \phi(x,y)
+||\widetilde{B}||_F^2 = \int \frac{(p(x,y) - p(x) p (y))^2}{p(x)p(y)}dxdy
 $$
 
-and $\widetilde{B}(x,y) = \phi(x,y) \epsilon$.
+Where 
+$$
+p(x,y) = \frac{1}{2\pi}\exp\left(\frac{1}{2(1-\rho^2)}(x^2+y^2 - 2\rho x y)\right)
+$$
+The result is $\frac{\rho^2}{1-\rho^2}$.
 
-We assume both $X,Y$ are standard Gaussian distribution, then we can compute
+
+
+The second method is to use the Taylor expansion of $\frac{p(x,y)}{p(x)p(y)} = 1 + \sum_{i=1}^{\infty} \rho \pi_i(x) \pi_i(y)$, where
+
+$\pi_i(x)$ is orthogonal polynomial w.r.t. the Gaussian kernel. 
+
+This expansion is possible due to [Mehler's kernel](https://en.wikipedia.org/wiki/Mehler_kernel#Probability_version).
+
+Notice that
 $$
-\phi(x,y) = \frac{xy}{\sqrt{2\pi}} \exp(-\frac{x^2+y^2}{4})
+||\widetilde{B}||_F^2 = \int \left(\frac{p(x,y)}{p(x)p(y)} - 1\right)^2p(x)p(y)dxdy
 $$
-Then $||\widetilde{B}||_F^2= \epsilon^2 \int \phi^2(x,y) dxdy$
+Therefore we have  
+$$
+||\widetilde{B}||_F^2 = \sum_{i=1}^{\infty}\rho^{2i} = \frac{\rho^2}{1-\rho^2}
+$$
+
+
+
+
+
 
