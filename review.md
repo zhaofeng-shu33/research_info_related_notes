@@ -111,3 +111,9 @@ The chosen of multiple observations for each node is to balance the contribution
 Some ideas to transform node observation to edge observation: Add new nodes with label zero. And add one edge from the new node to each old node.
 
 Problems: the transformation is deterministic and the expanded graph does not satisfy the condition any more.
+
+We take an approach to insert additional observations into the proof of Thoerem 1 in the original paper of Chen, Yu Xin. 
+
+$N_w = T n_0 + \frac{1}{2}(n^2 - \sum_{i=0}^{M-1} n_i^2 )$
+
+Confusing Part: Assumption of $n_0 \geq n_i$ for $i=1, \dots, M-1$. (Equation 91)
