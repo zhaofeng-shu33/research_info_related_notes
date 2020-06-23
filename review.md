@@ -117,3 +117,13 @@ We take an approach to insert additional observations into the proof of Thoerem 
 $N_w = T n_0 + \frac{1}{2}(n^2 - \sum_{i=0}^{M-1} n_i^2 )$
 
 Confusing Part: Assumption of $n_0 \geq n_i$ for $i=1, \dots, M-1$. (Equation 91)
+
+### New model based on SIBM
+
+Consider $m$ nodes $Y_1, \dots, Y_n$ with binary labels. If  $Y_i  = Y_j$ there are probability $p$ that there is an edge between the two nodes; If $Y_i \neq Y_j$, there are probability $q$ that there is an edge between them. Also $p>q$.
+
+For each node $Y_i$, we can generate $n$ i.i.d. observations $X_1^{(i)}, \dots, X_n^{(i)}$ from $P_0$ (if $Y_i = 0$) or $P_1$ (if $Y_i=1$).
+
+Suppose given one sample of the graph and $X_j^{(i)}$ for $i=1, \dots, m$ and $j=1, \dots, n$,
+
+what is the Chernoff Bound for ML method?
