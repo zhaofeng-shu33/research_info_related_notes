@@ -6,7 +6,7 @@ Each component of $X$ is draw from Bernoulli distribution with $p=0.5$.
 
 Abbe said they were equivalent when $n$ is large.
 
-## A simple illustration of Abbe's conclusion
+## A simple illustration of Abbe's conclusion (2015)
 
 $$
 p=\frac{a\log n}{n}, q=\frac{b\log n}{n}
@@ -93,7 +93,7 @@ Empirical deduction: This result can be got by evaluating $\mathbb{E}_G \log(\Pr
 
 To be more precisely:
 
-Consider the expection of edge numbers: 
+Consider the expectation of edge numbers: 
 $$
 \mathbb{E}_{G}[|E|] = \frac{a \log n}{n} \frac{n}{2}(\frac{n}{2} - 1) + \frac{b\log n}{n}\left(\frac{n}{2}\right)^2 \approx \frac{a+b}{4} n \log n
 $$
@@ -368,3 +368,10 @@ For SBM with two communities, the problem is solvable if $(a-b)^2 > 2(a+b)$.
 
 Not solvable if $(a-b)^2 \leq 2(a+b)$ (Mossel 2015)
 
+
+
+## Reference
+
+[1] Mossel, Elchanan, and Jiaming Xu. "Local algorithms for block models with side information." *Proceedings of the 2016 ACM Conference on Innovations in Theoretical Computer Science*. 2016.
+
+[2] Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
