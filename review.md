@@ -131,3 +131,5 @@ For each node $Y_i$, we can generate $n$ i.i.d. observations $X_1^{(i)}, \dots, 
 Suppose given one sample of the graph and $X_j^{(i)}$ for $i=1, \dots, m$ and $j=1, \dots, n$,
 
 what is the Chernoff Bound for ML method?
+
+If there is no graph structure, then we do a Hypothesis testing independently for each node, and the judging scheme is to compare $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=0)$ and $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=1)$ and the error probability decreases as $\exp^{-n D}$ where $D$ is called the Chernoff component and can be computed from the two joint distribution.
