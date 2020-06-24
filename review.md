@@ -122,7 +122,7 @@ This assumption is possible due to the property of translational invariant. We c
 
 proposals with $n_0 \geq n_i$ and multiply the error probability by $M$.
 
-### New model based on SIBM
+### New model based on SBM
 
 Consider $m$ nodes $Y_1, \dots, Y_n$ with binary labels. If  $Y_i  = Y_j$ there are probability $p$ that there is an edge between the two nodes; If $Y_i \neq Y_j$, there are probability $q$ that there is an edge between them. Also $p>q$.
 
