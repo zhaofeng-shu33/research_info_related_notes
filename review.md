@@ -112,11 +112,15 @@ Some ideas to transform node observation to edge observation: Add new nodes with
 
 Problems: the transformation is deterministic and the expanded graph does not satisfy the condition any more.
 
-We take an approach to insert additional observations into the proof of Thoerem 1 in the original paper of Chen, Yu Xin. 
+We take an approach to insert additional observations into the proof of Theorem 1 in the original paper of Chen, Yu Xin. 
 
 $N_w = T n_0 + \frac{1}{2}(n^2 - \sum_{i=0}^{M-1} n_i^2 )$
 
-Confusing Part: Assumption of $n_0 \geq n_i$ for $i=1, \dots, M-1$. (Equation 91)
+In Chen's original paper,  there is an assumption of $n_0 \geq n_i$ for $i=1, \dots, M-1$. (Equation 91).
+
+This assumption is possible due to the property of translational invariant. We can consider only
+
+proposals with $n_0 \geq n_i$ and multiply the error probability by $M$.
 
 ### New model based on SIBM
 
