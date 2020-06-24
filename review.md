@@ -133,3 +133,20 @@ Suppose given one sample of the graph and $X_j^{(i)}$ for $i=1, \dots, m$ and $j
 what is the Chernoff Bound for ML method?
 
 If there is no graph structure, then we do a Hypothesis testing independently for each node, and the judging scheme is to compare $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=0)$ and $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=1)$ and the error probability decreases as $\exp^{-n D}$ where $D$ is called the Chernoff component and can be computed from the two joint distribution.
+
+Equivalence of ML in SBIM to bisection partition.
+
+Let $z_{ij} \in \{0, 1\}$ to represent whether there is an edge between two nodes in a graph, then
+$$
+p(z | y) = \prod_{y_i = y_j} p^{z_{ij}} (1-p)^{1-z_{ij}} \prod_{y_i \neq y_j} q^{z_{ij}}(1-q)^{1-z_{ij}}
+$$
+Let $A$ to represent the number of edges between two parts $y_i=1$ and $y_i=-1$.
+
+Then 
+$$
+p(z|y)=p^{|E|-A}(1-p)^{\frac{n}{2}(\frac{n}{2}-1)-|E|+A} q^A (1-q)^{\frac{n^2}{4}-A}
+$$
+Suppose $p>q$, to maximize $p(z|y)$ is equivalent to minimize $A$. That is, to find a bisection which minimizes the number of edges across the cut.
+
+
+

@@ -372,6 +372,6 @@ Not solvable if $(a-b)^2 \leq 2(a+b)$ (Mossel 2015)
 
 ## Reference
 
-[1] Mossel, Elchanan, and Jiaming Xu. "Local algorithms for block models with side information." *Proceedings of the 2016 ACM Conference on Innovations in Theoretical Computer Science*. 2016.
+[1] Mossel, Elchanan, Joe Neeman, and Allan Sly. "Consistency thresholds for the planted bisection model." *Proceedings of the forty-seventh annual ACM symposium on Theory of computing*. 2015.
 
 [2] Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
