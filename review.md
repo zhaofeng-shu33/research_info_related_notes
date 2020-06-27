@@ -124,15 +124,15 @@ proposals with $n_0 \geq n_i$ and multiply the error probability by $M$.
 
 ### New model based on SBM
 
-Consider $m$ nodes $Y_1, \dots, Y_n$ with binary labels. If  $Y_i  = Y_j$ there are probability $p$ that there is an edge between the two nodes; If $Y_i \neq Y_j$, there are probability $q$ that there is an edge between them. Also $p>q$.
+Consider $n$ nodes $Y_1, \dots, Y_n$ with binary labels. If  $Y_i  = Y_j$ there are probability $p$ that there is an edge between the two nodes; If $Y_i \neq Y_j$, there are probability $q$ that there is an edge between them. Also $p>q$.
 
-For each node $Y_i$, we can generate $n$ i.i.d. observations $X_1^{(i)}, \dots, X_n^{(i)}$ from $P_0$ (if $Y_i = 0$) or $P_1$ (if $Y_i=1$).
+For each node $Y_i$, we can generate $m$ i.i.d. observations $X_1^{(i)}, \dots, X_m^{(i)}$ from $P_0$ (if $Y_i = 0$) or $P_1$ (if $Y_i=1$).
 
-Suppose given one sample of the graph and $X_j^{(i)}$ for $i=1, \dots, m$ and $j=1, \dots, n$,
+Suppose given one sample of the graph and $X_j^{(i)}$ for $i=1, \dots, n$ and $j=1, \dots, m$,
 
 what is the Chernoff Bound for ML method?
 
-If there is no graph structure, then we do a Hypothesis testing independently for each node, and the judging scheme is to compare $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=0)$ and $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=1)$ and the error probability decreases as $\exp^{-n D}$ where $D$ is called the Chernoff component and can be computed from the two joint distribution.
+If there is no graph structure, then we do a Hypothesis testing independently for each node, and the judging scheme is to compare $P(X^{(i)}_1, \dots, X^{(i)}_m | Y_i=0)=\prod_{j=1}^m p_0(x^{(i)}_j)$ and $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=1) = \prod_{j=1}^m p_1(x_j^{(i)})$ and the error probability decreases as $\exp^{-n D}$ where $D$ is called the Chernoff component and can be computed from the two joint distribution.
 
 Equivalence of ML in SBIM to bisection partition.
 
@@ -148,5 +148,13 @@ p(z|y)=p^{|E|-A}(1-p)^{\frac{n}{2}(\frac{n}{2}-1)-|E|+A} q^A (1-q)^{\frac{n^2}{4
 $$
 Suppose $p>q$, to maximize $p(z|y)$ is equivalent to minimize $A$. That is, to find a bisection which minimizes the number of edges across the cut.
 
+Consider also $p(x|y)$ as:
+$$
+p(x|y) = \prod_{i=1}^n \prod_{j=1}^m p_0(x_j^{(i)})^{y_i} p_1(x_j^{(i)})^{1-y_i}
+$$
+We maximize $\log p(x,z | y) = \log p(z | y) + \log p(x|y) = C + \sum_{i=1}^n B_i y_i + (\log q - \log p - \log (1-q) + \log (1-p)) A$
 
+
+
+The coefficient of $A$ is negative, $C$ is a constant, not involving $y_i$ and $B_i  = \sum_{j=1}^m \log \frac{p_0(x_j^{(i)})}{p_1(x_j^{(i)})}$.
 
