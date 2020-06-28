@@ -158,3 +158,17 @@ We maximize $\log p(x,z | y) = \log p(z | y) + \log p(x|y) = C + \sum_{i=1}^n B_
 
 The coefficient of $A$ is negative, $C$ is a constant, not involving $y_i$ and $B_i  = \sum_{j=1}^m \log \frac{p_0(x_j^{(i)})}{p_1(x_j^{(i)})}$.
 
+Let $S$ be the adjacency matrix of the graph, then
+$$
+A = \sum_{(i,j) \in E(G)} (1-y_i) y_j + (1-y_j) y_i = 2 e^T S y - y^T S y
+$$
+where $e$ is the all-one vector and $y$ is the target $n$-dimensional $\{0,1\}$ vector. We can merge the coefficient of linear component of $y$ in $A$ with $B_i$ and get the final decision rule:
+$$
+\begin{align}
+\min\, & y^T S y- b^T y \\
+s.t.\,\, & y \in \{0, 1\}^n \\
+ &e^T y = \frac{n}{2}
+\end{align}
+$$
+where $b_i = 2\textrm{deg}(i) + B_i$.
+
