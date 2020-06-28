@@ -140,7 +140,7 @@ Let $z_{ij} \in \{0, 1\}$ to represent whether there is an edge between two node
 $$
 p(z | y) = \prod_{y_i = y_j} p^{z_{ij}} (1-p)^{1-z_{ij}} \prod_{y_i \neq y_j} q^{z_{ij}}(1-q)^{1-z_{ij}}
 $$
-Let $A$ to represent the number of edges between two parts $y_i=1$ and $y_i=-1$.
+Let $A$ to represent the number of edges between two parts $y_i=1$ and $y_i=0$.
 
 Then 
 $$
@@ -162,7 +162,7 @@ Let $S$ be the adjacency matrix of the graph, then
 $$
 A = \sum_{(i,j) \in E(G)} (1-y_i) y_j + (1-y_j) y_i = 2 e^T S y - y^T S y
 $$
-where $e$ is the all-one vector and $y$ is the target $n$-dimensional $\{0,1\}$ vector. We can merge the coefficient of linear component of $y$ in $A$ with $B_i$ and get the final decision rule:
+where $e$ is the all-one vector and $y$ is the target $n$-dimensional $\{0,1\}$ vector. We can merge the coefficient of linear component of $y$ in $A$ with $B_i$ and get the final decision rule (ADMM):
 $$
 \begin{align}
 \min\, & y^T S y- b^T y \\
@@ -172,3 +172,4 @@ s.t.\,\, & y \in \{0, 1\}^n \\
 $$
 where $b_i = 2\textrm{deg}(i) + B_i$.
 
+p(x, z | y_1) = sum_{} 
