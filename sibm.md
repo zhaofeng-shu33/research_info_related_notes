@@ -344,7 +344,7 @@ Algorithm:
 
 Step 1: Alignment, assuming $\sigma^{(1)}$is ground truth. Using the six permutation functions and select the one with maximum alignment(after permutation nearest to $\sigma^{(1)})$ . It can be shown that $d(f(\sigma^{(j)}), \sigma^{(1)}) \leq \frac{n}{3}$.
 
-
+## 
 
 Score.
 
@@ -367,6 +367,32 @@ $ P(A(\hat{X}, X) \geq 1/2 + \epsilon)  \to 1$ as $n \to \infty$
 For SBM with two communities, the problem is solvable if $(a-b)^2 > 2(a+b)$.
 
 Not solvable if $(a-b)^2 \leq 2(a+b)$ (Mossel 2015)
+
+
+
+## Voter model
+
+https://en.wikipedia.org/wiki/Sznajd_model
+
+The idea of this model is mentioned in SIBM paper.
+
+## Metropolis
+
+Using Metropolis algorithm to generate the SIBM sample: https://en.wikipedia.org/wiki/Ising_model#Metropolis_algorithm
+
+
+
+Hamiltonian of SIBM
+$$
+H(\bar{\sigma}) = \frac{\alpha}{\beta} \frac{\log n}{n} \sum_{\{i,j\} \not\in E(G)}\bar{\sigma}_i\bar{\sigma}_j - \sum_{\{i,j\} \in E(G)} \bar{\sigma}_i \bar{\sigma}_j
+$$
+If there is one coordinate of $\bar{\sigma}$ flips: $\bar{\sigma}_r \to -\bar{\sigma}_r$. Then the change of energy is:
+$$
+H(\bar{\sigma}^{\sim\{r\}}) - H(\bar{\sigma}) = 2 \sum_{i \in N_r(G)} \bar{\sigma}_r \bar{\sigma}_i - 2\frac{\alpha \log n}{\beta n} \sum_{i \in V\backslash N_r(G)} \bar{\sigma}_r \bar{\sigma}_i
+$$
+We choose the index $r$ randomly from $V$ and calculate the energy difference, if $H(\bar{\sigma}^{\sim\{r\}}) < H(\bar{\sigma})$ we accept the new configuration. Otherwise, we accept it with probability $\exp^{-\beta (H(\bar{\sigma}^{\sim\{r\}}) - H(\bar{\sigma}))}$. We repeat the
+
+iteration for a given number of times.
 
 
 
