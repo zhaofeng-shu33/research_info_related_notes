@@ -22,7 +22,7 @@ independent samples $n$ which is necessary to recover $S$ with probability 1 has
 
 Consider the recovery problem of k clustering for d-uniform hypergraph. That is, every edge connects $d$ nodes. This paper focus on the regime when $p,q$ are fixed while $n,k$ tends to infinity (dense community).
 
-## Weighted Stochastic Block Model(2020)
+## Weighted Stochastic Block Model (2020)
 
 Each edge is associated with a weight from a given density function $p(\cdot)$ (if the edge is within the community) or $q(\cdot)$ (if the edge joins two different communities).
 
@@ -58,7 +58,7 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 
 # Literature Review on Semi-supervised SBM (Algorithm)
 
-## Signed networks Model(2020)
+## Signed networks Model (2020)
 
 * partially labeled node
 * the edge takes values from $\{\pm 1\}$
@@ -67,7 +67,7 @@ captured by $q$; When both the two attributes differ, the quantity is described 
 
 
 
-## Empirical Study of Phase transitions(2014)
+## Empirical Study of Phase transitions (2014)
 
 - SBM with a fraction $\alpha$ nodes whose labels are known
 - Study the detection versus non-detection regime using a belief propagation algorithm
@@ -131,6 +131,8 @@ For each node $Y_i$, we can generate $m$ i.i.d. observations $X_1^{(i)}, \dots, 
 Suppose given one sample of the graph and $X_j^{(i)}$ for $i=1, \dots, n$ and $j=1, \dots, m$,
 
 what is the Chernoff Bound for ML method?
+
+For SBM only, it is proved that the error probability $\leq c^{-\frac{1}{4}\epsilon}$.
 
 If there is no graph structure, then we do a Hypothesis testing independently for each node, and the judging scheme is to compare $P(X^{(i)}_1, \dots, X^{(i)}_m | Y_i=0)=\prod_{j=1}^m p_0(x^{(i)}_j)$ and $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=1) = \prod_{j=1}^m p_1(x_j^{(i)})$ and the error probability decreases as $\exp^{-n D}$ where $D$ is called the Chernoff component and can be computed from the two joint distribution.
 
