@@ -174,4 +174,41 @@ s.t.\,\, & y \in \{0, 1\}^n \\
 $$
 where $b_i = 2\textrm{deg}(i) + B_i$.
 
-p(x, z | y_1) = sum_{} 
+p(x, z | y_1)  is difficult to estimate, **sum** cannot be simplified.
+
+We consider $p(x, y_2, \dots, y_n | z, y_1)$ instead. Assuming $y_i \sim Bern(0.5)$ That is, we do not require $e^t y = \frac{n}{2}$ exactly.
+
+$H_0: p(x, y_2, \dots, y_n | z, y_1 = 0) = p_0(x) \prod_{i \in N_1(G)} p^{1-y_i} q^{y_i} \prod_{i \not \in N_1(G)} (1-p)^{1-y_i} (1-q)^{y_i} f(y_2, \dots, y_n)$
+
+And
+
+$H_1: p(x, y_2, \dots, y_n | z, y_1 = 1) = p_1(x) \prod_{i \in N_1(G)} p^{y_i} q^{1-y_i} \prod_{i \not \in N_1(G)} (1-p)^{y_i} (1-q)^{1-y_i} f(y_2, \dots, y_n)$
+
+The decision rule to accept $H_0$ is $A(x, y_2, \dots, y_n) : = \{(x, y_2, \dots, y_n) | p(x, y_2, \dots, y_n | z, y_1 = 0)  > p(x, y_2, \dots, y_n | z, y_1 = 1) \}$
+
+The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D(P_0 || P_1)}$.
+
+The Chernoff information term is
+
+$D=m D(p_0 || p_1) + E_{P_{Y_2, \dots, Y_n | Y_1 =0, Z}} [\log \frac{P_0(Y)}{P_1(Y)}]$
+
+Since the posterior of $Y_2, \dots, Y_n | Y_1=0, Z$ is not independent, we cannot decompose them easily.
+
+Let the posterior be denoted as $\hat{y}$. The second term is
+$$
+E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q}
+$$
+If $p=q$. This term is zero. That is ER-graph contributes nothing to the estimation of label.
+
+We can show that $P(Y_i = 0 | Y_1 =0, Z) > 0.5 > P(Y_i = 1 | Y_1 = 0 , Z)$ for $i \in N_1(G)$
+
+and $P(Y_i = 0 | Y_1 =0, Z) < 0.5 < P(Y_i = 1 | Y_1 = 0 , Z)$ for $i \not\in N_1(G)$
+
+Therefore 
+$$
+E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q} = \sum_{i \in N_1(G)} (2 P(Y_i=0 | Y_1=0 ,Z) - 1) \log \frac{p}{q} + \sum_{i \not\in N_1(G)}(2P(Y_i=0 | Y_1 = 0, Z) - 1) \log \frac{1-p}{1-q}
+$$
+
+
+which is exactly larger than zero.
+
