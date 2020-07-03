@@ -390,9 +390,11 @@ If there is one coordinate of $\bar{\sigma}$ flips: $\bar{\sigma}_r \to -\bar{\s
 $$
 H(\bar{\sigma}^{\sim\{r\}}) - H(\bar{\sigma}) = 2 \sum_{i \in N_r(G)} \bar{\sigma}_r \bar{\sigma}_i - 2\frac{\alpha \log n}{\beta n} \sum_{i \in V\backslash N_r(G)} \bar{\sigma}_r \bar{\sigma}_i
 $$
-We choose the index $r$ randomly from $V$ and calculate the energy difference, if $H(\bar{\sigma}^{\sim\{r\}}) < H(\bar{\sigma})$ we accept the new configuration. Otherwise, we accept it with probability $\exp^{-\beta (H(\bar{\sigma}^{\sim\{r\}}) - H(\bar{\sigma}))}$. We repeat the
+We choose the index $r$ randomly from $V$ (in implementation we iterate over all vertices one by one) and calculate the energy difference, if $H(\bar{\sigma}^{\sim\{r\}}) < H(\bar{\sigma})$ we accept the new configuration. Otherwise, we accept it with probability $\exp^{-\beta (H(\bar{\sigma}^{\sim\{r\}}) - H(\bar{\sigma}))}$. We repeat the
 
 iteration for a given number of times.
+
+Simulation problem:
 
 
 

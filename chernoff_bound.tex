@@ -36,12 +36,12 @@ and find that the optimal $\lambda^*$ satisfies
 \sum_{x\in \mathcal{X}} P_{\lambda^*}(x) \log \frac{P_1(x)}{P_2(x)} = 0 \textrm{ where }
 P_{\lambda}(x) = \frac{P_1^{\lambda}(x)P_2^{1-\lambda}(x)}{\sum_{a\in \mathcal{X}}P_1^{\lambda}(a)P_2^{1-\lambda}(a)}
 \end{equation}
-which is equivalent to say $\lambda$ is a solution to $D(P_{\lambda}|| P_1) = D(P_{\lambda} || P_2)$.
+which is equivalent to say $\lambda^*$ is a solution to $D(P_{\lambda}|| P_1) = D(P_{\lambda} || P_2)$.
 
-Since $\sum_{x\in \mathcal{X}} P_1^{\lambda}(x)  P_2^{1-\lambda}(x) = \frac{P_1^{\lambda^*}(y)P_2^{1-\lambda^*}(y)}
+Since $\sum_{x\in \mathcal{X}} P_1^{\lambda^*}(x)  P_2^{1-\lambda^*}(x) = \frac{P_1^{\lambda^*}(y)P_2^{1-\lambda^*}(y)}
 {P_{\lambda^*}(y)}$ for any $y\in \mathcal{X}$. Therefore,
 \begin{align*}
--\log \sum_{x\in \mathcal{X}} P_1^{\lambda}(x)  P_2^{1-\lambda}(x) &= \sum_{y \in \mathcal{X}} P_{\lambda^*}(y) \left(-\log \sum_{x\in \mathcal{X}} P_1^{\lambda}(x)  P_2^{1-\lambda}(x) \right)\\
+-\log \sum_{x\in \mathcal{X}} P_1^{\lambda^*}(x)  P_2^{1-\lambda^*}(x) &= \sum_{y \in \mathcal{X}} P_{\lambda^*}(y) \left(-\log \sum_{x\in \mathcal{X}} P_1^{\lambda^*}(x)  P_2^{1-\lambda^*}(x) \right)\\
 & = \sum_{y \in \mathcal{X}} P_{\lambda^*}(y) \log\left(\frac{P_{\lambda^*}(y)}{P_1^{\lambda^*}(y)P_2^{1-\lambda^*}(y)}\right) \\
 & = \lambda^* D(P_{\lambda^*} || P_1) + (1-\lambda^*) D(P_{\lambda^*} || P_2) \\
 & = D(P_{\lambda^*} || P_1) \textrm{ or } D(P_{\lambda^*} || P_2)
