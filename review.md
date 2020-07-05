@@ -212,3 +212,11 @@ $$
 
 which is exactly larger than zero.
 
+If $P(Y_i = 0 | Y_1 =0, Z) > C_1$ for $i\in N_1(G)$ where $C_1 > 0.5$ and irrelevant with $n, Z, i$
+
+and   $P(Y_i = 0 | Y_1 =0, Z) < C_2$ for $i\not\in N_1(G)$ where $C_2 < 0.5$ and irrelevant with $n, Z, i$
+
+Then 
+$$
+E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q} > \min \{(2C_1 - 1)\log\frac{p}{q}, (1-2C_2)\log\frac{1-q}{1-p}\} (n-1)
+$$

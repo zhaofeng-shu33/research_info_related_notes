@@ -398,6 +398,46 @@ Simulation problem:
 
 
 
+A naive parameter estimation method
+
+Given a graph $G$, we can count its edges as $|E|$.
+
+The first equation is 
+$$
+\frac{n}{2}(\frac{n}{2} - 1) p + (\frac{n}{2})^2 q= |E|
+$$
+This equation gives the value of $p+q$ approximately.
+
+Then we choose two nodes $A$ and $B$:
+
+$H_1$: the labels of $A$ and $B$ are the same;
+
+$H_2$: the labels of $A$ and $B$ are opposite;
+
+To distinguish $H_1$ from $H_2$, we use two statistics $T_1$ and $T_2$.
+
+$T_1$: the number of nodes which have edges to $A$ and $B$ or do not have edges to $A$ and $B$.
+
+$T_2$: the number of nodes which have only one edges to $A$ or $B$.
+
+Under the hypothesis of $H_1$: 
+
+$E[T_1] \approx \frac{n}{2} (p^2 + q^2 + (1-p)^2 + (1-q)^2)$
+
+$E[T_2] \approx n(p(1-p) + q(1-q))$
+
+Under the hypothesis of $H_2$:
+
+$E[T_1] \approx n (pq + (1-p)(1-q))$
+
+$E[T_2] \approx n(p(1-q) + (1-p)q)$
+
+Notice that $E[T_1] + E[T_2] \approx n$ under both cases.
+
+The statistics $T_1,T_2$ can be computed from data. And $E[T_1] > E[T_2]$ under $H_1$ and $E[T_1] < E[T_2]$ under $H_2$.
+
+In either way, we can estimate the value of the product of $p$ and $q$.
+
 ## Reference
 
 [1] Mossel, Elchanan, Joe Neeman, and Allan Sly. "Consistency thresholds for the planted bisection model." *Proceedings of the forty-seventh annual ACM symposium on Theory of computing*. 2015.
