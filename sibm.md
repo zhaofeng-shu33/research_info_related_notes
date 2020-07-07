@@ -364,11 +364,11 @@ that
 
 $ P(A(\hat{X}, X) \geq 1/2 + \epsilon)  \to 1$ as $n \to \infty$
 
-For SBM with two communities, the problem is solvable if $(a-b)^2 > 2(a+b)$.
+For SBM ($\frac{a}{n}, \frac{b}{n}$)with two communities, the problem is solvable if $(a-b)^2 > 2(a+b)$.
 
 Not solvable if $(a-b)^2 \leq 2(a+b)$ (Mossel 2015)
 
-
+Efficient algorithm for weak discovery scenario: k-cycle
 
 ## Voter model
 
@@ -398,7 +398,7 @@ Simulation problem:
 
 
 
-A naive parameter estimation method
+## A naive parameter estimation method
 
 Given a graph $G$, we can count its edges as $|E|$.
 
@@ -434,12 +434,34 @@ $E[T_2] \approx n(p(1-q) + (1-p)q)$
 
 Notice that $E[T_1] + E[T_2] \approx n$ under both cases.
 
-The statistics $T_1,T_2$ can be computed from data. And $E[T_1] > E[T_2]$ under $H_1$ and $E[T_1] < E[T_2]$ under $H_2$.
+The problem is that $E[T_1] \approx n$ under both cases and it is hard to distinguish $H_1$ from $H_2$.
 
-In either way, we can estimate the value of the product of $p$ and $q$.
+Actually, we can count the triangles in the graph, and get an equation of 3rd order:
+$$
+\frac{n/2(n/2-1)(n/2-2)}{3}p^3+ (n/2)^2(n/2-1)pq^2 = |T| 
+$$
+After some simplification, we can get the equation array of $a$ and $b$.
+
+Question: in ER graph, as $n\to \infty$ how to show that $6\frac{|T|}{(log n)^3} \to a$  where $p=\frac{a \log n}{n}$.
+
+The sum of $\frac{n^3}{6}$ of Bernoulli random variables with parameter $p^3$, but they are not independent.
+
+
+
+Other parameter estimation method
+
+It is mentioned in 4.1 of [1] that suppose $\sigma \in \{\pm\}^n$ is the true labels and $A$ is adjacency matrix, then
+$$
+E[A|\sigma] = \frac{p + q}{2} 11^T + \frac{p-q}{2}\sigma \sigma^T
+$$
+We can compute the second largest eigenvalues of $E[A|\sigma]$.
+
+
 
 ## Reference
 
 [1] Mossel, Elchanan, Joe Neeman, and Allan Sly. "Consistency thresholds for the planted bisection model." *Proceedings of the forty-seventh annual ACM symposium on Theory of computing*. 2015.
 
 [2] Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
+
+[3] Mossel, Elchanan, Joe Neeman, and Allan Sly. "Reconstruction and estimation in the planted partition model." *Probability Theory and Related Fields* 162.3-4 (2015): 431-461.
