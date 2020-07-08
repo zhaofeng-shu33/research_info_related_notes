@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{Semi-supervised learning for SBM model}
+\author{Feng Zhao}
+\begin{document}
+	\maketitle
+\section{Problem Formulation}
+New model based on SBM
+
+Consider $n$ nodes $Y_1, \dots, Y_n$ with binary labels. If  $Y_i  = Y_j$ there are probability $p$ that there is an edge between the two nodes; If $Y_i \neq Y_j$, there are probability $q$ that there is an edge between them. Also $p>q$.
+
+For each node $Y_i$, we can generate $m$ i.i.d. observations $X_1^{(i)}, \dots, X_m^{(i)}$ from $P_0$ (if $Y_i = 0$) or $P_1$ (if $Y_i=1$).
+
+Suppose given one sample of the graph and $X_j^{(i)}$ for $i=1, \dots, n$ and $j=1, \dots, m$,
+
+what is the Chernoff Bound for ML method?
+
+\section{Deduction}
+Initial Conclusion: Given $y_2, \dots, y_n$ and $x^{(i)}_{j}$, to distinguish $H_0: y_1 = 0 $ from $H_1: y_1 =1 $ the chernoff information
+for type I error is $mD(p_0||p_1)+ \min \{(2C_1 - 1)\log\frac{p}{q}, (1-2C_2)\log\frac{1-q}{1-p}\} (n-1)$ 
+
+For SBM only, it is proved that the error probability $\leq cn^{-\frac{1}{4}\epsilon}$\cite{abbe15}.
+
+If there is no graph structure, then we do a Hypothesis testing independently for each node, and the judging scheme is to compare $P(X^{(i)}_1, \dots, X^{(i)}_m | Y_i=0)=\prod_{j=1}^m p_0(x^{(i)}_j)$ and $P(X^{(i)}_1, \dots, X^{(i)}_n | Y_i=1) = \prod_{j=1}^m p_1(x_j^{(i)})$ and the error probability decreases as $\exp^{-n D}$ where $D$ is called the Chernoff component and can be computed from the two joint distribution.
+
+Equivalence of ML in SBIM to bisection partition.
+
+Let $z_{ij} \in \{0, 1\}$ to represent whether there is an edge between two nodes in a graph, then
+$$
+p(z | y) = \prod_{y_i = y_j} p^{z_{ij}} (1-p)^{1-z_{ij}} \prod_{y_i \neq y_j} q^{z_{ij}}(1-q)^{1-z_{ij}}
+$$
+Let $A$ to represent the number of edges between two parts $y_i=1$ and $y_i=0$.
+
+Then 
+$$
+p(z|y)=p^{|E|-A}(1-p)^{\frac{n}{2}(\frac{n}{2}-1)-|E|+A} q^A (1-q)^{\frac{n^2}{4}-A}
+$$
+Suppose $p>q$, to maximize $p(z|y)$ is equivalent to minimize $A$. That is, to find a bisection which minimizes the number of edges across the cut.
+
+Consider also $p(x|y)$ as:
+$$
+p(x|y) = \prod_{i=1}^n \prod_{j=1}^m p_0(x_j^{(i)})^{y_i} p_1(x_j^{(i)})^{1-y_i}
+$$
+We maximize $\log p(x,z | y) = \log p(z | y) + \log p(x|y) = C + \sum_{i=1}^n B_i y_i + (\log q - \log p - \log (1-q) + \log (1-p)) A$
+
+
+
+The coefficient of $A$ is negative, $C$ is a constant, not involving $y_i$ and $B_i  = \sum_{j=1}^m \log \frac{p_0(x_j^{(i)})}{p_1(x_j^{(i)})}$.
+
+Let $S$ be the adjacency matrix of the graph, then
+$$
+A = \sum_{(i,j) \in E(G)} (1-y_i) y_j + (1-y_j) y_i = 2 e^T S y - y^T S y
+$$
+where $e$ is the all-one vector and $y$ is the target $n$-dimensional $\{0,1\}$ vector. We can merge the coefficient of linear component of $y$ in $A$ with $B_i$ and get the final decision rule (ADMM):
+
+\begin{align}
+\min\, & y^T S y- b^T y \\
+s.t.\,\, & y \in \{0, 1\}^n \\
+ &e^T y = \frac{n}{2}
+\end{align}
+
+where $b_i = 2\textrm{deg}(i) + B_i$.
+
+$p(x, z | y_1)$  is difficult to estimate, **sum** cannot be simplified.
+
+We consider $p(x, y_2, \dots, y_n | z, y_1)$ instead. Assuming $y_i \sim Bern(0.5)$ That is, we do not require $e^t y = \frac{n}{2}$ exactly but
+asymptotically.
+
+$H_0: p(x, y_2, \dots, y_n | z, y_1 = 0) = p_0(x) \prod_{i \in N_1(G)} p^{1-y_i} q^{y_i} \prod_{i \not \in N_1(G)} (1-p)^{1-y_i} (1-q)^{y_i} f(y_2, \dots, y_n)$
+
+And
+
+$H_1: p(x, y_2, \dots, y_n | z, y_1 = 1) = p_1(x) \prod_{i \in N_1(G)} p^{y_i} q^{1-y_i} \prod_{i \not \in N_1(G)} (1-p)^{y_i} (1-q)^{1-y_i} f(y_2, \dots, y_n)$
+
+The decision rule to accept $H_0$ is $A(x, y_2, \dots, y_n) : = \{(x, y_2, \dots, y_n) | p(x, y_2, \dots, y_n | z, y_1 = 0)  > p(x, y_2, \dots, y_n | z, y_1 = 1) \}$
+
+The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D(P_0 || P_1)}$.
+
+The Chernoff information term is
+
+$D=m D(p_0 || p_1) + E_{P_{Y_2, \dots, Y_n | Y_1 =0, Z}} [\log \frac{P_0(Y)}{P_1(Y)}]$
+
+Since the posterior of $Y_2, \dots, Y_n | Y_1=0, Z$ is not independent, we cannot decompose them easily.
+
+Let the posterior be denoted as $\hat{y}$. The second term is
+$$
+E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q}
+$$
+If $p=q$. This term is zero. That is ER-graph contributes nothing to the estimation of label.
+
+We can show that $P(Y_i = 0 | Y_1 =0, Z) > 0.5 > P(Y_i = 1 | Y_1 = 0 , Z)$ for $i \in N_1(G)$
+
+and $P(Y_i = 0 | Y_1 =0, Z) < 0.5 < P(Y_i = 1 | Y_1 = 0 , Z)$ for $i \not\in N_1(G)$
+
+Therefore 
+\begin{align*}
+&E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q} =\\
+&\sum_{i \in N_1(G)} (2 P(Y_i=0 | Y_1=0 ,Z) - 1) \log \frac{p}{q} + \sum_{i \not\in N_1(G)}(2P(Y_i=0 | Y_1 = 0, Z) - 1) \log \frac{1-p}{1-q}
+\end{align*}
+
+
+which is exactly larger than zero.
+
+If $P(Y_i = 0 | Y_1 =0, Z) > C_1$ for $i\in N_1(G)$ where $C_1 > 0.5$ and irrelevant with $n, Z, i$
+
+and   $P(Y_i = 0 | Y_1 =0, Z) < C_2$ for $i\not\in N_1(G)$ where $C_2 < 0.5$ and irrelevant with $n, Z, i$
+
+Then 
+\begin{align*}
+&E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q}  >\\
+& \min \{(2C_1 - 1)\log\frac{p}{q}, (1-2C_2)\log\frac{1-q}{1-p}\} (n-1)
+\end{align*}
+\section{Related Work}
+\cite{cb} computes Chernoff bound for SBM.
+
+\begin{thebibliography}{9}
+	\bibitem{cb} Zhou, Zhixin, and Ping Li. "Rate optimal Chernoff bound and application to community detection in the stochastic block models." Electronic Journal of Statistics 14.1 (2020): 1302-1347.
+	\bibitem{abbe15} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." IEEE Transactions on Information Theory 62.1 (2015): 471-487.
+\end{thebibliography}
+\end{document}
