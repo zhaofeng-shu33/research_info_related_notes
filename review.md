@@ -130,7 +130,7 @@ For each node $Y_i$, we can generate $m$ i.i.d. observations $X_1^{(i)}, \dots, 
 
 Suppose given one sample of the graph and $X_j^{(i)}$ for $i=1, \dots, n$ and $j=1, \dots, m$,
 
-what is the Chernoff Bound for ML method?
+What is the Chernoff Bound for ML method?
 
 For SBM only, it is proved that the error probability $\leq c^{-\frac{1}{4}\epsilon}$.
 
@@ -220,3 +220,9 @@ Then
 $$
 E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q} > \min \{(2C_1 - 1)\log\frac{p}{q}, (1-2C_2)\log\frac{1-q}{1-p}\} (n-1)
 $$
+
+## Huang's suggestion:
+
+We suppose the prior distributions for $y_1, \dots, y_n$ are i.i.d Bern(0.5). $y_2, \dots, y_n$ should be hidden, to compare $p(x, z | y_1 =1)$ with $p(x,z| y_1 = 0)$ we only need
+
+to compare $\sum_{y_2, \dots, y_n} p(x,z,y_1=1, y_2, \dots, y_n)$ with $\sum_{y_2, \dots, y_n} p(x,z,y_1=0, y_2, \dots, y_n)$.
