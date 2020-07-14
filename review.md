@@ -176,21 +176,31 @@ where $b_i = 2\textrm{deg}(i) + B_i$.
 
 p(x, z | y_1)  is difficult to estimate, **sum** cannot be simplified.
 
-We consider $p(x, y_2, \dots, y_n | z, y_1)$ instead. Assuming $y_i \sim Bern(0.5)$ That is, we do not require $e^t y = \frac{n}{2}$ exactly.
+We consider $p(y_1 | x, y_2, \dots, y_n ,z)$ instead. Assuming $y_i \sim Bern(0.5)$ That is, we do not require $e^t y = \frac{n}{2}$ exactly.
 
-$H_0: p(x, y_2, \dots, y_n | z, y_1 = 0) = p_0(x) \prod_{i \in N_1(G)} p^{1-y_i} q^{y_i} \prod_{i \not \in N_1(G)} (1-p)^{1-y_i} (1-q)^{y_i} f(y_2, \dots, y_n)$
+$H_0: p(x,z | y_2, \dots, y_n, y_1 = 0) = p_0(x) \prod_{i \in N_1(G)} p^{1-y_i} q^{y_i} \prod_{i \not \in N_1(G)} (1-p)^{1-y_i} (1-q)^{y_i} f(y_2, \dots, y_n)$
 
 And
 
-$H_1: p(x, y_2, \dots, y_n | z, y_1 = 1) = p_1(x) \prod_{i \in N_1(G)} p^{y_i} q^{1-y_i} \prod_{i \not \in N_1(G)} (1-p)^{y_i} (1-q)^{1-y_i} f(y_2, \dots, y_n)$
+$H_1: p(x, z | | y_2, \dots, y_n, y_1 = 1) = p_1(x) \prod_{i \in N_1(G)} p^{y_i} q^{1-y_i} \prod_{i \not \in N_1(G)} (1-p)^{y_i} (1-q)^{1-y_i} f(y_2, \dots, y_n)$
 
-The decision rule to accept $H_0$ is $A(x, y_2, \dots, y_n) : = \{(x, y_2, \dots, y_n) | p(x, y_2, \dots, y_n | z, y_1 = 0)  > p(x, y_2, \dots, y_n | z, y_1 = 1) \}$
+The decision rule to accept $H_0$ is $A(x, y_2, \dots, y_n, z) : = \{(x, y_2, \dots, y_n) | p(x,z | y_2, \dots, y_n, y_1 = 0) > p(x,z | y_2, \dots, y_n, y_1 = 1) \}$
 
 The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D(P_0 || P_1)}$.
 
 The Chernoff information term is
 
-$D=m D(p_0 || p_1) + E_{P_{Y_2, \dots, Y_n | Y_1 =0, Z}} [\log \frac{P_0(Y)}{P_1(Y)}]$
+$D=m D(p_0 || p_1) + E_{P_{z | Y_1 =0, Y_2 = y_2, \dots, Y_n = y_n}}[\log \frac{P_0(z)}{P_1(z)}]$
+
+$$
+\begin{align}
+P_0(z) & = \prod_{j=2}^n p^{z_{1j}(1-y_j)}q^{z_{1j}y_j}(1-p)^{(1-z_{1j})(1-y_j)}(1-q)^{(1-z_{1j})y_j} \prod_{i>j>1}f(z_{ij}, y_i, y_j) \\
+P_1(z) & = \prod_{j=2}^n p^{z_{1j}y_j}q^{z_{1j}(1-y_j)}(1-p)^{(1-z_{1j})y_j}(1-q)^{(1-z_{1j})(1-y_j)} \prod_{i>j>1}f(z_{ij}, y_i, y_j) \\
+\end{align}
+$$
+Products of Bernoulli distribution.
+
+
 
 Since the posterior of $Y_2, \dots, Y_n | Y_1=0, Z$ is not independent, we cannot decompose them easily.
 
@@ -226,3 +236,13 @@ $$
 We suppose the prior distributions for $y_1, \dots, y_n$ are i.i.d Bern(0.5). $y_2, \dots, y_n$ should be hidden, to compare $p(x, z | y_1 =1)$ with $p(x,z| y_1 = 0)$ we only need
 
 to compare $\sum_{y_2, \dots, y_n} p(x,z,y_1=1, y_2, \dots, y_n)$ with $\sum_{y_2, \dots, y_n} p(x,z,y_1=0, y_2, \dots, y_n)$.
+
+A suboptimal algorithm:
+
+To estimate $Y_1$, we first estimate $Y_i$ from sample $\{X^{(i)}_1, \dots, X^{(i)}_{m_i}\} $
+
+The posterior distribution for $Y_i$ is $\Pr(Y_i=0 | x^{(i)}_1, \dots, x^{(i)}_{m_i}) = \frac{\prod_{j=1}^{m_i} p_0(x^{(i)}_j)}{\prod_{j=1}^{m_i} p_0(x^{(i)}_j)+\prod_{j=1}^{m_i} p_1(x^{(i)}_j)} $
+$$
+\Pr(Y_i=0 | x^{(i)}_1, \dots, x^{(i)}_{m_i})= \frac{1}{1+\exp\left(-\displaystyle\sum_{j=1}^{m_i} \log \frac{p_0(x^{(i)}_j)}{p_1(x^{(i)}_j)}\right)}
+$$
+Suppose $x_1^{(i)}, \dots x_{m_i}^{(i)}$ is sampled from $p_0$. Then as $m_i \to \infty$, $\Pr(Y_i=0 | x^{(i)}_1, \dots, x^{(i)}_{m_i}) = \frac{1}{1+\exp^{-m_i D(p_0 || p_1)}} \sim 1 - \exp^{-m_i D(p_0 || p_1)}$. Therefore, the type I error is $\Pr(Y_i=1 | x^{(i)}_1, \dots, x^{(i)}_{m_i}) \sim \exp^{-m_iD(p_0 || p_1)}$
