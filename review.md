@@ -182,11 +182,15 @@ $H_0: p(x,z | y_2, \dots, y_n, y_1 = 0) = p_0(x) \prod_{i \in N_1(G)} p^{1-y_i} 
 
 And
 
-$H_1: p(x, z | | y_2, \dots, y_n, y_1 = 1) = p_1(x) \prod_{i \in N_1(G)} p^{y_i} q^{1-y_i} \prod_{i \not \in N_1(G)} (1-p)^{y_i} (1-q)^{1-y_i} f(y_2, \dots, y_n)$
+$H_1: p(x, z | y_2, \dots, y_n, y_1 = 1) = p_1(x) \prod_{i \in N_1(G)} p^{y_i} q^{1-y_i} \prod_{i \not \in N_1(G)} (1-p)^{y_i} (1-q)^{1-y_i} f(y_2, \dots, y_n)$
 
-The decision rule to accept $H_0$ is $A(x, y_2, \dots, y_n, z) : = \{(x, y_2, \dots, y_n) | p(x,z | y_2, \dots, y_n, y_1 = 0) > p(x,z | y_2, \dots, y_n, y_1 = 1) \}$
+The decision rule to accept $H_0$ is $A(x, y_2, \dots, y_n, z) : = \{(x, y_2, \dots, y_n,z) | p(x,z | y_2, \dots, y_n, y_1 = 0) > p(x,z | y_2, \dots, y_n, y_1 = 1) \}$
+$$
+A(x, y_2, \dots, y_n, z) : =\{(x, y_2, \dots, y_n,z) | \sum_{i=1}^m \log \left(\frac{p_0(x_i^{(1)})}{p_1(x_i^{(1)})}\right) + \sum_{j=2}^n (1-2y_i)[z_{1j}\log\frac{p}{q} + (1-z_{1j})\log\frac{1-p}{1-q}] > 0 \}
+$$
 
-The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D(P_0 || P_1)}$.
+
+The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D(P_0 || P_1)}$(Chernoff Bound).
 
 The Chernoff information term is
 
@@ -200,36 +204,15 @@ P_1(z) & = \prod_{j=2}^n p^{z_{1j}y_j}q^{z_{1j}(1-y_j)}(1-p)^{(1-z_{1j})y_j}(1-q
 $$
 Products of Bernoulli distribution.
 
-
-
-Since the posterior of $Y_2, \dots, Y_n | Y_1=0, Z$ is not independent, we cannot decompose them easily.
-
-Let the posterior be denoted as $\hat{y}$. The second term is
+Only $z_{1j}, j=2,\dots, n$ are relevant.
 $$
-E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q}
-$$
-If $p=q$. This term is zero. That is ER-graph contributes nothing to the estimation of label.
-
-We can show that $P(Y_i = 0 | Y_1 =0, Z) > 0.5 > P(Y_i = 1 | Y_1 = 0 , Z)$ for $i \in N_1(G)$
-
-and $P(Y_i = 0 | Y_1 =0, Z) < 0.5 < P(Y_i = 1 | Y_1 = 0 , Z)$ for $i \not\in N_1(G)$
-
-Therefore 
-$$
-E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q} = \sum_{i \in N_1(G)} (2 P(Y_i=0 | Y_1=0 ,Z) - 1) \log \frac{p}{q} + \sum_{i \not\in N_1(G)}(2P(Y_i=0 | Y_1 = 0, Z) - 1) \log \frac{1-p}{1-q}
+\begin{align*}
+E_{P_{z | Y_1 =0, Y_2 = y_2, \dots, Y_n = y_n}}[\log \frac{P_0(z)}{P_1(z)}]
+&= \sum_{j=2}^n E_{P_{z_{1j} | Y_1=0, Y_j = y_j}}[ \log \frac{P_0(z_{ij})}{P_1(z_{ij})}] \\
+&= \sum_{j=2}^n [(1-y_j) D(p || q) + y_j D(q || p)]
+\end{align*}
 $$
 
-
-which is exactly larger than zero.
-
-If $P(Y_i = 0 | Y_1 =0, Z) > C_1$ for $i\in N_1(G)$ where $C_1 > 0.5$ and irrelevant with $n, Z, i$
-
-and   $P(Y_i = 0 | Y_1 =0, Z) < C_2$ for $i\not\in N_1(G)$ where $C_2 < 0.5$ and irrelevant with $n, Z, i$
-
-Then 
-$$
-E_{\hat{y}} [\sum_{i \in N_1(G)} (1-2y_i)]  \log \frac{p}{q} + E_{\hat{y}} [\sum_{i \not\in N_1(G)} (1-2y_i)] \log \frac{1-p}{1-q} > \min \{(2C_1 - 1)\log\frac{p}{q}, (1-2C_2)\log\frac{1-q}{1-p}\} (n-1)
-$$
 
 ## Huang's suggestion:
 
