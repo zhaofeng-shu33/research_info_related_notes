@@ -229,3 +229,6 @@ $$
 \Pr(Y_i=0 | x^{(i)}_1, \dots, x^{(i)}_{m_i})= \frac{1}{1+\exp\left(-\displaystyle\sum_{j=1}^{m_i} \log \frac{p_0(x^{(i)}_j)}{p_1(x^{(i)}_j)}\right)}
 $$
 Suppose $x_1^{(i)}, \dots x_{m_i}^{(i)}$ is sampled from $p_0$. Then as $m_i \to \infty$, $\Pr(Y_i=0 | x^{(i)}_1, \dots, x^{(i)}_{m_i}) = \frac{1}{1+\exp^{-m_i D(p_0 || p_1)}} \sim 1 - \exp^{-m_i D(p_0 || p_1)}$. Therefore, the type I error is $\Pr(Y_i=1 | x^{(i)}_1, \dots, x^{(i)}_{m_i}) \sim \exp^{-m_iD(p_0 || p_1)}$
+
+A naive upper bound for this 2-stage method: $\sum_{i=2}^n \exp^{-m_i D(p_0 || p_1)} + \exp^{-m_1 D(p_0 || p_1) - n D(p || q)}$
+
