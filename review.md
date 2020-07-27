@@ -232,3 +232,11 @@ Suppose $x_1^{(i)}, \dots x_{m_i}^{(i)}$ is sampled from $p_0$. Then as $m_i \to
 
 A naive upper bound for this 2-stage method: $\sum_{i=2}^n \exp^{-m_i D(p_0 || p_1)} + \exp^{-m_1 D(p_0 || p_1) - n D(p || q)}$
 
+
+
+## Chernoff Bound for SBM
+
+[1] Zhou, Zhixin, and Ping Li. "Rate optimal Chernoff bound and application to community detection in the stochastic block models." *Electronic Journal of Statistics* 14.1 (2020): 1302-1347.
+
+[2] Zhang, Anderson Y., and Harrison H. Zhou. "Minimax rates of community detection in stochastic block models." *The Annals of Statistics* 44.5 (2016): 2252-2280.
+
