@@ -190,11 +190,11 @@ A(x, y_2, \dots, y_n, z) : =\{(x, y_2, \dots, y_n,z) | \sum_{i=1}^m \log \left(\
 $$
 
 
-The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D(P_0 || P_1)}$(Chernoff Bound).
+The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D_{\alpha}(P_0 || P_1)}$(Chernoff alpha Bound).
 
-The Chernoff information term is
+The Chernoff alpha information term is
 
-$D=m D(p_0 || p_1) + E_{P_{z | Y_1 =0, Y_2 = y_2, \dots, Y_n = y_n}}[\log \frac{P_0(z)}{P_1(z)}]$
+$D_{\alpha}(P_0 || P_1)=m D_{\alpha}(p_0 || p_1) + E_{P_{z | Y_1 =0, Y_2 = y_2, \dots, Y_n = y_n}}[\log \frac{P_0(z)}{P_1(z)}]$
 
 $$
 \begin{align}
@@ -234,7 +234,7 @@ A naive upper bound for this 2-stage method: $\sum_{i=2}^n \exp^{-m_i D(p_0 || p
 
 
 
-## Chernoff Bound for SBM
+## Chernoff alpha Bound for SBM
 
 [1] Zhou, Zhixin, and Ping Li. "Rate optimal Chernoff bound and application to community detection in the stochastic block models." *Electronic Journal of Statistics* 14.1 (2020): 1302-1347.
 
