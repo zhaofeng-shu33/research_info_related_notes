@@ -240,3 +240,15 @@ A naive upper bound for this 2-stage method: $\sum_{i=2}^n \exp^{-m_i D(p_0 || p
 
 [2] Zhang, Anderson Y., and Harrison H. Zhou. "Minimax rates of community detection in stochastic block models." *The Annals of Statistics* 44.5 (2016): 2252-2280.
 
+In paper [2], for a given $K$ community SBM,
+
+the mismatched error $Er(\sigma, \hat{\sigma})$ for an estimator $\hat{\sigma}$:
+$$
+\lim_{n\to\infty}-\frac{1}{n}\log\inf_{\hat{\sigma}} Er(\sigma, \hat{\sigma}) = \frac{I}{K}
+$$
+where
+$$
+I = -2\log \left(\sqrt{\frac{a}{n}\frac{b}{n}} + \sqrt{(1-\frac{a}{n})(1-\frac{b}{n})}\right)
+$$
+which is the Renyi divergence of order $1/2$.
+
