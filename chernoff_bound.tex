@@ -1,31 +1,53 @@
 \documentclass{article}
 \usepackage{bm}
 \usepackage{amsmath}
+\usepackage{url}
 \usepackage{amssymb}
-\title{Derivation of Chernoff information bound for Hypothesis Testing Problem}
+\usepackage{theorem}
+\newtheorem{theorem}{Theorem}
+\title{Derivation of Chernoff information for Hypothesis Testing Problem}
 \begin{document}
 \maketitle
-This derivation can be found from 11.9 of \cite{it}.
-
+\section{Formulation}
 Notation: $\bm{x} = (x_1, \dots, x_n)$ is a vector. The samples $x_i$ are i.i.d. either from $P_1$ or $P_2$.
 
 $ H_1: X \sim P_1 $ versus $ H_2:  X \sim P_2 $.
 
+The decision rule to accept $H_1$ is $A_n$.
+$\alpha_n = P_1(A^c_n)$ denotes the Type I error. $\beta_n = P_2(A)$ denotes the Type II error.
+
+\begin{theorem}
+Let the prior probability of $H_1$ be $\pi_1$, then $P(H_2) = \pi_2 = 1 - \pi_1$. The average error is
+$P_e^{(n)} = \pi_1 \alpha_n + \pi_2 \beta_n$. Then we have
+\begin{equation}
+D^* = \lim_{n \to \infty} -\frac{1}{n} \log \min_{A_n \subseteq \mathcal{X}^n} P_e^{(n)}
+\end{equation}
+where $D^* = D(P_{\lambda^*} || P_1) = D(P_{\lambda^*} || P_2)$ and $\lambda^*$ satisfies
+\begin{equation}
+\sum_{x\in \mathcal{X}} P_{\lambda^*}(x) \log \frac{P_1(x)}{P_2(x)} = 0 \textrm{ where }
+P_{\lambda}(x) = \frac{P_1^{\lambda}(x)P_2^{1-\lambda}(x)}{\sum_{a\in \mathcal{X}}P_1^{\lambda}(a)P_2^{1-\lambda}(a)}
+\end{equation}
+
+\end{theorem}
+\section{Chernoff information}
+This derivation of upper bound can be found from 11.9 of \cite{it}. Here is a repetition of this proof.
+
+
 Decision rule of accepting $H_1$:
 \begin{equation}
-A=\{\bm{x}: P_1(\bm{x}) > P_2(\bm{x})\}
+A=\{\bm{x}: \pi_1 P_1(\bm{x}) > \pi_2 P_2(\bm{x})\}
 \end{equation}
 
 The error probability $P_e$ can be written as:
 \begin{align*}
-P_e & = \sum_{\bm{x} \in A^c} P_1(\bm{x})
-+ \sum_{\bm{x} \in A} P_2(\bm{x}) \\
-& = \sum_{\bm{x} \in \mathcal{X}^n} \min \{ P_1(\bm{x}), P_2(\bm{x})\} \\
+P_e & = \sum_{\bm{x} \in A^c} \pi_1 P_1(\bm{x})
++ \sum_{\bm{x} \in A} \pi_2 P_2(\bm{x}) \\
+& = \sum_{\bm{x} \in \mathcal{X}^n} \min \{ \pi_1 P_1(\bm{x}), \pi_2 P_2(\bm{x})\} \\
 \end{align*}
 Choosing $ 0 \leq \lambda \leq 1 $,
 we then have
 \begin{align*}
-P_e & \leq \sum_{\bm{x} \in \mathcal{X}^n}  P_1^{\lambda}(\bm{x})  P_2^{1-\lambda}(\bm{x}) \\
+P_e & \leq \sum_{\bm{x} \in \mathcal{X}^n}  \pi_1^{\lambda} P_1^{\lambda}(\bm{x}) \pi_2^{1-\lambda} P_2^{1-\lambda}(\bm{x}) \\
 & =  \sum_{\bm{x} \in \mathcal{X}^n}  \prod_{i=1}^n P_1^{\lambda}(x_i)  P_2^{1-\lambda}(x_i) \\
 & = \prod_{i=1}^n \sum_{x_i\in \mathcal{X}} P_1^{\lambda}(x_i)  P_2^{1-\lambda}(x_i) \\
 & = \left(\sum_{x\in \mathcal{X}} P_1^{\lambda}(x)  P_2^{1-\lambda}(x)\right)^n
@@ -46,7 +68,10 @@ Since $\sum_{x\in \mathcal{X}} P_1^{\lambda^*}(x)  P_2^{1-\lambda^*}(x) = \frac{
 & = \lambda^* D(P_{\lambda^*} || P_1) + (1-\lambda^*) D(P_{\lambda^*} || P_2) \\
 & = D(P_{\lambda^*} || P_1) \textrm{ or } D(P_{\lambda^*} || P_2)
 \end{align*}
+\section{Chernoff-Stein Lemma}
+
 \begin{thebibliography}{9}
 	\bibitem{it} Cover, Thomas M. Elements of information theory. John Wiley \& Sons, 1999.
+	\bibitem{wiki} \url{https://en.wikipedia.org/wiki/Error_exponents_in_hypothesis_testing}
 \end{thebibliography}
 \end{document}
