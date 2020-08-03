@@ -189,6 +189,13 @@ $$
 A(x, y_2, \dots, y_n, z) : =\{(x, y_2, \dots, y_n,z) | \sum_{i=1}^m \log \left(\frac{p_0(x_i^{(1)})}{p_1(x_i^{(1)})}\right) + \sum_{j=2}^n (1-2y_i)[z_{1j}\log\frac{p}{q} + (1-z_{1j})\log\frac{1-p}{1-q}] > 0 \}
 $$
 
+If $y_i = 0, i = 2, \dots, n$ then the decision rule can be written as:
+$$
+m [D(P_{X^m} || p_1) - D(P_{X^m} || p_0)] + (n-1) [D(P_Z || P_{Z_1}) - D(P_Z || P_{Z_0})] > 0
+$$
+where $P_{Z_1}\sim Bern(q)$, $P_{Z_0} \sim Bern(p)$ and $P_Z$ is a distribution on $\{0, 1\}$.
+
+
 
 The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D_{\alpha}(P_0 || P_1)}$(Chernoff alpha Bound).
 
