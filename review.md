@@ -283,5 +283,27 @@ where $T$ is a threshold.
 
 Let the empirical distribution from the sample be $X_m, Z_n$ then the LRT is equivalent with
 $$
-m (D(P_{X^m}||p_0) - D(P_{X^m} || p_1)) + n (D(P_{Z^n}||q_0) - D(P_{Z^n} || q_1))> \log T
+A(P_{X^m}, P_{Z^n})=\{m (D(P_{X^m}||p_1) - D(P_{X^m} || p_0)) + n (D(P_{Z^n}||q_1) - D(P_{Z^n} || q_0))> \log T\}
+$$
+To analyze the problem, we first extend the "Probability of Type Class" to encompass a more general case. 
+
+To estimate $P_0((P_X, P_Z)\in A^c)$ we have (See the Textbook, Elements of Information Theory Page 362)
+$$
+\begin{align}
+P_0((P_X, P_Z)\in A^c) & = \sum_{(P_X, P_Z)\in A^c} P_0^m(T(P_X)) Q_0^n(T(P_Z))
+\leq \sum_{(P_X, P_Z)\in A^c} \exp(-m D(P_X || P_0) - n D(P_Z || Q_0))
+\end{align}
+$$
+Suppose $m=n$ ($m=kn$ can also be considered where $k$ is a constant). After some computation we can show that
+$$
+\lim_{n\to\infty}-\frac{1}{n} \log P_0((P_X, P_Z)\in A^c)  = D(P^*_{X} || P_0)  + D(P^*_Z || Q_0)
+$$
+where $(P_X^*, P_Z^*)$ is $\arg\min_{(P_X,P_Z) \in A^c}D(P_X|| P_0)+D(P_Z || Q_0)$
+
+The optimal $\lambda$ is chosen such that $D(P_{\lambda} || P_0) + D(Q_{\lambda} || Q_0) = D(P_{\lambda} || P_1) + D(Q_{\lambda} || Q_1)$. Where
+$$
+\begin{align}
+P_{\lambda} & = \frac{P_0^{\lambda}P_1^{1-\lambda}}{\sum_{a\in \mathcal{X}} P_0^{\lambda}(a)P_1^{1-\lambda}(a)}\\
+Q_{\lambda} & = \frac{Q_0^{\lambda}Q_1^{1-\lambda}}{\sum_{a\in \mathcal{Z}} Q_0^{\lambda}(a)Q_1^{1-\lambda}(a)}
+\end{align}
 $$
