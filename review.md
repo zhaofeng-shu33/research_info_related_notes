@@ -265,3 +265,23 @@ I = -2\log \left(\sqrt{\frac{a}{n}\frac{b}{n}} + \sqrt{(1-\frac{a}{n})(1-\frac{b
 $$
 which is the Renyi divergence of order $1/2$.
 
+
+
+## Mixed Hypothesis Testing Problem
+
+$H_0: (p_0, q_0)$ and $H_1: (p_1, q_1)$. $p_i$ is a distribution on $\mathcal{X}$ while $q_i$ is on $\mathcal{Z}$.
+
+$X_1, \dots, X_m$ are generated from $p_i$ while $Z_1, \dots, Z_n$ are generated from $q_i$. Now given 
+
+$X_1, \dots, X_m, Z_1, \dots, Z_n$ choose $i=0$ or $i=1$?
+
+Using Log likelihood ratios test we have
+$$
+m \sum_{i=1}^m\log \frac{p_0(x_i)}{p_1(x_i)}+n \sum_{i=1}^n \log \frac{q_0(z_i)}{q_1(z_i)} > \log T
+$$
+where $T$ is a threshold.
+
+Let the empirical distribution from the sample be $X_m, Z_n$ then the LRT is equivalent with
+$$
+m (D(P_{X^m}||p_0) - D(P_{X^m} || p_1)) + n (D(P_{Z^n}||q_0) - D(P_{Z^n} || q_1))> \log T
+$$
