@@ -265,7 +265,9 @@ I = -2\log \left(\sqrt{\frac{a}{n}\frac{b}{n}} + \sqrt{(1-\frac{a}{n})(1-\frac{b
 $$
 which is the Renyi divergence of order $1/2$.
 
+Notice that in this kind of literature $r(\sigma, \hat{\sigma})$ is a fraction between 0 and 1. This definition of error function
 
+is different with that of Abbe, since Abbe focuses on the problem of exact recovery while the former focuses on the error proportion.
 
 ## Mixed Hypothesis Testing Problem
 
