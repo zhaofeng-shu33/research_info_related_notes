@@ -203,28 +203,7 @@ m [D(P_{X^m} || p_1) - D(P_{X^m} || p_0)] + (n-1 -\kappa) [D(P_Z || P_{Z_1}) - D
 $$
 
 
-The type I error probability is $P_0((x, y_2, \dots, y_n) \not\in A )$ which can be bounded by $\exp^{-D_{\alpha}(P_0 || P_1)}$(Chernoff alpha Bound).
 
-The Chernoff alpha information term is
-
-$D_{\alpha}(P_0 || P_1)=m D_{\alpha}(p_0 || p_1) + E_{P_{z | Y_1 =0, Y_2 = y_2, \dots, Y_n = y_n}}[\log \frac{P_0(z)}{P_1(z)}]$
-
-$$
-\begin{align}
-P_0(z) & = \prod_{j=2}^n p^{z_{1j}(1-y_j)}q^{z_{1j}y_j}(1-p)^{(1-z_{1j})(1-y_j)}(1-q)^{(1-z_{1j})y_j} \prod_{i>j>1}f(z_{ij}, y_i, y_j) \\
-P_1(z) & = \prod_{j=2}^n p^{z_{1j}y_j}q^{z_{1j}(1-y_j)}(1-p)^{(1-z_{1j})y_j}(1-q)^{(1-z_{1j})(1-y_j)} \prod_{i>j>1}f(z_{ij}, y_i, y_j) \\
-\end{align}
-$$
-Products of Bernoulli distribution.
-
-Only $z_{1j}, j=2,\dots, n$ are relevant.
-$$
-\begin{align*}
-E_{P_{z | Y_1 =0, Y_2 = y_2, \dots, Y_n = y_n}}[\log \frac{P_0(z)}{P_1(z)}]
-&= \sum_{j=2}^n E_{P_{z_{1j} | Y_1=0, Y_j = y_j}}[ \log \frac{P_0(z_{ij})}{P_1(z_{ij})}] \\
-&= \sum_{j=2}^n [(1-y_j) D(p || q) + y_j D(q || p)]
-\end{align*}
-$$
 
 
 ## Huang's suggestion:
