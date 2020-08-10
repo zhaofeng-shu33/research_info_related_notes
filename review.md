@@ -291,6 +291,8 @@ $$
 
 ## When $p,q$ are constants
 
+This section is based on deduction by Jin Sima.
+
 Suppose $y_1=1, y_2=0, y_3 = 1, y_4 = 0, \dots, y_{n-1}=1, y_n=0$ is the ground truth $A$.
 
 Let $A_k$ be the event that maximum likelihood method gives an estimator which has $k$ pairs different with
@@ -301,7 +303,7 @@ For each specific $A_k$ the distinguished pair has $\binom{n/2}{k}^2$ number of 
 
 Let $P_n^{(k)}$ to represent the error probability for the event when a specific choice has
 
-larger probability than the ground truth.
+larger probability than the ground truth. Then $P(A_k) = \binom{n/2}{k}^2 P_n^{(k)}$.
 
 We consider $k=1$ first, which can be the lower bound of $P^{(e)}$.
 
@@ -335,3 +337,9 @@ $Z_1^{n-2}$ is empirical distribution from the sample $z_{13}, z_{15}, \dots, z_
 $Z_2^{n-2}$ is empirical distribution from the sample $z_{14}, z_{16}, \dots, z_{1,n}, z_{23}, \dots, z_{2,n-1} $;
 
 Therefore, from Sanov's theorem, asymptotically we have $P_n^{1}\asymp\exp(-m C_1 - (n-2)C_2)$
+
+Similarly, for other $k$ we have $P_n^k \asymp\exp(-mk C_1 - k(n-2k)C_2)$.
+
+Actually, the dominate term is $P_n^1$. Our conclusion is that when $p, q$ are constant and $m=O(n)$, the
+
+exact recovery error decreases in $\exp(-m C_1 - n C_2)$.
