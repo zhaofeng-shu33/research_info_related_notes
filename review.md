@@ -1,4 +1,4 @@
-# Literature Review on Recent Developments on the topic of community discovery(theoretical literature)
+Literature Review on Recent Developments on the topic of community discovery(theoretical literature)
 
 ## Ising Block Model (2019)
 
@@ -288,3 +288,50 @@ P_{\lambda} & = \frac{P_0^{\lambda}P_1^{1-\lambda}}{\sum_{a\in \mathcal{X}} P_0^
 Q_{\lambda} & = \frac{Q_0^{\lambda}Q_1^{1-\lambda}}{\sum_{a\in \mathcal{Z}} Q_0^{\lambda}(a)Q_1^{1-\lambda}(a)}
 \end{align}
 $$
+
+## When $p,q$ are constants
+
+Suppose $y_1=1, y_2=0, y_3 = 1, y_4 = 0, \dots, y_{n-1}=1, y_n=0$ is the ground truth $A$.
+
+Let $A_k$ be the event that maximum likelihood method gives an estimator which has $k$ pairs different with
+
+the ground truth. The total error probability $P^{(e)}=\sum_{i=1}^{n/2}P(A_k)$.
+
+For each specific $A_k$ the distinguished pair has $\binom{n/2}{k}^2$ number of choices.
+
+Let $P_n^{(k)}$ to represent the error probability for the event when a specific choice has
+
+larger probability than the ground truth.
+
+We consider $k=1$ first, which can be the lower bound of $P^{(e)}$.
+
+We consider the specific choice:
+$$
+A_1: y_1 = 0, y_2 = 1, y_3 = 1, y_4 = 0, \dot, y_{n-1} = 1, y_n = 0
+$$
+which differs from $A$ at $y_1, y_2$.
+$$
+P(A) = \prod_{i=1}^m p_1(x_{1i})\prod_{i=1}^m p_0(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}
+$$
+
+$$
+P(A_1) = \prod_{i=1}^m p_0(x_{1i})\prod_{i=1}^m p_1(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}
+$$
+
+Then
+
+$P_n^{(1)} = P(P(A) < P(A_1))$
+
+where
+$$
+P(A) < P(A_1) \Rightarrow 
+m [D(X_1^m || P_1) - D(X_1^m || P_0)] + m [D(X_2^m || P_1) - D(X_2^m || P_0)]
+> (n-2)[D(P_{Z_1^{n-2}}|| P_{Z_q})-D(P_{Z_1^{n-2}}|| P_{Z_p})] + (n-2)[D(P_{Z_2^{n-2}}|| P_{Z_p})-D(P_{Z_2^{n-2}}|| P_{Z_q})]
+$$
+Where $X_j^m$ is empirical distribution from the sample $x_{j1}, x_{j2}, \dots, x_{jm}$
+
+$Z_1^{n-2}$ is empirical distribution from the sample $z_{13}, z_{15}, \dots, z_{1,n-1}, z_{24}, \dots, z_{2n} $;
+
+$Z_2^{n-2}$ is empirical distribution from the sample $z_{14}, z_{16}, \dots, z_{1,n}, z_{23}, \dots, z_{2,n-1} $;
+
+Therefore, from Sanov's theorem, asymptotically we have $P_n^{1}\asymp\exp(-m C_1 - (n-2)C_2)$
