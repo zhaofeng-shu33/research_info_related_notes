@@ -283,7 +283,7 @@ $$
 $$
 where $(P_X^*, P_Z^*)$ is $\arg\min_{(P_X,P_Z) \in A^c}D(P_X|| P_0)+D(P_Z || Q_0)$
 
-The optimal $\lambda$ is chosen such that $D(P_{\lambda} || P_0) + D(Q_{\lambda} || Q_0) = D(P_{\lambda} || P_1) + D(Q_{\lambda} || Q_1)$. Where
+The optimal $\lambda$ is chosen such that $D(P_{\lambda} || P_0) + D(Q_{\lambda} || Q_0) = D(P_{\lambda} || P_1) + D(Q_{\lambda} || Q_1)$, where
 $$
 \begin{align}
 P_{\lambda} & = \frac{P_0^{\lambda}P_1^{1-\lambda}}{\sum_{a\in \mathcal{X}} P_0^{\lambda}(a)P_1^{1-\lambda}(a)}\\
@@ -329,7 +329,7 @@ $P_n^{(1)} = P(P(A) < P(A_1))$
 where
 $$
 P(A) < P(A_1) \Rightarrow 
-m [D(X_1^m || P_1) - D(X_1^m || P_0)] + m [D(X_2^m || P_1) - D(X_2^m || P_0)]
+m [D(X_1^m || P_1) - D(X_1^m || P_0)] + m [D(X_2^m || P_0) - D(X_2^m || P_1)]
 > (n-2)[D(P_{Z_1^{n-2}}|| P_{Z_q})-D(P_{Z_1^{n-2}}|| P_{Z_p})] + (n-2)[D(P_{Z_2^{n-2}}|| P_{Z_p})-D(P_{Z_2^{n-2}}|| P_{Z_q})]
 $$
 Where $X_j^m$ is empirical distribution from the sample $x_{j1}, x_{j2}, \dots, x_{jm}$
