@@ -28,6 +28,8 @@ Each edge is associated with a weight from a given density function $p(\cdot)$ (
 
 The result is about general weighted model and some strange assumptions have to be used to make proof possible. For example, this theory requires each cluster should have at least $\frac{n}{\beta k}$ nodes. The extra parameter $\beta$ is introduced.
 
+The misclustering error used is the percentage of wrong results.
+
 ## Hierarchical Model proposed by Professor Huang
 
 Consider the case with 2 attributes, there are four communities $S_1, S_2, S_3, S_4$, each with equal size $|S_i|=\frac{n}{4}$.
@@ -313,11 +315,11 @@ A_1: y_1 = 0, y_2 = 1, y_3 = 1, y_4 = 0, \dot, y_{n-1} = 1, y_n = 0
 $$
 which differs from $A$ at $y_1, y_2$.
 $$
-P(A) = \prod_{i=1}^m p_1(x_{1i})\prod_{i=1}^m p_0(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}
+P(A) = \prod_{i=1}^m p_1(x_{1i})\prod_{i=1}^m p_0(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}
 $$
 
 $$
-P(A_1) = \prod_{i=1}^m p_0(x_{1i})\prod_{i=1}^m p_1(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}
+P(A_1) = \prod_{i=1}^m p_0(x_{1i})\prod_{i=1}^m p_1(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}
 $$
 
 Then
@@ -343,3 +345,4 @@ Similarly, for other $k$ we have $P_n^k \asymp\exp(-mk C_1 - k(n-2k)C_2)$.
 Actually, the dominate term is $P_n^1$. Our conclusion is that when $p, q$ are constant and $m=O(n)$, the
 
 exact recovery error decreases in $\exp(-m C_1 - n C_2)$.
+
