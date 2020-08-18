@@ -291,6 +291,10 @@ $$
 
 ## When $p,q$ are constants
 
+When $p>q$ and $p,q$ are constants, it is known that exact discovery is possible when $n\to\infty$.
+
+
+
 This section is based on deduction by Jin Sima.
 
 Suppose $y_1=1, y_2=0, y_3 = 1, y_4 = 0, \dots, y_{n-1}=1, y_n=0$ is the ground truth $A$.
@@ -343,3 +347,4 @@ Similarly, for other $k$ we have $P_n^k \asymp\exp(-mk C_1 - k(n-2k)C_2)$.
 Actually, the dominate term is $P_n^1$. Our conclusion is that when $p, q$ are constant and $m=O(n)$, the
 
 exact recovery error decreases in $\exp(-m C_1 - n C_2)$.
+
