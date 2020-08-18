@@ -338,9 +338,34 @@ m [D(X_1^m || P_1) - D(X_1^m || P_0)] + m [D(X_2^m || P_0) - D(X_2^m || P_1)]
 $$
 Where $X_j^m$ is empirical distribution from the sample $x_{j1}, x_{j2}, \dots, x_{jm}$
 
-$Z_1^{n-2}$ is empirical distribution from the sample $z_{13}, z_{15}, \dots, z_{1,n-1}, z_{24}, \dots, z_{2n} $;
+$Z_1^{n-2}$ is empirical distribution from the sample $z_{13}, z_{15}, \dots, z_{1,n-1}, z_{24}, \dots, z_{2n} $; (Bern(p))
 
-$Z_2^{n-2}$ is empirical distribution from the sample $z_{14}, z_{16}, \dots, z_{1,n}, z_{23}, \dots, z_{2,n-1} $;
+$Z_2^{n-2}$ is empirical distribution from the sample $z_{14}, z_{16}, \dots, z_{1,n}, z_{23}, \dots, z_{2,n-1} $; (Bern(q))
+
+The decision rule  can also be written in the following form:
+$$
+\sum_{i=1}^m \log\frac{p_0(x_{1i})}{p_1(x_{1i})} +
+\sum_{i=1}^m \log\frac{p_0(x_{2i})}{p_1(x_{2i})}
+\geq \log \frac{p(1-q)}{q(1-p)} \sum_{i=1}^{n-2}(z_{i1} - z_{i2})
+$$
+where $x_{1i}$ are sampled from $p_1$, $x_{2i}$ from $p_2$;
+
+$z_{i1}$ are sampled from Bern(p), $z_{i2}$ sampled from Bern(q).
+
+Notice that $\log \frac{p(1-q)}{q(1-p)}  > 0$. We consider the case when $m$ is very large, then by law of large number
+
+we have $\sum_{i=1}^m \log\frac{p_0(x_{1i})}{p_1(x_{1i})} +
+\sum_{i=1}^m \log\frac{p_0(x_{2i})}{p_1(x_{2i})} \to - (D(p_0 || p_1) + D(p_1 || p_0))$.
+
+Let $D=\frac{D(p_0 || p_1) + D(p_1 || p_0)}{\log \frac{p(1-q)}{q(1-p)}}$.
+
+Then we want to estimate the error term $P(\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > mD)$.
+
+If $p = a \log n /n, q = b \log n /b $, then $D\to \frac{D(p_0 || p_1) + D(p_1 || p_0)}{\log \frac{a}{b}}$, which is a constant.
+
+Therefore, we will treat $D$ as a constant to estimate the case of one error.
+
+
 
 Therefore, from Sanov's theorem, asymptotically we have $P_n^{1}\asymp\exp(-m C_1 - (n-2)C_2)$
 

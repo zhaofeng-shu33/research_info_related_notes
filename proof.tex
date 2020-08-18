@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{url}
+\usepackage{amssymb}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\title{Proofs for semi-supervised SBM}
+\begin{document}
+\maketitle
+\begin{lemma}
+Let $Z_{i2}$ follows Bernoulli distribution with parameter $q=\frac{\beta \log n }{n}$.
+Let $Z_{i1} \sim Bern(p)$ with $p=\frac{\alpha \log n }{n}$. $Z_{i2}$ are i.i.d. for $i=1,\dots, n$.
+The same is true for $Z_{i1}$. $\beta < \alpha$.
+We then have $P(\sum_{i=1}^{n} (Z_{i2} - Z_{i1}) geq  D \log n) \leq n^{-C}$
+where $C=\frac{3(\alpha - \beta + D)^2}{2(4\alpha + 2\beta + D)} + O(\log n /n)$.
+\end{lemma}
+\begin{proof}
+	Let $X_i = Z_{i2} - \frac{\beta \log n }{n}, X_{i+n} = \frac{\alpha \log n }{n} - Z_{i1}$.
+	$X_i$ are zero means and $|X_i| \leq 1 + O(\frac{\log n}{n})$.
+	Then $\sum_{i=1}^{n} (Z_{i2} - Z_{i1}) = \sum_{i=1}^{2n} X_{i} - (\alpha - \beta)\log n $.
+	Then $\sum_{i=1}^{n} (Z_{i2} - Z_{i1}) \geq D \log n \iff \sum_{i=1}^{2n} X_{i} \geq (D + \alpha - \beta)\log n$.
+	$\sum_{i=1}^{2n} E[X_i^2] = (\alpha + \beta)\log n + O(\frac{\log^2 n}{n})$.
+	By Bernstein's inequality, we have
+	$$
+	P(\sum_{i=1}^{2n} X_{i}  \geq t) \leq \exp(-\frac{1/2 t^2}{\sum_{i=1}^{2n} E[X_i^2] + \frac{1}{3}(1+O(\log n /n))t})
+	$$
+	Let $t=(D + \alpha - \beta)\log n$.
+	\begin{align}
+	\frac{1/2 t^2}{\sum_{i=1}^{2n} E[X_i^2] + \frac{1}{3}t} & 
+	= \frac{1/2(D + \alpha - \beta)^2\log^2 n}{(\alpha + \beta)\log n + O(\frac{\log^2 n}{n}) + 1/3(D + \alpha - \beta)\log n } \\
+	 & =\frac{3/2(D + \alpha - \beta)^2\log n}{O(\frac{\log n}{n}) + (D + 4\alpha - 2\beta) }
+	\end{align}
+\end{proof}
+
+\end{document}
