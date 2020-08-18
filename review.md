@@ -28,6 +28,8 @@ Each edge is associated with a weight from a given density function $p(\cdot)$ (
 
 The result is about general weighted model and some strange assumptions have to be used to make proof possible. For example, this theory requires each cluster should have at least $\frac{n}{\beta k}$ nodes. The extra parameter $\beta$ is introduced.
 
+The misclustering error used is the percentage of wrong results.
+
 ## Hierarchical Model proposed by Professor Huang
 
 Consider the case with 2 attributes, there are four communities $S_1, S_2, S_3, S_4$, each with equal size $|S_i|=\frac{n}{4}$.
@@ -281,7 +283,7 @@ $$
 $$
 where $(P_X^*, P_Z^*)$ is $\arg\min_{(P_X,P_Z) \in A^c}D(P_X|| P_0)+D(P_Z || Q_0)$
 
-The optimal $\lambda$ is chosen such that $D(P_{\lambda} || P_0) + D(Q_{\lambda} || Q_0) = D(P_{\lambda} || P_1) + D(Q_{\lambda} || Q_1)$. Where
+The optimal $\lambda$ is chosen such that $D(P_{\lambda} || P_0) + D(Q_{\lambda} || Q_0) = D(P_{\lambda} || P_1) + D(Q_{\lambda} || Q_1)$, where
 $$
 \begin{align}
 P_{\lambda} & = \frac{P_0^{\lambda}P_1^{1-\lambda}}{\sum_{a\in \mathcal{X}} P_0^{\lambda}(a)P_1^{1-\lambda}(a)}\\
@@ -317,11 +319,11 @@ A_1: y_1 = 0, y_2 = 1, y_3 = 1, y_4 = 0, \dot, y_{n-1} = 1, y_n = 0
 $$
 which differs from $A$ at $y_1, y_2$.
 $$
-P(A) = \prod_{i=1}^m p_1(x_{1i})\prod_{i=1}^m p_0(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}
+P(A) = \prod_{i=1}^m p_1(x_{1i})\prod_{i=1}^m p_0(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}
 $$
 
 $$
-P(A_1) = \prod_{i=1}^m p_0(x_{1i})\prod_{i=1}^m p_1(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}
+P(A_1) = \prod_{i=1}^m p_0(x_{1i})\prod_{i=1}^m p_1(x_{2i})\prod_{\substack{i=3\\i \textrm{ is odd}}}^n q^{z_{1i}}(1-q)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n p^{z_{1i}}(1-p)^{1-z_{1i}}\prod_{\substack{i=3\\i \textrm{ is odd}}}^n p^{z_{2i}}(1-p)^{1-z_{2i}}\prod_{\substack{i=3\\i \textrm{ is even}}}^n q^{z_{2i}}(1-q)^{1-z_{2i}}
 $$
 
 Then
@@ -331,7 +333,7 @@ $P_n^{(1)} = P(P(A) < P(A_1))$
 where
 $$
 P(A) < P(A_1) \Rightarrow 
-m [D(X_1^m || P_1) - D(X_1^m || P_0)] + m [D(X_2^m || P_1) - D(X_2^m || P_0)]
+m [D(X_1^m || P_1) - D(X_1^m || P_0)] + m [D(X_2^m || P_0) - D(X_2^m || P_1)]
 > (n-2)[D(P_{Z_1^{n-2}}|| P_{Z_q})-D(P_{Z_1^{n-2}}|| P_{Z_p})] + (n-2)[D(P_{Z_2^{n-2}}|| P_{Z_p})-D(P_{Z_2^{n-2}}|| P_{Z_q})]
 $$
 Where $X_j^m$ is empirical distribution from the sample $x_{j1}, x_{j2}, \dots, x_{jm}$
