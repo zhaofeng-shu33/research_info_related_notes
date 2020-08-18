@@ -345,7 +345,7 @@ $Z_2^{n-2}$ is empirical distribution from the sample $z_{14}, z_{16}, \dots, z_
 The decision rule  can also be written in the following form:
 $$
 \sum_{i=1}^m \log\frac{p_0(x_{1i})}{p_1(x_{1i})} +
-\sum_{i=1}^m \log\frac{p_0(x_{2i})}{p_1(x_{2i})}
+\sum_{i=1}^m \log\frac{p_1(x_{2i})}{p_0(x_{2i})}
 \geq \log \frac{p(1-q)}{q(1-p)} \sum_{i=1}^{n-2}(z_{i1} - z_{i2})
 $$
 where $x_{1i}$ are sampled from $p_1$, $x_{2i}$ from $p_2$;
@@ -355,7 +355,7 @@ $z_{i1}$ are sampled from Bern(p), $z_{i2}$ sampled from Bern(q).
 Notice that $\log \frac{p(1-q)}{q(1-p)}  > 0$. We consider the case when $m$ is very large, then by law of large number
 
 we have $\sum_{i=1}^m \log\frac{p_0(x_{1i})}{p_1(x_{1i})} +
-\sum_{i=1}^m \log\frac{p_0(x_{2i})}{p_1(x_{2i})} \to - (D(p_0 || p_1) + D(p_1 || p_0))$.
+\sum_{i=1}^m \log\frac{p_1(x_{2i})}{p_0(x_{2i})} \to - (D(p_0 || p_1) + D(p_1 || p_0))$.
 
 Let $D=\frac{D(p_0 || p_1) + D(p_1 || p_0)}{\log \frac{p(1-q)}{q(1-p)}}$.
 
@@ -364,6 +364,33 @@ Then we want to estimate the error term $P(\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > mD
 If $p = a \log n /n, q = b \log n /b $, then $D\to \frac{D(p_0 || p_1) + D(p_1 || p_0)}{\log \frac{a}{b}}$, which is a constant.
 
 Therefore, we will treat $D$ as a constant to estimate the case of one error.
+
+### Impact of $p(n),q(n)$
+
+When $n$ is large, we can find $\epsilon_2$ such that $\log \frac{p(1-q)}{q(1-p)} leq \log \frac{a}{b} + \epsilon_2$
+
+By Sanov's theorem:
+$$
+P(\frac{1}{m}\sum_{i=1}^{m} \log \frac{p_1(x_{1i})}{p_0(x_{1i})} < D(p_1||p_0) - \frac{\epsilon_1}{2}) \dot{=} \exp(-m D(p_{\epsilon_1}^* || p_1))
+$$
+which decays in polynomial rate if $m=O(\log n)$.
+
+Therefore we can conditioned $\log \frac{p(1-q)}{q(1-p)}\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > m\sum_{i=1}^m \log\frac{p_1(x_{1i})}{p_0(x_{1i})} +
+\sum_{i=1}^m \log\frac{p_0(x_{2i})}{p_1(x_{2i})}$ on
+$$
+\begin{align}
+\frac{1}{m}\sum_{i=1}^{m} \log \frac{p_1(x_{1i})}{p_0(x_{1i})} &\geq D(p_1||p_0) - \frac{\epsilon_1}{2}\\
+\frac{1}{m}\sum_{i=1}^{m} \log \frac{p_0(x_{2i})}{p_1(x_{2i})} &\geq D(p_0||p_1) - \frac{\epsilon_1}{2}\\
+\end{align}
+$$
+Let $D(\epsilon_1, \epsilon_2) = \frac{D(p_0 || p_1) + D(p_1 || p_0) - \epsilon_1}{\log \frac{a}{b} + \epsilon_2}$.
+
+Then 
+$$
+P(\log \frac{p(1-q)}{q(1-p)}\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > m\sum_{i=1}^m \log\frac{p_1(x_{1i})}{p_0(x_{1i})} +
+\sum_{i=1}^m \log\frac{p_0(x_{2i})}{p_1(x_{2i})}) < P(\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > mD(\epsilon_1, \epsilon_2))(1-\exp(-m C_1) - exp(-m C_2)) + \exp(-m C_1) + \exp(-m C_2)
+$$
+
 
 
 
