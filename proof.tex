@@ -35,9 +35,51 @@ where $C=\frac{3(\alpha - \beta + D)^2}{2(4\alpha + 2\beta + D)} + O(\log n /n)$
 \end{proof}
 Notation: $f(n)\dot{=} g(n) \iff \lim_{n\to \infty} \frac{1}{n} \log \frac{f(n)}{g(n)} = 1$.
 \begin{lemma}
-	Suppose $k << n$. $x_i$ is sampled from $p_1$ and $z_i$ is sampled from $Bern(p)$.
+	Suppose $k << n$. $x_i$ is i.i.d. sampled from $p_1$ and $z_i$ is i.i.d. sampled from $Bern(p)$.
 	$p > q$
-Let $A:= \frac{1}{n}\sum_{i=1}^n \log \frac{p_0(x_i)}{p_1(x_i)} \geq \frac{k}{n} \sum_{i=1}(z_i \log\frac{p}{q} +(1-z_i \frac{\log(1-p)}{\log(1-q)}))$.
-By the theory of large deviation, $P(A) \dot{=} \exp(-n C(k))$. Show that $0 < C(k) < C(k+1)$.
+Let $A_k := \frac{1}{n}\sum_{i=1}^n \log \frac{p_0(x_i)}{p_1(x_i)} \geq \frac{k}{n} \sum_{i=1}(z_i \log\frac{p}{q} +(1-z_i) \frac{\log(1-p)}{\log(1-q)}))$.
+By the theory of large deviation, $P(A_k) \dot{=} \exp(-n C(k))$. Show that $0 < C(k) < C(k+1)$.
 \end{lemma}
+\begin{proof}
+	To apply Sanov's theorem, we treat $(x_i, z_i)$ jointly sampled from $\mathcal{X} \times \mathcal{Z}$
+	and the constraint is 
+	\begin{equation}\label{eq:fxz}	
+	\frac{1}{n} \sum_{i=1}^n f(x_i, z_i) \geq 0
+	\end{equation}	
+	where
+	$$
+	f(x, z) = \log\frac{p_0(x)}{p_1(x)} + kz \log\frac{q}{p} + k(1-z) \log \frac{1-q}{1-p}
+	$$
+	Then by Sanov's theorem, we have $C(k) = D(p^*(x,z)|| p_1(x)Bern(p))$
+	where $p^*(x,z)$ is the minimizer for $D(p(x,z)|| p_1(x)Bern(p))$ subjected to
+	\eqref{eq:fxz}.
+	We can rewrite \eqref{eq:fxz} in probability form:
+	\begin{equation}\label{eq:probxz}
+	\sum_{x\in \mathcal{X}} p(x) \log\frac{p_0(x)}{p_1(x)} + k\sum_{z \in \{0,1\}} p(z) \log\frac{p_{Bq}(z)}{p_{Bp}(z)} \geq 0
+	\end{equation}
+	where $p(x), p(z)$ are the marginal probability mass function.
+	Using Lagrange's method, we can get
+	\begin{equation}
+	p^*(x,z) = C_1 p_0^{\lambda}(x)p_1^{1-\lambda}(x) \cdot C_2 p_{Bq}^{k\lambda}(z)p_{Bp}^{1-k\lambda}(z)
+	\end{equation}
+	where $\frac{1}{C_1} = \sum_{x\in\mathcal{X}}p_0^{\lambda}(x)p_1^{1-\lambda}(x) $
+	and $\frac{1}{C_2} = \sum_{z\in \{0,1\}} p_{Bq}^{k\lambda}(z)p_{Bp}^{1-k\lambda}(z)$
+	The parameter $\lambda$ is solved by letting the left hand of \eqref{eq:probxz} takes zero.
+	That is:
+	\begin{equation}\label{eq:constraint}
+	C_1 \sum_{x\in \mathcal{X}} p_0^{\lambda}(x)p_1^{1-\lambda}(x)\log\frac{p_0(x)}{p_1(x)} + kC_2[p^{1-k\lambda}q^{k\lambda}\log\frac{q}{p} +
+	(1-p)^{1-k\lambda}(1-q)^{k\lambda}\log\frac{1-q}{1-p} ] = 0
+	\end{equation}
+	On the other hand,
+	\begin{align*}
+	C(k) & = D(p(x)|| p_1(x)) + D(p(z) || Bern(p)) \\
+	& = C_1\sum_{x\in \mathcal{X}} p_0^{\lambda}(x)p_1^{1-\lambda}(x)\log\frac{p_0^{\lambda}(x)p_1^{1-\lambda}(x)}{C_1 p_1(x)}  \\
+	& + kC_2[p^{1-k\lambda}q^{k\lambda}\log\frac{p^{1-k\lambda}q^{k\lambda}}{C_2 p} +
+	(1-p)^{1-k\lambda}(1-q)^{k\lambda}\log\frac{(1-p)^{1-k\lambda}(1-q)^{k\lambda}}{C_2(1-p)} ] 
+	\end{align*}
+	Using \eqref{eq:constraint}, we can simplify $C(k)$ as
+	\begin{equation}
+	C(k) = - \log  C_1 - \log C_2
+	\end{equation}
+\end{proof}
 \end{document}
