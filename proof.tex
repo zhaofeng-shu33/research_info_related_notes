@@ -82,6 +82,17 @@ By the theory of large deviation, $P(A_k) \dot{=} \exp(-n C(k))$. Show that $0 <
 	C(k) =  \log  C_1 + \log C_2
 	\end{equation}
 	Using $p_0^{\lambda} p_1^{1-\lambda} \leq \lambda p_0 + (1-\lambda) p_1$ we can get $C_1 > 1, C_2 > 1$.
-	
+	Below we use some not very rigorous analysis:
+	we require $0<\lambda < \frac{1}{k}$ to make $1-k\lambda > 0$.
+	This requirement is plausible to make $0 < k \lambda < 1$. As $k$ grows larger, the first term in
+	Equation \eqref{eq:constraint} is more nearer to $-D(p_1||p_0)$, which is a negative value.
+	On the other hand, we can choose $k\lambda > \mu^*$ to make the second term
+	in  \eqref{eq:constraint} a positive value \eqref{eq:constraint}.
+	$\mu^*$ is the minimizer for $p_{Bq}^{\mu}(z)p_{Bp}^{1-\mu}(z)$; also the zero point for
+	$p^{1-\mu}q^{\mu}\log\frac{q}{p} +
+	(1-p)^{1-\mu}(1-q)^{\mu}\log\frac{1-q}{1-p} = 0$. Therefore, as $k$ grows, we can treat the first term
+	as $-D(p_1||p_0)$, then $\lambda k $ decreases while keeping $\lambda k > \mu^*$. Since for $\mu > \mu^*$
+	$\frac{1}{C_2}$ increases, we finally get $C_2$ increases as $k$ increases. $C(k) \to \log \frac{1}{\mu^*}$
+	as $k$ is very large.
 \end{proof}
 \end{document}
