@@ -315,7 +315,10 @@ We consider $k=1$ first, which can be the lower bound of $P^{(e)}$.
 
 We consider the specific choice:
 $$
-A_1: y_1 = 0, y_2 = 1, y_3 = 1, y_4 = 0, \dot, y_{n-1} = 1, y_n = 0
+\begin{align}
+A: y_1 = 1, y_2 = 0, y_3 = 1, y_4 = 0, \dot, y_{n-1} = 1, y_n = 0 \\
+A_1: y_1 = 0, y_2 = 1, y_3 = 1, y_4 = 0, \dot, y_{n-1} = 1, y_n = 0 \\
+\end{align}
 $$
 which differs from $A$ at $y_1, y_2$.
 $$
@@ -397,6 +400,12 @@ $$
 Therefore, from Sanov's theorem, asymptotically we have $P_n^{1}\asymp\exp(-m C_1 - (n-2)C_2)$
 
 Similarly, for other $k$ we have $P_n^k \asymp\exp(-mk C_1 - k(n-2k)C_2)$.
+
+The problem is that $C_2$ depends on $k$. This is because $C_2 = D(p^*_{1\lambda} || p) + D(p^*_{2\lambda} || q)$ while $\lambda$ is determined
+
+from an equation containing $k$.
+
+
 
 Actually, the dominate term is $P_n^1$. Our conclusion is that when $p, q$ are constant and $m=O(n)$, the
 
