@@ -73,13 +73,15 @@ By the theory of large deviation, $P(A_k) \dot{=} \exp(-n C(k))$. Show that $0 <
 	On the other hand,
 	\begin{align*}
 	C(k) & = D(p(x)|| p_1(x)) + D(p(z) || Bern(p)) \\
-	& = C_1\sum_{x\in \mathcal{X}} p_0^{\lambda}(x)p_1^{1-\lambda}(x)\log\frac{p_0^{\lambda}(x)p_1^{1-\lambda}(x)}{C_1 p_1(x)}  \\
-	& + kC_2[p^{1-k\lambda}q^{k\lambda}\log\frac{p^{1-k\lambda}q^{k\lambda}}{C_2 p} +
-	(1-p)^{1-k\lambda}(1-q)^{k\lambda}\log\frac{(1-p)^{1-k\lambda}(1-q)^{k\lambda}}{C_2(1-p)} ] 
+	& = C_1\sum_{x\in \mathcal{X}} p_0^{\lambda}(x)p_1^{1-\lambda}(x)\log\frac{C_1  p_0^{\lambda}(x)p_1^{1-\lambda}(x)}{p_1(x)}  \\
+	& + C_2[p^{1-k\lambda}q^{k\lambda}\log\frac{C_2 p^{1-k\lambda}q^{k\lambda}}{p} +
+	(1-p)^{1-k\lambda}(1-q)^{k\lambda}\log\frac{C_2(1-p)^{1-k\lambda}(1-q)^{k\lambda}}{(1-p)} ] 
 	\end{align*}
 	Using \eqref{eq:constraint}, we can simplify $C(k)$ as
 	\begin{equation}
-	C(k) = - \log  C_1 - \log C_2
+	C(k) =  \log  C_1 + \log C_2
 	\end{equation}
+	Using $p_0^{\lambda} p_1^{1-\lambda} \leq \lambda p_0 + (1-\lambda) p_1$ we can get $C_1 > 1, C_2 > 1$.
+	
 \end{proof}
 \end{document}
