@@ -164,7 +164,7 @@ The coefficient of $A$ is negative, $C$ is a constant, not involving $y_i$ and $
 
 Let $S$ be the adjacency matrix of the graph, then
 $$
-A = \sum_{(i,j) \in E(G)} (1-y_i) y_j + (1-y_j) y_i = 2 e^T S y - y^T S y
+A = \sum_{(i,j) \in E(G)} (1-y_i) y_j + (1-y_j) y_i = e^T S y - y^T S y
 $$
 where $e$ is the all-one vector and $y$ is the target $n$-dimensional $\{0,1\}$ vector. We can merge the coefficient of linear component of $y$ in $A$ with $B_i$ and get the final decision rule (ADMM):
 $$
@@ -174,7 +174,7 @@ s.t.\,\, & y \in \{0, 1\}^n \\
  &e^T y = \frac{n}{2}
 \end{align}
 $$
-where $b_i = 2\textrm{deg}(i) + B_i$.
+where $b_i = \textrm{deg}(i) + B_i$.
 
 p(x, z | y_1)  is difficult to estimate, **sum** cannot be simplified.
 
@@ -351,7 +351,7 @@ $$
 \sum_{i=1}^m \log\frac{p_1(x_{2i})}{p_0(x_{2i})}
 \geq \log \frac{p(1-q)}{q(1-p)} \sum_{i=1}^{n-2}(z_{i1} - z_{i2})
 $$
-where $x_{1i}$ are sampled from $p_1$, $x_{2i}$ from $p_2$;
+where $x_{1i}$ are sampled from $p_1$, $x_{2i}$ from $p_0$;
 
 $z_{i1}$ are sampled from Bern(p), $z_{i2}$ sampled from Bern(q).
 
@@ -411,3 +411,81 @@ Actually, the dominate term is $P_n^1$. Our conclusion is that when $p, q$ are c
 
 exact recovery error decreases in $\exp(-m C_1 - n C_2)$.
 
+## Critical condition
+
+When the graph is missing,  the exact recovery condition is $n^2 \exp(-m D)$ as $m\to \infty$.
+
+Using the conclusion from "Mixed Hypothesis Testing Problem", we should choose $\lambda=\frac{1}{2}$
+
+and $p_1^*=p_2^*$. Therefore $D=D(p_1^* || p_0) + D(p_1^* || p_1)$.
+
+ $\to D=-2 \log \sum_{x\in \mathcal{X}} \sqrt{P_0(x)P_1(x)}$.
+
+The value $D$ is called Renyi divergence of order $1/2$.
+
+We let $m=\log n \to D > 2$ 
+
+
+
+When the node information is missing, the condition is $n^2 \exp(-n D)$​ where
+
+$ D = -2 \log \sum_{x\in \mathcal{X}} \sqrt{Q_0(x)Q_1(x)} = \frac{(\sqrt{a}-\sqrt{b})^2 \log n}{n}$
+
+Therefore $\sqrt{a} - \sqrt{b} > \sqrt{2}$.
+
+
+
+## Mixed Case
+
+Using Lemma 7 of Abbe's paper [1],
+
+the error exponent is $\exp(-\log n g(a, b, \epsilon))$
+
+For a given type $T(p)$, we have
+$$
+\epsilon = -\frac{D(X_1^m || P_1) - D(X_1^m || P_0) + D(X_2^m || P_0) - D(X_2^m || P_1)}{\log a /b}
+$$
+From Theorem 11.1.4 of [2], the error exponent of a specific type is
+
+$\exp(-m (D(X_1^m || p_1) + D(X_2^m || p_0)))$
+
+Let $m=\log n $ To maximize  $\exp(-\log n g(a, b, \epsilon))\exp(-m (D(X_1^m || p_1) + D(X_2^m || p_0)))$ is equivalent to:
+$$
+\min D(X_1^m || p_1) + D(X_2^m || p_0) + g(\alpha, \beta, \epsilon)
+$$
+When $\epsilon$ is sufficiently small, that is, $P_0$ is very near to $P_1$, we can approximate $g(a, b, \epsilon)$
+
+by its linear term:
+$$
+g(a, b, \epsilon) = (\sqrt{a} - \sqrt{b})^2 + \frac{\epsilon}{2}[\log \frac{a}{b} - \frac{1}{\sqrt{ab}}]
+$$
+The coefficient of $\epsilon > 0$ when $\sqrt{a} > \sqrt{b} + \sqrt{2}$
+
+Let $\kappa = \frac{1}{2}[1-\frac{1}{\sqrt{ab}\log (a/b)}]$
+
+we can get the optimal  distribution for $X_1^m$  is 
+$$
+\begin{align}
+P_{X_1^m}(x) &= \frac{P_1^{1-\kappa}(x)P_0^\kappa(x)}{\sum_{x\in\mathcal{X}}P_1^{1-\kappa}(x)P_0^\kappa(x)} \\
+P_{X_2^m}(x) &= \frac{P_0^{1-\kappa}(x)P_1^\kappa(x)}{\sum_{x\in\mathcal{X}}P_0^{1-\kappa}(x)P_1^\kappa(x)}
+\end{align}
+$$
+And the optimal value is
+$$
+\Gamma(a,b,p_0, p_1) = (\sqrt{a} -\sqrt{b})^2 - \log(\sum_{x\in\mathcal{X}} p_1^{1-\kappa}(x)p_0^{\kappa}(x))- \log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))
+$$
+The term $-\log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))$ is related with Renyi divergence of order $\kappa$
+$$
+D_{\kappa}(p_1 || p_0) = -\frac{1}{1-\kappa}\log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))
+$$
+The exact recovery condition is:
+$$
+\Gamma(a,b,p_0, p_1) > 2
+$$
+
+
+ 
+
+[1] Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
+
+[2] Cover, Thomas M. *Elements of information theory*. John Wiley & Sons, 1999.
