@@ -316,8 +316,8 @@ We consider $k=1$ first, which can be the lower bound of $P^{(e)}$.
 We consider the specific choice:
 $$
 \begin{align}
-A: y_1 = 1, y_2 = 0, y_3 = 1, y_4 = 0, \dot, y_{n-1} = 1, y_n = 0 \\
-A_1: y_1 = 0, y_2 = 1, y_3 = 1, y_4 = 0, \dot, y_{n-1} = 1, y_n = 0 \\
+A: y_1 = 1, y_2 = 0, y_3 = 1, y_4 = 0, \dots, y_{n-1} = 1, y_n = 0 \textrm{ ground truth} \\
+A_1: y_1 = 0, y_2 = 1, y_3 = 1, y_4 = 0, \dots, y_{n-1} = 1, y_n = 0 \\
 \end{align}
 $$
 which differs from $A$ at $y_1, y_2$.
@@ -351,6 +351,13 @@ $$
 \sum_{i=1}^m \log\frac{p_1(x_{2i})}{p_0(x_{2i})}
 \geq \log \frac{p(1-q)}{q(1-p)} \sum_{i=1}^{n-2}(z_{i1} - z_{i2})
 $$
+
+For general $k$, the decision rule is:
+$$
+\sum_{i=1}^{km} \log\frac{p_0(x_{1i})}{p_1(x_{1i})} +
+\sum_{i=1}^{km} \log\frac{p_1(x_{2i})}{p_0(x_{2i})}
+\geq \log \frac{p(1-q)}{q(1-p)} \sum_{i=1}^{k(n-2k)}(z_{i1} - z_{i2})
+$$
 where $x_{1i}$ are sampled from $p_1$, $x_{2i}$ from $p_0$;
 
 $z_{i1}$ are sampled from Bern(p), $z_{i2}$ sampled from Bern(q).
@@ -370,7 +377,7 @@ Therefore, we will treat $D$ as a constant to estimate the case of one error.
 
 ### Impact of $p(n),q(n)$
 
-When $n$ is large, we can find $\epsilon_2$ such that $\log \frac{p(1-q)}{q(1-p)} leq \log \frac{a}{b} + \epsilon_2$
+When $n$ is large, we can find $\epsilon_2$ such that $\log \frac{p(1-q)}{q(1-p)} \leq \log \frac{a}{b} + \epsilon_2$
 
 By Sanov's theorem:
 $$
@@ -484,7 +491,7 @@ $$
 $$
 
 
- 
+
 
 [1] Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
 

@@ -35,10 +35,10 @@ where $C=\frac{3(\alpha - \beta + D)^2}{2(4\alpha + 2\beta + D)} + O(\log n /n)$
 \end{proof}
 Notation: $f(n)\dot{=} g(n) \iff \lim_{n\to \infty} \frac{1}{n} \log \frac{f(n)}{g(n)} = 1$.
 \begin{lemma}
-	Suppose $k << n$. $x_i$ is i.i.d. sampled from $p_1$ and $z_i$ is i.i.d. sampled from $Bern(p)$.
+	Suppose $k \ll n$. $x_i$ is i.i.d. sampled from $p_1$ and $z_i$ is i.i.d. sampled from $Bern(p)$.
 	$p > q$
-Let $A_k := \frac{1}{n}\sum_{i=1}^n \log \frac{p_0(x_i)}{p_1(x_i)} \geq \frac{k}{n} \sum_{i=1}(z_i \log\frac{p}{q} +(1-z_i) \frac{\log(1-p)}{\log(1-q)}))$.
-By the theory of large deviation, $P(A_k) \dot{=} \exp(-n C(k))$. Show that $0 < C(k) < C(k+1)$.
+Let $A_k := \frac{1}{n}\sum_{i=1}^n \log \frac{p_0(x_i)}{p_1(x_i)} \geq \frac{1}{n} \sum_{i=1}(z_i \log\frac{p}{q} +(1-z_i) \frac{\log(1-p)}{\log(1-q)}))$.
+show that $P(A_k) \dot{=} \exp(-n C)$.
 \end{lemma}
 \begin{proof}
 	To apply Sanov's theorem, we treat $(x_i, z_i)$ jointly sampled from $\mathcal{X} \times \mathcal{Z}$
@@ -48,51 +48,40 @@ By the theory of large deviation, $P(A_k) \dot{=} \exp(-n C(k))$. Show that $0 <
 	\end{equation}	
 	where
 	$$
-	f(x, z) = \log\frac{p_0(x)}{p_1(x)} + kz \log\frac{q}{p} + k(1-z) \log \frac{1-q}{1-p}
+	f(x, z) = \log\frac{p_0(x)}{p_1(x)} + z \log\frac{q}{p} + (1-z) \log \frac{1-q}{1-p}
 	$$
-	Then by Sanov's theorem, we have $C(k) = D(p^*(x,z)|| p_1(x)Bern(p))$
+	Then by Sanov's theorem, we have $C = D(p^*(x,z)|| p_1(x)Bern(p))$
 	where $p^*(x,z)$ is the minimizer for $D(p(x,z)|| p_1(x)Bern(p))$ subjected to
 	\eqref{eq:fxz}.
 	We can rewrite \eqref{eq:fxz} in probability form:
 	\begin{equation}\label{eq:probxz}
-	\sum_{x\in \mathcal{X}} p(x) \log\frac{p_0(x)}{p_1(x)} + k\sum_{z \in \{0,1\}} p(z) \log\frac{p_{Bq}(z)}{p_{Bp}(z)} \geq 0
+	\sum_{x\in \mathcal{X}} p(x) \log\frac{p_0(x)}{p_1(x)} + \sum_{z \in \{0,1\}} p(z) \log\frac{p_{Bq}(z)}{p_{Bp}(z)} \geq 0
 	\end{equation}
 	where $p(x), p(z)$ are the marginal probability mass function.
 	Using Lagrange's method, we can get
 	\begin{equation}
-	p^*(x,z) = C_1 p_0^{\lambda}(x)p_1^{1-\lambda}(x) \cdot C_2 p_{Bq}^{k\lambda}(z)p_{Bp}^{1-k\lambda}(z)
+	p^*(x,z) = C_1 p_0^{\lambda}(x)p_1^{1-\lambda}(x) \cdot C_2 p_{Bq}^{\lambda}(z)p_{Bp}^{1-\lambda}(z)
 	\end{equation}
 	where $\frac{1}{C_1} = \sum_{x\in\mathcal{X}}p_0^{\lambda}(x)p_1^{1-\lambda}(x) $
-	and $\frac{1}{C_2} = \sum_{z\in \{0,1\}} p_{Bq}^{k\lambda}(z)p_{Bp}^{1-k\lambda}(z)$
+	and $\frac{1}{C_2} = \sum_{z\in \{0,1\}} p_{Bq}^{\lambda}(z)p_{Bp}^{1-\lambda}(z)$
 	The parameter $\lambda$ is solved by letting the left hand of \eqref{eq:probxz} takes zero.
 	That is:
 	\begin{equation}\label{eq:constraint}
-	C_1 \sum_{x\in \mathcal{X}} p_0^{\lambda}(x)p_1^{1-\lambda}(x)\log\frac{p_0(x)}{p_1(x)} + kC_2[p^{1-k\lambda}q^{k\lambda}\log\frac{q}{p} +
-	(1-p)^{1-k\lambda}(1-q)^{k\lambda}\log\frac{1-q}{1-p} ] = 0
+	C_1 \sum_{x\in \mathcal{X}} p_0^{\lambda}(x)p_1^{1-\lambda}(x)\log\frac{p_0(x)}{p_1(x)} + C_2[p^{1-\lambda}q^{\lambda}\log\frac{q}{p} +
+	(1-p)^{1-\lambda}(1-q)^{\lambda}\log\frac{1-q}{1-p} ] = 0
 	\end{equation}
 	On the other hand,
 	\begin{align*}
 	C(k) & = D(p(x)|| p_1(x)) + D(p(z) || Bern(p)) \\
 	& = C_1\sum_{x\in \mathcal{X}} p_0^{\lambda}(x)p_1^{1-\lambda}(x)\log\frac{C_1  p_0^{\lambda}(x)p_1^{1-\lambda}(x)}{p_1(x)}  \\
-	& + C_2[p^{1-k\lambda}q^{k\lambda}\log\frac{C_2 p^{1-k\lambda}q^{k\lambda}}{p} +
-	(1-p)^{1-k\lambda}(1-q)^{k\lambda}\log\frac{C_2(1-p)^{1-k\lambda}(1-q)^{k\lambda}}{(1-p)} ] 
+	& + C_2[p^{1-\lambda}q^{\lambda}\log\frac{C_2 p^{1-\lambda}q^{\lambda}}{p} +
+	(1-p)^{1-\lambda}(1-q)^{\lambda}\log\frac{C_2(1-p)^{1-\lambda}(1-q)^{\lambda}}{(1-p)} ] 
 	\end{align*}
-	Using \eqref{eq:constraint}, we can simplify $C(k)$ as
+	Using \eqref{eq:constraint}, we can simplify $C$ as
 	\begin{equation}
-	C(k) =  \log  C_1 + \log C_2
+	C  =  \log  C_1 + \log C_2
 	\end{equation}
 	Using $p_0^{\lambda} p_1^{1-\lambda} \leq \lambda p_0 + (1-\lambda) p_1$ we can get $C_1 > 1, C_2 > 1$.
-	Below we use some not very rigorous analysis:
-	we require $0<\lambda < \frac{1}{k}$ to make $1-k\lambda > 0$.
-	This requirement is plausible to make $0 < k \lambda < 1$. As $k$ grows larger, the first term in
-	Equation \eqref{eq:constraint} is more nearer to $-D(p_1||p_0)$, which is a negative value.
-	On the other hand, we can choose $k\lambda > \mu^*$ to make the second term
-	in  \eqref{eq:constraint} a positive value \eqref{eq:constraint}.
-	$\mu^*$ is the minimizer for $p_{Bq}^{\mu}(z)p_{Bp}^{1-\mu}(z)$; also the zero point for
-	$p^{1-\mu}q^{\mu}\log\frac{q}{p} +
-	(1-p)^{1-\mu}(1-q)^{\mu}\log\frac{1-q}{1-p} = 0$. Therefore, as $k$ grows, we can treat the first term
-	as $-D(p_1||p_0)$, then $\lambda k $ decreases while keeping $\lambda k > \mu^*$. Since for $\mu > \mu^*$
-	$\frac{1}{C_2}$ increases, we finally get $C_2$ increases as $k$ increases. $C(k) \to \log \frac{1}{\mu^*}$
-	as $k$ is very large.
+
 \end{proof}
 \end{document}
