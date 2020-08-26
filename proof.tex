@@ -114,8 +114,15 @@ Show that $P(A_k) \dot{=} \exp(-n C)$.
 	$$
 	We have
 $$
-		P(X_n = k)P(Z_n = k) = \binom{n}{k}^2 p^k (1-p)^{n-k}q^k(1-q)^{nk}
+		P(X_n = k)P(Z_n = k) = \binom{n}{k}^2 p^k (1-p)^{n-k}q^k(1-q)^{n-k}
 $$
 We will use the inequality $\binom{n}{k} \geq \frac{1}{n+1}\exp(nH(k/n))$.
+Then
+$$
+\log P(X_n = k)P(Z_n = k) \geq -2\log(n+1) + 2n \log(\sqrt{pq} + \sqrt{(1-p)(1-q)})
+$$
+Therefore, $\log P(A) \geq \log P(X_n = k)P(Z_n = k) \geq -2\log(n+1) + 2n \log(\sqrt{pq} + \sqrt{(1-p)(1-q)})$.
+That is $P(A) \geq \frac{1}{(n+1)^2}\exp(-nC)$.
+The polynomial term is neglectable compared with the exponential term.
 \end{proof}
 \end{document}
