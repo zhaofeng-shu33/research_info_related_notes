@@ -98,7 +98,24 @@ Show that $P(A_k) \dot{=} \exp(-n C)$.
 	$g(\beta)  = (1-q+q e^{\beta})(1-p+p e^{-\beta})$. $g(0) = 1$ and when $\beta$ is very small,
 	$g(\beta) = 1 + (q-p) \beta + o(\beta)$. Therefore, we can choose a proper $\beta$ such that $g(\beta) < 1$.
 	Since $\beta$ can take any positive value, now we compute the minimum value of $g(\beta)$ instead.
-	the optimal $\beta^*$ satisfies $e^{2\beta} = \frac{(1-q)p}{(1-p)q}$. Now we compute $C' = -\log g(beta^*) = C$.
-	Therefore, $P(A) \leq \exp^{-nC}$.
+	the optimal $\beta^*$ satisfies $e^{2\beta} = \frac{(1-q)p}{(1-p)q}$. Now we compute $C' = -\log g(\beta^*) = C$.
+	Therefore, $P(A) \leq \exp(-nC)$.
+	
+	To simplify our discussion, let $X_n = \sum_{i=1}^n X_i, Z_n = \sum_{i=1}^n Z_i$. We have $X_n \sim Binomial(n, q),
+	Z_n \sim Binomial(n, p)$ and $X_n, Z_n$ are independent.
+	
+	On the other hand $P(A) = \sum_{j=1}^n\sum_{k=0}^j P(X_n = j)P(Z_n = k)$.
+	We choose a proper $j,k$ such that $P(X_n = j)P(Z_n = k)$ is maximized.
+	Since we observe $P(X_n - Z_n = r)$ decreases as $r$ increase ($r\geq 0$).
+	The maximum value is taken when $j=k$. On the other hand,
+	we should choose:
+	$$
+	k = n \frac{\sqrt{pq}}{\sqrt{pq} + \sqrt{(1-p)(1-q)}}
+	$$
+	We have
+$$
+		P(X_n = k)P(Z_n = k) = \binom{n}{k}^2 p^k (1-p)^{n-k}q^k(1-q)^{nk}
+$$
+We will use the inequality $\binom{n}{k} \geq \frac{1}{n+1}\exp(nH(k/n))$.
 \end{proof}
 \end{document}
