@@ -6,6 +6,8 @@
 \usepackage{amssymb}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\DeclareMathOperator{\E}{\mathbb{E}}
 \title{Proofs for semi-supervised SBM}
 \begin{document}
 \maketitle
@@ -34,11 +36,11 @@ where $C=\frac{3(\alpha - \beta + D)^2}{2(4\alpha + 2\beta + D)} + O(\log n /n)$
 	\end{align}
 \end{proof}
 Notation: $f(n)\dot{=} g(n) \iff \lim_{n\to \infty} \frac{1}{n} \log \frac{f(n)}{g(n)} = 1$.
-\begin{lemma}
+\begin{lemma}\label{lem:coupled}
 	Suppose $k \ll n$. $x_i$ is i.i.d. sampled from $p_1$ and $z_i$ is i.i.d. sampled from $Bern(p)$.
 	$p > q$
-Let $A_k := \frac{1}{n}\sum_{i=1}^n \log \frac{p_0(x_i)}{p_1(x_i)} \geq \frac{1}{n} \sum_{i=1}(z_i \log\frac{p}{q} +(1-z_i) \frac{\log(1-p)}{\log(1-q)}))$.
-show that $P(A_k) \dot{=} \exp(-n C)$.
+Let $A := \frac{1}{n}\sum_{i=1}^n \log \frac{p_0(x_i)}{p_1(x_i)} \geq \frac{1}{n} \sum_{i=1}(z_i \log\frac{p}{q} +(1-z_i) \frac{\log(1-p)}{\log(1-q)}))$.
+Show that $P(A_k) \dot{=} \exp(-n C)$.
 \end{lemma}
 \begin{proof}
 	To apply Sanov's theorem, we treat $(x_i, z_i)$ jointly sampled from $\mathcal{X} \times \mathcal{Z}$
@@ -83,5 +85,20 @@ show that $P(A_k) \dot{=} \exp(-n C)$.
 	\end{equation}
 	Using $p_0^{\lambda} p_1^{1-\lambda} \leq \lambda p_0 + (1-\lambda) p_1$ we can get $C_1 > 1, C_2 > 1$.
 
+\end{proof}
+\begin{corollary}
+	Let $p_0 \sim Bern(p), p_1 \sim Bern(q)$ in Lemma \ref{lem:coupled}. Then the region $A$ can be simplified as $\sum_{i=1}^n (x_i - z_i) \geq 0$,
+	where $x_i \in Bern(q), z_i \in Bern(p)$ and both are i.i.d. sampled. We can compute $\lambda = \frac{1}{2}$ and the error exponent
+	$C = -2\log(\sqrt{pq} + \sqrt{(1-p)(1-q)})$. Below we give another way to prove that $P(A) \dot{=} \exp(-nC)$.
+\end{corollary}
+\begin{proof}
+	We use Chernoff inequality to give a tight upper bound.
+	$P(\sum_{i=1}^n (x_i - z_i) \geq 0) \leq \E[\exp(\beta \sum_{i=1}^n (x_i - z_i))]$ where $\beta > 0$.
+	$\E[\exp(\beta \sum_{i=1}^n (x_i - z_i))] = (1-q+q e^{\beta})^n(1-p+p e^{-\beta})^n$. Let
+	$g(\beta)  = (1-q+q e^{\beta})(1-p+p e^{-\beta})$. $g(0) = 1$ and when $\beta$ is very small,
+	$g(\beta) = 1 + (q-p) \beta + o(\beta)$. Therefore, we can choose a proper $\beta$ such that $g(\beta) < 1$.
+	Since $\beta$ can take any positive value, now we compute the minimum value of $g(\beta)$ instead.
+	the optimal $\beta^*$ satisfies $e^{2\beta} = \frac{(1-q)p}{(1-p)q}$. Now we compute $C' = -\log g(beta^*) = C$.
+	Therefore, $P(A) \leq \exp^{-nC}$.
 \end{proof}
 \end{document}

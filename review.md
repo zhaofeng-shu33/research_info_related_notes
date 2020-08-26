@@ -362,6 +362,10 @@ where $x_{1i}$ are sampled from $p_1$, $x_{2i}$ from $p_0$;
 
 $z_{i1}$ are sampled from Bern(p), $z_{i2}$ sampled from Bern(q).
 
+Let $m=n$, from Sanov's theorem, when $k\ll n$ we can show that $P(A_k) \dot{=} \exp(-kn C)$.
+
+Therefore, the dominant term is $k=1$.
+
 Notice that $\log \frac{p(1-q)}{q(1-p)}  > 0$. We consider the case when $m$ is very large, then by law of large number
 
 we have $\sum_{i=1}^m \log\frac{p_0(x_{1i})}{p_1(x_{1i})} +
