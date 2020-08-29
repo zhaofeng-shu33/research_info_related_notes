@@ -37,10 +37,10 @@ where $C=\frac{3(\alpha - \beta + D)^2}{2(4\alpha + 2\beta + D)} + O(\log n /n)$
 \end{proof}
 Notation: $f(n)\dot{=} g(n) \iff \lim_{n\to \infty} \frac{1}{n} \log \frac{f(n)}{g(n)} = 1$.
 \begin{lemma}\label{lem:coupled}
-	Suppose $k \ll n$. $x_i$ is i.i.d. sampled from $p_1$ and $z_i$ is i.i.d. sampled from $Bern(p)$.
+	Suppose $x_i$ is i.i.d. sampled from $p_1$ and $z_i$ is i.i.d. sampled from $Bern(p)$.
 	$p > q$
 Let $A := \frac{1}{n}\sum_{i=1}^n \log \frac{p_0(x_i)}{p_1(x_i)} \geq \frac{1}{n} \sum_{i=1}(z_i \log\frac{p}{q} +(1-z_i) \frac{\log(1-p)}{\log(1-q)}))$.
-Show that $P(A_k) \dot{=} \exp(-n C)$.
+Show that $P(A) \dot{=} \exp(-n C)$.
 \end{lemma}
 \begin{proof}
 	To apply Sanov's theorem, we treat $(x_i, z_i)$ jointly sampled from $\mathcal{X} \times \mathcal{Z}$
@@ -136,7 +136,7 @@ The polynomial term is neglectable compared with the exponential term.
 	As a result, $\binom{n}{k}  < \frac{n^k}{k!} < \frac{n^k e^k}{k^k}
 	= (\frac{ne}{k})^k$
 \end{proof}
-\begin{theorem}
+\begin{theorem}\label{thm:2pq}
 	For a $\textrm{SBM}(n,2,p, q)$ with $p,q$ as constant, $p > q$. The
 	exact recovery error decreases in $\exp(-n (C + o(1)))$
 	where $C = -2\log(\sqrt{pq} + \sqrt{(1-p)(1-q)})$.
@@ -188,5 +188,16 @@ The polynomial term is neglectable compared with the exponential term.
 	P(F) \leq \frac{n}{4}\exp(-nf(1)) = \exp(-n (C+g(n)))
 	\end{equation}
 	where $g(n) = -\frac{1}{n}(\log (n/4) + 2 C - 2 \log (2/ne)) = o(1)$
+\end{proof}
+\begin{theorem}
+	In $\textrm{SBM}(n, 2, p, q)$ where $p,q$ are constant, each node has further $n$ observations based on its label.
+	That is $ x_{ij} \sim p_{y_i}$ where $y_i = 0 $ or $y_i = 1$. $D(p_0 || p_1) > 0$. Then generally we will have
+	the exact recovery error decreases in $\exp(-nC')$. where $C'$ is a constant irreverent with $n$.
+\end{theorem}
+\begin{proof}
+	The proof is similar with that of Theorem \ref{thm:2pq} and we have
+	\begin{equation}
+	C' = -2 \log(\sqrt{pq} + \sqrt{(1-p)(1-q)}) - 2 \log \sum_{x\in \mathcal{X}} \sqrt{p_0(x)p_1(x)}
+	\end{equation}
 \end{proof}
 \end{document}
