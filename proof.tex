@@ -221,4 +221,18 @@ The polynomial term is neglectable compared with the exponential term.
 	\end{align*}
 	Taking $\lambda = \frac{1}{2}$ we have $T_1 = 0$ and $T_2 = C'$.
 \end{proof}
+\begin{lemma}
+	Suppose $Z \sim Binomial(n, \frac{b\log n}{n}), X\sim Binomial(n, \frac{a\log n}{n})$.
+	For $ t > b - a$, show that
+	\begin{equation}
+	P(Z - X \geq \epsilon \log n) \leq \exp(-\log n \cdot ( g(a, b, \epsilon) + O(\frac{\log n}{n})))
+	\end{equation}
+	where
+	\begin{equation}
+	g(\alpha,\beta,\epsilon)= (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)
+	\end{equation}
+\end{lemma}
+\begin{proof}
+	Use Chernoff Inequality.
+\end{proof}
 \end{document}
