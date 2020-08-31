@@ -450,21 +450,21 @@ Therefore $\sqrt{a} - \sqrt{b} > \sqrt{2}$.
 
 Using Lemma 7 of Abbe's paper [1],
 
-the error exponent is $\exp(-\log n \cdot g(a, b, \epsilon))$
+the error exponent of $P(\sum_{i=1}^n (z_{i1} - z_{i2} \geq \epsilon \log n ))$ is $\exp(-\log n \cdot g(a, b, \epsilon))$
 
-For a given type $T(p)$, we have
+For a given type $T(p)$, let $m= \gamma\log n $ , we have
 $$
-\epsilon = -\frac{D(X_1^m || P_1) - D(X_1^m || P_0) + D(X_2^m || P_0) - D(X_2^m || P_1)}{\log a /b}
+\epsilon = -\gamma\frac{D(X_1^m || P_1) - D(X_1^m || P_0) + D(X_2^m || P_0) - D(X_2^m || P_1)}{\log a /b}
 $$
 From Theorem 11.1.4 of [2], the error exponent of a specific type is
 
 $\exp(-m (D(X_1^m || p_1) + D(X_2^m || p_0)))$
 
-Let $m=\log n $ To maximize  $\exp(-\log n g(a, b, \epsilon))\exp(-m (D(X_1^m || p_1) + D(X_2^m || p_0)))$ is equivalent to:
+To maximize  $\exp(-\log n g(a, b, \epsilon))\exp(-m (D(X_1^m || p_1) + D(X_2^m || p_0)))$ is equivalent to:
 $$
-\min D(X_1^m || p_1) + D(X_2^m || p_0) + g(\alpha, \beta, \epsilon)
+\min \gamma(D(X_1^m || p_1) + D(X_2^m || p_0)) + g(\alpha, \beta, \epsilon)
 $$
-When $\epsilon$ is sufficiently small, that is, $P_0$ is very near to $P_1$, we can approximate $g(a, b, \epsilon)$
+When $\epsilon$ is sufficiently small (we have already let $n \to\infty$, that is, $P_0$ is very near to $P_1$, we can approximate $g(a, b, \epsilon)$
 
 by its linear term:
 $$
@@ -483,17 +483,29 @@ P_{X_2^m}(x) &= \frac{P_0^{1-\kappa}(x)P_1^\kappa(x)}{\sum_{x\in\mathcal{X}}P_0^
 $$
 And the optimal value is
 $$
-\Gamma(a,b,p_0, p_1) = (\sqrt{a} -\sqrt{b})^2 - \log(\sum_{x\in\mathcal{X}} p_1^{1-\kappa}(x)p_0^{\kappa}(x))- \log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))
+\Gamma(a,b,p_0, p_1) = (\sqrt{a} -\sqrt{b})^2 - \gamma\log(\sum_{x\in\mathcal{X}} p_1^{1-\kappa}(x)p_0^{\kappa}(x))- \gamma\log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))
 $$
+Notice that $\Gamma(a,b,p_0, p_1) $ is linear with $\gamma$.
+
 The term $-\log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))$ is related with Renyi divergence of order $\kappa$
 $$
 D_{\kappa}(p_1 || p_0) = -\frac{1}{1-\kappa}\log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))
 $$
 The exact recovery condition is:
 $$
-\Gamma(a,b,p_0, p_1) > 2
+\begin{align}
+\Gamma(a,b,p_0, p_1) &> 2 \\
+\epsilon &> b - a
+\end{align}
 $$
 
+Let $C=\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x), C'=\sum_{x\in\mathcal{X}} p^{1-\kappa}_0(x)p^{\kappa}_1(x)$
+
+The second condition is equivalent with:
+$$
+h(\kappa)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\kappa}_0(x)p^{\kappa}_1(x)\log\frac{p_1(x)}{p_0(x)} < (a-b)\log\frac{a}{b\gamma}
+$$
+Since $\kappa < \frac{1}{2}$, the right hand side is smaller than 0 ($h(\frac{1}{2})=0, h(0)<0, h(1)>0$). Therefore the second condition holds.
 
 
 
