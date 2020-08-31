@@ -450,7 +450,7 @@ Therefore $\sqrt{a} - \sqrt{b} > \sqrt{2}$.
 
 Using Lemma 7 of Abbe's paper [1],
 
-the error exponent is $\exp(-\log n g(a, b, \epsilon))$
+the error exponent is $\exp(-\log n \cdot g(a, b, \epsilon))$
 
 For a given type $T(p)$, we have
 $$
@@ -474,7 +474,7 @@ The coefficient of $\epsilon > 0$ when $\sqrt{a} > \sqrt{b} + \sqrt{2}$
 
 Let $\kappa = \frac{1}{2}[1-\frac{1}{\sqrt{ab}\log (a/b)}]$
 
-we can get the optimal  distribution for $X_1^m$  is 
+we can get the optimal  distribution for $X_1^m, X_2^m$:
 $$
 \begin{align}
 P_{X_1^m}(x) &= \frac{P_1^{1-\kappa}(x)P_0^\kappa(x)}{\sum_{x\in\mathcal{X}}P_1^{1-\kappa}(x)P_0^\kappa(x)} \\

@@ -153,7 +153,7 @@ The polynomial term is neglectable compared with the exponential term.
 	A_1: & y_1 = 0, y_2 = 1, y_3 = 1, y_4 = 0, \dots, y_{n-1} = 1, y_n = 0 \\	
 	\end{align*}
 	Then if $P(A) < P(A_1)$, event $F$ will happen. Therefore, we use $P(P(A) < P(A_1))$ as the lower bound of $P(F)$.
-	By simplification we get $P(\sum_{i=1}^{n-2} (x_i - z_i) \geq 0) \dot{=} \exp{-nC}$ where $x_i, z_i$ are the same with Corollary \ref{cor:xz}.
+	By simplification we get $P(\sum_{i=1}^{n-2} (x_i - z_i) \geq 0) \dot{=} \exp (-nC)$ where $x_i, z_i$ are the same with Corollary \ref{cor:xz}.
 	
 	For the upper bound, we next show that 
 	\begin{equation}
@@ -199,5 +199,26 @@ The polynomial term is neglectable compared with the exponential term.
 	\begin{equation}
 	C' = -2 \log(\sqrt{pq} + \sqrt{(1-p)(1-q)}) - 2 \log \sum_{x\in \mathcal{X}} \sqrt{p_0(x)p_1(x)}
 	\end{equation}
+	In short, the error exponent comes from the case when one pair is wrongly classified.
+	The event $P(A) < P(A_1)$ can be written as:
+	\begin{align*}
+	&T_1 = \sum_{x \in \mathcal{X}} p_{X_1}(x) \log \frac{p_0(x)}{p_1(x)}
+	+ \sum_{x \in \mathcal{X}} p_{X_2}(x) \log \frac{p_1(x)}{p_0(x)}
+	+ \sum_{z \in \{0,1\}} p_{Z_1}(x) \log \frac{p_{B_q}(x)}{p_{B_p}(x)}\\
+	&
+	+ \sum_{z \in \{0,1\}} p_{Z_2}(x) \log \frac{p_{B_p}(x)}{p_{B_q}(x)} \geq 0
+	\end{align*}
+	we use Sanov' theorem, and the error exponent is the minimum value of
+	$$
+	T_2 = D(p_{X_1} || p_1) + D(p_{X_2} || p_0) + D(p_{Z_1} || p_{B_p}) + D(p_{Z_2} || p_{B_q})
+	$$
+	Using Lagrange's method to minimize $T_2 + \lambda T_1$, we have
+	\begin{align*}
+	p_{X_1}(x) &= \frac{p_1^{1-\lambda}(x)p_0^{\lambda}(x)}{\sum_{x\in\mathcal{X}}p_1^{1-\lambda}(x)p_0^{\lambda}(x)} \\
+	p_{X_2}(x) &= \frac{p_0^{1-\lambda}(x)p_1^{\lambda}(x)}{\sum_{x\in\mathcal{X}}p_0^{1-\lambda}(x)p_1^{\lambda}(x)} \\	
+	p_{Z_1}(z) &= \frac{p_{B_p}^{1-\lambda}(x)p_{B_q}^{\lambda}(z)}{\sum_{z\in\{0,1\} }p_{B_p}^{1-\lambda}(z)p_{B_q}^{\lambda}(z)} \\
+	p_{Z_2}(z) &= \frac{p_{B_q}^{1-\lambda}(x)p_{B_p}^{\lambda}(z)}{\sum_{z\in\{0,1\} }p_{B_q}^{1-\lambda}(z)p_{B_p}^{\lambda}(z)}	
+	\end{align*}
+	Taking $\lambda = \frac{1}{2}$ we have $T_1 = 0$ and $T_2 = C'$.
 \end{proof}
 \end{document}
