@@ -125,6 +125,49 @@ Therefore, $\log P(A) \geq \log P(X_n = k)P(Z_n = k) \geq -2\log(n+1) + 2n \log(
 That is $P(A) \geq \frac{1}{(n+1)^2}\exp(-nC)$.
 The polynomial term is neglectable compared with the exponential term.
 \end{proof}
+\begin{corollary}\label{cor:decrease}
+	Now we modify the condition in \ref{lem:coupled} as follows:
+	$$
+	A := \frac{1}{n}\sum_{i=1}^n \log \frac{p_0(x_i)}{p_1(x_i)} \geq \frac{1}{n} \sum_{i=1}(z_i \log\frac{p}{q} +(1-z_i) \frac{\log(1-p)}{\log(1-q)}) + \epsilon\frac{\log n }{n} [\log \frac{p}{q} - \log \frac{1-p}{1-q}]
+	$$
+	Take the same assumption in Corollary \ref{cor:xz} that
+	$p_0 \sim Bern(p), p_1 \sim Bern(q)$, we now have $\sum_{i=1}^n (x_i - z_i) \geq \epsilon \log n$.
+	This problem is interesting when
+	$ p = \frac{a \log n }{n} $ and $ q = \frac{b \log n }{n}$. Follow the same procedure as
+	in the proof of \ref{lem:coupled}. The conclusion is that $P(A) \dot{=} n^{-g(a,b,\epsilon)}$.
+	where $g(a,b,\epsilon)$ is defined as:
+	\begin{equation}\label{eq:gab}
+	g(a,b,\epsilon) = a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
+	\end{equation}
+	Notice that Equation \eqref{eq:gab} is the same as that of Equation \eqref{eq:galphabeta}.
+	\begin{proof}
+	Our $\lambda$ is no longer equal to $\frac{1}{2}$ but is the solution to the following equation, modified directly from Equation \eqref{eq:constraint}:
+	\begin{equation}\label{eq:Clambda}
+	C_1 \sum_{x\in \mathcal{X}} p_0^{\lambda}(x)p_1^{1-\lambda}(x)\log\frac{p_0(x)}{p_1(x)} + C_2 \sum_{z\in \mathcal{X}} p_0^{1-\lambda}(z)p_1^{\lambda}(z)\log\frac{p_1(z)}{p_0(z)}= \epsilon\frac{\log n }{n} [\log \frac{p}{q} - \log \frac{1-p}{1-q}]
+	\end{equation}
+	And $C= \log C_1 + \log C_2 + \lambda \epsilon\frac{\log n }{n} [\log \frac{p}{q} - \log \frac{1-p}{1-q}]$
+	Using the Taylor expansion we have
+	$$
+	C = (a + b - a^{\lambda}b^{1-\lambda} - a^{1-\lambda}b^{\lambda} + \lambda \epsilon \log\frac{a}{b}) \frac{\log n }{n}
+	+ o(\frac{\log n}{n})
+	$$
+	The $\lambda$ is solved by computing the dominant term on both sides of Equation \eqref{eq:Clambda} and we get
+	\begin{equation}
+	 a^{\lambda}b^{1-\lambda} - a^{1-\lambda}b^{\lambda} = \epsilon
+	\end{equation}
+	Solving the above equation we can get the dominant term of $\lambda^*$, as $n\to \infty$, $\lambda_n \to \lambda^*$.
+	we have:
+	\begin{equation}
+	\lambda^*= \frac{
+				\log \frac{ 
+			\epsilon + \sqrt{\epsilon^2 + 4 ab }	
+			} { 2b}
+	}
+	{\log \frac{a}{b}}
+	\end{equation}
+	which is larger than $\frac{1}{2}$. we also get the necessary condition by letting $\lambda > 0 \rightarrow \epsilon > b - a$.  Also by letting $\lambda < 1$ we have $\lambda < a - b$.
+	\end{proof}
+\end{corollary}
 \begin{lemma}\label{lem:nk}
 	$\binom{n}{k} < (\frac{ne}{k})^k$
 \end{lemma}
@@ -228,7 +271,7 @@ The polynomial term is neglectable compared with the exponential term.
 	P(Z - X \geq \epsilon \log n) \leq \exp(-\log n \cdot ( g(a, b, \epsilon) + O(\frac{\log n}{n})))
 	\end{equation}
 	where
-	\begin{equation}
+	\begin{equation}\label{eq:galphabeta}
 	g(\alpha,\beta,\epsilon)= (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)
 	\end{equation}
 \end{lemma}

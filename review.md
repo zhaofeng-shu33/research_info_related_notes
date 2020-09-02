@@ -464,11 +464,19 @@ To maximize  $\exp(-\log n g(a, b, \epsilon))\exp(-m (D(X_1^m || p_1) + D(X_2^m 
 $$
 \theta^* = \min \gamma(D(X_1^m || p_1) + D(X_2^m || p_0)) + g(a, b, \epsilon)
 $$
-Then $P(P(A)<P(A_1))\leq \sum_{P\in P_n} Q^n(T(P))P(\sum_{i=1}^n (z_{i1} - z_{i2} \geq \epsilon \log n )) \leq |P_n| \exp(-\log n \theta*)$.
+Then $P(P(A)<P(A_1))\leq \sum_{P\in P_n} Q^n(T(P))P(\sum_{i=1}^n (z_{i1} - z_{i2} \geq \epsilon \log n )) \leq |P_n| \exp(-\log n \cdot\theta^*)$.
 
 Since $|P_n|\leq m^{|\mathcal{X}|^2} = O((\log n)^{|\mathcal{X}|^2})$, which is inferior to the polynomial term. Therefore, we get the
 
 dominant error term as $n^{-\theta^*}$.
+
+To get the lower bound, we only need to choose a $P^*$ to reach $\theta^*$ and we then have
+
+$P(P(A) > P(A_1)) \geq Q^n(T(P^*))P(\sum_{i=1}^n (z_{i1} - z_{i2} \geq \epsilon \log n )) \geq \exp(-\log n \cdot \theta^*)$.
+
+Here we also use the conclusion that $\frac{1}{(m+1)^{|\mathcal{X}|^2}}2^{-mD(P||Q)}\leq Q^n(T(P))$ and neglect the inferior term.
+
+
 
 When $\epsilon$ is sufficiently small (we have already let $n \to\infty$, that is, $P_0$ is very near to $P_1$, we can approximate $g(a, b, \epsilon)$
 
