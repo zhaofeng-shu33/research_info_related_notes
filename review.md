@@ -460,10 +460,16 @@ From Theorem 11.1.4 of [2], the error exponent of a specific type is
 
 $\exp(-m (D(X_1^m || p_1) + D(X_2^m || p_0)))$
 
-To maximize  $\exp(-\log n g(a, b, \epsilon))\exp(-m (D(X_1^m || p_1) + D(X_2^m || p_0)))$ is equivalent to:
+To maximize  $\exp(-\log n g(a, b, \epsilon))\exp(-m (D(X_1^m || p_1) + D(X_2^m || p_0)))$ is equivalent to (unconstrained optimization):
 $$
-\min \gamma(D(X_1^m || p_1) + D(X_2^m || p_0)) + g(\alpha, \beta, \epsilon)
+\theta^* = \min \gamma(D(X_1^m || p_1) + D(X_2^m || p_0)) + g(a, b, \epsilon)
 $$
+Then $P(P(A)<P(A_1))\leq \sum_{P\in P_n} Q^n(T(P))P(\sum_{i=1}^n (z_{i1} - z_{i2} \geq \epsilon \log n )) \leq |P_n| \exp(-\log n \theta*)$.
+
+Since $|P_n|\leq m^{|\mathcal{X}|^2} = O((\log n)^{|\mathcal{X}|^2})$, which is inferior to the polynomial term. Therefore, we get the
+
+dominant error term as $n^{-\theta^*}$.
+
 When $\epsilon$ is sufficiently small (we have already let $n \to\infty$, that is, $P_0$ is very near to $P_1$, we can approximate $g(a, b, \epsilon)$
 
 by its linear term:
@@ -481,6 +487,8 @@ P_{X_1^m}(x) &= \frac{P_1^{1-\kappa}(x)P_0^\kappa(x)}{\sum_{x\in\mathcal{X}}P_1^
 P_{X_2^m}(x) &= \frac{P_0^{1-\kappa}(x)P_1^\kappa(x)}{\sum_{x\in\mathcal{X}}P_0^{1-\kappa}(x)P_1^\kappa(x)}
 \end{align}
 $$
+Take $X_1^m$ for an example, we have $P_{X_1^m}^* = \arg\min [(1-\kappa)D(X_1^m || p_1) + \kappa D(X_1^m || p_0)]$
+
 And the optimal value is
 $$
 \Gamma(a,b,p_0, p_1) = (\sqrt{a} -\sqrt{b})^2 - \gamma\log(\sum_{x\in\mathcal{X}} p_1^{1-\kappa}(x)p_0^{\kappa}(x))- \gamma\log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))
