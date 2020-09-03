@@ -134,7 +134,7 @@ The polynomial term is neglectable compared with the exponential term.
 	$p_0 \sim Bern(p), p_1 \sim Bern(q)$, we now have $\sum_{i=1}^n (x_i - z_i) \geq \epsilon \log n$.
 	This problem is interesting when
 	$ p = \frac{a \log n }{n} $ and $ q = \frac{b \log n }{n}$. Follow the same procedure as
-	in the proof of \ref{lem:coupled}. The conclusion is that $P(A) \dot{=} n^{-g(a,b,\epsilon)}$.
+	in the proof of Lemma \ref{lem:coupled}. The conclusion is that $P(A) \dot{=} n^{-g(a,b,\epsilon)}$.
 	where $g(a,b,\epsilon)$ is defined as:
 	\begin{equation}\label{eq:gab}
 	g(a,b,\epsilon) = a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
@@ -276,6 +276,27 @@ The polynomial term is neglectable compared with the exponential term.
 	\end{equation}
 \end{lemma}
 \begin{proof}
-	Use Chernoff Inequality.
+	The proof is similar with that of Corollary \ref{cor:xz}.
+	Use Chernoff Inequality to proof the upper bound. For the lower bound, we consider
+	\begin{align*}
+	P(Z - X \geq \epsilon \log n) & \geq P(Z - X = \epsilon \log n) \\
+	& = \sum_{\tau \log n = 0}^{n - \epsilon \log n} P(X = \tau \log n) P(Z = (\tau + \epsilon) \log n)
+	\end{align*}
+	Let
+	\begin{align*}
+	T(\tau) &= P(X = \tau \log n) P(Z = (\tau + \epsilon) \log n) \\ 
+	\log T(\tau) & = \log \binom{n}{\tau \log n} +  \log \binom{n}{(\tau + \epsilon) \log n}
+    +  \tau \log n \log p + (\tau + \epsilon) \log n \log q \\
+    &+ (n - \tau \log n) \log (1 - p)
+    + (n - (\tau + \epsilon) \log n ) \log (1 - q )
+	\end{align*}
+	We need to choose a $\tau=\tau^*$ such that $T(\tau)$ is maximized. Then
+	$ P(Z - X \geq \epsilon \log n) \geq T(\tau^*)$.
+	We need a good estimate of $\binom{n}{\tau \log n}$ to write an asymptotic expression of $\log T(\tau)$.
+	The way to estimate $\log T(\tau)$ and compute its maximum value 
+    is covered in the proof Lemma 7 of \cite{abbe}.
 \end{proof}
+\begin{thebibliography}{9}
+	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
+\end{thebibliography}
 \end{document}
