@@ -482,11 +482,11 @@ When $\epsilon$ is sufficiently small (we have already let $n \to\infty$, that i
 
 by its linear term:
 $$
-g(a, b, \epsilon) = (\sqrt{a} - \sqrt{b})^2 + \frac{\epsilon}{2}[\log \frac{a}{b} - \frac{1}{\sqrt{ab}}]
+g(a, b, \epsilon) = (\sqrt{a} - \sqrt{b})^2 + \frac{\epsilon}{2}\log \frac{a}{b}
 $$
 The coefficient of $\epsilon > 0$ when $\sqrt{a} > \sqrt{b} + \sqrt{2}$
 
-Let $\kappa = \frac{1}{2}[1-\frac{1}{\sqrt{ab}\log (a/b)}]$
+Let $\kappa = \frac{1}{2}$.
 
 we can get the optimal  distribution for $X_1^m, X_2^m$:
 $$
@@ -499,7 +499,7 @@ Take $X_1^m$ for an example, we have $P_{X_1^m}^* = \arg\min [(1-\kappa)D(X_1^m 
 
 And the optimal value is
 $$
-\Gamma(a,b,p_0, p_1) = (\sqrt{a} -\sqrt{b})^2 - \gamma\log(\sum_{x\in\mathcal{X}} p_1^{1-\kappa}(x)p_0^{\kappa}(x))- \gamma\log(\sum_{x\in\mathcal{X}} p_0^{1-\kappa}(x)p_1^{\kappa}(x))
+\Gamma(a,b,p_0, p_1) = (\sqrt{a} -\sqrt{b})^2 - 2\gamma\log(\sum_{x\in\mathcal{X}} \sqrt{p_1(x)p_0(x)})
 $$
 Notice that $\Gamma(a,b,p_0, p_1) $ is linear with $\gamma$.
 
@@ -519,9 +519,9 @@ Let $C=\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x), C'=\sum_{x\in\ma
 
 The second condition is equivalent with:
 $$
-h(\kappa)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\kappa}_0(x)p^{\kappa}_1(x)\log\frac{p_1(x)}{p_0(x)} < (a-b)\log\frac{a}{b\gamma}
+h(\kappa)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\kappa}_0(x)p^{\kappa}_1(x)\log\frac{p_1(x)}{p_0(x)} < (a-b)\gamma\log\frac{a}{b}
 $$
-Since $\kappa < \frac{1}{2}$, the right hand side is smaller than 0 ($h(\frac{1}{2})=0, h(0)<0, h(1)>0$). Therefore the second condition holds.
+Since $\kappa = \frac{1}{2}$, the right hand side is equal to 0 ($h(\frac{1}{2})=0, h(0)<0, h(1)>0$). Therefore the second condition holds.
 
 
 
