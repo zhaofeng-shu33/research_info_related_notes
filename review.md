@@ -525,9 +525,31 @@ Let $C=\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x), C'=\sum_{x\in\ma
 
 The second condition is equivalent with:
 $$
-h(\kappa)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\kappa}_0(x)p^{\kappa}_1(x)\log\frac{p_1(x)}{p_0(x)} < (a-b)\gamma\log\frac{a}{b}
+h(\kappa)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\kappa}_0(x)p^{\kappa}_1(x)\log\frac{p_1(x)}{p_0(x)} < \frac{a-b}{\gamma}\log\frac{a}{b}
 $$
 Since $\kappa = \frac{1}{2}$, the right hand side is equal to 0 ($h(\frac{1}{2})=0, h(0)<0, h(1)>0$). Therefore the second condition holds.
+
+
+
+## Consideration for general $k$
+
+$$
+\epsilon = -\gamma k\frac{D(X_1^{km} || P_1) - D(X_1^{km} || P_0) + D(X_2^{km} || P_0) - D(X_2^{km} || P_1)}{\log a /b}
+$$
+
+and we minimize
+$$
+k\gamma (D(X_1^{km}||P_1) + D(X_2^{km}||P_0)) + \frac{k(n-2k)}{n} g(\alpha, \beta, \epsilon)
+$$
+Where the function $g(\alpha, \beta, \epsilon)$ is defined as:
+$$
+g(\alpha, \beta, \epsilon) = \begin{cases}
+1 & \epsilon < b-a \\
+ (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)& |\epsilon| \leq a-b \\
+0 & \epsilon > a-b
+\end{cases}
+$$
+
 
 
 
