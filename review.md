@@ -401,7 +401,7 @@ Let $D(\epsilon_1, \epsilon_2) = \frac{D(p_0 || p_1) + D(p_1 || p_0) - \epsilon_
 
 Then 
 $$
-P(\log \frac{p(1-q)}{q(1-p)}\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > m\sum_{i=1}^m \log\frac{p_1(x_{1i})}{p_0(x_{1i})} +
+P(\log \frac{p(1-q)}{q(1-p)}\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > \sum_{i=1}^m \log\frac{p_1(x_{1i})}{p_0(x_{1i})} +
 \sum_{i=1}^m \log\frac{p_0(x_{2i})}{p_1(x_{2i})}) < P(\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > mD(\epsilon_1, \epsilon_2))(1-\exp(-m C_1) - exp(-m C_2)) + \exp(-m C_1) + \exp(-m C_2)
 $$
 
@@ -478,13 +478,19 @@ Here we also use the conclusion that $\frac{1}{(m+1)^{|\mathcal{X}|^2}}2^{-mD(P|
 
 
 
-When $\epsilon$ is sufficiently small (we have already let $n \to\infty$, that is, $P_0$ is very near to $P_1$, we can approximate $g(a, b, \epsilon)$
+Actually we can show that $\frac{d^2 g(a,b,\epsilon) }{d\epsilon^2} > 0$ therefore
+$$
+\gamma(D(X_1^m || p_1) + D(X_2^m || p_0)) + g(a, b, \epsilon) \geq \gamma(D(X_1^m || p_1) + D(X_2^m || p_0))  + \tilde{g}(a,b,\epsilon)
+$$
 
-by its linear term:
+
+where
 $$
-g(a, b, \epsilon) = (\sqrt{a} - \sqrt{b})^2 + \frac{\epsilon}{2}\log \frac{a}{b}
+\tilde{g}(a, b, \epsilon) = (\sqrt{a} - \sqrt{b})^2 + \frac{\epsilon}{2}\log \frac{a}{b}
 $$
-The coefficient of $\epsilon > 0$ when $\sqrt{a} > \sqrt{b} + \sqrt{2}$
+The coefficient of $\epsilon > 0$.
+
+Now we minimize $\gamma(D(X_1^m || p_1) + D(X_2^m || p_0))  + \tilde{g}(a,b,\epsilon)$
 
 Let $\kappa = \frac{1}{2}$.
 
