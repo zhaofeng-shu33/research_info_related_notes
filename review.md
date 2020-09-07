@@ -544,9 +544,9 @@ $$
 Where the function $g(\alpha, \beta, \epsilon)$ is defined as:
 $$
 g(\alpha, \beta, \epsilon) = \begin{cases}
-1 & \epsilon < b-a \\
- (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)& |\epsilon| \leq a-b \\
-0 & \epsilon > a-b
+0 & \epsilon < \frac{k(n-2k)}{n}(b-a) \\
+ (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)& |\epsilon| \leq \frac{k(n-2k)}{n}(a-b) \\
++\infty & \epsilon > \frac{k(n-2k)}{n}(\alpha - \beta)
 \end{cases}
 $$
 
