@@ -220,7 +220,7 @@ The polynomial term is neglectable compared with the exponential term.
 	P(F) \leq \sum_{k=1}^{n/4} \binom{n/2}{k}^2 \exp(-k(n-2k)C)
 	\end{equation}
 	Using the inequality from Lemma \ref{lem:nk}, we have
-	\begin{equation}
+	\begin{equation}\label{eq:Ff}
 		P(F) \leq \sum_{k=1}^{n/4} \exp(-nf(k))
 	\end{equation}
 	where $f(k)= \frac{2k}{n}\log\frac{2k}{ne} + k(1-\frac{2k}{n})C$.
@@ -239,9 +239,11 @@ The polynomial term is neglectable compared with the exponential term.
 \end{theorem}
 \begin{proof}
 	The proof is similar with that of Theorem \ref{thm:2pq} and we have
-	\begin{equation}
-	C' = -2 \log(\sqrt{pq} + \sqrt{(1-p)(1-q)}) - 2 \log \sum_{x\in \mathcal{X}} \sqrt{p_0(x)p_1(x)}
-	\end{equation}
+	\begin{align}
+	C' &= C_1 + C_2  \\
+	C_1 &= - 2 \log \sum_{x\in \mathcal{X}} \sqrt{p_0(x)p_1(x)} \\
+	C_2 &= -2 \log(\sqrt{pq} + \sqrt{(1-p)(1-q)}) 
+	\end{align}
 	In short, the error exponent comes from the case when one pair is wrongly classified.
 	The event $P(A) < P(A_1)$ can be written as:
 	\begin{align*}
@@ -263,6 +265,9 @@ The polynomial term is neglectable compared with the exponential term.
 	p_{Z_2}(z) &= \frac{p_{B_q}^{1-\lambda}(x)p_{B_p}^{\lambda}(z)}{\sum_{z\in\{0,1\} }p_{B_q}^{1-\lambda}(z)p_{B_p}^{\lambda}(z)}	
 	\end{align*}
 	Taking $\lambda = \frac{1}{2}$ we have $T_1 = 0$ and $T_2 = C'$.
+	For $P(P(A_k) > P(A))$ we have it equal to $\exp(-nk C_1 - k(n-2k)C_2)$.
+	Similar to the discussion of \eqref{eq:Ff}, we have
+	$P(F) \leq \sum_{k=1}^{n/4}P(P(A_1) > P(A)) \dot{=} \exp(-nC_1 - nC_2)$.
 \end{proof}
 \begin{lemma}
 	Suppose $Z \sim Binomial(n, \frac{b\log n}{n}), X\sim Binomial(n, \frac{a\log n}{n})$.
