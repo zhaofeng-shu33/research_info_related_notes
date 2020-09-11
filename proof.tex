@@ -2,6 +2,7 @@
 \usepackage{bm}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{algorithm,algorithmic}
 \usepackage{url}
 \usepackage{amssymb}
 \newtheorem{theorem}{Theorem}
@@ -301,6 +302,37 @@ The polynomial term is neglectable compared with the exponential term.
 	The way to estimate $\log T(\tau)$ and compute its maximum value 
     is covered in the proof Lemma 7 of \cite{abbe}.
 \end{proof}
+\section{Algorithms to solve the data fusion problem}
+We estimate the label of each node using only node observation first.
+Then for each node, we update its label by a hypothesis testing problem.
+\begin{algorithm}
+\caption{data fusion algorithm}
+\begin{algorithmic}
+\REQUIRE graph $G(V,E)$ adjancy matrix $A_{ij}$, node observation $x^{(i)}_{j}$ for $i \in [n], j \in [m]$, mode parameter $p_0, p_1, p, q$
+\ENSURE node label $d_i$ for $ i \in [n]$
+\FOR{$ i \in [n]$}
+\STATE compute the ratio $L_i = \sum_{s=1}^m \log\frac{p_0(x^{(i)}_s)}{p_1(x^{(i)}_s)}$ % initialization of label
+\IF{$L_i > 0$}
+\STATE $d_i \leftarrow 0$
+\ELSE
+\STATE $d_i \leftarrow 1$
+\ENDIF
+\ENDFOR
+\WHILE{iteration time does not exceed the maximum}
+\FOR{$ i \in [n]$}
+\STATE compute the ratio $L_i = \sum_{s=1}^m \log\frac{p_0(x^{(i)}_s)}{p_1(x^{(i)}_s)} + \sum_{s=1, s\neq i}^n
+(1-2d_s)[A_{is}\log\frac{p}{q} + (1-A_{is})\log\frac{1-p}{1-q}]$ % initialization of label
+\IF{$L_i > 0$}
+\STATE $d_i \leftarrow 0$
+\ELSE
+\STATE $d_i \leftarrow 1$
+\ENDIF
+\ENDFOR
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+For sparse graphs and no node information available, this fusion algorithm is equivalent to
+asynchronous label propagation. Since $\log\frac{1-p}{1-q} \approx = 0$ 
 \begin{thebibliography}{9}
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
 \end{thebibliography}
