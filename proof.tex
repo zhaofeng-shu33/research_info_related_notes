@@ -306,6 +306,17 @@ The polynomial term is neglectable compared with the exponential term.
 	The way to estimate $\log T(\tau)$ and compute its maximum value 
     is covered in the proof Lemma 7 of \cite{abbe}.
 \end{proof}
+\begin{lemma}
+	Suppose $m > n, Z \sim Binomial(m, \frac{b\log n}{n}), X\sim Binomial(m, \frac{a\log n}{n})$.
+	For $ t > \frac{m}{n}(b - a)$, show that
+	\begin{equation}
+	P(Z - X \geq t \log n) \leq \exp(-\log n \frac{m}{n}\cdot ( g(a, b, \frac{n}{m}t) + O(\frac{\log n}{n})))
+	\end{equation}
+	where $g(a,b,\epsilon)$ is defined in \eqref{eq:gab}.
+\end{lemma}
+\begin{proof}
+	Similar with the proof of Proposition 5 in \cite{yemin}.
+\end{proof}
 \section{Algorithms to solve the data fusion problem}
 We estimate the label of each node using only node observation first.
 Then for each node, we update its label by a hypothesis testing problem.
@@ -339,5 +350,8 @@ For sparse graphs and no node information available, this fusion algorithm is eq
 asynchronous label propagation. Since $\log\frac{1-p}{1-q} \approx = 0$ 
 \begin{thebibliography}{9}
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
+	\bibitem{yemin} 	Min Ye.
+	\newblock Exact recovery and sharp thresholds of stochastic ising block model,
+	2020.
 \end{thebibliography}
 \end{document}

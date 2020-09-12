@@ -539,36 +539,30 @@ $$
 
 and we minimize
 $$
-k\gamma (D(X_1^{km}||P_1) + D(X_2^{km}||P_0)) + \frac{k(n-2k)}{n} g(\alpha, \beta, \epsilon)
+k\gamma (D(X_1^{km}||P_1) + D(X_2^{km}||P_0)) + \frac{k(n-2k)}{n} g(\alpha, \beta, \frac{n}{k(n-2k)}\epsilon)
 $$
 Where the function $g(\alpha, \beta, \epsilon)$ is defined as:
 $$
 g(\alpha, \beta, \epsilon) = \begin{cases}
-0 & \epsilon < \frac{k(n-2k)}{n}(b-a) \\
- (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)& |\epsilon| \leq \frac{k(n-2k)}{n}(a-b) \\
-+\infty & \epsilon > \frac{k(n-2k)}{n}(\alpha - \beta)
+0 & \epsilon < (b-a) \\
+ (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)& |\epsilon| \leq(a-b) \\
++\infty & \epsilon > (\alpha - \beta)
 \end{cases}
 $$
-
-For $\epsilon < \frac{k(n-2k)}{n}(b-a)$ we have:
-$$
-h(\kappa)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\kappa}_0(x)p^{\kappa}_1(x)\log\frac{p_1(x)}{p_0(x)} < \frac{a-b}{\gamma}(1-\frac{2k}{n})\log\frac{a}{b}
-$$
-where $\kappa = \frac{k(n-2k)}{2n}$.
 
 We can use Lagrange multiplier to solve this problem:
 
 We add a term $-\lambda[ \gamma k[D(X_1^{km} || P_1) - D(X_1^{km} || P_0) + D(X_2^{km} || P_0) - D(X_2^{km} || P_1)]+ \log\frac{a}{b}\epsilon]$
 
-Then $\frac{k(n-2k)}{n}g'(\epsilon) = \lambda \log\frac{a}{b}$.
+Then $g'(\epsilon') = \lambda \log\frac{a}{b}$. where $\epsilon' = \frac{n}{k(n-2k)}\epsilon$
 
-Let $\lambda = \frac{k(n-2k)}{n \log(a/b)}\log\frac{\epsilon+\sqrt{\epsilon^2+4ab}}{2b}$.
+Let $\lambda = \frac{1}{\log(a/b)}\log\frac{\epsilon'+\sqrt{\epsilon'^2+4ab}}{2b}$.
 
-Then $h(\lambda) = -\frac{\log(a/b)\epsilon}{\gamma k}$ from which we can solve $\epsilon(k)$.
+Then $h(\lambda) = -\frac{\log(a/b)\epsilon}{\gamma k}$ from which we can solve $\epsilon(k)=0$.
 
 Then the minimum value equals
 $$
-\Gamma(k) = \frac{k(n-2k)}{n}[a+b-\sqrt{\epsilon^2 + 4ab}] - k\gamma(\log C + \log C')
+\Gamma(k) = \frac{k(n-2k)}{n}[a+b-\sqrt{\epsilon'^2 + 4ab}] - k\gamma(\log C + \log C')
 $$
 Let $H(\lambda) = \log C + \log C'$, then $H'(\lambda) = h(\lambda)$
 $$
@@ -577,8 +571,8 @@ $$
 We transform the expression to $\lambda$, we have
 $$
 \begin{align}
-\epsilon &= b \exp(\lambda \frac{n\log(a/b)}{k(n-2k)}) - a\exp(-\lambda \frac{n\log (a/b)}{k(n-2k)}) \\
-\sqrt{\epsilon^2 + 4ab}  &= b \exp(\lambda \frac{n\log(a/b)}{k(n-2k)}) + a\exp(-\lambda \frac{n\log (a/b)}{k(n-2k)}) \\
+\epsilon' &= b \exp(\lambda \log(a/b)) - a\exp(-\lambda  \log(a/b)) \\
+\sqrt{\epsilon'^2 + 4ab}  &= b \exp(\lambda  \log(a/b)) + a\exp(-\lambda  \log(a/b)) \\
 \end{align}
 $$
 Then
@@ -587,11 +581,11 @@ $$
 $$
 where
 $$
-\Xi[\lambda] = \frac{k(n-2k)}{n}(b \exp(\lambda \frac{n\log(a/b)}{k(n-2k)}) + a\exp(-\lambda \frac{n\log (a/b)}{k(n-2k)})) + \gamma k H(\lambda)
+\Xi[\lambda] = \frac{k(n-2k)}{n}(b \exp(\lambda  \log(a/b)) + a\exp(-\lambda \log(a/b))) + \gamma k H(\lambda)
 $$
 $\Xi'[\lambda] = \log(a/b) \epsilon + \gamma k h(\lambda) = 0$.
 
-$\Xi''[\lambda] = \frac{n}{k(n-2k)}\log^2(a/b)(b \exp(\lambda \frac{n\log(a/b)}{k(n-2k)}) + a\exp(-\lambda \frac{n\log (a/b)}{k(n-2k)})) + \gamma k h'(\lambda)>0$
+$\Xi''[\lambda] = \frac{k(n-2k)}{n}\log^2(a/b)(b \exp( \lambda\log(a/b)) + a\exp(-\lambda \log(a/b))) + \gamma k h'(\lambda)>0$
 
 Since
 $$
@@ -601,13 +595,13 @@ By Cauchy Inequality, $h'(\lambda) > 0$.
 
 Therefore, $\Gamma(k) = \frac{k(n-2k)}{n}(a+b) - \Xi[\lambda^*]$ where $\lambda^*$ is the minimum value of $\Xi$.
 
-We have $\Xi[\lambda^*] \leq \Xi[1/2]$.
+We have $\Xi[\lambda^*] \leq \Xi[\frac{1}{2}]$.
 
-Therefore, $\Gamma(k) \geq  \frac{k(n-2k)}{n}(a+b) - \Xi[1/2]$.
+Therefore, $\Gamma(k) \geq  \frac{k(n-2k)}{n}(a+b) - \Xi[\frac{1}{2}]$.
 
 We get a lower bound of the minimum value as:
 $$
-\Gamma(k) \geq \frac{k(n-2k)}{n}[a+b-b\exp(\frac{n\log(a/b)}{2k(n-2k)}) - a\exp(- \frac{n\log (a/b)}{2k(n-2k)})] - 2\gamma k\sum_{x\in\mathcal{X}}\sqrt{p_0(x)p_1(x)}=:\Lambda(k)
+\Gamma(k) \geq \frac{k(n-2k)}{n}[a+b-2\sqrt{ab}] - 2\gamma k\sum_{x\in\mathcal{X}}\sqrt{p_0(x)p_1(x)} =:\Lambda(k)
 $$
 We then analyze the lower bound $\Lambda(k)$.
 
