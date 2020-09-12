@@ -142,7 +142,7 @@ Equivalence of ML in SBIM to bisection partition.
 
 Let $z_{ij} \in \{0, 1\}$ to represent whether there is an edge between two nodes in a graph, then
 $$
-p(z | y) = \prod_{y_i = y_j} p^{z_{ij}} (1-p)^{1-z_{ij}} \prod_{y_i \neq y_j} q^{z_{ij}}(1-q)^{1-z_{ij}}
+ 
 $$
 Let $A$ to represent the number of edges between two parts $y_i=1$ and $y_i=0$.
 
@@ -389,12 +389,12 @@ P(\frac{1}{m}\sum_{i=1}^{m} \log \frac{p_1(x_{1i})}{p_0(x_{1i})} < D(p_1||p_0) -
 $$
 which decays in polynomial rate if $m=O(\log n)$.
 
-Therefore we can conditioned $\log \frac{p(1-q)}{q(1-p)}\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > m\sum_{i=1}^m \log\frac{p_1(x_{1i})}{p_0(x_{1i})} +
+Therefore we can conditioned $\log \frac{p(1-q)}{q(1-p)}\sum_{i=1}^{n-2} Z_{i2} - Z_{i1} > \sum_{i=1}^m \log\frac{p_1(x_{1i})}{p_0(x_{1i})} +
 \sum_{i=1}^m \log\frac{p_0(x_{2i})}{p_1(x_{2i})}$ on
 $$
 \begin{align}
-\frac{1}{m}\sum_{i=1}^{m} \log \frac{p_1(x_{1i})}{p_0(x_{1i})} &\geq D(p_1||p_0) - \frac{\epsilon_1}{2}\\
-\frac{1}{m}\sum_{i=1}^{m} \log \frac{p_0(x_{2i})}{p_1(x_{2i})} &\geq D(p_0||p_1) - \frac{\epsilon_1}{2}\\
+m\frac{1}{m}\sum_{i=1}^{m} \log \frac{p_1(x_{1i})}{p_0(x_{1i})} &\geq D(p_1||p_0) - \frac{\epsilon_1}{2}\\
+m\frac{1}{m}\sum_{i=1}^{m} \log \frac{p_0(x_{2i})}{p_1(x_{2i})} &\geq D(p_0||p_1) - \frac{\epsilon_1}{2}\\
 \end{align}
 $$
 Let $D(\epsilon_1, \epsilon_2) = \frac{D(p_0 || p_1) + D(p_1 || p_0) - \epsilon_1}{\log \frac{a}{b} + \epsilon_2}$.
@@ -550,6 +550,66 @@ g(\alpha, \beta, \epsilon) = \begin{cases}
 \end{cases}
 $$
 
+For $\epsilon < \frac{k(n-2k)}{n}(b-a)$ we have:
+$$
+h(\kappa)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\kappa}_1(x)p^{\kappa}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\kappa}_0(x)p^{\kappa}_1(x)\log\frac{p_1(x)}{p_0(x)} < \frac{a-b}{\gamma}(1-\frac{2k}{n})\log\frac{a}{b}
+$$
+where $\kappa = \frac{k(n-2k)}{2n}$.
+
+We can use Lagrange multiplier to solve this problem:
+
+We add a term $-\lambda[ \gamma k[D(X_1^{km} || P_1) - D(X_1^{km} || P_0) + D(X_2^{km} || P_0) - D(X_2^{km} || P_1)]+ \log\frac{a}{b}\epsilon]$
+
+Then $\frac{k(n-2k)}{n}g'(\epsilon) = \lambda \log\frac{a}{b}$.
+
+Let $\lambda = \frac{k(n-2k)}{n \log(a/b)}\log\frac{\epsilon+\sqrt{\epsilon^2+4ab}}{2b}$.
+
+Then $h(\lambda) = -\frac{\log(a/b)\epsilon}{\gamma k}$ from which we can solve $\epsilon(k)$.
+
+Then the minimum value equals
+$$
+\Gamma(k) = \frac{k(n-2k)}{n}[a+b-\sqrt{\epsilon^2 + 4ab}] - k\gamma(\log C + \log C')
+$$
+Let $H(\lambda) = \log C + \log C'$, then $H'(\lambda) = h(\lambda)$
+$$
+h(\lambda)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\lambda}_1(x)p^{\lambda}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\lambda}_0(x)p^{\lambda}_1(x)\log\frac{p_1(x)}{p_0(x)}
+$$
+We transform the expression to $\lambda$, we have
+$$
+\begin{align}
+\epsilon &= b \exp(\lambda \frac{n\log(a/b)}{k(n-2k)}) - a\exp(-\lambda \frac{n\log (a/b)}{k(n-2k)}) \\
+\sqrt{\epsilon^2 + 4ab}  &= b \exp(\lambda \frac{n\log(a/b)}{k(n-2k)}) + a\exp(-\lambda \frac{n\log (a/b)}{k(n-2k)}) \\
+\end{align}
+$$
+Then
+$$
+\Gamma(k) = \frac{k(n-2k)}{n}(a+b) - \Xi[\lambda]
+$$
+where
+$$
+\Xi[\lambda] = \frac{k(n-2k)}{n}(b \exp(\lambda \frac{n\log(a/b)}{k(n-2k)}) + a\exp(-\lambda \frac{n\log (a/b)}{k(n-2k)})) + \gamma k H(\lambda)
+$$
+$\Xi'[\lambda] = \log(a/b) \epsilon + \gamma k h(\lambda) = 0$.
+
+$\Xi''[\lambda] = \frac{n}{k(n-2k)}\log^2(a/b)(b \exp(\lambda \frac{n\log(a/b)}{k(n-2k)}) + a\exp(-\lambda \frac{n\log (a/b)}{k(n-2k)})) + \gamma k h'(\lambda)>0$
+
+Since
+$$
+h'(\lambda)=\frac{1}{C^2}(C\sum p_1^{1-\lambda}p_0^{\lambda}(\log\frac{p_0}{p_1})^2-(\sum p_1^{1-\lambda}p_0^{\lambda}\log\frac{p_0}{p_1})^2) + \frac{1}{C'^2}(C'\sum p_0^{1-\lambda}p_1^{\lambda}(\log\frac{p_1}{p_0})^2-(\sum p_0^{1-\lambda}p_1^{\lambda}\log\frac{p_1}{p_0})^2)
+$$
+By Cauchy Inequality, $h'(\lambda) > 0$.
+
+Therefore, $\Gamma(k) = \frac{k(n-2k)}{n}(a+b) - \Xi[\lambda^*]$ where $\lambda^*$ is the minimum value of $\Xi$.
+
+We have $\Xi[\lambda^*] \leq \Xi[1/2]$.
+
+Therefore, $\Gamma(k) \geq  \frac{k(n-2k)}{n}(a+b) - \Xi[1/2]$.
+
+We get a lower bound of the minimum value as:
+$$
+\Gamma(k) \geq \frac{k(n-2k)}{n}[a+b-b\exp(\frac{n\log(a/b)}{2k(n-2k)}) - a\exp(- \frac{n\log (a/b)}{2k(n-2k)})] - 2\gamma k\sum_{x\in\mathcal{X}}\sqrt{p_0(x)p_1(x)}=:\Lambda(k)
+$$
+We then analyze the lower bound $\Lambda(k)$.
 
 
 

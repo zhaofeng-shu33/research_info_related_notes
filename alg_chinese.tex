@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\pagestyle{empty}
+\begin{document}
+\begin{algorithm}
+	\caption{数据融合模型的社群发现算法}
+		输入: 图的邻接矩阵$A$，节点观测量 $x^{(i)}_{j}$，模型参数 $p_0, p_1, p, q$ \\
+		输出: 节点标签 $d_i$
+	\begin{algorithmic}
+		\FOR{$ i $ 从 $1$ 到 $n$}
+		\STATE 计算仅节点观测似然比 $L_i = \sum_{s=1}^m \log\frac{p_0(x^{(i)}_s)}{p_1(x^{(i)}_s)}$ % initialization of label
+		\IF{$L_i > 0$}
+		\STATE $d_i \leftarrow 0$
+		\ELSE
+		\STATE $d_i \leftarrow 1$
+		\ENDIF
+		\ENDFOR
+		\WHILE{迭代次数未达上限且 $d_i$ 仍在改变}
+		\FOR{$ i $ 从 $1$ 到 $n$}
+		\STATE  计算联合似然比 $L_i = \sum_{s=1}^m \log\frac{p_0(x^{(i)}_s)}{p_1(x^{(i)}_s)} + \sum_{s=1, s\neq i}^n
+		(1-2d_s)[A_{is}\log\frac{p}{q} + (1-A_{is})\log\frac{1-p}{1-q}]$ % initialization of label
+		\IF{$L_i > 0$}
+		\STATE $d_i \leftarrow 0$
+		\ELSE
+		\STATE $d_i \leftarrow 1$
+		\ENDIF
+		\ENDFOR
+		\ENDWHILE
+	\end{algorithmic}
+\end{algorithm}
+
+\end{document}

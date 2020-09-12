@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
 \newtheorem{corollary}{Corollary}
 \DeclareMathOperator{\E}{\mathbb{E}}
 \title{Proofs for semi-supervised SBM}
@@ -141,6 +142,9 @@ The polynomial term is neglectable compared with the exponential term.
 	g(a,b,\epsilon) = a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
 	\end{equation}
 	Notice that Equation \eqref{eq:gab} is the same as that of Equation \eqref{eq:galphabeta}.
+	\begin{remark}
+		we have $g'(\epsilon) = \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}$ and $g''(\epsilon ) = \frac{1}{\sqrt{4ab + \epsilon^2}}$.
+		\end{remark}
 	\begin{proof}
 	Our $\lambda$ is no longer equal to $\frac{1}{2}$ but is the solution to the following equation, modified directly from Equation \eqref{eq:constraint}:
 	\begin{equation}\label{eq:Clambda}
