@@ -317,6 +317,39 @@ The polynomial term is neglectable compared with the exponential term.
 \begin{proof}
 	Similar with the proof of Proposition 5 in \cite{yemin}.
 \end{proof}
+\begin{lemma}
+	For an ER graph with parameter $p=\frac{c\log n}{n}$. When $c>1$, the graph is connected with probability
+	$1-o(1)$. When $c<1$, the graph is connected with probability $o(1)$. 
+\end{lemma}
+\begin{proof}
+	The problem is closely related with the probability $P(\sum_{i=1}^n X_i > 1)$ where $X_1, \dots, X_n$
+	i.i.d. $\sim Bern(p)$.
+	When $c > 1$ by large deviation theory $P(\sum_{i=1}^n X_i = 0)$ decreases in polynomial rate with respect with $n$. To be more specific, we consider the number of node which is disconnected with others.
+	To be continued.
+\end{proof}
+\begin{lemma}
+	If $\sqrt{a} - \sqrt{b} < \sqrt{2}$, then exact recovery for $SSBM(n, 2, \frac{a \log n}{n}, \frac{b \log n}{n})$
+	is impossible.	
+\end{lemma}
+\begin{proof}
+	We follow the main idea of Abbe's proof in \cite{abbe} but we give a simper version.
+	We want to compute $P(F_A)$ directly by considering
+	$P(F_A) = 1 - P(F_A^c)$ where
+	$F_A^c = \{B_i - A_i <0, \forall i \in A \}$.
+	where $A_i:=|\{j \in A | (i,j) \in E \}|$ and $B_i := |\{ j \in B | (i,j) \in E \}|$.
+	We notice that the events $\{B_i - A_i < 0\}$ and $\{B_j - A_j < 0\}$
+	are not independent since there may be edges $(i, j) \in E$.
+	We make the modifications and define new random variables $A'_j = A_j - \xi_{1j}$.
+	The indicator function $\xi_{1j}$ is a random variable which takes value $1$
+	if $(1,j) \in E(G)$, otherwise takes value $0$.
+	Since $B_i - A_i <0$ implies $B_i - A'_i < 1$
+	We then have
+	\begin{align*}
+	P(\{B_i - A_i <0, \forall i \in A \}) &= P(B_1 - A_1 < 0) P(\{B_i - A_i <0, \forall i \in A \} | B_1 - A_1 < 0)\\
+	&\leq  P(B_1 - A_1 < 0) P(\{B_i - A'_i < 1, \forall i \in A \} | B_1 - A_1 < 0) \\
+	&=  P(B_1 - A_1 < 0) P(\{B_i - A'_i < 1, \forall i \in A \}) \\
+	\end{align*}
+\end{proof}
 \section{Algorithms to solve the data fusion problem}
 We estimate the label of each node using only node observation first.
 Then for each node, we update its label by a hypothesis testing problem.
@@ -347,7 +380,7 @@ Then for each node, we update its label by a hypothesis testing problem.
 \end{algorithmic}
 \end{algorithm}
 For sparse graphs and no node information available, this fusion algorithm is equivalent to
-asynchronous label propagation. Since $\log\frac{1-p}{1-q} \approx = 0$ 
+asynchronous label propagation. Since $\log\frac{1-p}{1-q} \approx  0$ 
 \begin{thebibliography}{9}
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
 	\bibitem{yemin} 	Min Ye.
