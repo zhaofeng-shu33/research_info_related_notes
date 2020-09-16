@@ -327,28 +327,50 @@ The polynomial term is neglectable compared with the exponential term.
 	When $c > 1$ by large deviation theory $P(\sum_{i=1}^n X_i = 0)$ decreases in polynomial rate with respect with $n$. To be more specific, we consider the number of node which is disconnected with others.
 	To be continued.
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{lem:ab2}
 	If $\sqrt{a} - \sqrt{b} < \sqrt{2}$, then exact recovery for $SSBM(n, 2, \frac{a \log n}{n}, \frac{b \log n}{n})$
-	is impossible.	
+	is impossible.
 \end{lemma}
 \begin{proof}
-	We follow the main idea of Abbe's proof in \cite{abbe} but we give a simper version.
-	We want to compute $P(F_A)$ directly by considering
-	$P(F_A) = 1 - P(F_A^c)$ where
-	$F_A^c = \{B_i - A_i <0, \forall i \in A \}$.
-	where $A_i:=|\{j \in A | (i,j) \in E \}|$ and $B_i := |\{ j \in B | (i,j) \in E \}|$.
-	We notice that the events $\{B_i - A_i < 0\}$ and $\{B_j - A_j < 0\}$
-	are not independent since there may be edges $(i, j) \in E$.
-	We make the modifications and define new random variables $A'_j = A_j - \xi_{1j}$.
-	The indicator function $\xi_{1j}$ is a random variable which takes value $1$
-	if $(1,j) \in E(G)$, otherwise takes value $0$.
-	Since $B_i - A_i <0$ implies $B_i - A'_i < 1$
-	We then have
-	\begin{align*}
-	P(\{B_i - A_i <0, \forall i \in A \}) &= P(B_1 - A_1 < 0) P(\{B_i - A_i <0, \forall i \in A \} | B_1 - A_1 < 0)\\
-	&\leq  P(B_1 - A_1 < 0) P(\{B_i - A'_i < 1, \forall i \in A \} | B_1 - A_1 < 0) \\
-	&=  P(B_1 - A_1 < 0) P(\{B_i - A'_i < 1, \forall i \in A \}) \\
-	\end{align*}
+	We follow the main idea of Abbe's proof in \cite{abbe} but we give a stronger version.
+	We assume $i \in A, j \in B$ where $A$ and $B$ denote two communities.
+	We want to show that $P(F) = 1 - o(1)$ by considering $P(F_1)$.
+	$F_1: \exists i,j$ such that $E(i, B \backslash \{j\}) + E(j, A \backslash \{i\}) \geq E(i, A \backslash \{i\}) + E(j, B \backslash \{j\})$.
+	Then $P(F) \geq P(F_1)$.
+	
+	Let $F_1(i,j)$ represent the event when $i,j$ are chosen. Then $F_1 = \cup_{i,j}F_1(i,j)$.
+	
+	Consider $F_1^c = \cap_{i\in A, j\in B} F_1^c(i,j)$. (or $1\leq i \leq n/2, n/2+1 \leq j \leq n$)
+	
+	Let $H_1\subseteq A, H_2 \subseteq B$ such that $|H_1| = |H_2| = \frac{n}{\log^3 n}$.
+	
+	To upper bound $P(F_1^c)$ we restrict $i \in H_1, j \in H_2$ and consider
+	$G_1(i,j): E(i, B \backslash \{j\}) + E(j, A \backslash \{i\}) \geq E(i, A \backslash H_1) + E(j, B \backslash H_2) + 2\delta(n)$
+	where $\delta(n) = \frac{\log n}{\log \log n}$.
+	The advantage of considering $G_1(i,j)$ is that $G_1(i,j)$ and $G_1(i', j')$ are independent.
+	Let the event $\Delta_1$ represents all nodes in $H_1$ are connected to less than $\delta(n)$ other nodes in $H_1$.
+	$\Delta_2$ is defined similarly.
+	
+	Then we have $F_1^c \Rightarrow \Delta_1^c \cup \Delta_2^c \cup \cap_{i\in A, j\in B}G^c_1(i,j)$
+	
+	Therefore, we have $P(F_1^c) \leq P(\Delta_1^c) + P(\Delta_2^c) + P(\cap_{i\in A, j\in B}G^c_1(i,j))$.
+	We can show that $P(\Delta_1^c) = o(1)$ from Lemma 10 of \cite{abbe}.
+	Similar to the analysis in Lemma 3 of \cite{abbe}, we have $P(G_1(i,j)) > n^{-\sqrt(\alpha - \beta)^2}$
+	and $P(\cap_{i\in A, j\in B}G^c_1(i,j)) = (1 - P(G_1(i,j)))^{|H_1|^2} \sim \exp(-\frac{2 - (\sqrt{\alpha} - \sqrt{\beta})^2}{\log^6 n}) \to 0$.
+	We get the conclusion that $P(F_1^c) \to 0$ and $P(F) \to 1$.
+	
+\end{proof}
+\begin{lemma}
+	Let $m=(\log n)^{\gamma}$,
+	If $(\sqrt{a} - \sqrt{b})^2 - 2\gamma\log\sum_{x\in\mathcal{X}} \sqrt{p_0(x)p_1(x)} < 2$, then exact recovery for the mixed model with $SSBM(n, m, 2, p_0, p_1, \frac{a \log n}{n}, \frac{b \log n}{n})$
+	is impossible.
+\end{lemma}
+\begin{proof}
+	Let $C = - 2\gamma\log\sum_{x\in\mathcal{X}} \sqrt{p_0(x)p_1(x)}$ which is positive.
+	The proof is similar with Lemma \ref{lem:ab2} with some modification that we need to add $\sum_{s=1}^m \log \frac{p_0(x^{(i)}_s)}{p_1(x_s^{(i)})}
+	+ \sum_{s=1}^m \log \frac{p_1(x^{(i)}_s)}{p_0(x_s^{(i)})}$ to the left hand of the event $F_1(i,j), G_1(i,j)$. ($x_s^{(i)}$ is the sample for the $i$-th node)
+	Also we need
+	$P(G_1(i,j)) > n^{-(\sqrt{\alpha} - \sqrt{\beta})^2 + C)}$.
 \end{proof}
 \section{Algorithms to solve the data fusion problem}
 We estimate the label of each node using only node observation first.

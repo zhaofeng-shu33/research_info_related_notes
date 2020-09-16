@@ -450,7 +450,7 @@ Therefore $\sqrt{a} - \sqrt{b} > \sqrt{2}$.
 
 Using Lemma 7 of Abbe's paper [1],
 
-the error exponent of $P(\sum_{i=1}^n (z_{i1} - z_{i2} \geq \epsilon \log n ))$ is $\exp(-\log n \cdot g(a, b, \epsilon))$
+the error exponent of $P(\sum_{i=1}^n (z_{i2} - z_{i1} \geq \epsilon \log n ))$ is $\exp(-\log n \cdot g(a, b, \epsilon))$
 
 For a given type $T(p)$, let $m= \gamma\log n $ , we have
 $$
