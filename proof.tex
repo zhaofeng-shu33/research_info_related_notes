@@ -377,41 +377,25 @@ The polynomial term is neglectable compared with the exponential term.
 \end{lemma}
 \begin{proof}
 	In Abbe's original proof (Section 6 of \cite{abbe}), he gave an upper bound of the error rate but that bound is not tight.
-	We enhance his results by more careful analysis to show that $P(F) \leq cn^{2\epsilon}$.
+	We enhance his results by more careful analysis to show that $P(F) \leq cn^{-2\epsilon}$.
 	We start with the following inequality, which is Equation 14 in \cite{abbe}.
 	\begin{equation}
-	P(F) \leq \sum_{k=1}^{n/4} \binom{n/2}{k}^2 \exp \Big(-\frac{\log n}{n}4k(n/2-k)(\frac{a+b}{2} - \sqrt{ab})  \Big)
+	P(F) \leq \sum_{k=1}^{n/4} \exp \Big[k\Big( 2\log n - 2 \log 2k + 2 - (\frac{1}{2} - \frac{k}{n})\cdot 4(\frac{a+b}{2} - \sqrt{ab})  \Big)\Big]
 	\end{equation}
 	Let $\frac{a+b}{2} - \sqrt{ab} = 1 + \epsilon$ where $\epsilon > 0$, $f(k) = -2\log(2k) + 4\frac{k}{n} \log n - (\frac{1}{2} - \frac{k}{n}) 4\epsilon \log n + 2$,
 	then we have
 	$P(F)\leq \sum_{k=1}^{\sqrt{n}} \exp(kf(k)) + I_2$. where
 	\begin{equation}
-	I_2 = \sum_{k=\sqrt{n}}^{n/4}\binom{n/2}{k}^2 \exp \Big(-\frac{\log n}{n}4k(n/2-k)(\frac{a+b}{2} - \sqrt{ab})  \Big)
+	I_2 = \sum_{k=\sqrt{n}}^{n/4}\exp(kf(k))
 	\end{equation}
 	$f'(x) = \frac{-2}{x} + \frac{4(1+\epsilon)\log n}{n}$, for $n$ sufficiently large, we have $f'(1) < 0$, $f'(\sqrt{n})<0$ and $f(x)$ takes maximal value
 	at $f(1)$. Therefore, $f(k)\leq f(1)$ for $1\leq k \leq \sqrt{n}$. Then,
 	$\sum_{k=1}^{\sqrt{n}} \exp(kf(k)) \leq \frac{\exp(f(1))}{1-\exp(f(1))}$. $\exp(f(1))\sim C n^{-2\epsilon}$ where $C$ is a constant.
 	
-	Now we want to estimate $I_2$ by applying Stirling's formula.
-	\begin{align*}
-	I_2 \leq & C'\sum_{k=\sqrt{n}}^{n/4} \frac{n}{4\pi k (n/2-k)} \frac{(n/2)^{n}}{k^{2k} (n/2-k)^{n-2k}} \exp(-\frac{\log n}{n}4k(n/2-k)(1+\epsilon))\\
-	= & C'\sum_{k=\sqrt{n}}^{n/4} \exp(kf_2(k))
-	\end{align*}
-	where 
-	\begin{align*}
-	f_2(x) &= \frac{n}{x} \log \frac{n}{2} - 2\log x \\
-	&- (\frac{n+1}{x} - 2)\log(n/2-x) + \frac{1}{x} \log n - \frac{1}{x} \log(4\pi x)
-	- (\log n)(2+2\epsilon) + \frac{x}{n}(\log n)(4+4\epsilon) \\
-	f'_2(x) & = -\frac{n}{2x^2}\log(n/2) - \frac{1}{x} -\frac{\log n}{2x^2} \\
-	&+ \frac{n+1}{2x^2}\log(n/2-x) + (\frac{n+1}{2x}-1)\frac{1}{n/2-x} +\frac{\log (4\pi x)}{2x^2}-\frac{1}{2x^2} + \frac{\log n}{n}(4+4\epsilon)
-	\end{align*}
-	We consider two regimes, $k=\Theta(n)$ and $k=o(n)$, for the first regime, the dominant term is $\frac{\log n}{n}(4+4\epsilon)$ and we have
-	$f'_2(x) > 0$, for the second regime, we use the limit $k/n = o(1)$ to simplify 
-	$$
-	f'_2(x) \sim -\frac{1}{x} -\frac{1}{nx} + \frac{\log(4\pi x)}{2x^2} - \frac{1+\log(2)}{2x^2} + \frac{\log n}{n}(4+4\epsilon)
-	$$
-	which is negative for $k=o(\frac{n}{\log n})$.
-	Therefore, $f_2(x)$ takes minimum value within $[\sqrt{n}, n/4]$.
+	Now we want to estimate $I_2$. $f(\frac{n}{4}) > 0$ and $f(x)$ takes minimal value within $[\sqrt{n}, \frac{n}{4}]$.
+	$f(\frac{n}{4}) = 2\log 2 + 2 - \log n (1+\epsilon)$, $f(\sqrt{n}) = -2\log 2 - \log n(1+2\epsilon) + \frac{4\epsilon}{\sqrt{n}}\log n + 2 + \frac{4}{n}\log n $.
+	Therefore, $f(n/4) > f(\sqrt{n})$. And we have $I_2 \leq \sum_{k=\sqrt{n}}^{n/4} \exp(kf(n/4)) \sim \exp(\sqrt{n}f(n/4))$.
+	The dominant term is $n^{-2\epsilon}$, which is exactly $n^{2-(\sqrt{a} - \sqrt{b})^2}$.
 	
 	For the lower bound part, we consider the event $A_1: $ ML algorithm fails only at one pair. Then $P(F) \geq P(A_1)$.
 	$A_1$ can further be decomposed into a serial of event $A_{ij}:$ AL algorithm fails only at $(i,j)$ pair. That is:
