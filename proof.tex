@@ -355,13 +355,13 @@ The polynomial term is neglectable compared with the exponential term.
 	
 	Therefore, we have $P(F_1^c) \leq P(\Delta_1^c) + P(\Delta_2^c) + P(\cap_{i\in A, j\in B}G^c_1(i,j))$.
 	We can show that $P(\Delta_1^c) = o(1)$ from Lemma 10 of \cite{abbe}.
-	Similar to the analysis in Lemma 3 of \cite{abbe}, we have $P(G_1(i,j)) > n^{-\sqrt(\alpha - \beta)^2}$
+	Similar to the analysis in Lemma 4 of \cite{abbe}, we have $P(G_1(i,j)) > n^{-(\alpha - \beta)^2}$
 	and $P(\cap_{i\in A, j\in B}G^c_1(i,j)) = (1 - P(G_1(i,j)))^{|H_1|^2} \sim \exp(-\frac{2 - (\sqrt{\alpha} - \sqrt{\beta})^2}{\log^6 n}) \to 0$.
 	We get the conclusion that $P(F_1^c) \to 0$ and $P(F) \to 1$.
 	
 \end{proof}
 \begin{lemma}
-	Let $m=(\log n)^{\gamma}$,
+	Let $m=\gamma\log n$,
 	If $(\sqrt{a} - \sqrt{b})^2 - 2\gamma\log\sum_{x\in\mathcal{X}} \sqrt{p_0(x)p_1(x)} < 2$, then exact recovery for the mixed model with $SSBM(n, m, 2, p_0, p_1, \frac{a \log n}{n}, \frac{b \log n}{n})$
 	is impossible.
 \end{lemma}
@@ -371,6 +371,22 @@ The polynomial term is neglectable compared with the exponential term.
 	+ \sum_{s=1}^m \log \frac{p_1(x^{(i)}_s)}{p_0(x_s^{(i)})}$ to the left hand of the event $F_1(i,j), G_1(i,j)$. ($x_s^{(i)}$ is the sample for the $i$-th node)
 	Also we need
 	$P(G_1(i,j)) > n^{-(\sqrt{\alpha} - \sqrt{\beta})^2 + C)}$.
+\end{proof}
+\begin{lemma}
+	If $\sqrt{a} - \sqrt{b} > \sqrt{2}$ and we consider SSBM $(n,2, \frac{a\log n}{n}, \frac{b \log n}{n})$, for ML algorithms, the exact recovery error rate is $O( n^{2-(\sqrt{a} - \sqrt{b})^2})$.
+\end{lemma}
+\begin{proof}
+	In Abbe's original proof (Section 6 of \cite{abbe}), he gave an upper bound of the error rate but that bound is not tight.
+	We enhance his results by more careful analysis to show that $P(F) \leq cn^{2\epsilon}$.
+	We start with the following inequality, which is Equation 14 in \cite{abbe}.
+	\begin{equation}
+	P(F) \leq \sum_{k=1}^{n/4} \exp \Big[k\Big(2\log n - 2 \log (2k) + 2 - (\frac{1}{2} - \frac{k}{n})\cdot 4 (\frac{a+b}{2} - \sqrt{ab}) \log n \Big)\Big]
+	\end{equation}
+	Let $\frac{a+b}{2} - \sqrt{ab} = 1 + \epsilon$ where $\epsilon > 0$, $f(k) = -2\log(2k) + 4\frac{k}{n} \log n - (\frac{1}{2} - \frac{k}{n}) 4\epsilon \log n + 2$,
+	then we have
+	$P(F)\leq \sum_{k=1}^{n/4} \exp(kf(k))$.
+	$f'(x) = \frac{-2}{x} + \frac{4(1+\epsilon)\log n}{n}$, for $n$ sufficiently large, we have $f'(1) < 0$, $f'(\frac{n}{4})>0$ and $f(x)$ takes minimum value
+	within $[1,\frac{n}{4}]$. Therefore, $f(k)\leq \max\{f(1), f(n/4)\}$, we further have $f(1) - f(n/4) = \log n $
 \end{proof}
 \section{Algorithms to solve the data fusion problem}
 We estimate the label of each node using only node observation first.
