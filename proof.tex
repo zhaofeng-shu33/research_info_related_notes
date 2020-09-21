@@ -387,6 +387,12 @@ The polynomial term is neglectable compared with the exponential term.
 	$P(F)\leq \sum_{k=1}^{n/4} \exp(kf(k))$.
 	$f'(x) = \frac{-2}{x} + \frac{4(1+\epsilon)\log n}{n}$, for $n$ sufficiently large, we have $f'(1) < 0$, $f'(\frac{n}{4})>0$ and $f(x)$ takes minimum value
 	within $[1,\frac{n}{4}]$. Therefore, $f(k)\leq \max\{f(1), f(n/4)\}$, we further have $f(1) - f(n/4) = \log n $
+	
+	For the lower bound part, we consider the event $A_1: $ ML algorithm fails only at one pair. Then $P(F) \geq P(A_1)$.
+	$A_1$ can further be decomposed into a serial of event $A_{ij}:$ AL algorithm fails only at $(i,j)$ pair. That is:
+	$P(A_1) = \sum_{i,j} P(A_{ij}) = (n/2)^2 P(A_{12})$ since $A_{ij}$ are mutual exclusive.
+	We only need to show $P(A_{12})$ is lower bounded by $n^{-(\sqrt{a}-\sqrt{b})^2}$.
+	
 \end{proof}
 \section{Algorithms to solve the data fusion problem}
 We estimate the label of each node using only node observation first.
@@ -394,7 +400,7 @@ Then for each node, we update its label by a hypothesis testing problem.
 \begin{algorithm}
 \caption{data fusion algorithm}
 \begin{algorithmic}
-\REQUIRE graph $G(V,E)$ adjancy matrix $A_{ij}$, node observation $x^{(i)}_{j}$ for $i \in [n], j \in [m]$, mode parameter $p_0, p_1, p, q$
+\REQUIRE graph $G(V,E)$ adjacency matrix $A_{ij}$, node observation $x^{(i)}_{j}$ for $i \in [n], j \in [m]$, mode parameter $p_0, p_1, p, q$
 \ENSURE node label $d_i$ for $ i \in [n]$
 \FOR{$ i \in [n]$}
 \STATE compute the ratio $L_i = \sum_{s=1}^m \log\frac{p_0(x^{(i)}_s)}{p_1(x^{(i)}_s)}$ % initialization of label
