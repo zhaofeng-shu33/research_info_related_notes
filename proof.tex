@@ -170,7 +170,7 @@ The polynomial term is neglectable compared with the exponential term.
 	}
 	{\log \frac{a}{b}}
 	\end{equation}
-	which is larger than $\frac{1}{2}$. we also get the necessary condition by letting $\lambda > 0 \rightarrow \epsilon > b - a$.  Also by letting $\lambda < 1$ we have $\lambda < a - b$.
+	which is larger than $\frac{1}{2}$. we also get the necessary condition by letting $\lambda > 0 \rightarrow \epsilon > b - a$.  Also by letting $\lambda < 1$ we have $\epsilon < a - b$.
 	\end{proof}
 \end{corollary}
 \begin{lemma}\label{lem:nk}
@@ -404,23 +404,24 @@ The polynomial term is neglectable compared with the exponential term.
 	
 	We consider the optimization problem:
 	$f(\sigma) = \sum_{i,j} A_{ij}\delta_{\sigma_j \neq \sigma_j}$ where $A_{ij}$ is the adjacency matrix. We also assume the ground truth
-	is $\tilde{\sigma} = (0,1,0,1,\dots,)$. Event $A_{12}$ is equivalent to say $\bar{\sigma}=(1,0,0,1,0,1,\dots,)$ is the maximal value of $f(\sigma)$.
+	is $\tilde{\sigma} = (0,1,0,1,\dots,)$. Event $A_{12}$ is equivalent to say $\bar{\sigma}=(1,0,0,1,0,1,\dots,)$ is the minimal value of $f(\sigma)$.
 	Then $P(A_{12}) = 1 - P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma}))$.
 	Further:
 	\begin{align*}
 	P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma})) &= P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma})| f(\bar{\sigma}) < f(\tilde{\sigma}))P(f(\bar{\sigma}) < f(\tilde{\sigma})) \\
 	&+ P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma}) | f(\bar{\sigma}) \geq f(\tilde{\sigma}))P(f(\bar{\sigma}) \geq f(\tilde{\sigma}))
 	\end{align*}
-	We have shown previously $P(f(\bar{\sigma}) \geq f(\tilde{\sigma})) = P(\sum_{i=1}^{n-2} Z_i - X_i \geq 0) = O(n^{-(\sqrt{a} - \sqrt{b})^2})$
+	We have shown previously $P(f(\bar{\sigma}) \geq f(\tilde{\sigma})) = P(\sum_{i=1}^{n-2} Z_i - X_i \geq 0) = \Theta(n^{-(\sqrt{a} - \sqrt{b})^2})$
 	where $Z_i \sim Bern(\frac{b\log n}{n})$ and $X_i \sim Bern(\frac{a \log n}{n})$.
 	Therefore,
 	$$
-	P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma})) \leq 1 - O(n^{-(\sqrt{a} - \sqrt{b})^2}) + O(n^{-(\sqrt{a} - \sqrt{b})^2})P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma}) | f(\bar{\sigma}) \geq f(\tilde{\sigma}))
+	P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma})) \leq 1 - \Theta(n^{-(\sqrt{a} - \sqrt{b})^2}) + \Theta(n^{-(\sqrt{a} - \sqrt{b})^2})P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma}) | f(\bar{\sigma}) \geq f(\tilde{\sigma}))
 	$$
 	Using union bound,
 	\begin{align*}
 	&P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma}) | f(\bar{\sigma}) \geq f(\tilde{\sigma}))
-	\leq \sum_{\sigma \neq \tilde{\sigma}}P(f(\sigma)>f(\tilde{\sigma})) \\
+	\leq \sum_{\sigma \neq \tilde{\sigma}}P(f(\sigma)>f(\tilde{\sigma}) | f(\bar{\sigma}) \geq f(\tilde{\sigma}) ) \\
+	&\approx ? \sum_{\sigma \neq \tilde{\sigma}}P(f(\sigma)>f(\tilde{\sigma}) )\\
 	&=\sum_{k=1}^{n/4}(\binom{n/2}{k})^2 \exp(-\log n \cdot k(n-2k)(\sqrt{a} - \sqrt{b})^2) = O(n^{2-(\sqrt{a}-\sqrt{b})^2}) = o(1)
 	\end{align*}
 	Hence, $P(A_{12})\geq O(n^{-(\sqrt{a}-\sqrt{b})^2})$
