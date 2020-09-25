@@ -418,7 +418,7 @@ The polynomial term is neglectable compared with the exponential term.
 	$$
 	P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma})) \leq 1 - \Theta(n^{-(\sqrt{a} - \sqrt{b})^2}) + \Theta(n^{-(\sqrt{a} - \sqrt{b})^2})P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma}) | f(\bar{\sigma}) \leq f(\tilde{\sigma}))
 	$$
-	Using union bound,
+	Using union bound (this proof is wrong),
 	\begin{align*}
 	&P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma}) | f(\bar{\sigma}) \leq f(\tilde{\sigma}))
 	\leq \sum_{\sigma \neq \tilde{\sigma}}P(f(\sigma) < f(\tilde{\sigma}) | f(\bar{\sigma}) \leq f(\tilde{\sigma}) ) \\
