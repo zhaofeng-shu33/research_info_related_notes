@@ -127,6 +127,17 @@ Therefore, $\log P(A) \geq \log P(X_n = k)P(Z_n = k) \geq -2\log(n+1) + 2n \log(
 That is $P(A) \geq \frac{1}{(n+1)^2}\exp(-nC)$.
 The polynomial term is neglectable compared with the exponential term.
 \end{proof}
+\begin{remark}
+	A third way to prove Corollary \ref{cor:xz} is to use Sanov's theorem directly. Let $Z_i = X_i - Y_i$, which is a random variable
+	taking values on $\{-1, 0, 1\}$, its probability vector is given by $Q=[(1-q)p, qp+(1-p)(1-q), q(1-p)]$.
+	The event $\sum_{i=1}^n z_i \geq 0 $ can be regarded as $P_{Z^n}(1) - P_{Z^n}(-1) \geq 0$ where the empirical distribution
+	of $Z^n$ is summarized from the observed data $\{z_1, \dots, z_n\}$. That is, $P_{Z^n}(r) = \frac{1}{n}\sum_{i=1}^n \bm{1}\{z_i = r\}$.
+	Now we can apply Sanov's theorem, the optimal $P_{Z^n}$ to minimize $D_{KL}(P_{Z^n}|| Q)$ is given by
+	probability vector $[(1-q)p\exp(-\lambda), qp+(1-p)(1-q), q(1-p)\exp(\lambda)]/C'$ where $C'$ is the normalization constant. The constraint on
+	$\lambda$ is that $(1-p)q\exp(\lambda)=(1-q)p\exp(-\lambda)$ (the inequality constraint becomes equality), in which we can solve out
+	$P^*_{Z^n} = [\sqrt{pq(1-p)(1-q)}, qp+(1-p)(1-q), \sqrt{pq(1-p)(1-q)}]/C'$ and $C'=(\sqrt{pq}+\sqrt{(1-p)(1-q)})^2$.
+	The KL-Divergence of $D_{KL}(P_{Z^n}|| Q)$ can be simplified to $-\log C'$, which is exactly $-2\log (\sqrt{pq}+\sqrt{(1-p)(1-q)})$.
+\end{remark}
 \begin{corollary}\label{cor:decrease}
 	Now we modify the condition in \ref{lem:coupled} as follows:
 	$$
