@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\def\E{\mathbb{E}}
+\DeclareMathOperator{\tr}{Tr}
+\title{SDP ands its duality}
+\begin{document}
+\maketitle
+\section{Lagrange Dual Theory}
+See \cite{dual}. This theory can be used to get the dual problem for LP and SDP.
+First consider
+\begin{align*}
+\min\, & c^T x \\
+s.t. \,& Ax = b \\
+&x \geq 0
+\end{align*}
+We write the Lagrange function as
+$L(x,y) = c^T x - y^T(Ax-b) = (c - A^Ty)^Tx + b^T y$.
+We minimize $L(x,y)$ subjected to $x \geq 0$. The domain of definition for the dual function should exclude
+those $y$ such that $-\infty = L(x,y)$. Therefore, we should have $c-A^Ty \geq 0$ and
+the dual problem becomes:
+\begin{align*}
+\max\, & b^T y \\
+s.t. \,& A^y \leq c
+\end{align*}
+The same can be said about SDP problem. Following 12.2 of \cite{sdp} we consider the primal problem as:
+\begin{align*}
+\min\,& C \cdot X \\
+s.t. \,& A_i \cdot X = b_i, i=1,\dots, m \\
+& X \succeq 0
+\end{align*}
+The inner product of two symmetric matrix is defined by $A\cdot B = \tr(A^TB) = \sum_{i,j=1}^n A_{ij}B_{ij}$.
+The norm associated with such inner product is Frobenius norm.
+
+Similar to the deduction of LDP problem, we consider $L(X,y)= C\cdot X - \sum_{i=1}^m y_i (A_i \cdot X - b_i)
+=(C-\sum_{i=1}^m y_i A_i)\cdot X + \sum_{i=1}^m b_i y_i$.
+If $C-\sum_{i=1}^m y_i A_i \not\in S_n^+$, then we can find vector $z$ such that 
+$z^T(C-\sum_{i=1}^m y_i A_i)z = (C-\sum_{i=1}^m y_i A_i) \cdot zz^T < 0$ Let $X=\lambda zz^T \in S_n^+$
+we can make $L(X,y) \to -\infty$. Therefore, $C-\sum_{i=1}^m y_i A_i \succeq 0$.
+And we get the dual problem of SDP:
+\begin{align*}
+\max\,&\sum_{i=1}^m b_i y_i \\
+s.t.\,& \sum_{i=1}^m y_i A_i \preceq C
+\end{align*}
+\begin{thebibliography}{9}
+	\bibitem{dual} https://de.wikipedia.org/wiki/Lagrange-Dualität
+	\bibitem{sdp} https://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15859-f11/www/notes/lecture12.pdf
+\end{thebibliography}
+\end{document}
