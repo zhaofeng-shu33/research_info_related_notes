@@ -529,7 +529,8 @@ $$
 -\kappa\sum_{(i,j)\not\in E} y_i y_j
 $$
 Let $b_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})}$
-and the matrix $B$ is defined as in \cite{abbe}.
+and choose $\kappa = 1$.
+The matrix $B$ is defined as in \cite{abbe}.
 Then the problem is $\max b^T y + y^T B y$.
 Following \cite{wang2019tightness}, we use the relaxation
 technique to get a SDP problem as follows:
@@ -541,6 +542,33 @@ s.t.\,& \diag(X) = 1 \\
 & X \succeq 0
 \end{align*}
 We should consider $\tilde{g} = (1,g^T)^T$ as the optimal solution to the above SDP problem.
+
+Following Abbe's approach, we consider the dual problem. Let $Y_i = \tilde{B}(\tilde{g}\tilde{g}^T)_{ii}$.
+Then $Y = (b^T g, \diag\{bg^T+Bgg^T\})$
+The condition for $\tilde{g}$ to become the optimal solution is then
+$$
+\diag(Y) - \tilde{B}  = \begin{pmatrix} b^T g & -b^T \\ -b & \diag(bg^T + Bgg^T) - B \end{pmatrix}
+\succeq 0
+$$
+We first analyze $E[\diag(Y) - \tilde{B}]$, Let $D_1 = \frac{D_{KL}(p_0||p_1)}{\log a/b},
+D_2 = -\frac{D_{KL}(p_1||p_0)}{\log a/b}$. Then the constant matrix $\tilde{C}$ can be written as:
+\begin{equation}
+\tilde{C}=\begin{pmatrix}
+\frac{n(D_1 + D_2)}{2} & -D_1 & -D_1& \dots, & -D_1 & D_2 & \dots & D_2 \\
+-D_1 & D_1 + d & a & \dots & a & b & \dots & b \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+-D_1 & a & \dots & a & D_1 + d & b & \dots & b \\
+D_2 & b & \dots & b & D_2 + d & a & \dots & a \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+D_2 & b & \dots & b & a & \dots & a & D_2 + d 
+\end{pmatrix}
+\end{equation}
+where $a,b,d$ have the same definition as in \cite{abbe}.
+The eigenvalues of $\tilde{C}$ are $0$ corresponding to $\tilde{g}$, two eigenvalues of order $O(n)$
+all other eigenvalues are $d-a+D_1$ and $d-a+D_2$, which are of order $\log n$ ($d-a=(a-b)\log n$).
+
+% http://matrix.skku.ac.kr/Series-E/Monthly-E.pdf Cauchy’s Interlace Theorem
+% possibly useful to estimate the eigenvalue.
 
 \begin{thebibliography}{9}
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
