@@ -10,6 +10,7 @@
 \newtheorem{remark}{Remark}
 \newtheorem{corollary}{Corollary}
 \DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\diag}{diag}
 \title{Proofs for semi-supervised SBM}
 \begin{document}
 \maketitle
@@ -498,10 +499,54 @@ Then for each node, we update its label by a hypothesis testing problem.
 \end{algorithm}
 For sparse graphs and no node information available, this fusion algorithm is equivalent to
 asynchronous label propagation. Since $\log\frac{1-p}{1-q} \approx  0$ 
+
+\section{SDP relaxation for Mixture Model}
+Consider ML estimation of SBM$(n,2,p,q)$ while each node has further $m$ observations.
+Then the likelihood function
+$$
+L=\prod_{i=1}^n \prod_{j=1}^m p_0^{\sigma_i}(x_i^{(j)})p_1^{1-\sigma_i}(x_i^{(j)})\prod_{(i,j) \in E} p^{\delta(\sigma_i, \sigma_j)}q^{1-\delta(\sigma_i, \sigma_j)}
+\prod_{(i,j)\not\in E} (1-p)^{\delta(\sigma_i, \sigma_j)}(1-q)^{1-\delta(\sigma_i, \sigma_j)}
+$$
+where $\sigma_i \in \{0,1\}$ and $\delta$ is the indicator function.
+$\max \log L$ is equivalent to (neglecting some constant term for the given graph $G$)
+$$
+\max \sum_{i=1}^n \sum_{j=1}^m \sigma_i \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})}
++\log\frac{p}{q}\sum_{(i,j) \in E} \delta(\sigma_i, \sigma_j)
++\log \frac{1-p}{1-q}\sum_{(i,j)\not\in E} \delta(\sigma_i, \sigma_j)
+$$
+Let $\kappa = -\log\frac{1-p}{1-q} / \log\frac{p}{q} \sim \frac{a-b}{\log a/b}\frac{\log n}{n}$,
+Then we only need to:
+$$
+\max \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m \sigma_i \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})}
++\sum_{(i,j) \in E} \delta(\sigma_i, \sigma_j)
+-\kappa\sum_{(i,j)\not\in E} \delta(\sigma_i, \sigma_j)
+$$
+Let $\delta(\sigma_i, \sigma_j) = \frac{y_i y_j + 1}{2}, \sigma_i = (y_i+1)/2$ where $y_i,y_j \in \{\pm 1 \}$
+We further consider the problem:
+$$
+\max \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m y_i \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})}
++\sum_{(i,j) \in E} y_i y_j
+-\kappa\sum_{(i,j)\not\in E} y_i y_j
+$$
+Let $b_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})}$
+and the matrix $B$ is defined as in \cite{abbe}.
+Then the problem is $\max b^T y + y^T B y$.
+Following \cite{wang2019tightness}, we use the relaxation
+technique to get a SDP problem as follows:
+Let $\tilde{B} = \begin{pmatrix} 0 & b^T \\ b & B \end{pmatrix}$
+Then we have
+\begin{align*}
+\max\, & \tilde{B} \cdot X \\
+s.t.\,& \diag(X) = 1 \\
+& X \succeq 0
+\end{align*}
+We should consider $\tilde{g} = (1,g^T)^T$ as the optimal solution to the above SDP problem.
+
 \begin{thebibliography}{9}
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
 	\bibitem{yemin} 	Min Ye.
 	\newblock Exact recovery and sharp thresholds of stochastic ising block model,
 	2020.
+	\bibitem{wang2019tightness} Wang, Alex L., and Fatma Kılınç-Karzan. On the tightness of SDP relaxations of QCQPs. Tech. Rep, 2019.
 \end{thebibliography}
 \end{document}
