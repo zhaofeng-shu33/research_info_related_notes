@@ -270,7 +270,7 @@ A(P_{X^m}, P_{Z^n})=\{m (D(P_{X^m}||p_1) - D(P_{X^m} || p_0)) + n (D(P_{Z^n}||q_
 $$
 To analyze the problem, we first extend the "Probability of Type Class" to encompass a more general case. 
 
-To estimate $P_0((P_X, P_Z)\in A^c)$ we have (See the Textbook, Elements of Information Theory Page 362)
+To estimate $P_0((P_X, P_Z)\in A^c)$ we have (See the Textbook, Elements of Information Theory Page 362)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 $$
 \begin{align}
 P_0((P_X, P_Z)\in A^c) & = \sum_{(P_X, P_Z)\in A^c} P_0^m(T(P_X)) Q_0^n(T(P_Z))
@@ -546,7 +546,7 @@ $$
 g(\alpha, \beta, \epsilon) = \begin{cases}
 0 & \epsilon < (b-a) \\
  (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)& |\epsilon| \leq(a-b) \\
-+\infty & \epsilon > (\alpha - \beta)
++\infty & \epsilon > (a-b)
 \end{cases}
 $$
 
@@ -601,10 +601,50 @@ Therefore, $\Gamma(k) \geq  \frac{k(n-2k)}{n}(a+b) - \Xi[\frac{1}{2}]$.
 
 We get a lower bound of the minimum value as:
 $$
-\Gamma(k) \geq \frac{k(n-2k)}{n}[a+b-2\sqrt{ab}] - 2\gamma k\sum_{x\in\mathcal{X}}\sqrt{p_0(x)p_1(x)} =:\Lambda(k)
+\Gamma(k) \geq \frac{k(n-2k)}{n}[a+b-2\sqrt{ab}] - 2\gamma k\log(\sum_{x\in\mathcal{X}}\sqrt{p_0(x)p_1(x)}) =:\Lambda(k)
 $$
 We then analyze the lower bound $\Lambda(k)$.
 
+
+
+### When only one node has error
+
+If the probability
+$$
+P(\sum_{i=1}^m \log\frac{p_0(x_{1i})}{p_1(x_{1i})} 
+\geq \log \frac{p(1-q)}{q(1-p)} \sum_{i=1}^{n/2}(z_{i1} - z_{i2}))
+$$
+is considered,
+
+we need to consider
+$$
+\theta^* = \min D(X_1^{m}||P_1)+  \frac{1}{2}g(a, b, 2\epsilon)
+$$
+And the probability is bounded by $\exp(-\log n \theta^*)$. (We suppose $m=\log n$ for simplicity).
+
+We can get a lower bound of $\theta^*$ by considering only linear approximation of $\theta^*$.
+
+Since $g(a,b,\epsilon) \geq (\sqrt{a} -\sqrt{b})^2 + \epsilon \frac{\log a/b}{2}$.
+
+We consider
+$$
+\theta'=\min D(X_1^{m} || P_1) + \frac{1}{2}(\sqrt{a}-\sqrt{b})^2 + \epsilon * \log(a/b)/2
+$$
+where
+$$
+\epsilon = -\frac{D(X_1^{m}||P_1) - D(X_1^m || P_0)}{\log a/b}
+$$
+This is equivalent to minimize
+$$
+\frac{D(X_1^m || P_1) + D(X_1^m || P_0)}{2}
+$$
+And we get $\theta' = \frac{1}{2}(\sqrt{a}-\sqrt{b})^2 - \log\sum_{x\in \mathcal{X}}\sqrt{P_0(x)P_1(x)}$
+
+That is we have
+$$
+P(\sum_{i=1}^m \log\frac{p_0(x_{1i})}{p_1(x_{1i})} 
+\geq \log \frac{p(1-q)}{q(1-p)} \sum_{i=1}^{n/2}(z_{i1} - z_{i2}))\leq n^{-\frac{1}{2}(\sqrt{a}-\sqrt{b})^2 + \log\sum_{x\in \mathcal{X}}\sqrt{P_0(x)P_1(x)}}
+$$
 
 
 [1] Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.

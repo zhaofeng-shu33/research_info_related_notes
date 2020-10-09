@@ -554,13 +554,13 @@ We first analyze $E[\diag(Y) - \tilde{B}]$, Let $D_1 = \frac{D_{KL}(p_0||p_1)}{\
 D_2 = -\frac{D_{KL}(p_1||p_0)}{\log a/b}$. Then the constant matrix $\tilde{C}$ can be written as:
 \begin{equation}
 \tilde{C}=\begin{pmatrix}
-\frac{n(D_1 + D_2)}{2} & -D_1 & -D_1& \dots, & -D_1 & D_2 & \dots & D_2 \\
--D_1 & D_1 + d & a & \dots & a & b & \dots & b \\
-\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
--D_1 & a & \dots & a & D_1 + d & b & \dots & b \\
-D_2 & b & \dots & b & D_2 + d & a & \dots & a \\
-\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
-D_2 & b & \dots & b & a & \dots & a & D_2 + d 
+\frac{n(D_1 + D_2)}{2} & -D_1 & -D_1& \dots & -D_1 & D_2 & D_2 & \dots & D_2 \\
+-D_1 & D_1 + d & a & \dots & a & b & b & \dots & b \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+-D_1 & a & \dots & a & D_1 + d & b & b & \dots & b \\
+D_2 & b & \dots & b & b & D_2 + d  & a & \dots & a \\
+\vdots & \vdots & \vdots & \vdots & \vdots &\vdots & \vdots & \vdots & \vdots \\
+D_2 & b & \dots & b & b & a & \dots & a & D_2 + d 
 \end{pmatrix}
 \end{equation}
 where $a,b,d$ have the same definition as in \cite{abbe}.
