@@ -567,8 +567,11 @@ where $a,b,d$ have the same definition as in \cite{abbe}.
 The eigenvalues of $\tilde{C}$ are $0$ corresponding to $\tilde{g}$, two eigenvalues of order $O(n)$
 all other eigenvalues are $d-a+D_1$ and $d-a+D_2$, which are of order $\log n$ ($d-a=(a-b)\log n$).
 
-% http://matrix.skku.ac.kr/Series-E/Monthly-E.pdf Cauchy’s Interlace Theorem
-% possibly useful to estimate the eigenvalue.
+We have already known that $\tilde{C}+\tilde{\Gamma}$ has an eigenvalue equal to $0$.
+If all eigenvalue of $\diag(bg^T + Bgg^T) - B$ is larger than zero, then by
+Cauchy’s Interlace Theorem \cite{it} all eigenvalues of $\tilde{C}+\tilde{\Gamma}$ is larger than zero.
+Compared with original formulation in \cite{abbe}, we add a diagonal matrix $\diag(bg^T)$.
+Therefore, it is equivalent to estimate the probability with one error.
 
 \begin{thebibliography}{9}
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
@@ -576,5 +579,6 @@ all other eigenvalues are $d-a+D_1$ and $d-a+D_2$, which are of order $\log n$ (
 	\newblock Exact recovery and sharp thresholds of stochastic ising block model,
 	2020.
 	\bibitem{wang2019tightness} Wang, Alex L., and Fatma Kılınç-Karzan. On the tightness of SDP relaxations of QCQPs. Tech. Rep, 2019.
+	\bibitem{it} http://matrix.skku.ac.kr/Series-E/Monthly-E.pdf Cauchy’s Interlace Theorem
 \end{thebibliography}
 \end{document}
