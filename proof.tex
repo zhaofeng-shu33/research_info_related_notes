@@ -417,38 +417,87 @@ The polynomial term is neglectable compared with the exponential term.
 	Therefore, $f(n/4) > f(\sqrt{n})$. And we have $I_2 \leq \sum_{k=\sqrt{n}}^{n/4} \exp(kf(n/4)) \sim \exp(\sqrt{n}f(n/4))$.
 	The dominant term is $n^{-2\epsilon}$, which is exactly $n^{2-(\sqrt{a} - \sqrt{b})^2}$.
 	
-	For the lower bound part, we consider the event $A_1: $ ML algorithm fails only at one pair. Then $P(F) \geq P(A_1)$.
-	$A_1$ can further be decomposed into a serial of event $A_{ij}:$ AL algorithm fails only at $(i,j)$ pair. That is:
-	$P(A_1) = \sum_{i,j} P(A_{ij}) = (n/2)^2 P(A_{12})$ since $A_{ij}$ are mutual exclusive.
-	We only need to show $P(A_{12})$ is lower bounded by $n^{-(\sqrt{a}-\sqrt{b})^2}$.
-	
-	We consider the optimization problem:
-	$f(\sigma) = \sum_{i,j} A_{ij}\delta_{\sigma_j \neq \sigma_j}$ where $A_{ij}$ is the random adjacency matrix. We also assume the ground truth
-	is $\tilde{\sigma} = (0,1,0,1,\dots,)$. Event $A_{12}$ is equivalent to say $\bar{\sigma}=(1,0,0,1,0,1,\dots,)$ is the minimal value of $f(\sigma)$.
-	Then $P(A_{12}) = 1 - P(\exists \sigma, s.t. f(\sigma)>f(\bar{\sigma}))$.
-	Further:
-	\begin{align*}
-	P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma})) &=
-	P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma})| f(\bar{\sigma}) < f(\tilde{\sigma}))P(f(\bar{\sigma}) > f(\tilde{\sigma})) \\
-	&+ P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma}) | f(\bar{\sigma}) \geq f(\tilde{\sigma}))P(f(\bar{\sigma}) \leq f(\tilde{\sigma}))
-	\end{align*}
-	We have shown previously $P(f(\bar{\sigma}) \leq f(\tilde{\sigma})) = P(\sum_{i=1}^{n-2} Z_i - X_i \geq 0) = \Theta(n^{-(\sqrt{a} - \sqrt{b})^2})$
-	where $Z_i \sim Bern(\frac{b\log n}{n})$ and $X_i \sim Bern(\frac{a \log n}{n})$.
-	Therefore,
-	$$
-	P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma})) \leq 1 - \Theta(n^{-(\sqrt{a} - \sqrt{b})^2}) + \Theta(n^{-(\sqrt{a} - \sqrt{b})^2})P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma}) | f(\bar{\sigma}) \leq f(\tilde{\sigma}))
-	$$
-	Using union bound (this proof is wrong),
-	\begin{align*}
-	&P(\exists \sigma, s.t. f(\sigma) < f(\bar{\sigma}) | f(\bar{\sigma}) \leq f(\tilde{\sigma}))
-	\leq \sum_{\sigma \neq \tilde{\sigma}}P(f(\sigma) < f(\tilde{\sigma}) | f(\bar{\sigma}) \leq f(\tilde{\sigma}) ) \\
-	&\approx ? \sum_{\sigma \neq \tilde{\sigma}}P(f(\sigma) < f(\tilde{\sigma}) )\\
-	&=\sum_{k=1}^{n/4}(\binom{n/2}{k})^2 \exp(-\log n \cdot k(n-2k)(\sqrt{a} - \sqrt{b})^2) = O(n^{2-(\sqrt{a}-\sqrt{b})^2}) = o(1)
-	\end{align*}
-	Hence, $P(A_{12})\geq O(n^{-(\sqrt{a}-\sqrt{b})^2})$
+
 \end{proof}
 
-
+\begin{theorem}
+	Exact recovery for SBM with $p_0, p_1$
+\end{theorem}
+\begin{proof}
+	Consideration for general $k$
+	
+	$$
+	\epsilon = -\gamma k\frac{D(X_1^{km} || P_1) - D(X_1^{km} || P_0) + D(X_2^{km} || P_0) - D(X_2^{km} || P_1)}{\log a /b}
+	$$
+	
+	and we minimize
+	$$
+	k\gamma (D(X_1^{km}||P_1) + D(X_2^{km}||P_0)) + \frac{k(n-2k)}{n} g(\alpha, \beta, \frac{n}{k(n-2k)}\epsilon)
+	$$
+	Where the function $g(\alpha, \beta, \epsilon)$ is defined as:
+	$$
+	g(\alpha, \beta, \epsilon) = \begin{cases}
+	0 & \epsilon < (b-a) \\
+	(\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)& |\epsilon| \leq(a-b) \\
+	+\infty & \epsilon > (a-b)
+	\end{cases}
+	$$
+	
+	We can use Lagrange multiplier to solve this problem:
+	
+	We add a term $-\lambda[ \gamma k[D(X_1^{km} || P_1) - D(X_1^{km} || P_0) + D(X_2^{km} || P_0) - D(X_2^{km} || P_1)]+ \log\frac{a}{b}\epsilon]$
+	
+	Then $g'(\epsilon') = \lambda \log\frac{a}{b}$. where $\epsilon' = \frac{n}{k(n-2k)}\epsilon$
+	
+	Let $\lambda = \frac{1}{\log(a/b)}\log\frac{\epsilon'+\sqrt{\epsilon'^2+4ab}}{2b}$.
+	
+	Then $h(\lambda) = -\frac{\log(a/b)\epsilon}{\gamma k}$ from which we can solve $\epsilon(k)=0$.
+	
+	Then the minimum value equals
+	$$
+	\Gamma(k) = \frac{k(n-2k)}{n}[a+b-\sqrt{\epsilon'^2 + 4ab}] - k\gamma(\log C + \log C')
+	$$
+	Let $H(\lambda) = \log C + \log C'$, then $H'(\lambda) = h(\lambda)$
+	$$
+	h(\lambda)=\frac{1}{C}\sum_{x\in\mathcal{X}} p^{1-\lambda}_1(x)p^{\lambda}_0(x)\log\frac{p_0(x)}{p_1(x)}+\frac{1}{C'}\sum_{x\in\mathcal{X}} p^{1-\lambda}_0(x)p^{\lambda}_1(x)\log\frac{p_1(x)}{p_0(x)}
+	$$
+	We transform the expression to $\lambda$, we have
+	
+	\begin{align}
+	\epsilon' &= b \exp(\lambda \log(a/b)) - a\exp(-\lambda  \log(a/b)) \\
+	\sqrt{\epsilon'^2 + 4ab}  &= b \exp(\lambda  \log(a/b)) + a\exp(-\lambda  \log(a/b)) \\
+	\end{align}
+	
+	Then
+	$$
+	\Gamma(k) = \frac{k(n-2k)}{n}(a+b) - \Xi[\lambda]
+	$$
+	where
+	$$
+	\Xi[\lambda] = \frac{k(n-2k)}{n}(b \exp(\lambda  \log(a/b)) + a\exp(-\lambda \log(a/b))) + \gamma k H(\lambda)
+	$$
+	$\Xi'[\lambda] = \log(a/b) \epsilon + \gamma k h(\lambda) = 0$.
+	
+	$\Xi''[\lambda] = \frac{k(n-2k)}{n}\log^2(a/b)(b \exp( \lambda\log(a/b)) + a\exp(-\lambda \log(a/b))) + \gamma k h'(\lambda)>0$
+	
+	Since
+	$$
+	h'(\lambda)=\frac{1}{C^2}(C\sum p_1^{1-\lambda}p_0^{\lambda}(\log\frac{p_0}{p_1})^2-(\sum p_1^{1-\lambda}p_0^{\lambda}\log\frac{p_0}{p_1})^2) + \frac{1}{C'^2}(C'\sum p_0^{1-\lambda}p_1^{\lambda}(\log\frac{p_1}{p_0})^2-(\sum p_0^{1-\lambda}p_1^{\lambda}\log\frac{p_1}{p_0})^2)
+	$$
+	By Cauchy Inequality, $h'(\lambda) > 0$.
+	
+	Therefore, $\Gamma(k) = \frac{k(n-2k)}{n}(a+b) - \Xi[\lambda^*]$ where $\lambda^*$ is the minimum value of $\Xi$.
+	
+	We have $\Xi[\lambda^*] \leq \Xi[\frac{1}{2}]$.
+	
+	Therefore, $\Gamma(k) \geq  \frac{k(n-2k)}{n}(a+b) - \Xi[\frac{1}{2}]$.
+	
+	We get a lower bound of the minimum value as:
+	$$
+	\Gamma(k) \geq \frac{k(n-2k)}{n}[a+b-2\sqrt{ab}] - 2\gamma k\log(\sum_{x\in\mathcal{X}}\sqrt{p_0(x)p_1(x)}) =:\Lambda(k)
+	$$
+	We then analyze the lower bound $\Lambda(k)$.
+\end{proof}
 \section{SDP relaxation for Mixture Model}
 Consider ML estimation of SBM$(n,2,p,q)$ while each node has further $m$ observations.
 Then the likelihood function
