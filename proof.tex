@@ -584,7 +584,7 @@ By using the inequality $g(a,b,\epsilon) \geq (\sqrt{a} -\sqrt{b})^2 + \epsilon 
 we can get a lower bound of $\theta^*$: $(\sqrt{a} - \sqrt{b})/2 + \frac{1}{2}\min(D(X_i^{(m)} || p_1) + 
 D(X_i^{(m)} || p_0))$, which is $(\sqrt{a} - \sqrt{b})/2 + \frac{1}{2}D_{1/2}(p_0||p_1)$.
 For $g_i = -1$, we have $\epsilon_i = g_i b_i = \frac{1}{\log a/b}(D(X_i^{(m)} || p_0) - 
-D(X_i^{(m)} || p_1)  )$ and its mean value is positiive($\frac{1}{\log a/b} D(p_1||p_0)$).
+D(X_i^{(m)} || p_1)  )$ and its mean value is positive ($\frac{1}{\log a/b} D(p_1||p_0)$).
 Therefore, we have $P(\epsilon_i + \sum_{i=1}^{n/2} (x_i - z_i) \leq 0) \leq \exp(-\log n \min \theta'^*)$,
 where $\theta'^* = D(X_i^{(m)}||p_1) + \frac{1}{2}g(a,b,2\epsilon_i)$.
 Similarly we have $\theta'^* \geq (\sqrt{a} - \sqrt{b})/2 + \frac{1}{2}D_{1/2}(p_0||p_1)$.
