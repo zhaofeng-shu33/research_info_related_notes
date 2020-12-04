@@ -18,17 +18,17 @@ are loosely connected between different communities.
 
 
 
-$Y$ is the node label.
+$Y$ is the node label (indepedent Bernoulli random variable).
 
 $X_{ij}$ be the edge connection information, random variable depending only on node $i, j$. We can regard
 
 $X$ as an adjacency matrix.
 
-Suppose $f_i$ be a function which maps $n(n-1)/2$ vector to a $k$ vector and $g$ is a scalar function
+Suppose $f$ be a function which maps $n(n-1)/2$ vector to a $k$ vector and $g$ is a scalar function
 
 which maps the node label to its higher ($k$) dimension embedding. Suppose there are $r$ communities,
 
 then we should choose $k=r-1$. For example, if $k=2$,$g(0)=1,g(1)=-1$. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f_i(X)]=0$ and $\mathrm{Var}[f_i(X)]=1$.
 $$
-\sum_{i=1}^n E[g(Y_i) \cdot f_i(X)]
+E[g(Y_1) \cdot f(X)]
 $$
