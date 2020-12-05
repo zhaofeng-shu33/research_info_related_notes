@@ -18,7 +18,7 @@ are loosely connected between different communities.
 
 
 
-$Y$ is the node label (indepedent Bernoulli random variable).
+$Y$ is the node label (independent Bernoulli random variable).
 
 $X_{ij}$ be the edge connection information, random variable depending only on node $i, j$. We can regard
 
@@ -28,7 +28,8 @@ Suppose $f$ be a function which maps $n(n-1)/2$ vector to a $k$ vector and $g$ i
 
 which maps the node label to its higher ($k$) dimension embedding. Suppose there are $r$ communities,
 
-then we should choose $k=r-1$. For example, if $k=2$,$g(0)=1,g(1)=-1$. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f_i(X)]=0$ and $\mathrm{Var}[f_i(X)]=1$.
+then we should choose $k=r-1$. For example, if $k=2$,$g(0)=1,g(1)=-1$. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\mathrm{Var}[f(X)]=1$.
 $$
 E[g(Y_1) \cdot f(X)]
 $$
+
