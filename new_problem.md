@@ -28,8 +28,16 @@ Suppose $f$ be a function which maps $n(n-1)/2$ vector to a $k$ vector and $g$ i
 
 which maps the node label to its higher ($k$) dimension embedding. Suppose there are $r$ communities,
 
-then we should choose $k=r-1$. For example, if $k=2$,$g(0)=1,g(1)=-1$. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\mathrm{Var}[f(X)]=1$.
+then we should choose $k=r-1$. For example, if $k=2$, $g(1)=1,g(-1)=-1$. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\textrm{Var}[f(X)] = 1$. 
 $$
-E[g(Y_1) \cdot f(X)]
+\max E[ g(Y_1) \cdot f(X) | Y_2 = 1]
 $$
+
+By Cauchy's inequality we know the maximal value is 1.
+
+($Y_2$ and $Y_1$ are independent)
+
+
+
+
 
