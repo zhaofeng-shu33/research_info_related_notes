@@ -49,7 +49,41 @@ This is the center or mass coordinate of the mass
 density on the $xy$-plane. It is
 \begin{align}
     a = \iint x w(x,y) dx dy = \int x w_1(x)dx \notag \\
-    a = \iint y w(x,y) dx dy = \int y w_2(y)dy 
+    b = \iint y w(x,y) dx dy = \int y w_2(y)dy 
+\end{align}
+Further $s^2$ and $t^2$ mean the stastical dispersion of $x$ around its mean value $a$
+or $y$ around its mean value $b$ respectively.
+These are moment of inertia of the plane with $w(x,y)$ as the density around the axis through the
+center of mass and parallel to the coordinate axis. It is defined as:
+\begin{align}
+    s^2 = \iint (x-a)^2 w(x,y) dx dy = \int (x-a)^2 w_1(x)dx \notag \\
+    t^2 = \iint (y-b)^2 w(x,y) dx dy = \int (y-b)^2 w_2(y)dy 
+\end{align}
+As the correlation metric we need consider a numerical quantity, which should satisfy three properties.
+Firstly it can be computed from any given two-parameter distribution. Secondly the value should
+be zero is $x$ and $y$ are statistically independent. Thirdly the value should be one is $x$ and $y$
+are fully dependent.
+
+The classtical correlation coefficient satisfies the first and second condition, which is based on the moment of deviation
+of the distribution:
+\begin{equation}
+r = \frac{1}{st} \iint (x-a)(y-b)w(x,y)dxdy
+\end{equation}
+We always have $r^2 \leq 1$.
+The value $r=+ 1$ occurs when $y$ has positive linear relationship with $x$.
+The value $r= - 1$ occurs when $y$ has negative linear relationship with $x$.
+The disadvantage of this correlation coefficient is that based on $r=0$ we cannot get the
+full independence condition $w(x,y)=w_1(x)w_2(y)$.
+On the other hand, when $x$ and $y$ have full statistical non-linear dependence, $r$
+is different from one.
+
+To remedy the second shortcoming other correlation metrics are proposed.
+A unified method to the detailed analysis of the distribution $w(x,y)$ are the regression line $\bar{y}(x)$ and $\bar{x}(y)$.
+They are the mechanical view of the geometric place for the center of mass of the strip in
+the $xy$-plane parallel to the coordinate axes.
+\begin{align}
+   \bar{y}(x) = \frac{\int y w(x,y) dy}{\int w(x,y) dy} = \frac{1}{w_1(x)} \int y w(x, y)dy \notag \\
+   \bar{x}(y) =  \frac{\int x w(x,y) dx}{\int w(x,y) dx} = \frac{1}{w_2(x)} \int x w(x, y)dx 
 \end{align}
 \end{document}
 
