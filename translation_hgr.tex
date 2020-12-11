@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{The statistical problem of correlation as variational and eigenvalue problem, including its connection with the curve fitting\footnote{translated by Feng Zhao, the title of the original article is "Das statistische Problem der Korrelation als Variations- und Eigenwertproblem und sein Zusammenhang mit der Ausgleichsrechnung"}}
+
+\date{December 2020}
+\author{Hans Gebelein}
+
+\begin{document}
+\maketitle
+\begin{centering}
+A satisfied correlation metric is required to satisfy
+the property that the two random variables are independent when the metric is zero and one is
+determined by another when the metric is one.
+The task to obtain such correlation metric is conducted
+as a variational problem and can be transformed to solve
+the smallest eigenvalue of a homogeneous Fredholm integral equation. By examining theses variational
+problems we can obtain its relationship with the commonly used correlation metric and the curve fitting.
+\end{centering}
+
+\section{Problem formulation and commonly-used correlation metric}
+One of the notable view for the judgement of two-dimensional probabilistic distribution $w(x,y)$ is by fixing one variable $x$, the distribution of $y$ is more or less influenced or not. As is well known,
+Such influence does not exist when $w(x,y)$
+is the product of a function $w_1(x)$ of $x$ and
+a function $w_2(y)$ of $y$. $x$ and $y$
+are mutually independent in such case. On the
+other hand, it can happen that for each given $x$
+only a single $y$ is corresponded. Then $y$
+is a function of $x$ and we say a complete correlation
+exists between the two variables. In general the result lies between the two extreme cases, and there is a question about a metric for the tightness of the relationship
+between $x$ and $y$. This is the correlation problem of statistics.
+
+To characterize the correlation between $y$ and $x$,
+there are many well-known different metrics, which we firstly quote here. Especially we observe a so-called
+geometric probabilistic distribution for the random variable $x$ and $y$. Such pair is determined by the
+positive function $w(x,y)$ by the normalization condition:
+\begin{equation}
+    \iint w(x,y) dx dy = 1
+\end{equation}
+Integrating by $x$ or $y$ we can obtain
+\begin{equation}
+    w_1(x) = \int w(x,y)dy \textrm{ and }
+    w_2(y) = \int w(x,y)dx
+\end{equation}
+Their integral about $x$ or $y$ is 1. In the following we use $a$
+and $b$ to describe the mean value of $x$ and $y$
+with respect to the distribution $w(x,y)$.
+This is the center or mass coordinate of the mass
+density on the $xy$-plane. It is
+\begin{align}
+    a = \iint x w(x,y) dx dy = \int x w_1(x)dx \notag \\
+    a = \iint y w(x,y) dx dy = \int y w_2(y)dy 
+\end{align}
+\end{document}
+

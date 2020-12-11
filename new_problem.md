@@ -35,7 +35,18 @@ $$
 
 By Cauchy's inequality we know the maximal value is 1.
 
-($Y_2$ and $Y_1$ are independent)
+($Y_2$ and $Y_1$ are independent; $X$ and $Y$ are independent)
+
+We can empirically estimate:
+$$
+\frac{1}{2} \sum_{x\in \mathcal{X}} f(x)[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]
+$$
+
+### Useful property of HGR maximal correlation
+
+If $\rho(X;Y)=0$, then $X$ and $Y$ are independent.
+
+
 
 
 
