@@ -85,5 +85,28 @@ the $xy$-plane parallel to the coordinate axes.
    \bar{y}(x) = \frac{\int y w(x,y) dy}{\int w(x,y) dy} = \frac{1}{w_1(x)} \int y w(x, y)dy \notag \\
    \bar{x}(y) =  \frac{\int x w(x,y) dx}{\int w(x,y) dx} = \frac{1}{w_2(x)} \int x w(x, y)dx 
 \end{align}
+In the two extreme cases of statistical independence and
+full dependence, the two regression lines are clearly
+characterized. For independence we have $\bar{y}(x) = b$
+and $\bar{x}(y)=a$ due to $w(x,y) = w_1(x)w_2(y)$.
+That is, the regression lines are the horizontal and
+the vertical straight lines through the center of mass of the
+distribution. It should be noted that from this condition of regression lines,
+the center of mass cannot be inferred reversely based on the assumption of statistical independence.
+Actually we cannot deduce $w(x,y)=w_1(x)w_2(y)$.
+
+On the other hand, under
+the condition of full dependence, $x$ and
+$y$ are determined by the function $y(x)$
+and $x(y)$ explicitly. We have $\bar{y}(x) = y(x)$
+and $\bar{x}(y) = x(y)$ so that in this case
+the two regression lines coincide.
+
+In statistical practice, based on the regression lines,
+Pearson introduced \textsf{correlation ratio}.
+\begin{align}
+   k^2_{yx} = \frac{1}{t^2}\int (\bar{y}(x) - b)^2 w_1(x)dx \textrm{ (correlation ratio of $y$ to $x$}) \notag \\
+   k^2_{xy} = \frac{1}{s^2}\int (\bar{x}(y) - a)^2 w_2(y)dy \textrm{ (correlation ratio of $y$ to $x$})
+\end{align}
 \end{document}
 
