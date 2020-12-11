@@ -108,5 +108,54 @@ Pearson introduced \textsf{correlation ratio}.
    k^2_{yx} = \frac{1}{t^2}\int (\bar{y}(x) - b)^2 w_1(x)dx \textrm{ (correlation ratio of $y$ to $x$}) \notag \\
    k^2_{xy} = \frac{1}{s^2}\int (\bar{x}(y) - a)^2 w_2(y)dy \textrm{ (correlation ratio of $y$ to $x$})
 \end{align}
+These correlation ratio take value zero at independence
+condition and in particular take value one at full
+dependence condition. Therefore, the measure of correlation with the help of this quantity is very satisfied when they are equal. If we are not dealing with the two extreme
+cases with $k^2_{yx} = k^2_{xy}=0$ or $1$, then
+generally $k^2_{yx}$ is not equal to $k^2_{xy}$. Only when the regression lines are straight, the two correlation coefficients take the same value, and this
+value also equal to the square of the correlation
+coefficient $r$.
+
+Pearson also suggested another measure of correlation metric as \textsf{Mean square Contingency}.
+\begin{align}
+   f^2 &= \frac{1}{\sqrt{(m-1)(n-1)}}\sum_{ik}
+   \frac{(w(x_i,y_k)-w_1(x_i)w_2(y_k))^2}{w_1(x_i)w_2(y_k)} \notag \\
+   &=\frac{1}{\sqrt{(m-1)(n-1)}}\left(\sum_{ik}
+   \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)} -1\right)
+\end{align}
+Here the discrete distribution must be assumed, in
+which $m$ and $n$ are the number of rows and columns of the so-called correlation table. Then
+under the condition of statistical independence $w(x_i,y_k) = w_1(x_i)w_2(y_k)$, $f^2=0$ is obvious.
+Under the condition of full dependence, $m=n$ is necessary. $w(x_i,y_k)$ has only $n$ non-zero
+probability values
+$$
+w(x_i, y_k) = w_1(x_i) = w_2(y_k)
+$$
+Then there are $n$ non-zero terms $w^2(x_i, y_k)/w_1(x_i)w_2(y_k)$, which are all one, and due
+to $m=n$ we have $f^2=1$.
+
+The particular advantage of this correlation metric
+of Pearson is that the value depends only on the
+frequency, not on the value of $x$ or $y$.
+Hence this metric also allows other non-numerical
+quantities like color, gender etc. Its disadvantage is
+that $f^2$ is defined only for the discrete distribution and we will show later that the natural generalization to $w(x,y)$ is not possible in general.
+
+All these existing correlation metrics have special
+advantages and disadvantages. Their relationship with
+each other is not easily observed. In the following
+we show that the correlation problem can be formulated
+as a variational problem, and this variational problem
+can be transformed to the homogeneous Fredholm integral equation, where we can solve the eigenvalue problem.
+We find that the commonly used correlation metrics are not others but different method to approximate the smallest eigenvalue of this integral equation.
+If we are dealing with a discrete distribution, then the integral equation degenerates to a homogeneous linear equation system.
+
+The question about the best relation between $y$ and
+$x$ is also met in curve fitting, which deals with
+a sequence of observed points by finding a simple curve
+to best fit the data. We deal with the curve fitting problem by treating it as a correlation problem, which provides new point of view for the solution. It shows that from correlation problem, we can develop good methods to solve the task of curve fitting.
+\section{Variational problem and integral equation}
+
 \end{document}
+
 
