@@ -69,9 +69,9 @@ B=\begin{pmatrix}
 $$
 We can write the SVD decomposition of $B$ analytically:
 
-$B=U\Sigma V^T$ where $\Sigma = \textrm{diag}(1, \frac{|p-pr-qr|}{\sqrt{r(1-r)}\sqrt{p+q}\sqrt{1-p-q}})$
+$B=U\Sigma V^T$ where $\Sigma = \textrm{diag}(1, \sigma_2)$
 $$
-U = \begin{pmatrix}
+\sigma_2=\frac{|p-pr-qr|}{\sqrt{r(1-r)}\sqrt{p+q}\sqrt{1-p-q}}, U = \begin{pmatrix}
 \sqrt{1-r} & \sqrt{r}\\
 \sqrt{r} & -\sqrt{1-r}
 \end{pmatrix}, V = \begin{pmatrix}
@@ -86,5 +86,12 @@ s = \begin{cases}
 -1 & p - pr - qr < 0
 \end{cases}
 $$
+
+When $p=pr+qr$, $\sigma_2=0$ which means that $X$ and $Y$ are indepedent.
+
+For this special example, the HGR maximal correlation $\sigma_2$ equals the Pearson correlation coefficient.
+
+Binary Symmetric model is the special case of the above 2x2 B matrix. (See for example, https://github.com/zhaofeng-shu33/ace_cream/blob/master/example/BSC.py)
+
 
 
