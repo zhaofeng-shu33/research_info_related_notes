@@ -42,13 +42,49 @@ $$
 \frac{1}{2} \sum_{x\in \mathcal{X}} f(x)[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]
 $$
 
+Then we have $f(x)=\frac{1}{C}[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]$
+
+where $C$ is the normalization constant such that $\sum_{x\in \mathcal{X}} f(x)=1$.
+
+
+
 ### Useful property of HGR maximal correlation
 
 If $\rho(X;Y)=0$, then $X$ and $Y$ are independent.
 
 
 
+Understanding HGR maximal correlation:
 
+Suppose $Y, X$ are correlated binary distributions, specified by
 
+$P(Y=1, X=1)=p, P(Y=0, X=1)=q, P(Y=1, X=0)= r - p, P(Y=0, X=0)=1-r-q$.
+
+Then the B matrix of $X,Y$ can be written as:
+$$
+B=\begin{pmatrix}
+\frac{1-r-q}{\sqrt{1-r}\sqrt{1-p-q}} & \frac{q}{\sqrt{1-r}\sqrt{p+q}} \\
+\frac{r-p}{\sqrt{r}\sqrt{1-p-q}} & \frac{p}{\sqrt{r}\sqrt{p+q}}
+\end{pmatrix}
+$$
+We can write the SVD decomposition of $B$ analytically:
+
+$B=U\Sigma V^T$ where $\Sigma = \textrm{diag}(1, \frac{|p-pr-qr|}{\sqrt{r(1-r)}\sqrt{p+q}\sqrt{1-p-q}})$
+$$
+U = \begin{pmatrix}
+\sqrt{1-r} & \sqrt{r}\\
+\sqrt{r} & -\sqrt{1-r}
+\end{pmatrix}, V = \begin{pmatrix}
+\sqrt{1-p-q} &  s\sqrt{p+q}\\
+\sqrt{p+q} & -s \sqrt{1-p-q}
+\end{pmatrix}
+$$
+The sign indicator $s$ is defined as:
+$$
+s = \begin{cases}
+1 & p - pr - qr > 0 \\
+-1 & p - pr - qr < 0
+\end{cases}
+$$
 
 
