@@ -162,7 +162,34 @@ and $y$, the quantity is not invariant.
 If the two quantities are assigned other values,
 that is, if $x$ is transformed by $f(x)$ and $y$
 is transformed by $g(y)$, then the value of $r$
-varies in general.
+varies in general. The disadvantage of the quantity $r$
+is removed when all these kinds of transformations
+are considered. To obtain an improved correlation metric,
+we inquire for the greatest value which $r$ can achieve by
+such transformation. Then we have the following variational problem:
+
+Given a positive function $w(x,y)$ which satisfies the
+normalization condition $\iint w(x,y)dxdy=1$. It is to determine the function $f(x)$ and $g(y)$ such that
+\begin{equation}
+    K^2 = \max\frac{(\iint f(x)g(y)w(x,y)dxdy)^2}
+    {\iint f^2(x)w(x,y)dxdy \iint g^(y) w(x,y)dxdy}
+\end{equation}
+Then $K^2$ is a measure for the correlation of the distribution
+$w(x,y)$. In the term of mechanics,
+the correlation measure is the largest value of the quotient
+of the moment of deviation divided by the two moments of inertia for the distribution when all kinds of distortion in $x$ or $y$ direction are allowed.
+
+We can write the variational problem in a simpler way when 
+only normalized functions $f(x)$ and $g(y)$ are allowed.
+That is:
+\begin{align}
+\iint f^2(x) w(x,y)dxdy &= \iint f^2(x)w_1(x)dx=1\notag\\
+\iint g^2(x) w(x,y)dxdy &= \iint g^2(x)w_2(y)dy=1
+\end{align}
+
 \end{document}
+
+
+
 
 
