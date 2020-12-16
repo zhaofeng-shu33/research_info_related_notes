@@ -29,6 +29,29 @@ def g(a):
     res -= (1 - a) * np.log((1 - a) / (1 - p_1))
     return res
 
+def get_marginal_probability(x, p, q, y1=None):
+    total_sum = 0
+    for i in range(16):
+        val = [int(j) for j in bin(i).lstrip('0b').zfill(4)]
+        if val[1] == 0:
+            continue
+        if y1 is not None and val[0] != y1:
+            continue
+        # six terms
+        val_base = []
+        for i in range(4):
+            for j in range(i + 1, 4):
+                equal = int(val[i] == val[j])
+                val_base.append(equal * p + (1 - equal) * q)        
+        _sum = 1
+        for i in range(6):
+            _sum *= np.power(val_base[i], x[i]) * np.power(1 - val_base[i], 1 - x[i])
+        total_sum += _sum
+    if y1 is None:
+        return total_sum / 8
+    else:
+        return total_sum / 4
+    
 def sbm_graph(n, k, a, b):
     if n % k != 0:
         raise ValueError('n %k != 0')
@@ -68,7 +91,7 @@ def _get_embedding(affinity_matrix_, n_clusters=2):
     Ls.sort(key=lambda x:x[1])
     k = n_clusters
     selected_array = [Ls[i][0] for i in range(k)]
-    # print(Ls[1][1])
+    print(Ls[1][1], Ls[2][1])
     return vectors[:, selected_array]
 
 def get_first_embedding(x_list):
@@ -123,10 +146,10 @@ def exact_compare(labels):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--spectral', default=True, const=True, type=bool, nargs='?')
+    parser.add_argument('--spectral', default=False, const=True, type=bool, nargs='?')
     args = parser.parse_args()
     if args.spectral:
-        a = 16
+        a = 11.6
         b = 4
         n = 200
         G = sbm_graph(n, 2, a, b)
@@ -142,6 +165,27 @@ if __name__ == '__main__':
         print(exact_compare(labels))
         plt.show()
     else:
+        p = 0.7
+        q = 0.3
+        prob = 0
+        f_val = []
+        prob_val = []
         for i in range(64):
             val = [int(j) for j in bin(i).lstrip('0b').zfill(6)]
-            print(val, get_first_embedding(val))
+            prob_val.append(get_marginal_probability(val, p, q))
+            f_val.append(get_first_embedding(val))
+        f_val = np.array(f_val)
+        mean_val = np.dot(f_val, prob_val)
+        std_var = np.sqrt(np.dot(f_val ** 2, prob_val) - mean_val ** 2)
+        f_val = (f_val - mean_val) / std_var
+
+        _prob_vector = []
+        for i in range(64):
+            val = [int(j) for j in bin(i).lstrip('0b').zfill(6)]
+            _prob = get_marginal_probability(val, p, q, y1=1)
+            _prob -= get_marginal_probability(val, p, q, y1=0)
+            _prob /= 2
+            _prob_vector.append(_prob)
+        _prob_vector = np.array(_prob_vector)
+        print(np.dot(_prob_vector, _prob_vector) / np.sqrt(np.dot(_prob_vector ** 2, prob_val)))
+        print(np.dot(_prob_vector, f_val))

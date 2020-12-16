@@ -28,7 +28,7 @@ Suppose $f$ be a function which maps $n(n-1)/2$ vector to a $k$ vector and $g$ i
 
 which maps the node label to its higher ($k$) dimension embedding. Suppose there are $r$ communities,
 
-then we should choose $k=r-1$. For example, if $k=2$, $g(1)=1,g(-1)=-1$. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\textrm{Var}[f(X)] = 1$. 
+then we should choose $k=r-1$. For example, if $r=2$, $g(1)=1,g(-1)=-1$. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\textrm{Var}[f(X)] = 1$. 
 $$
 \max E[ g(Y_1) \cdot f(X) | Y_2 = 1]
 $$
@@ -37,15 +37,33 @@ By Cauchy's inequality we know the maximal value is 1.
 
 ($Y_2$ and $Y_1$ are independent; $X$ and $Y$ are independent)
 
-We can empirically estimate:
+We can empirically estimate the maximum value of:
 $$
 \frac{1}{2} \sum_{x\in \mathcal{X}} f(x)[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]
 $$
 
 Then we have $f(x)=\frac{1}{C}[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]$
 
-where $C$ is the normalization constant such that $\sum_{x\in \mathcal{X}} f(x)=1$.
+where $C$ is the normalization constant such that $\sum_{x\in \mathcal{X}} P(x)f^2(x)=1$.
 
+## Simple example for $n=4$
+
+Two parameters: $p,q$.
+
+$|\mathcal{X}|=64$. The length of vector $X$ is 6.
+
+Simulation: $p=0.7, q=0.3$, the optimal value is 0.44.
+
+
+
+Now we consider $r>2$, then we should fix $Y_2 = v_2, Y_{r} = v_r$ where $v_1, v_2, \dots v_r \in \mathbb{R}^{r-1}$.
+
+$||v_i||=1, \sum_{i=1}^r = v_i = 0, v_i \cdot v_j = \frac{-1}{r-1}$.
+
+We are solving:
+$$
+\max E[ \sum_{i=2}^ r g_i(Y_1) \cdot f_i(X) | Y_2 = v_2, \dots, Y_r = v_r]
+$$
 
 
 ### Useful property of HGR maximal correlation
@@ -94,4 +112,20 @@ For this special example, the HGR maximal correlation $\sigma_2$ equals the Pear
 Binary Symmetric model is the special case of the above 2x2 B matrix. (See for example, https://github.com/zhaofeng-shu33/ace_cream/blob/master/example/BSC.py)
 
 
+
+## Neural Network Approach
+
+We can treat the $X$ as a zero-one image ($n\times n$) and $Y_1$ as its classification label. We consider the joint
+
+distribution.
+
+
+
+## Spectral Clustering Approach
+
+To embed $Y_1$ given $Y_2=1$ in a numerical number.  We use the second smallest eigenvector of the unnormalized Laplacian function of the graph. We should make the eigenvector to have length 1
+
+and the second component to be positive. Then we use the first component as the numerical embedding
+
+of $Y_1$.
 
