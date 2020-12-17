@@ -191,7 +191,7 @@ Functions like $f(x)=1, f(x)=\frac{x-a}{s}$
 and $g(y)=1, g(y)=\frac{y-b}{t}$ satisfy \eqref{eq:fgw}
 where $a,b,s,t$ are defined in (\ref{eq:ab}, \ref{eq:st}).
 Owing to this constraint the variational problem of correlation becomes:
-\begin{equation}
+\begin{equation}\label{eq:K2}
     K^2 = (\max \iint f(x)g(y)dxdy)^2
 \end{equation}
 To guarantee this variational problem meaningful, another
@@ -212,8 +212,43 @@ as
 \begin{align}
     \iint f(x)w(x,y)dxdy = \int f(x)w_1(x)dx=0 \notag\\
         \iint g(x)w(x,y)dxdy = \int g(y)w_2(y)dy=0
+        \label{eq:fwgw0}
 \end{align}
+If this condition is fulfilled, $K^2$ is strictly less than
+one in general. In particular in the case of full
+statistical dependence due to $w(x,y)=w_1(x)w_2(y)$
+$$
+\iint f(x)g(y) w(x,y) dxdy=
+\int f(x)w_1(x)dx \int g(y) w_2(y) dy = 0
+$$
+we have $K^2=0$.
 
+According to (\ref{eq:ab}, \ref{eq:st}), the functions
+$f(x) = \frac{x-a}{s}$
+and $g(y) = \frac{y-b}{t}$
+satisfy the condition \eqref{eq:fwgw0}.
+Using these functions in \eqref{eq:K2},
+we can get the correlation coefficient $r$. Therefore the
+following estimation holds:
+\begin{equation}
+    r^2 \leq K^2 \leq 1
+\end{equation}
+To make sure the above result holds, the correlation
+coefficient $r$ is no more than one for any distribution
+$w(x,y)$.
+
+The variational problem \eqref{eq:K2} 
+contains two available functions.
+We proceed with such case with only one free function,
+in which we firstly treat $f(x)$ or $g(y)$ fix and determine
+the other function such that the double intergral takes the largest
+value. The task can be solved by applying Cauchy-Schwarz
+inequality $(\int FGdx)^2 \leq \int F^2dx \int G^2dx$ where
+$$
+F(x)=f(x)\sqrt{w_1(x)},
+G(x)=\frac{1}{\sqrt{w_1(x)}}\int g(y) w(x,y)dy
+$$
+Then we have
 \end{document}
 
 
