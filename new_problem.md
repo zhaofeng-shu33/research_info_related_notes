@@ -129,3 +129,14 @@ and the second component to be positive. Then we use the first component as the 
 
 of $Y_1$.
 
+
+
+## Comments of Professor Huang
+
+Optimal value is computational intractable. Try to find some sub-optimal algorithm and show that in some
+
+special model they can approximate the optimal value in asymptotic regime.
+
+SBM is not a very useful model, especially when modeling the community in real world.
+
+Show that spectral embedding is a special kind of embedding under the framework of encoding-decoding view.
