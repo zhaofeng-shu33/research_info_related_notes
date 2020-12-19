@@ -249,7 +249,46 @@ F(x)=f(x)\sqrt{w_1(x)},
 G(x)=\frac{1}{\sqrt{w_1(x)}}\int g(y) w(x,y)dy
 $$
 Then we have
+\begin{align*}
+    (\iint f(x)g(y) w(x,y) dxdy)^2
+    &= \left(\int f(x)\sqrt{w_1(x)} \cdot (\frac{1}{\sqrt{w_1(x)}}
+    \int g(y)w(x,y)dy) dx\right)^2 \\
+    &\leq \int \underbrace{f^2(x) w_1(x) dx}_{=1} \cdot
+    \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx \\
+    &= \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx
+\end{align*}
+This is the largest value that the variational
+integral can take for a determined $g(y)$ and arbitrary
+$f(x)$. The upper bound is reached when $F(x)$ and $G(x)$ are proportional to each other, or $f(x)$ and $g(x)$ satisfy
+the equation
+\begin{align*}
+    \frac{G(x)}{F(x)}
+    = \frac{\int g(y) w(x,y)dy}{w_1(x)f(x)}
+    = \textrm{const.} = C
+\end{align*}
+The constant $C$ is obtained
+by integration on both side of equation $C^2F^2(x) = G^2(x)$.
+Since $\int F^2(x) x = 1$, we obtain
+$$
+C^2 = \int G^2(x)dx
+= \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx
+$$
+which is exactly the value of the upper bound in the
+estimation.
+
+Therefore we obtain the result: Let $g(y)$ fixed and 
+the function $f(x)$ is changeable. Under this condition, the variational integral
+\eqref{eq:K2} takes the largest value
+\begin{equation}
+    C^2 = \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx
+\end{equation}
+when $f(x)$ is set by
+\begin{equation}
+    f(x) = \frac{1}{C w_1(x)}
+    \int g(y) w(x,y) dy
+\end{equation}
 \end{document}
+
 
 
 
