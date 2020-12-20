@@ -68,7 +68,17 @@ $$
 
 ### Useful property of HGR maximal correlation
 
-If $\rho(X;Y)=0$, then $X$ and $Y$ are independent.
+If the HGR maximal correlation $\rho(X;Y)=0$, then $X$ and $Y$ are independent.
+
+Proof:
+
+For any $f,g$ we have $\mathbb{E}[f(x)g(y)] = \mathbb{E}[f(x)]\mathbb{E}[g(y)]$.
+
+Choosing $f(x)=\mathbf{1}[X=x]$ and $g(y) = \mathbf{1}[Y=y]$,  we have
+
+$P(X=x, Y=y) = P(X=x)P(Y=y)$.
+
+That is, $X$ and $Y$ are independent.
 
 
 
