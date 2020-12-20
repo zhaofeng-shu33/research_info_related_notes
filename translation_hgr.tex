@@ -38,7 +38,7 @@ positive function $w(x,y)$ by the normalization condition:
     \iint w(x,y) dx dy = 1
 \end{equation}
 Integrating by $x$ or $y$ we can obtain
-\begin{equation}
+\begin{equation}\label{eq:w12}
     w_1(x) = \int w(x,y)dy \textrm{ and }
     w_2(y) = \int w(x,y)dx
 \end{equation}
@@ -84,7 +84,7 @@ They are the mechanical view of the geometric place for the center of mass of th
 the $xy$-plane parallel to the coordinate axes.
 \begin{align}
    \bar{y}(x) = \frac{\int y w(x,y) dy}{\int w(x,y) dy} = \frac{1}{w_1(x)} \int y w(x, y)dy \notag \\
-   \bar{x}(y) =  \frac{\int x w(x,y) dx}{\int w(x,y) dx} = \frac{1}{w_2(x)} \int x w(x, y)dx 
+   \bar{x}(y) =  \frac{\int x w(x,y) dx}{\int w(x,y) dx} = \frac{1}{w_2(x)} \int x w(x, y)dx  \label{eq:barxy}
 \end{align}
 In the two extreme cases of statistical independence and
 full dependence, the two regression lines are clearly
@@ -107,7 +107,7 @@ In statistical practice, based on the regression lines,
 Pearson introduced \textsf{correlation ratio}.
 \begin{align}
    k^2_{yx} = \frac{1}{t^2}\int (\bar{y}(x) - b)^2 w_1(x)dx \textrm{ (correlation ratio of $y$ to $x$}) \notag \\
-   k^2_{xy} = \frac{1}{s^2}\int (\bar{x}(y) - a)^2 w_2(y)dy \textrm{ (correlation ratio of $y$ to $x$})
+   k^2_{xy} = \frac{1}{s^2}\int (\bar{x}(y) - a)^2 w_2(y)dy \textrm{ (correlation ratio of $y$ to $x$}) \label{eq:pr}
 \end{align}
 These correlation ratio take value zero at independence
 condition and in particular take value one at full
@@ -279,7 +279,7 @@ estimation.
 Therefore we obtain the result: Let $g(y)$ fixed and 
 the function $f(x)$ is changeable. Under this condition, the variational integral
 \eqref{eq:K2} takes the largest value
-\begin{equation}
+\begin{equation}\label{eq:C2g}
     C^2 = \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx
 \end{equation}
 when $f(x)$ is set by
@@ -287,6 +287,42 @@ when $f(x)$ is set by
     f(x) = \frac{1}{C w_1(x)}
     \int g(y) w(x,y) dy
 \end{equation}
+If $g(y)$ takes such value that the double integral reaches
+the largest possible value $K^2$, then $C^2=K^2$. Therefore,
+we can treat \eqref{eq:C2g} as a new form of our variational
+problems, in which $g(y)$ is a free function.
+Obviously to get such variational problems with only
+one unknown function we can exchange the role of $f(x)$
+and $g(y)$. We obtain the following two integrals for
+the variational problem of correlation as its second form.
+\begin{align}
+    K^2 & = \max \int  \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx \notag \\
+    K^2 & = \max \int \frac{1}{w_2(y)} (\int f(x) w(x,y)dx)^2 dy \label{eq:K2second}
+\end{align}
+To approximate the maximal value of the integral, we can
+set $f(x)$ or $g(y)$ to linear function, which should
+satisfy the normalization condition \ref{eq:fgw}
+and the orthogonal condition \ref{eq:fwgw0}. These functions
+are $f(x)=\frac{x-a}{s}$
+or $g(y) = \frac{y-b}{t}$.
+Due to \ref{eq:w12} and \ref{eq:barxy} it follows that
+\begin{align*}
+    \int g(y) w(x,y) dy
+    & = \int \frac{y-b}{t} w(x,y) dy =
+    \frac{\bar{y}(x) - b}{t} w_1(x) \\
+    \int f(x) w(x,y) dx
+    & = \int \frac{x-a}{s} w(x,y) dx =
+    \frac{\bar{x}(y) - a}{s} w_2(y)
+\end{align*}
+And according to \ref{eq:K2second},
+\begin{align*}
+    \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx 
+    & = \frac{1}{t^2}\int (\bar{y}(x) - b)^2 w_1(x)dx =
+    k^2_{yx}\notag \\
+     \frac{1}{w_2(y)} (\int f(x) w(x,y)dx)^2 dy&= \frac{1}{s^2}\int (\bar{x}(y) - a)^2 w_2(y)dy = k^2_{xy}
+\end{align*}
+These approximated values are the two Pearson correlation
+ratios in \ref{eq:pr}.
 \end{document}
 
 
