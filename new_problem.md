@@ -139,7 +139,21 @@ and the second component to be positive. Then we use the first component as the 
 
 of $Y_1$.
 
+Theoretical analysis of spectral clustering for SBM community detection does not have beautiful result.
 
+They use matrix perturbation theory, notably the Davis-Kahan theorem, the conclusion is that
+
+partial recovery is possible by using the first k smallest eigenvector of Laplacian matrix. That is,
+
+the number of misclassified converges to zero. Some authors uses some post processing steps after
+
+spectral clustering to achieve exact recovery. This makes the complete algorithm quite complex. Though
+
+it has theoretical values, it lacks practicality. For some reference,
+
+[1] Yun, Se-Young, and Alexandre Proutiere. "Accurate community detection in the stochastic block model via spectral algorithms." *arXiv preprint arXiv:1412.7335* (2014).
+
+ 
 
 ## Comments of Professor Huang
 
@@ -150,3 +164,17 @@ special model they can approximate the optimal value in asymptotic regime.
 SBM is not a very useful model, especially when modeling the community in real world.
 
 Show that spectral embedding is a special kind of embedding under the framework of encoding-decoding view.
+
+## Laplacian Eigenmap and Spectral Clustering
+
+Laplacian eigenmap is the same with the normalized spectral clustering
+
+[1] Belkin, Mikhail, and Partha Niyogi. "Laplacian eigenmaps and spectral techniques for embedding and clustering." *Advances in neural information processing systems* 14 (2001): 585-591.
+
+## Some experimental results for several embedding methods
+
+The article [1] compares several graph embedding techniques for several tasks. Notably for link
+
+prediction.
+
+[1] Goyal, Palash, and Emilio Ferrara. "Graph embedding techniques, applications, and performance: A survey." *Knowledge-Based Systems* 151 (2018): 78-94.
