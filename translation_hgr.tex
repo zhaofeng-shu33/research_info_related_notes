@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath}
-
+\usepackage{mathtools}
 \title{The statistical problem of correlation as variational and eigenvalue problem, including its connection with the curve fitting\footnote{translated by Feng Zhao, the title of the original article is "Das statistische Problem der Korrelation als Variations- und Eigenwertproblem und sein Zusammenhang mit der Ausgleichsrechnung"}}
 
 \date{December 2020}
@@ -283,7 +283,7 @@ the function $f(x)$ is changeable. Under this condition, the variational integra
     C^2 = \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx
 \end{equation}
 when $f(x)$ is set by
-\begin{equation}
+\begin{equation}\label{eq:fbyg}
     f(x) = \frac{1}{C w_1(x)}
     \int g(y) w(x,y) dy
 \end{equation}
@@ -322,8 +322,92 @@ And according to \ref{eq:K2second},
      \frac{1}{w_2(y)} (\int f(x) w(x,y)dx)^2 dy&= \frac{1}{s^2}\int (\bar{x}(y) - a)^2 w_2(y)dy = k^2_{xy}
 \end{align*}
 These approximated values are the two Pearson correlation
-ratios in \ref{eq:pr}.
+ratios in \eqref{eq:pr}.
+
+From this result we have shown 
+the position of correlation ratio in the general theory
+and its relationship with the other correlation metric.
+$k^2_{yx}$ and $k^2_{xy}$
+are two different first-order approximation for the general
+correlation metric $K^2$.
+$k^2_{yx}$ corresponds to $g(y)=\frac{y-b}{t}$
+and the optimal $f(x)$ given such $g(y)$ while
+$k^2_{xy}$ corresponds to $f(x)=\frac{x-a}{s}$
+and the optimal $g(y)$ given such $f(x)$.
+
+By these two approaches, the variational problem is not fully exhausted and in general must be smaller than $K^2$, which
+is their upper bound.
+On the other hand, as approximation to the variational
+problems they are better than the value which uses linear
+function $f(x)$ and $g(y)$ in \eqref{eq:K2}.
+Therefore $r^2$ is the lower bound for both of
+the correlation ratio\footnote{Note: $r^2 \leq \min\{k^2_{xy}, k^2_{yx}\}$}.
+
+The second function does not appear explicitly
+in the formula of $k^2_{yx}$
+and $k^2_{xy}$. In the first case $f(x)$ is the same as
+$\bar{y}(x)-b$ up to a normalization factor, and in the
+second case $g(y)$ coincides with $\bar{x}(y)-a$ up to .
+These functions satisfy the orthogonal condition
+\eqref{eq:fwgw0}. If they are linear functions,
+then they must be $\frac{x-a}{s}$
+and $\frac{y-b}{t}$ due to the orthogonality and the normalization. The two function pairs are identical and
+the two correlation ratios also take the same value,
+which must be equal to $r^2$. Therefore we obtain the above
+mentioned result without proof that $k^2_{yx}
+= k^2_{xy}=r^2$ in the case of straight regression lines.
+
+Now we treat $f(x)$ and $g(y)$ as the solution function
+in the variational problem \eqref{eq:K2second}, such that
+the integrals take the value $K^2$. Then according to
+previous equation \eqref{eq:fbyg}, for the two functions
+the integral equations hold simultaneously
+\begin{align}
+    f(x) &= \frac{1}{K w_1(x)}\int g(y)w(x,y)dy \notag \\
+    g(y) &= \frac{1}{K w_2(y)}\int f(x) w(x,y)dx 
+\end{align}
+Combing the two equations,
+\begin{align*}
+    f(x) = \frac{1}{K}
+    \int \frac{w(x,y)}{w_1(x)} g(y)dy
+    & = \frac{1}{K}
+    \int \frac{w(x,y)}{w_1(x)}  (\frac{1}{K w_2(y)}\int f(z) w(z,y)dz )dy \\
+    &= \frac{1}{K^2}
+    \iint \frac{w(x,y)w(z,y)}{w_1(x)w_2(y)}f(z)dzdy
+\end{align*}
+This result is an homogeneous Fredholm integral
+equation for the function $f(x)$
+\begin{equation}
+    f(x) = \lambda \int \frac{W(x,z)}{w_1(x)}f(z) dz
+\end{equation}
+with the kernel
+$$
+W(x,z) = \int \frac{w(x,y)w(z,y)}{w_2(y)} dy
+\textrm{ and with } \lambda = \frac{1}{K^2}
+$$
+We can write the equation down as the symmetric kernel.
+It has the form
+\begin{equation}
+    f(x)\sqrt{w_1(x)}
+    =\lambda \int \frac{W(x,z)}{\sqrt{w_1(x) w_1(z)}}
+    f(z) \sqrt{w_1(z)}dz
+    \tag{18a}
+\end{equation}
+Obviously there is also a corresponding integral equation
+for $g(y)$.
+It can be obtained by the elimination of $f(x)$ 
+from the two integral equations.
+
+The first obvious eigen function of the integral equation
+is $f(x)=1$, corresponding to eigenvalue $\lambda=1$.
+By the side condition \eqref{eq:fwgw0} for $f(x)$ it
+has been already excluded.
+
+
 \end{document}
+
+
+
 
 
 
