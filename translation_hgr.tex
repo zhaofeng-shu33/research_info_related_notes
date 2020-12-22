@@ -387,7 +387,7 @@ W(x,z) = \int \frac{w(x,y)w(z,y)}{w_2(y)} dy
 $$
 We can write the equation down as the symmetric kernel.
 It has the form
-\begin{equation}
+\begin{equation}\label{eq:18a}
     f(x)\sqrt{w_1(x)}
     =\lambda \int \frac{W(x,z)}{\sqrt{w_1(x) w_1(z)}}
     f(z) \sqrt{w_1(z)}dz
@@ -402,16 +402,43 @@ The first obvious eigen function of the integral equation
 is $f(x)=1$, corresponding to eigenvalue $\lambda=1$.
 By the side condition \eqref{eq:fwgw0} for $f(x)$ it
 has been already excluded.
+We split it from the kernel and obtain the reduced kernel from \eqref{eq:18a} as
+$$
+\frac{W(x,z)}{\sqrt{w_1(x) w_1(z)}}
+- \frac{1}{\lambda} \sqrt{w_1(x)} f(x) \sqrt{w_1(z)}f(z)
+= \frac{W(x,z) - w_1(x) w_1(z)}{\sqrt{w_1(x) w_1(z)}}
+$$
+After the elimination of root in the integral equation
+% why?
+\begin{equation}\label{eq:fReducedKernel}
+    f(x)=\lambda \int \frac{W(x,z) - w_1(x) w_1(z)}{\sqrt{w_1(x) w_1(z)}} f(z)dz
+\end{equation}
+Since $\lambda = 1/K^2$, the problem to solve the correlation metric $K^2$ from \eqref{eq:K2}
+is equivalent to the problem to solve the smallest eigenvalue of this
+integral equation. By the theory of the integral equation,
+this first eigenvalue is determined by a variational problem, whose
+third form is
+\begin{equation}\label{eq:Kdoublef}
+    K^2 = \frac{1}{\lambda_{\min}}
+    = \max\iint(W(x,z) - w_1(x)w_1(z))f(x)f(z) dxdz
+\end{equation}
+The maximum is reached when $f(x)$ is the first eigen function
+of \eqref{eq:fReducedKernel}.
+If instead of the optimal one we use an approximation function
+$f(x) = \frac{x-a}{s}$, then we can obtain again the Pearson
+correlation ratio $k^2_{xy}$.
 
+Without further assumption about the distribution function
+$w(x,y)$ there is not much to say about the integral equation.
+Firstly the kernel is well defined. Secondly, considering
+the orthogonal condition $\int f(x)w_1(x)dx=0$
+and exchanging the order of integration, we can get
+\eqref{eq:K2second} from \eqref{eq:Kdoublef}. And we can see
+obviously that this variational integral only takes positive
+value. However, it is not easy to compute the eigenvalue.
+The hope of some method to investigate the first eigenvalue
+based on the separation of equations containing only eigenvalues is vain. To get an overview of the existing possibility to proceed,
+we firstly investigate the two extreme cases: independence
+and statistically dependence.
 
 \end{document}
-
-
-
-
-
-
-
-
-
-

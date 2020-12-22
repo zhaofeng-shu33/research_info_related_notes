@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import networkx as nx
+from sklearn.decomposition import PCA
 
 p_0 = 0.5
 p_1 = 0.4
@@ -144,15 +145,24 @@ def exact_compare(labels):
     labels_inner = np.array(labels)
     return np.sum(labels_inner) == 0 and np.abs(np.sum(labels_inner[:n2])) == n2
 
+def try_pca(G):
+    A = nx.convert_matrix.to_numpy_array(G)
+    x_vals = PCA(n_components=2).fit_transform(A)
+    plt.scatter(x_vals[:, 0], x_vals[:, 1])
+    plt.show()
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--spectral', default=False, const=True, type=bool, nargs='?')
+    parser.add_argument('--pca', default=False, const=True, type=bool, nargs='?')
     args = parser.parse_args()
-    if args.spectral:
-        a = 11.6
-        b = 4
-        n = 200
-        G = sbm_graph(n, 2, a, b)
+    a = 14
+    b = 4
+    n = 200
+    G = sbm_graph(n, 2, a, b)
+    if args.pca:
+        try_pca(G)
+    elif args.spectral:
         # print(b * np.log(n))
         A = np.zeros([n, n])
         for u,v in G.edges():
