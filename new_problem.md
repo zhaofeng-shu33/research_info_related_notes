@@ -35,6 +35,12 @@ $$
 
 By Cauchy's inequality we know the maximal value is 1.
 
+Is $g(Y_2)$ meaningful?
+
+Monto-Carlo Sampling to approximate the likelihood $f$.
+
+
+
 ($Y_2$ and $Y_1$ are independent; $X$ and $Y$ are independent)
 
 We can empirically estimate the maximum value of:
