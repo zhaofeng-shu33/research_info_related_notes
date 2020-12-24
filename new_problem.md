@@ -60,7 +60,7 @@ Notice that:
 $$
 \begin{align}
 P(X=x| Y_1=1, Y_2=1) &= \sum_{y_3,\dots, y_n = \pm 1}
-P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n) \\
+P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n)\cdot P(Y_3=y_3, \dots, Y_n=y_n) \\
 &=\sum_{i=1}^{2^{n-2}}\frac{1}{2^{n-2}}P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n) \\
 &=\sum_{i=1}^N \frac{1}{N}P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n)
 \end{align}
@@ -85,19 +85,19 @@ from SBM and compute the standard variance of $f(x_1), \dots, f(x_n)$. But for t
 
 task, only the sign of $f(x)$ matters. and we do not need to compute the exact value of $C$ and $(\frac{pq}{(1-p)(1-q)})^{|E|/2}$. Therefore, we get a community detection method based on Monte-Carlo approximation
 
-of HGR optimization problem. We fix $Y_2=1$ and sample $y_1, y_3, \dots, y_n$ $N$ times. For each sample,
+of HGR optimization problem. We fix $Y_1=1$ and sample $y_2, y_3, \dots, y_n$ $N$ times. For each sample,
 
 we compute $h(y)$ respectively.
 
 to estimate the label of
 
-$Y_i$ for $i\neq 2$. We first count the number of $N_1=|\{y_1=1,y_2, \dots, y_n\}|$ in the sample and
+$Y_i$ for $i\neq 1$. We first count the number of $N_2=|\{y_2=1,y_2, \dots, y_n\}|$ in the sample and
 
-$N'_1 = |\{y_1=-1, y_2, \dots, y_n\}|$ and compute
+$N'_2 = |\{y_2=-1, y_2, \dots, y_n\}|$ and compute
 
-$f(x)=\frac{1}{N_1}\sum_{y_1=1} h(y) - \frac{1}{N_2}\sum_{y_1=-1}h(y)$
+$f(x)=\frac{1}{N_1}\sum_{y_2=1} h(y) - \frac{1}{N_2}\sum_{y_2=-1}h(y)$
 
-If $f(x)>0$ we assign $Y_1=1$ otherwise we assign $Y_1=-1$.
+If $f(x)>0$ we assign $Y_2=1$ otherwise we assign $Y_2=-1$.
 
 For $Y_3, \dots, Y_n$ similar steps can be conducted.
 

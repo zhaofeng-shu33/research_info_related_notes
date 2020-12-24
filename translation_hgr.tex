@@ -441,4 +441,58 @@ based on the separation of equations containing only eigenvalues is vain. To get
 we firstly investigate the two extreme cases: independence
 and statistically dependence.
 
+\textbf{a) Independent case}
+
+In this case, due to $w(x,y) = w_1(x) w_2(y)$, the integral
+on the right side of \eqref{eq:fReducedKernel} for any function
+$f(x)$ is
+\begin{align*}
+    \int \frac{W(x,z) - w_1(x) w_1(z)}{w_1(x)}
+    f(z) dz
+    &= \iint \frac{w(x,y) w(z,y)}{w_1(x)w_2(y)} f(z) dy dz- \int w_1(z) f(z) dz \\
+    &= \iint w_1(z) w_2(y) f(z) dydz
+    - \int w_1(z) f(z) dz \\
+    &= \int w_1(z) f(z) dz-\int w_1(z) f(z) dz=0
+\end{align*}
+All functions are the eigen functions of the integral equation in consideration $f(x)$ for all range of the belonging eigenvalue $\lambda$.
+The smallest eigenvalue can be infinitely large and therefore
+$K^2 = \frac{1}{\lambda_{\min}} = 0$.
+
+When the correlation coefficient $r$
+and the correlation ratio $k^2_{yx}$ or $K^2_{xy}$
+are zero, it does not follow that
+$x$ and $y$ are stochastically independent with each other.
+The conclusion is true when the new correlation metric $K^2$
+vanishes. It follows simply from the bilinear form for the integration equation of the kernel. Suppose
+$f_i(x)$ is the eigenfunction and $\lambda_i$
+is the belonging eigenvalue,
+then we have the representation.
+\begin{equation}\label{eq:wxzZero}
+    \frac{W(x,z) - w_1(x) w_1(z)}{\sqrt{w_1(x)w_1(z)}}
+    = \sum \frac{1}{\lambda_i}
+    \sqrt{w_1(x)}f_i(x) \sqrt{w_1(z)}f_i(z)
+\end{equation}
+In the previous case all $\lambda_i$ are infinite\footnote{$\frac{1}{\lambda_{\min}}=K^2=0$},
+and \eqref{eq:wxzZero} is simplified to
+$W(x,z)=w_1(x)w_1(z)=0$. Let $z=x$,
+\begin{equation}
+    W(x,x) - w_1^2(x) = 0
+\end{equation}
+With the help of the definition equation for $W(x,z)$
+and the equation \eqref{eq:w12} it follows
+\begin{align*}
+    W(x,x) - w_1^2(x) &=
+    \int \frac{w^2(x,y)}{w_2(y)}dy
+    - 2 w_1(x) \int w(x,y)dy
+    + w_1^2(x) \int w_2(y) dy \\
+    &= \int \left(\frac{w^2(x,y)}{w_2(y)} - 2w_1(x)w(x,y) + w_1^2(x)w_2(y) \right) dy \\
+    &= \int \frac{1}{w_2(y)}
+    (w(x,y)-w_1(x)w_2(y))^2dy=0
+\end{align*}
+Since the integrand is almost surely positive, the above
+equation holds only when the relation
+$$w(x,y)=w_1(x)w_2(y)$$
+holds. This shows that $x$
+and $y$ are stochastically independent.
+
 \end{document}
