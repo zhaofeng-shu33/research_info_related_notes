@@ -364,7 +364,7 @@ previous equation \eqref{eq:fbyg}, for the two functions
 the integral equations hold simultaneously
 \begin{align}
     f(x) &= \frac{1}{K w_1(x)}\int g(y)w(x,y)dy \notag \\
-    g(y) &= \frac{1}{K w_2(y)}\int f(x) w(x,y)dx 
+    g(y) &= \frac{1}{K w_2(y)}\int f(x) w(x,y)dx \label{eq:gbyf}
 \end{align}
 Combing the two equations,
 \begin{align*}
@@ -495,4 +495,79 @@ $$w(x,y)=w_1(x)w_2(y)$$
 holds. This shows that $x$
 and $y$ are stochastically independent.
 
+\textbf{Full dependent case}
+In this case, the probability distribution takes
+non-zero value 
+only in a curve $y=y(x)$ in the $xy-$plane. The two
+parameter distribution function $w(x,y)$ is degenerated
+in both $x$ and $y$, which is given as
+$$
+w(x,y) = \begin{cases}
+0 & \textrm{ for } y \neq y(x)\\
+\infty &\textrm{ for } y = y(x)
+\end{cases}
+$$
+Also recall the definition of marginal distribution
+$$
+\int w(x,y)dy = w_1(x) \textrm{ and } \int w(x,y)dx= w_2(y)
+$$
+and we always have $\int w_1(x)dx = \int w_2(y) dy = 1$.
+
+We assume now the relation between
+$x$ and $y$ values are reversibly connected, so that
+$y=y(x)$ and the inversion $x=x(y)$ are definite functions.
+Since the probability distribution  is only along
+the curve $y(x)$, there exists the differential formula
+$$
+w_1(x) dx = w_2(y) dy
+$$
+and for any function $f(x)$
+$$
+\int f(x) w(x,y)dx = f(x(y)) \cdot \int w(x,y) dx
+= f(x(y)) \cdot w_2(y)
+$$
+This fact make it possible to calculate the integrals on the right side of
+\eqref{eq:fReducedKernel} for any function $f(x)$ which satisfies
+the orthogonal condition \eqref{eq:fwgw0}. It is
+\begin{align*}
+    \int \frac{W(x,z) - w_1(x) w_1(z)}{w_1(x)} f(z)dz
+    &= \iint  \frac{w(x,y)w(z,y)}{w_1(x)w_2(y)} f(z) dydz- \int w_1(z) f(z)dz \\
+    &= \frac{1}{w_1(x)} \int \frac{1}{w_2(y)}\int f(z)w(z,y)dz\cdot w(x,y)dy\\
+    &= \frac{1}{w_1(x)} \int f(x(y)) w(x,y)dy \\
+    &= f(x(y(x))) = f(x)
+\end{align*}
+In this case, all functions which are orthogonal to $w_1(x)$ or their
+linear combinations
+are eigenfunction of the integral equation.
+The corresponding eigenvalues are all equal to one.
+That is, $\lambda = 1$ is an eigenvalue.
+A normalized eigenfunction is, for example,
+$$
+f(x) = \frac{x-a}{s}
+$$
+To show $K^2=1$, it is enough to compute $k^2_{xy}$
+using this simple expression of $f(x)$.
+To prove the correlation is one, it is not necessary to solve the integral equation.
+
+Now we investigate the question whether $K^2=1$
+leads to the full dependence of the two features.
+That is, there exists a definite functional relation
+between $x$ and $y$. In general case, there is a function
+$f(x)$, together with the corresponding function $g(y)$
+by \eqref{eq:gbyf}, makes the variational integral $K^2$
+take value one. We use the expression of $K^2$ in its
+original form \eqref{eq:K2}. Due to the normalization
+\eqref{eq:fgw} we have
+\begin{align*}
+K^2 = \iint f(x)g(y) w(x,y)dxdy
+&= \frac{1}{2} \iint (f^2(x) + g^2(y) - 
+[f(x) - g(y)]^2) w(x,y) dxdy \\
+& = 1 - \frac{1}{2} \iint [f(x) - g(y)]^2 w(x,y) dxdy
+\end{align*}
+In order for $K^2=1$,
+we must have
+\begin{equation}
+    \iint [f(x) - g(y)]^2 w(x,y)dxdy=0
+\end{equation}
+When $w(x,y)$ is non-zero everywhere, this is the case $f(x)=g(y)=$ const.
 \end{document}
