@@ -565,8 +565,24 @@ D_2 & b & \dots & b & b & a & \dots & a & D_2 + d
 \end{pmatrix}
 \end{equation}
 where $a,b,d$ have the same definition as in \cite{abbe}.
-The eigenvalues of $\tilde{C}$ are $0$ corresponding to $\tilde{g}$, two eigenvalues of order $O(n)$
+The eigenvalues of $\tilde{C}$ are $0$ corresponding to $\tilde{g}$, two eigenvalues of order $\omega(n)$
 all other eigenvalues are $d-a+D_1$ and $d-a+D_2$, which are of order $\log n$ ($d-a=(a-b)\log n$).
+
+Notice that the two $O(n)$ eigenvalues are solutions to
+$\lambda^2 - [D_1 + D2 + 2c + \frac{n}{2}(D_1 + D2)] \lambda
++ (n+1) (D_1 D_2 + D_1 c + D_2c)=0$ where
+$c = \frac{n}{2} - b \log n$. As $n\to \infty$, to balance the term in the equation, we have
+either $\lambda = O(n \log n)$ or $\lambda^2 = O(n^2 \log n)$. That is, $\lambda = \omega(n)$.
+
+The first three eigenvalues are solved out by considering the $3\times 3 $
+matrix (assuming the eigenvector has the form $(u, v, \dots, v, w, \dots, w)$):
+\begin{equation*}
+\begin{pmatrix}
+n\frac{D_1 + D_2}{2} & -\frac{n}{2} D_1 & \frac{n}{2} D_2 \\
+-D_1 & D_1 + \frac{n}{2} - b \log n & \frac{n}{2} - b \log n \\
+D_2 & \frac{n}{2} - b \log n & D_2 + \frac{n}{2} - b \log n
+\end{pmatrix}
+\end{equation*}
 
 We have already known that $\tilde{C}+\tilde{\Gamma}$ has an eigenvalue equal to $0$.
 If all eigenvalue of $\diag(bg^T + Bgg^T) - B$ is larger than zero, then by
