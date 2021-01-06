@@ -551,8 +551,8 @@ $$
 \diag(Y) - \tilde{B}  = \begin{pmatrix} b^T g & -b^T \\ -b & \diag(bg^T + Bgg^T) - B \end{pmatrix}
 \succeq 0
 $$
-We first analyze $E[\diag(Y) - \tilde{B}]$, Let $D_1 = \frac{D_{KL}(p_0||p_1)}{\log a/b},
-D_2 = -\frac{D_{KL}(p_1||p_0)}{\log a/b}$. Then the constant matrix $\tilde{C}$ can be written as:
+We first analyze $E[\diag(Y) - \tilde{B}]$, Let $D_1 = m\frac{D_{KL}(p_0||p_1)}{\log a/b},
+D_2 = m\frac{D_{KL}(p_1||p_0)}{\log a/b}$. Then the constant matrix $\tilde{C}$ can be written as:
 \begin{equation}
 \tilde{C}=\begin{pmatrix}
 \frac{n(D_1 + D_2)}{2} & -D_1 & -D_1& \dots & -D_1 & D_2 & D_2 & \dots & D_2 \\
