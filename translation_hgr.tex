@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{amsmath}
 \usepackage{mathtools}
+\usepackage{graphicx}
 \title{The statistical problem of correlation as variational and eigenvalue problem, including its connection with the curve fitting\footnote{translated by Feng Zhao, the title of the original article is "Das statistische Problem der Korrelation als Variations- und Eigenwertproblem und sein Zusammenhang mit der Ausgleichsrechnung"}}
 
 \date{December 2020}
@@ -570,4 +571,43 @@ we must have
     \iint [f(x) - g(y)]^2 w(x,y)dxdy=0
 \end{equation}
 When $w(x,y)$ is non-zero everywhere, this is the case $f(x)=g(y)=$ const.
+
+The result $K^2=1$ follows simply from the distribution
+$w(x,y)$, which are non-zero only in the rectangular
+area. The rectangular areas are the common cover
+by the strips parallel to
+$y$-axis and those parallel to $x$-axis.
+Within each strip of such strips system (in Figure 1)
+the value of the constant for $f(x) = g(y)$ is the same.
+However, the functions $f(x)$ and $g(y)$, orthogonal to
+$w_1(x)$ or $w_2(y)$, can not equal
+the same constant, but are piece-wise constant stair curves,
+which take at least one positive and negative value respectively. Therefore, the distributional space in
+the $xy$-plane consists of at least two such strip systems.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{a.png}
+\end{figure}
+The figures 2a to c show three examples for such distribution
+planes. $w(x,y)$ is non-zero only in the shaded fields,
+whose horizontal strip and vertical strip has same number.
+If the strip division is infinitely refined, then in the above
+observed case, only along 
+a curve in the $xy$-plane
+that the probability is not zero. The curve is not necessarily a one-to-one correspondence of the $x-$
+and $y-$ value, which is assumed in the previous computation
+and occurs in the first example of the case. It can also be the curve shown in the other two
+examples, which are multi-valued function.
+The curve is marked in the distributional plane, in which
+there is not a one-to-one relation of $x$ and $y$, but a one-to-one relation for
+the $x$-class and $y$-class with the same number.
+For the stochastic relation of $x$ and $y$
+there exists certain room to move, which is not captured
+by the correlation metric $K^2$.
+
+
 \end{document}
+
+
+
+

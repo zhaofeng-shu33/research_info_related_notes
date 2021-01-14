@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{bm}
+\usepackage{bbm}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{algorithm,algorithmic}
@@ -526,16 +527,16 @@ $$
 +\sum_{(i,j) \in E} y_i y_j
 -\kappa\sum_{(i,j)\not\in E} y_i y_j
 $$
-Let $b_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})}$
+Let $h_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})}$
 and choose $\kappa = 1$.
 The data $x_i^{(j)}$ are sampled from $p_0$ if $\sigma_i = 1 (y_i = 1)$. On the contrary,
 if $y_i = -1$ the data $x_i^{(j)}$ are sampled from $p_1$.
 
 The matrix $B$ is defined as in \cite{abbe}.
-Then the problem is $\max b^T y + y^T B y$.
+Then the problem is $\max h^T y + \frac{1}{2}y^T B y$.
 Following \cite{wang2019tightness}, we use the relaxation
 technique to get a SDP problem as follows:
-Let $\tilde{B} = \begin{pmatrix} 0 & b^T \\ b & B \end{pmatrix}$
+Let $\tilde{B} = \begin{pmatrix} 0 & h^T \\ h & B \end{pmatrix}$
 Then we have
 \begin{align*}
 \max\, & \tilde{B} \cdot X \\
@@ -545,10 +546,10 @@ s.t.\,& \diag(X) = 1 \\
 We should consider $\tilde{g} = (1,g^T)^T$ as the optimal solution to the above SDP problem.
 
 Following Abbe's approach, we consider the dual problem. Let $Y_i = \tilde{B}(\tilde{g}\tilde{g}^T)_{ii}$.
-Then $Y = (b^T g, \diag\{bg^T+Bgg^T\})$
+Then $Y = (h^T g, \diag\{ g^T+Bgg^T\})$
 The condition for $\tilde{g}$ to become the optimal solution is then
 $$
-\diag(Y) - \tilde{B}  = \begin{pmatrix} b^T g & -b^T \\ -b & \diag(bg^T + Bgg^T) - B \end{pmatrix}
+\diag(Y) - \tilde{B}  = \begin{pmatrix} h^T g & -h^T \\ -h & \diag(hg^T + Bgg^T) - B \end{pmatrix}
 \succeq 0
 $$
 We first analyze $E[\diag(Y) - \tilde{B}]$, Let $D_1 = m\frac{D_{KL}(p_0||p_1)}{\log a/b},
@@ -556,17 +557,23 @@ D_2 = m\frac{D_{KL}(p_1||p_0)}{\log a/b}$. Then the constant matrix $\tilde{C}$ 
 \begin{equation}
 \tilde{C}=\begin{pmatrix}
 \frac{n(D_1 + D_2)}{2} & -D_1 & -D_1& \dots & -D_1 & D_2 & D_2 & \dots & D_2 \\
--D_1 & D_1 + d & a & \dots & a & b & b & \dots & b \\
+-D_1 & D_1 + d & a' & \dots & a' & b' & b' & \dots & b' \\
 \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
--D_1 & a & \dots & a & D_1 + d & b & b & \dots & b \\
-D_2 & b & \dots & b & b & D_2 + d  & a & \dots & a \\
+-D_1 & a' & \dots & a' & D_1 + d & b' & b' & \dots & b' \\
+D_2 & b' & \dots & b' & b' & D_2 + d  & a' & \dots & a \\
 \vdots & \vdots & \vdots & \vdots & \vdots &\vdots & \vdots & \vdots & \vdots \\
-D_2 & b & \dots & b & b & a & \dots & a & D_2 + d 
+D_2 & b' & \dots & b' & b' & a' & \dots & a' & D_2 + d 
 \end{pmatrix}
 \end{equation}
-where $a,b,d$ have the same definition as in \cite{abbe}.
+where $a,b,d$ are defined:
+\begin{align*}
+a' & = - \frac{2a \log n}{n} + 1 \\
+b' & = - \frac{2b \log n}{n} + 1 \\
+d & = (a-b) \log n - \frac{2a \log n}{n} + 1
+\end{align*}
+which are similar to those in the proof of Lemma 11 in \cite{abbe}.
 The eigenvalues of $\tilde{C}$ are $0$ corresponding to $\tilde{g}$, two eigenvalues of order $\omega(n)$
-all other eigenvalues are $d-a+D_1$ and $d-a+D_2$, which are of order $\log n$ ($d-a=(a-b)\log n$).
+all other eigenvalues are $d-a'+D_1$ and $d-a'+D_2$, which are of order $\log n$ ($d-a'=(a-b)\log n$).
 
 Notice that the two $O(n)$ eigenvalues are solutions to
 $\lambda^2 - [D_1 + D2 + 2c + \frac{n}{2}(D_1 + D2)] \lambda
@@ -574,7 +581,7 @@ $\lambda^2 - [D_1 + D2 + 2c + \frac{n}{2}(D_1 + D2)] \lambda
 $c = \frac{n}{2} - b \log n$. As $n\to \infty$, to balance the term in the equation, we have
 either $\lambda = O(n \log n)$ or $\lambda^2 = O(n^2 \log n)$. That is, $\lambda = \omega(n)$.
 
-The first three eigenvalues are solved out by considering the $3\times 3 $
+The first three eigenvalues can also be solved out by considering the $3\times 3 $
 matrix (assuming the eigenvector has the form $(u, v, \dots, v, w, \dots, w)$):
 \begin{equation*}
 \begin{pmatrix}
@@ -585,28 +592,32 @@ D_2 & \frac{n}{2} - b \log n & D_2 + \frac{n}{2} - b \log n
 \end{equation*}
 
 We have already known that $\tilde{C}+\tilde{\Gamma}$ has an eigenvalue equal to $0$.
-If all eigenvalue of $\diag(bg^T + Bgg^T) - B$ is larger than zero, then by
+If all eigenvalue of $\diag(hg^T + Bgg^T) - B$ is larger than zero, then by
 Cauchy’s Interlace Theorem \cite{it} all eigenvalues of $\tilde{C}+\tilde{\Gamma}$ is larger than zero.
+
 Compared with original formulation in \cite{abbe}, we add a diagonal matrix $\diag(bg^T)$.
 Therefore, it is equivalent to estimate the probability with one error.
 To be more specific, we consider $g_i = 1$ and in such case
-$b_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})} = \frac{1}{\log a/b}(D(X_i^{(m)} || p_1) - 
+$h_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})} = \frac{1}{\log a/b}(D(X_i^{(m)} || p_1) - 
 D(X_i^{(m)} || p_0)  ))
 $, whose mean value is positive ($\frac{1}{\log a/b}D(p_0||p_1)$).
 Therefore, we need to consider to control the following probability:
-$P(b_i + \sum_{i=1}^{n/2} (x_i - z_i) \leq 0) \leq \exp(-\log n \min \theta^*)$ 
+$P(h_i + \sum_{i=1}^{n/2} (x_i - z_i) \leq 0) \leq \exp(-\log n \min \theta^*)$ 
 where $\theta^* = D(X_i^{(m)} || p_0) + \frac{1}{2} g(a,b,2b_i)$.
 By using the inequality $g(a,b,\epsilon) \geq (\sqrt{a} -\sqrt{b})^2 + \epsilon \frac{\log a/b}{2}$
 we can get a lower bound of $\theta^*$: $(\sqrt{a} - \sqrt{b})/2 + \frac{1}{2}\min(D(X_i^{(m)} || p_1) + 
 D(X_i^{(m)} || p_0))$, which is $(\sqrt{a} - \sqrt{b})/2 + \frac{1}{2}D_{1/2}(p_0||p_1)$.
-For $g_i = -1$, we have $\epsilon_i = g_i b_i = \frac{1}{\log a/b}(D(X_i^{(m)} || p_0) - 
+For $g_i = -1$, we have $\epsilon_i = g_i h_i = \frac{1}{\log a/b}(D(X_i^{(m)} || p_0) - 
 D(X_i^{(m)} || p_1)  )$ and its mean value is positive ($\frac{1}{\log a/b} D(p_1||p_0)$).
 Therefore, we have $P(\epsilon_i + \sum_{i=1}^{n/2} (x_i - z_i) \leq 0) \leq \exp(-\log n \min \theta'^*)$,
 where $\theta'^* = D(X_i^{(m)}||p_1) + \frac{1}{2}g(a,b,2\epsilon_i)$.
 Similarly we have $\theta'^* \geq (\sqrt{a} - \sqrt{b})/2 + \frac{1}{2}D_{1/2}(p_0||p_1)$.
 Therefore, for all $i$, $P(g_i b_i + (Bgg^T)_{ii} < 0) \leq n^{-(\sqrt{a} - \sqrt{b})/2 - \frac{1}{2}D_{1/2}(p_0||p_1)}$.
-$P(\diag(bg^T + Bgg^T) \textrm{ is not semidefnite}) \leq n^{1-(\sqrt{a} - \sqrt{b})/2 - \frac{1}{2}D_{1/2}(p_0||p_1)} = o(1)$
+$P(\diag(hg^T + Bgg^T) \textrm{ is not semidefnite}) \leq n^{1-(\sqrt{a} - \sqrt{b})/2 - \frac{1}{2}D_{1/2}(p_0||p_1)} = o(1)$
 since $(\sqrt{a} - \sqrt{b})/2 + D_{1/2}(p_0||p_1) > 2$.
+
+If we consider the eigenvalues of
+$\diag(hg^T + Bgg^T) - B$ directly,
 
 \begin{thebibliography}{9}
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
