@@ -605,8 +605,68 @@ For the stochastic relation of $x$ and $y$
 there exists certain room to move, which is not captured
 by the correlation metric $K^2$.
 
-
+According to the definition of the correlation metric,
+$K^2$ does not depend on the specific value of $x$
+and $y$ in the distribution.
+By now the developed formula of $K^2$ contains explicitly
+the function $f(x)$ and $g(y)$ (or only one function).
+In particular, we want an expression for the smallest
+eigenvalue of the integral equation \eqref{eq:fReducedKernel}.
+Such expression does not contain $f(x)$ and
+$g(y)$ but only depends on the distribution function
+$w(x,y)$.
+To obtain such expression, it is suggested to go from \eqref{eq:wxzZero}
+which uses double series to expand the kernel
+\begin{equation}
+        \frac{W(x,z) - w_1(x) w_1(z)}{\sqrt{w_1(x)w_1(z)}}
+    = \sum \frac{1}{\lambda_i}
+    \sqrt{w_1(x)}f_i(x) \sqrt{w_1(z)}f_i(z) \tag{21}
+\end{equation}
+We regard the above equation formally and disregard
+its convergence and other necessary assumptions.
+For $z=x$ the integration about $x$ provides
+$$
+J = \int \frac{W(x,x) - w_1^2(x)}{w_1(x)} dx
+= \frac{1}{\lambda_1}
++ \frac{1}{\lambda_2}
++ \dots
+$$
+The integrand allows the following two transformations:
+$$
+\frac{W(x,x) - w_1^2(x)}{w_1(x)}
+= \int \frac{w^2(x,y)}{w_1(x)w_2(y)} dy - w_1(x)
+=\int \frac{[w(x,y)-w_1(x)w_2(y)]^2}{w_1(x)w_2(y)} dy 
+$$
+Then it follows for $J$ that
+\begin{equation}\label{eq:JlambdaM}
+    J=\int \frac{[w(x,y)-w_1(x)w_2(y)]^2}{w_1(x)w_2(y)} dxdy
+    = \iint  \frac{w^2(x,y)}{w_1(x)w_2(y)} dxdy-1
+    = \frac{1}{\lambda_1}
++ \frac{1}{\lambda_2}
++ \dots
+\end{equation}
+This expression from its construction coincides with the mean square
+contingency of Pearson.
+When the first eigenvalue $\lambda_1$
+is simple and the series of the reciprocal eigenvalues
+converge, it is righteous to solve $\lambda_1$
+to show the strength of the correlation.
+The two extreme cases do not belong to such situation.
+In the full dependence case, $\lambda_i=1$ and $J$
+is infinitely large. When this singular behavior
+occurs, famous methods from the theory of
+integral equation will fail and is not applicable.
+A clear and self-understandable result follows when full independence of $x$ and $y$
+occurs. $\lambda_1$ is already infinitely large, which
+is also true for the remaining eigenvalues. Therefore,
+according to \eqref{eq:JlambdaM} $J=0$.
 \end{document}
+
+
+
+
+
+
 
 
 
