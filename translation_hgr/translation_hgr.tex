@@ -378,7 +378,7 @@ Combing the two equations,
 \end{align*}
 This result is an homogeneous Fredholm integral
 equation for the function $f(x)$
-\begin{equation}
+\begin{equation}\label{eq:fkernel}
     f(x) = \lambda \int \frac{W(x,z)}{w_1(x)}f(z) dz
 \end{equation}
 with the kernel
@@ -660,7 +660,46 @@ A clear and self-understandable result follows when full independence of $x$ and
 occurs. $\lambda_1$ is already infinitely large, which
 is also true for the remaining eigenvalues. Therefore,
 according to \eqref{eq:JlambdaM} $J=0$.
+
+For continuous distributions it is not shown that the value $J$ is a useful
+measure of correlation relationship.
+But for arithmetic distribution\footnote{For arithmetic distribution
+the correlation theory present here can be developed by the elementary
+algebra techniques. Such material are introduced thoroughly in the upcoming book about mathematical
+statistics. (Publisher Quelle \& Meyer, university education in monograph.)}
+there is certain information about the correlation relationship. For arithmetic distribution
+the linear equation systems replace the place of integral equation,
+and the number of eigenvalues is finite, equal to the row or column
+number of the correlation table.
+
+Let $w(x_i, y_k)$
+be the probability mass distribution for $m$ possible $x$-values $x_i$
+and $n$ possible $y$-values $y_k$, then corresponding to
+the kernel function $W(x,z)$ of the integral equation \eqref{eq:fkernel}
+we have
+$$
+W(x_i, x_l)
+= \sum_k \frac{w(x_i, y_k) w(x_l, y_k)}{w_2(y_k)}
+\textrm{ with } w_2(y_k) = \sum_i w(x_i, y_k)
+$$
+and the integral equation corresponds to the linear equation system
+with $m$ equations.
+$$
+f(x_i) = \lambda \sum_{l}
+\frac{W(x_i, x_l)}{w_1(x_i)} f(x_l)
+=\lambda  \sum_{l,k} \frac{w(x_i, y_k) w(x_l, y_k)}{w_1(x_i)w_2(y_k)}
+f(x_l).
+$$
+The trace of the determinant of this equation system is
+the sum of all the $m$ reciprocal eigenvalues
+$$
+\sum_{i,k} \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)}
+= \frac{1}{\lambda_0}
++ \frac{1}{\lambda_1}
++ \dots + \frac{1}{\lambda_{m-1}}.
+$$
 \end{document}
+
 
 
 
