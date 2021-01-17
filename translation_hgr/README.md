@@ -1,0 +1,1 @@
+Original article: https://onlinelibrary.wiley.com/doi/epdf/10.1002/zamm.19410210604

@@ -123,7 +123,7 @@ Pearson also suggested another measure of correlation metric as \textsf{Mean squ
    f^2 &= \frac{1}{\sqrt{(m-1)(n-1)}}\sum_{ik}
    \frac{(w(x_i,y_k)-w_1(x_i)w_2(y_k))^2}{w_1(x_i)w_2(y_k)} \notag \\
    &=\frac{1}{\sqrt{(m-1)(n-1)}}\left(\sum_{ik}
-   \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)} -1\right)
+   \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)} -1\right)\label{eq:pearson}
 \end{align}
 Here the discrete distribution must be assumed, in
 which $m$ and $n$ are the number of rows and columns of the so-called correlation table. Then
@@ -698,6 +698,52 @@ $$
 + \frac{1}{\lambda_1}
 + \dots + \frac{1}{\lambda_{m-1}}.
 $$
+Obviously $\lambda_0$ is the eigenvalue, which belongs to the eigenfunction
+$f(x)=1$, which is used to split \eqref{eq:fkernel} to get \eqref{eq:fReducedKernel}.
+Therefore, we obtain the result
+\begin{align}
+    J=\sum_{ik}  \frac{w^2(x_i,y_k)}{w_1(x_i) w_2(y_k)} -1
+    &=\sum_{ik} \frac{[w(x_i,y_k) - w_1(x_i)w_2(y_k)]^2}{w_1(x_i)w_2(y_k)} \notag\\
+    &= \frac{1}{\lambda_1}
++ \frac{1}{\lambda_2}
++ \dots \tag{24a}
+\end{align}
+In the same way we can conduct the computation for $g(y_k)$
+with the help of linear equation system, which corresponds to the
+integral equation for $g(y)$
+and contains $n$ equations. The result in (24a)
+is changed only in the place where the series of reciprocal
+eigenvalues is ended by member $\frac{1}{\lambda_{n-1}}$.
+The left hand side of the expression in both the two cases
+is the same since the expression about $x$
+and $y$ is symmetric. Besides,
+both leads to the representation of the identical system of finite eigenvalues \footnote{The proof can be found in the book of writers.}.
+If $m\neq n$, all the surplus eigenvalues are infinite.
+
+Suppose $n\leq m$. The number of nonzero reciprocal eigenvalue is
+then $n-1$.
+The smallest of these eigenvalues, $\lambda_1$,
+produces our correlation metric $K^2 = \frac{1}{\lambda_1}$.
+For other eigenvalues $1/\lambda_i \leq K^2$ holds. Then $J \leq (n-1)\cdot K^2$ and symmetric estimation formula containing $m$ and $n$ is preferred,
+$$
+J \leq \sqrt{(m-1)(n-1)} K^2 \textrm{ or } K^2 \geq \frac{J}{\sqrt{(m-1)(n-1)} }
+$$
+The expression on the right hand side of this formula is the Pearson's
+mean square contingency according to \eqref{eq:pearson}. Therefore, We obtain the result
+\begin{align}
+       f^2 &= \frac{1}{\sqrt{(m-1)(n-1)}}\sum_{ik}
+   \frac{(w(x_i,y_k)-w_1(x_i)w_2(y_k))^2}{w_1(x_i)w_2(y_k)} \notag \\
+   &=\frac{1}{\sqrt{(m-1)(n-1)}}\left(\sum_{ik}
+   \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)} -1\right) \\
+   &=\frac{1}{\sqrt{(m-1)(n-1)}}(\frac{1}{\lambda_1}
+   + \frac{1}{\lambda_2} + \dots ) \leq K^2 \notag
+\end{align}
+We can see that $f^2$ is definitely smaller than our correlation
+metric $K^2$ and smaller than one as a result. According to its
+construction, $f^2$
+is the mean of $(m-1)$ or $(n-1)$ reciprocal eigenvalues of the eigenvalue
+problems which corresponds to the correlation task.
+
 \end{document}
 
 
