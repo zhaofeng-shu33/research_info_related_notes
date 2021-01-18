@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+	Mutual information has such a property that when $I(X;Y)=0$, $X$
+	and $Y$ are independent. We investigate
+	the B matrix norm quantity:
+	\begin{equation}
+	||B||^2_F = \int \frac{[w(x,y)-w_1(x)w_2(y)]^2}{w_1(x)w_2(y)} dxdy= \iint  \frac{w^2(x,y)}{w_1(x)w_2(y)} dxdy-1
+	\end{equation}
+	It is known that $||B||^2_F$ is an upper bound for HGR maximal correlation $K^2$.
+	If $||B||^2_F$ vanishes, $K^2=0$.
+	
+	For continuous distribution, we use the uniform distribution over
+	$\{(x,y) | x^2 + \gamma^2 y^2 \leq 1 \}$.
+	For this special distribution, we can compute that
+	
+	\begin{align*}
+	||B||^2_F & = \gamma \iint_{\substack{x^2+\gamma^2 y^2\leq 1\\x\geq 0, y \geq 0}} \frac{1}{\sqrt{1-x^2}\sqrt{1-\gamma^2 y^2}}
+	dxdy -1\\
+	& = \gamma \int_{0}^{1/\gamma} \arcsin(\sqrt{1-\gamma^2 y^2}) \frac{dy}{\sqrt{1-\gamma^2y^2}} -1\\
+	& = \int_0^{\pi/2}(\frac{\pi}{2} - \theta) d\theta -1 \\
+	& = \frac{\pi^2}{8} - 1
+	\end{align*}
+	
+\end{document}

@@ -734,7 +734,7 @@ mean square contingency according to \eqref{eq:pearson}. Therefore, We obtain th
        f^2 &= \frac{1}{\sqrt{(m-1)(n-1)}}\sum_{ik}
    \frac{(w(x_i,y_k)-w_1(x_i)w_2(y_k))^2}{w_1(x_i)w_2(y_k)} \notag \\
    &=\frac{1}{\sqrt{(m-1)(n-1)}}\left(\sum_{ik}
-   \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)} -1\right) \\
+   \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)} -1\right) \label{eq:25} \\
    &=\frac{1}{\sqrt{(m-1)(n-1)}}(\frac{1}{\lambda_1}
    + \frac{1}{\lambda_2} + \dots ) \leq K^2 \notag
 \end{align}
@@ -744,7 +744,32 @@ construction, $f^2$
 is the mean of $(m-1)$ or $(n-1)$ reciprocal eigenvalues of the eigenvalue
 problems which corresponds to the correlation task.
 
+This relationship indicates two points. Firstly an application
+of the generalization of Pearson's mean square contingency
+to continuous distribution is in principal not possible, because
+the mean of the reciprocal eigenvalue in the case of
+integral equation is either undetermined or zero, which is
+not a suitable quantity to measure the correlation.
+Secondly, this contingency measure does not allow good comparison with the correlation coefficient
+$r$ and the two correlation ratios $k^2_{xy}, k^2_{yx}$, because
+the connection of each quantity with $K^2$ is quite 
+different from \eqref{eq:25}.
+
+The case of fully stochastic dependence is in particular remarkable.
+In this case is $m=n$,
+and for the connected value $x_i$
+and $y_k$ it holds that
+$$
+w(x_i, y_k) = w_1(x_i)
+= w_2(y_k)
+$$
+In such case, the equation system is reduced 
+to $n$ equation $f(x_i) = \lambda f(x_i)$.
+
+\section{Series Expansion for the quantity of the correlation theory}
+
 \end{document}
+
 
 
 
