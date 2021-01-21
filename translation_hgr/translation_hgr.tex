@@ -763,12 +763,190 @@ $$
 w(x_i, y_k) = w_1(x_i)
 = w_2(y_k)
 $$
-In such case, the equation system is reduced 
-to $n$ equation $f(x_i) = \lambda f(x_i)$.
+The equation system, led from the integral equation, in such case is reduced 
+to $n$ equation $f(x_i) = \lambda f(x_i)$, in which
+the solution is $\lambda=1$.
+Hence the multiplicity of $\lambda=1$ is $n$ for the complete
+kernel, and is $n-1$ for the reduced kernel. Then $J=n-1$
+and $f^2=1$. In the case of full dependence of discrete distribution, the correlation metric is clearly visible.
 
 \section{Series Expansion for the quantity of the correlation theory}
+The correlation theory developed above is not others but
+a general theory of the two-dimensional distribution
+$w(x,y)$.
+To expand the function $w(x,y)$
+with orthogonal functions, we need two function systems,
+one with functions of $x$
+and the other with functions of $y$.
+For this purpose, we use the normalized
+orthogonal polynomials with increasing degrees $\varphi_n(x)$
+for $w_1(x)=\int w(x,y)dy$ and $\psi_n(y)$
+for $w_2(y) = \int w(x,y)dx$. For this polynomial
+exists the equations
+\begin{equation}
+    \int \varphi_i(x)
+    \varphi_j(x) w_1(x)dx
+    =\begin{cases}
+    0 & \textrm{for } i\neq j\\
+    1 &\textrm{for } i= j\\
+    \end{cases}
+    \textrm{ and } \int \psi_i(x)
+    \psi_j(x) w_2(y)dy
+    =\begin{cases}
+    0 & \textrm{for } i\neq j\\
+    1 &\textrm{for } i= j\\
+    \end{cases}.
+\end{equation}
+The firsts of these polynomials go as
+$$
+\varphi_0(x) = 1;
+\varphi_1(x) = \frac{x-a}{s} \textrm{ and }
+\psi_0(y) = 1;
+\psi_1(y) = \frac{y-b}{t}
+$$
+For general arbitrary functions $f(x)$
+or $g(y)$ the series expansion is
+\begin{equation}
+\begin{aligned}
+f(x) &=\sum_{i=0}^{\infty} a_{i} \varphi_{i}(x) \quad \text { with } \quad a_{i}=\int f(x) \varphi_{i}(x) w_{1}(x) d x \\
+g(y) &=\sum_{j=0}^{\infty} b_{j} \psi_{i}(y) \quad \text { with } \quad b_{j}=\int g(y) \psi_{j}(y) w_{2}(y) d y
+\end{aligned}
+\end{equation}
+In the following we assume that the above series converge, when
+they are not ended in finite terms. Then the exchange of member-like integration is allowed.
+Under this assumption is for example
+$$
+\int f^{2}(x) w_{1}(x) dx=\int\left(\sum_{i=0}^{\infty} a_{i} \varphi_{i}(x)\right)^{2}w_{1}(x) \mathrm{d} x=\sum_{i, k=0}^{\infty} a_{i} a_{k} \int \varphi_{i}(x) \varphi_{k}(x) w_{1}(x) d x=\sum_{i=0}^{\infty} a_{i}^{2}
+$$
+and the corresponding formula for $g(y)$.
+Therefore, for $f(x)$ and $g(y)$ the so-called 
+completeness relation holds as
+\begin{equation}\label{eq:28}
+    \int f^{2}(x) w_{1}(x) d x=\sum_{i=0}^{\infty} a_{i}^{2} ; \quad \int g^{2}(y) w_{2}(y) d y=\sum_{j=0}^{\infty} b_{j}^{2}
+\end{equation}
+For the probability distribution $w(x,y)$ (likewise converges)
+there is an expansion of the form
+$$
+w(x,y) = \sum_{i,j=0}^{\infty}
+c_{ij} \varphi_i(x) \phi_j(y)w_1(x) w_2(y).
+$$
+Considering the orthogonality of $\varphi_i(x)$
+and $\psi_j(y)$, by multiplying both sides with the product of the two
+polynomials $\varphi_i(x)$
+and $\psi_j(y)$ and integrating over $x$
+and $y$
+yields the formula
+$$
+c_{ij} = \iint \varphi_i(x) \varphi_j(y) w(x,y)dxdy.
+$$
+The coefficient $c_{ij}$ for $i=0$ or $j=0$ is given instantly.
+It is
+$$
+\begin{array}{lll}
+&\textrm{for }i=j=0 & c_{00}=\iint w(x, y) \mathrm{d} x \mathrm{d} y=1 \\
+&\textrm{for }i=0, j\neq 0 & c_{0 j}=\iint \psi_{j}(y) w(x, y) \mathrm{d} x \mathrm{d} y=\int \psi_{j}(y) w_{2}(y) d y=0 \\
+\textrm{and} & & \\
+&\textrm{for }i\neq0, j= 0 & c_{i 0}=\iint \varphi_{i}(x) w(x, y) \mathrm{d} x \mathrm{d} y=\int \varphi_{i}(x) w_{1}(x) d x=0.
+\end{array}
+$$
+Therefore, the series expansion for $w(x,y)$ is simplified
+as
+$$
+w(x, y)=w_{1}(x) w_{2}(y)+\sum_{i, j=1}^{\infty} c_{i j} \varphi_{i}(x) \psi_{j}(y) w_{1}(x) w_{2}(y)
+$$
+\begin{equation}\label{eq:29}
+    \frac{w(x, y)}{w_{1}(x) w_{2}(y)}=1+\sum_{i, j=1}^{\infty} c_{i j} \varphi_{i}(x) \psi_{j}(y) \text { with } c_{ij}=\iint \varphi_i(x) \psi_{j}(y) w(x, y) \mathrm{d} x \mathrm{d} y
+\end{equation}
+We make another formula corresponding with the complete relation
+\eqref{eq:28}. It holds
+$$
+\begin{aligned}
+\iint \frac{w^{2}(x, y)}{w_{1}(x) w_{2}(y)} d x d y &=\iint\left(\sum_{i, j=0}^{\infty} c_{i j} \varphi_{i}(x) \psi_{j}(y)\right)^{2} w_{1}(x) w_{2}(y) d x d y \\
+&=\sum_{i, j=0}^{\infty} c_{i j}^{2} \int \varphi_{i}^{2}(x) w_{1}(x) d x \int \psi_{j}^{2}(y) w_{2}(y) d y=\sum_{i, j=0}^{\infty} c_{i j}^{2}
+\end{aligned}
+$$
+or, as $c_{00}=0$ and $c_{0j}=c_{j0}=0$ holds for $i,j\neq j$,
+\begin{equation}
+    \iint \frac{w^{2}(x, y)}{w_{1}(x) w_{2}(y)} d x d y - 1
+    =\sum_{i,j=1}^{\infty} c_{ij}^2
+\end{equation}
+This is the expression $J$ of equation \eqref{eq:JlambdaM},
+which is the basis of the Pearson's mean square contingency
+$f^2$ for discrete distribution.
 
+It is expected that in the case of discrete probability mass
+function $w(x_i, y_k)$ with finite rows and columns of the correlation
+table the functions $\varphi_i(x)$ contains the same number of
+columns and the functions $\psi_j(y)$ contains the same
+number of rows. In this case the series expansion then all terminates with finite members.
+
+In the center of our correlation theory is the expression \eqref{eq:K2}
+\begin{equation*}
+    K^2 = (\max \iint f(x)g(y)dxdy)^2,
+\end{equation*}
+where the allowed functions $f(x)$
+and $g(y)$ must satisfy the conditions
+$$
+\begin{array}{ll}
+\int f(x) w_{1}(x) d x=0, & \int f^{2}(x) w_{1}(x) d x=1 \\
+\int g(y) w_{2}(y) d y=0, & \int g^{2}(y) w_{2}(y) d y=1
+\end{array}
+$$
+According to \eqref{eq:28}
+and \eqref{eq:29}, the orthogonal and normalizing conditions
+can be expressed with respect to the coefficients of series
+expansion for $f(x)$ and $g(y)$:
+\begin{equation}
+    a_0 = b_0 = 0 \textrm{ and } 
+    \sum_{i=1}^{\infty} a_i^2
+    =\sum_{i=1}^{\infty} b_j^2 = 1
+\end{equation}
+Now it follows that
+\begin{align}\label{eq:32}
+\iint f(x) g(y) w(x, y) d x d y 
+&=\iint \sum_{i=1}^{\infty} a_{i} \varphi_{i}(x) \sum_{j=1}^{\infty} b_{j} \psi_{j}(y) \sum_{k, l=0}^{\infty} c_{k l} \varphi_{k}(x) \psi_{l}(y) w_{1}(x) w_{2}(y) d x d y \notag\\
+&=\sum_{i, j=1}^{\infty} a_{i} b_{j} c_{i j}
+\end{align}
+The simplest approximation value for $K^2$ arises when
+we set $a_1=b_1=1$ and all other $a_i$
+and $b_i$ equal to zero. That is, we compute $K^2$ by
+the test function $f(x) = \varphi_1(x) = \frac{x-a}{s}$
+and $g(y) = \psi_1(y) = \frac{y-b}{t}$. The result of this
+approximated computation of $K^2$ is the quantity of
+correlation coefficient $r$. By \eqref{eq:32}
+\begin{equation}
+    r = c_{11}
+\end{equation}
+In the second version of the variational problem
+\eqref{eq:K2second} and in the integral equation of the
+correlation \eqref{eq:gbyf} appear the function
+$$
+\int f(x) w(x,y)dx \textrm{ and }
+\int g(y) w(x,y)dy
+$$
+With the help of series expansion is
+$$
+\begin{aligned}
+\int f(x) w(x, y) \mathrm{d} x &=\int \sum_{k=1}^{\infty} a_{k} \varphi_{k}(x)\left\{1+\sum_{i j=1}^{\infty} c_{i j} \varphi_{i}(x) \psi_{j}(y)\right\} w_{1}(x) w_{2}(y) d x \\
+&=\sum_{i j=1}^{\infty} a_{i} c_{i j} \psi_{j}(y) w_{2}(y)
+\end{aligned}
+$$
+and alongside
+$$
+\int g(y) w(x, y) d y=\sum_{i j=1}^{\infty} b_{j} c_{i j} \varphi_{i}(x) w_{1}(x).
+$$
+It follows from the integral equation that 
+$$
+K  g(y) w_{2}(y)=K w_{2}(y) \sum_{j=1}^{\infty} b_{j} \psi_{j}(y)
+$$
+and
+$$
+K f(x) w_{1}(x)=K w_{1}(x) \sum_{i=1}^{\infty} a_{i} \varphi_{i}(x)
+$$
 \end{document}
+
+
+
 
 
 
