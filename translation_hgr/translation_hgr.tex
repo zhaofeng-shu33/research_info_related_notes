@@ -896,7 +896,7 @@ According to \eqref{eq:28}
 and \eqref{eq:29}, the orthogonal and normalizing conditions
 can be expressed with respect to the coefficients of series
 expansion for $f(x)$ and $g(y)$:
-\begin{equation}
+\begin{equation}\label{eq:31}
     a_0 = b_0 = 0 \textrm{ and } 
     \sum_{i=1}^{\infty} a_i^2
     =\sum_{i=1}^{\infty} b_j^2 = 1
@@ -943,6 +943,30 @@ and
 $$
 K f(x) w_{1}(x)=K w_{1}(x) \sum_{i=1}^{\infty} a_{i} \varphi_{i}(x)
 $$
+Through comparison arises the following, which corresponds to the position of the integral equation,
+infinite linear equation systems for the coefficients $a_i$
+and $b_i$:
+$$
+a_{i}=\frac{1}{K} \sum_{j=1}^{\infty} b_{j} c_{i j}, \quad b_{j}=\frac{1}{K} \sum_{i=1}^{\infty} a_{i} c_{i j}
+$$
+The question is then seeking the largest value for $K$.
+We can isolate $K$ by squaring both sides of these equations
+and adding them together. By \eqref{eq:31} it turns out
+\begin{align}
+K^{2}=\sum_{i=1}^{\infty}\left(\sum_{j=1}^{\infty} b_{j} c_{i j}\right)^{2} \notag\\
+K^{2}=\sum_{j=1}^{\infty}\left(\sum_{i=1}^{\infty} a_{i} c_{i j}\right)^{2}
+\end{align}
+These are the pair of the variational integral in single coefficient version, which we can also obtain immediately from the expression
+\eqref{eq:K2second}.
+
+For the first formula we set $b_1=1, b_2=b_3=\dots=0$,
+then the Pearson's correlation ratio $k^2_{yx}$ is obtained.
+In a similar way we obtain $k^2_{xy}$ when we set
+$a_1=1$ and $a_2=a_3=\dots=0$ in the second formula. As
+a result, the two correlation ratios are obtained as
+\begin{equation}
+    k_{y x}^{2}=\sum_{i=1}^{\infty} c_{i 1}^{2}, \quad k_{x y}^{*}=\sum_{j=1}^{\infty} c_{1 j}^{2}
+\end{equation}
 \end{document}
 
 
