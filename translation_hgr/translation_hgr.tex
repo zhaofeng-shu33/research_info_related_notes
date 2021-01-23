@@ -85,7 +85,7 @@ They are the mechanical view of the geometric place for the center of mass of th
 the $xy$-plane parallel to the coordinate axes.
 \begin{align}
    \bar{y}(x) = \frac{\int y w(x,y) dy}{\int w(x,y) dy} = \frac{1}{w_1(x)} \int y w(x, y)dy \notag \\
-   \bar{x}(y) =  \frac{\int x w(x,y) dx}{\int w(x,y) dx} = \frac{1}{w_2(x)} \int x w(x, y)dx  \label{eq:barxy}
+   \bar{x}(y) =  \frac{\int x w(x,y) dx}{\int w(x,y) dx} = \frac{1}{w_2(y)} \int x w(x, y)dx  \label{eq:barxy}
 \end{align}
 In the two extreme cases of statistical independence and
 full dependence, the two regression lines are clearly
@@ -946,15 +946,15 @@ $$
 Through comparison arises the following, which corresponds to the position of the integral equation,
 infinite linear equation systems for the coefficients $a_i$
 and $b_i$:
-$$
+\begin{equation}\label{eq:34}
 a_{i}=\frac{1}{K} \sum_{j=1}^{\infty} b_{j} c_{i j}, \quad b_{j}=\frac{1}{K} \sum_{i=1}^{\infty} a_{i} c_{i j}
-$$
+\end{equation}
 The question is then seeking the largest value for $K$.
 We can isolate $K$ by squaring both sides of these equations
 and adding them together. By \eqref{eq:31} it turns out
 \begin{align}
 K^{2}=\sum_{i=1}^{\infty}\left(\sum_{j=1}^{\infty} b_{j} c_{i j}\right)^{2} \notag\\
-K^{2}=\sum_{j=1}^{\infty}\left(\sum_{i=1}^{\infty} a_{i} c_{i j}\right)^{2}
+K^{2}=\sum_{j=1}^{\infty}\left(\sum_{i=1}^{\infty} a_{i} c_{i j}\right)^{2}\label{eq:35}
 \end{align}
 These are the pair of the variational integral in single coefficient version, which we can also obtain immediately from the expression
 \eqref{eq:K2second}.
@@ -964,10 +964,111 @@ then the Pearson's correlation ratio $k^2_{yx}$ is obtained.
 In a similar way we obtain $k^2_{xy}$ when we set
 $a_1=1$ and $a_2=a_3=\dots=0$ in the second formula. As
 a result, the two correlation ratios are obtained as
-\begin{equation}
-    k_{y x}^{2}=\sum_{i=1}^{\infty} c_{i 1}^{2}, \quad k_{x y}^{*}=\sum_{j=1}^{\infty} c_{1 j}^{2}
+\begin{equation}\label{eq:46}
+    k_{y x}^{2}=\sum_{i=1}^{\infty} c_{i 1}^{2}, \quad k_{x y}^{2}=\sum_{j=1}^{\infty} c_{1 j}^{2}
 \end{equation}
+It is seen immediately that the two correlation ratios are definitely larger
+than $r^2=c_{11}^2$, and the equality is taken when the 
+corresponding regression lines are straight lines.
+Connected with \eqref{eq:K2second}, For the regression lines $\bar{y}(x)$
+and $\bar{x}(y)$ holds namely the equation
+\begin{align*}
+\frac{\bar{y}(x)-b}{t}&=\frac{1}{w_{1}(x)} \int \frac{y-b}{t} w(x, y) \mathrm{d} y=\frac{1}{w_{1}(x)} \int \psi_{1}(y) w(x, y) \mathrm{d} y=\sum_{i=1}^{\infty} c_{i1} \varphi_{i}(x),\\
+    \frac{\bar{x}(y)-a}{s}&=\frac{1}{w_{2}(y)} \int \frac{x-a}{s} w(x, y) \mathrm{d} x=\frac{1}{w_{2}(y)} \int \varphi_{1}(x) w(x, y) \mathrm{d} x=\sum_{j=1}^{\infty} c_{1 j} \psi_{j}(y).
+\end{align*}
+They are straight lines if and only if
+the right series
+reduces to the linear functions
+$c_{11}\varphi_1(x)$
+or $c_{11}\psi_1(y)$ respectively.
+The condition turns out to be
+\begin{equation}\label{eq:37}
+    c_{21}=c_{3 i} \cdots=0 \text { and } c_{12}=c_{13}=\cdots=0
+\end{equation}
+and these are the same condition, under which 
+$k^2_{yx} = k^2_{xy}=r^2$ is.
+
+By elimination of the function $g(y)$ from both of the integral
+equation \eqref{eq:gbyf} the Fredholm integral equation 
+\eqref{eq:fkernel} for $f(x)$ alone is obtained. In the same
+way by elimination of $b_j$
+from the equation \eqref{eq:34} a linear equation system
+for the quantities $a_{i}$ is got. It is
+$$
+a_{k}=\frac{1}{K} \sum_{j=1}^{\infty} b_{j} c_{k j}=\frac{1}{K^{2}} \sum_{j=1}^{\infty} \sum_{i=1}^{\infty} a_{i} c_{i j} c_{k j}=\frac{1}{K^{2}} \sum_{i=1}^{\infty} a_{i} C_{i k} \text { with } C_{i k}=\sum_{j=1}^{\infty} c_{i j} c_{k j}
+$$
+Then the integral equation \eqref{eq:fkernel} corresponds to
+\begin{equation}
+a_{k}=\frac{1}{K^{2}} \sum_{i=1}^{\infty} a_{i} C_{i k} \text { with } C_{i k}=\sum_{j=1}^{\infty} c_{i j} c_{k j} \quad(k=1,2, \ldots)
+\end{equation}
+The quantity $K^2$ marks the measure of the correlation. It is
+determined by the ``characteristic equation"
+\begin{equation}
+    \left|\begin{array}{llll}
+C_{11}-K^{2} & C_{12} & C_{13} & \ldots \\
+C_{21} & C_{22}-K^{2} & C_{23} & \ldots \\
+C_{31} & C_{32} & C_{33}  -K^{2} & \ldots \\
+\ldots . & & &
+\end{array}\right|=0
+\end{equation}
+The first approximation for $K^2$
+is $K^2\approx C_{11} = \sum_{j=1}^{\infty} c^2_{1j} = k^2_{xy}$.
+This value is nothing else but the correlation ratio based on
+$f(x) = \varphi_1(x)$.
+
+The fact is noticeable that the quantity 
+$C_{ik}$ can also be computed without using series coefficients $c_{ik}$. In the expansion
+$$
+\int f(x) w(x, y) \mathrm{d} x=\sum_{i, j=1}^{\infty} a_{i} c_{i j} \psi_{j}(y) w_{2}(y)
+$$
+we use $f(x) = \varphi_i(x)$ and $f(x) = \psi_k(x)$
+respectively,
+$$
+\int \varphi_{i}(x) w(x, y) d x=\sum_{j=1}^{\infty} c_{i j} \psi_{j}(y) w_{2}(y) \text { and } \int \varphi_{k}(x) w(x, y) \mathrm{d} x=\sum_{l=1}^{\infty} c_{k l} \psi_{l}(y) w_{2}(y).
+$$
+Hence it follows that
+\begin{align*}
+\int \frac{1}{w_{2}(y)} \int& \varphi_{i}(x) w(x, y) \mathrm{d} x \int \varphi_{k}(x) w(x, y) \mathrm{d} x \cdot \mathrm{d} y \\
+&=\int \sum_{j=1}^{\infty} c_{i j} \psi_{j}(y) \sum_{l=1}^{\infty} c_{k l} \psi_{l}(y) w_{2}(y) d y=\sum_{j=1}^{\infty} c_{i j} \mathrm{c}_{k j}=C_{i k}.
+\end{align*}
+The result is then
+\begin{equation}
+    C_{i k}=\int \frac{1}{w_{2}(y)} \int \varphi_{i}(x) w(x, y) d x \int \varphi_{k}(x) w(x, y) d x \cdot d y
+\end{equation}
+According to this construction, these quantities are generalization of the expressions
+for the correlation ratio $k^2_{xy}$, which is obtained when
+$i=k=1$.
+
+The result of these paragraphs show that all quantities of
+the correlation theory allow simple expression with the help of the
+series coefficients $c_{ij}$ of the expansion of the distribution
+$w(x,y)$. It also allows clear investigation of
+the property of the correlation.
+The correlation problem is therefore the problem of series
+expansion of $w(x,y)$ about the orthogonal polynomials with
+respect to the density function 
+$w_1(x)$ and $w_2(y)$.
+It is worthwhile to give notice to the 
+general series expansion problem and to develop
+practical computational method, which makes the solution
+possible with tolerable time overhead.
+
+The ideas introduced here deals with the case when
+the distribution $w(x,y)$ is known.
+the empirical distribution $w(x,y)$ changes as the number of observed
+samples increases.
+In this work this theory is explained in detail by fully calculated
+examples (Example 34 and 35), so that we omit the reproduction of these examples here.
+
 \end{document}
+
+
+
+
+
+
+
+
 
 
 
