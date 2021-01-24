@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\DeclareMathOperator{\Pois}{Pois}
+\title{Poisson Distribution}
+\author{zhaof17 }
+\date{January 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+An important property for Poisson distribution.
+Suppose $P_1 \sim \Pois(c)$, $P_2 \sim \Pois(d)$.
+And $P_{\lambda}$ is defined as 
+$$
+P_{\lambda}(x) = \frac{P_1^{1-\lambda}(x) P_2^{\lambda} (x)}
+{\sum_{x \in \mathcal{X}}P_1^{1-\lambda}(x) P_2^{\lambda} (x)}
+$$
+\begin{enumerate}
+    \item $P_{\lambda} \sim \Pois(c^{1-\lambda} d^{\lambda})$
+    \item $D_{\mathrm{KL}}(P_{\lambda}||P_1) = c^{1-\lambda}d^{\lambda}\log(\frac{d}{c})^{\lambda} + c-c^{1-\lambda}d^{\lambda}$
+\end{enumerate}
+The second property is proved using the KL divergence
+of two Poisson distributions. See \cite{kl}
+\section{Side Information of Abbe}
+This section discusses theoretical deduction and experimental results for \cite{abbe}.
+
+Let $c_1 = \frac{a}{2}, c_2=\frac{b}{2}$. $p_0, p_1$ are two
+discrete distributions.
+The Abbe's conclusion for side information is solving the following
+optimization problem:
+\begin{equation}\label{eq:lambda}
+    \min_{\lambda \in [0,1]} c_1^{1-\lambda}c_2^{\lambda} +
+    c_2^{1-\lambda}c_1^{\lambda} + \gamma \log(\sum_{x\in \mathcal{X}}p^{1-\lambda}_0(x) p^{\lambda}_1(x))
+\end{equation}
+Let $p_{\lambda}$ be defined as
+$$
+p_{\lambda}(x) = \frac{p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+$$
+After solving $\lambda$ from \eqref{eq:lambda}. The theoretical
+threshold is given by
+\begin{align}
+    I_+ =\lambda (c_1^{1-\lambda}c_2^{\lambda} -
+    c_2^{1-\lambda}c_1^{\lambda})\log\frac{c_2}{c_1}+c_1+c_2\notag \\
+    -c_1^{1-\lambda}c_2^{\lambda} -
+    c_2^{1-\lambda}c_1^{\lambda}+\gamma D_{\mathrm{KL}}(p_{\lambda}||p_0)>1
+\end{align}
+When $\lambda=\frac{1}{2}$ makes $D_{\mathrm{KL}}(p_{\lambda}||p_0)=
+D_{\mathrm{KL}}(p_{\lambda}||p_1)$, the threshold of Abbe is the same as
+us.
+
+\subsection{Experiment Result}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig.png}
+    \label{fig:my_label}
+\end{figure}
+
+The red line is our theoretical line
+given by $a=(\sqrt{2 - \gamma D_{1/2}(p_0||p_1)} + \sqrt{b})^2$,
+which is strictly over the black region. It tells that
+exact recovery condition of Abbe is more stronger than us.
+
+\begin{thebibliography}{9}
+\bibitem{kl} https://stats.stackexchange.com/questions/145789/kl-divergence-between-two-univariate-poisson-distributions
+\bibitem{abbe} Asadi, Amir R., Emmanuel Abbe, and Sergio Verdú. "Compressing data on graphs with clusters." 2017 IEEE International Symposium on Information Theory (ISIT). IEEE, 2017.
+\end{thebibliography}
+\end{document}
+
