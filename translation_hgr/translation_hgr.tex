@@ -1127,8 +1127,18 @@ The quantities $d_i$ are simultaneously the series coefficients of the regressio
 That is, the best fitting function $F(x)$ is this regression line.
 
 As a result, we obtain the following result: To fit series of observation points
-by a function $F(x)$,  the average quadratic deviation $Q$ is minimized, when the regression line $\bar{y}(x)$ is chosen as the fitting function for the distribution $w(x,y)$ of the observation points.
+by a function $F(x)$,  the average quadratic deviation $Q$ is minimized, when the regression line $\bar{y}(x)$ is chosen as the fitting function for the distribution $w(x,y)$ of the observation points. The value $Q$ is equal to the deviation of the correlation ratio
+$k^2_{yx}$ from one, multiplied by the variance $t^2$ of the ordinate.
+In the case of full dependence we have $k^2_{yx}=1$ and the quadratic deviation $Q=0$.
+The task is then reduced to an interpolation problem.
 
+If in the described task of computing deviations we exchange the abscissa
+and ordinate, then $\bar{y}(x)$ is replaced by the other regression line $\bar{x}(y)$
+and the second correlation ratio $k^2_{xy}$ replaces $k^2_{yx}$. Generally the two ratios
+are not identical. Hence different fitting curve and different $Q$
+exist. The fitting curve changes if we make distortion in abscissa or ordinate
+direction before fitting the curve, for example, applying logarithmic transformation to observation points. Therefore, the task of curve
+fitting is not clearly formulated.
 \end{document}
 
 
