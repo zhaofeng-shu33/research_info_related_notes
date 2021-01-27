@@ -539,13 +539,42 @@ technique to get a SDP problem as follows:
 Let $\tilde{B} = \begin{pmatrix} 0 & h^T \\ h & B \end{pmatrix}$
 Then we have
 \begin{align*}
-\max\, & \tilde{B} \cdot X \\
-s.t.\,& \diag(X) = 1 \\
-& X \succeq 0
+\max\, \tilde{B} \cdot X  &\\
+s.t.\, \diag(X) &= 1 \\
+ X &\succeq 0 \\
+ \sum_{j=1, j\neq i}^{n+1} (X_{ij} + X_{ji})& = 0
 \end{align*}
-We should consider $\tilde{g} = (1,g^T)^T$ as the optimal solution to the above SDP problem.
+The number of constraints is $2(n+1)$. Let $\tilde{g} = (1,g^T)^T$.
+We should consider $X^*=\tilde{g}^T \tilde{g}$
+as the optimal solution to the above SDP problem, and we can verify $X^*$ satisfies all of the
+constraints.
 
-Following Abbe's approach, we consider the dual problem. Let $Y_i = \tilde{B}(\tilde{g}\tilde{g}^T)_{ii}$.
+Following Abbe's approach, we consider the dual problem, which has the following form:
+\begin{align*}
+\min &\sum_{i=1}^{n+1} y_i \\
+s.t. &\, \diag\{y_1, \dots, y_n\} + \Xi - \widetilde{B} \succeq 0 
+\end{align*}
+The symmetric matrix $\Xi$ is defined as 
+\begin{equation}
+\Xi_{ij} = \begin{cases}
+0 & i=j \\
+\lambda_i + \lambda_j & i\neq j
+\end{cases}
+\end{equation}
+We choose $y_i, \lambda_i$ for $i=1,\dots, n+1$ which satisfy
+the dual constraint and achieve the strong duality.
+We define $\mu=\mathbbm{1}_n^T h$ and $\lambda = -u/n$.
+Then we choose $\lambda_1=\mu, \lambda_{i+1}=g_i\lambda$
+and $y_i$ are chosen such that
+$(\diag\{y_1, \dots, y_n\} + \Xi - \widetilde{B})\tilde{g}=0$, from which we obtain
+\begin{align}
+y_1 &= h^T g - n\lambda \\
+y_{i+1} & = (h_i - \mu - (n-2)\lambda)g_i - \lambda + \diag\{Bgg^T\}, i = 1, \dots, n
+\end{align}
+We can also verify that $\sum_{i=1}^{n+1} y_i = 2h^Tg + g^T \widetilde{B} g$.
+
+ 
+Let $Y_i = \tilde{B}(\tilde{g}\tilde{g}^T)_{ii}$.
 Then $Y = (h^T g, \diag\{ g^T+Bgg^T\})$
 The condition for $\tilde{g}$ to become the optimal solution is then
 $$
