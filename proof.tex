@@ -537,15 +537,28 @@ $$
 -\kappa\sum_{(i,j)\not\in E} y_i y_j
 $$
 Let $h_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j)})}$
-and choose $\kappa = 1$.
 The data $x_i^{(j)}$ are sampled from $p_0$ if $\sigma_i = 1 (y_i = 1)$. On the contrary,
 if $y_i = -1$ the data $x_i^{(j)}$ are sampled from $p_1$.
 
-The matrix $B$ is defined as in \cite{abbe}.
-Then the problem is $\max h^T y + \frac{1}{2}y^T B y$.
+We multiply the above equation by $2$ and subtract $y^T(J_n-I_n)y$. We then can get
+$$
+2\sum_{i=1}^n h_iy_i + \sum_{(i,j)\in E} y_i y_j - (2\kappa+1) \sum_{(i,j)\in E} y_i y_j
+$$
+
+The matrix $B$ is defined as in \cite{abbe} as
+\begin{equation}
+B_{ij} = \begin{cases}
+0 & i=j \\
+1 & (i,j) \in E \\
+-1 & (i,j) \not\in E
+\end{cases}
+\end{equation}
+
+Then the problem is $2\max h^T y + \frac{1}{2}y^T B y$ (omit $\kappa=o(1)$).
+
 Following \cite{wang2019tightness}, we use the relaxation
 technique to get a SDP problem as follows:
-Let $\tilde{B} = \begin{pmatrix} 0 & h^T \\ h & B \end{pmatrix}$
+Let $\tilde{B} = \begin{pmatrix} 0 & h^T \\ h & \frac{1}{2}B \end{pmatrix}$
 Then we have
 \begin{align}
 \max\, \tilde{B} \cdot X  &\notag\\
