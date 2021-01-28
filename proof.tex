@@ -599,25 +599,25 @@ The symmetric matrix $\Xi$ is defined as
 \end{equation}
 We choose $y_i, \lambda_i$ for $i=1,\dots, n+1$ which satisfy
 the dual constraint and achieve the strong duality.
-We define $\mu=\frac{1}{n}\mathbbm{1}_n^T h$ and $\lambda = -u/n, \epsilon=2\lambda$.
-Then we choose $\lambda_1=\mu, \lambda_{i+1}=g_i\lambda + \frac{\epsilon}{2}$
+We define $\mu=\frac{1}{n}\mathbbm{1}_n^T h$ and $\lambda = -u/n$.
+Then we choose $\lambda_1=\mu, \lambda_{i+1}=g_i\lambda + \lambda$
 and $y_i$ are chosen such that
 $(\diag\{y_1, \dots, y_n\} + \Xi - \widetilde{B})\tilde{g}=0$, from which we obtain
 \begin{align}
 y_1 &= h^T g - n\lambda \\
 y_{i+1} & = (h_i +\lambda)g_i + \lambda + \frac{1}{2}\diag\{Bgg^T\}, i = 1, \dots, n
 \end{align}
-We can also verify that $\sum_{i=1}^{n+1} y_i = 2h^Tg + g^T \widetilde{B} g$.
+We can also verify that $\sum_{i=1}^{n+1} y_i = 2h^Tg +\frac{1}{2} g^T B g$.
 The condition for such solution pair to become optimal is then
 \begin{align}
-\diag(y) + \Xi - \widetilde{B} & = \begin{pmatrix} h^T (g+\mathbbm{1}_n) & -h^T +(\mu + \frac{\epsilon}{2} )\mathbbm{1}_n^T + \lambda g^T\\
--h+(\mu + \frac{\epsilon}{2} )\mathbbm{1}_n + \lambda g& \Xi_n \end{pmatrix}
+\diag(y) + \Xi - \widetilde{B} & = \begin{pmatrix} h^T (g+\frac{1}{n}\mathbbm{1}_n) & -h^T +(\mu + \lambda)\mathbbm{1}_n^T + \lambda g^T\\
+-h+(\mu + \lambda )\mathbbm{1}_n + \lambda g& \Xi_n \end{pmatrix}
 \succeq 0 \notag \\
 \textrm{ where }\Xi_n & = \diag(hg^T + \frac{1}{2}Bgg^T - \lambda \mathbbm{1}_ng^T)  + 2\lambda J_n -\lambda I_n - \frac{1}{2}B + 2\lambda \Xi'
 \end{align}
 The matrix $\Xi'$ satisfies $\Xi'_{ij}=g_i + g_j$.
 
-By the construction $\tilde{g}$ is the eigenvector of $\diag(y) + \Xi - \tilde{B}$ with eigenvalue $0$.
+By the construction, $\tilde{g}$ is the eigenvector of $\diag(y) + \Xi - \widetilde{B}$ with eigenvalue $0$.
 If all eigenvalues of $\Xi_n$ is larger than zero, then by
 Cauchy's Interlace Theorem, all eigenvalues of $\diag(y) + \Xi- \tilde{B}$ is larger than zero.
 Let $A$ be the adjacency matrix of $G$
@@ -626,8 +626,8 @@ Then we have
 \begin{equation}\label{eq:Xi_n}
 \Xi_n = \diag(hg^T + Agg^T -\lambda \mathbbm{1}_ng^T)  + (\frac{1}{2} +2\lambda) J_n -\lambda I_n - A + 2\lambda \Xi'
 \end{equation}
-For any vector $x \in \mathbb{R}^n$ with $\norm{x}=1$, we decompose it as $x=\frac{\beta}{\sqrt{n}} g^{\perp}
-+ \sqrt{1-\beta^2} g$ where $g^Tg^{\perp}=0, \beta \in [0,1], \norm{g^{\perp}}=1$, we can expand $x^T \Xi_n x$ as
+For any vector $x \in \mathbb{R}^n$ with $\norm{x}=1$, we decompose it as $x=\frac{\beta}{\sqrt{n}} g
++ \sqrt{1-\beta^2} g^{\perp}$ where $g^Tg^{\perp}=0, \beta \in [0,1], \norm{g^{\perp}}=1$, we can expand $x^T \Xi_n x$ as
 \begin{align*}
 x^T \Xi_n x = \frac{\beta^2}{n} g^T \Xi_n g  &
 +		\frac{\beta}{\sqrt{n}}\sqrt{1-\beta^2} g^T \Xi_n g^{\perp}
@@ -649,16 +649,28 @@ The norm can be expanded as:
 \norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}^2
 =\norm{\tilde{h}}^2 - \frac{1}{n}(\tilde{h}^Tg)^2
 \end{align*}
-Using $\tilde{h}^T\mathbbm{1}_n=\mu$ and Law of Large Numbers (Chebyshev's inequality), with large probability (exponential rate), we can approximate
-the above equation with 
+We define $\hat{g}_1 = \frac{1}{2}(g + \mathbbm{1}_n)$ and $\hat{g}_2 = \frac{1}{2}(-g +\mathbbm{1}_n)$.
+Using $\tilde{h}^T\mathbbm{1}_n=\mu$ 
 \begin{align*}
 \frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^Tg)^2
-&=\frac{\norm{\tilde{h}}^2}{n} - 2\frac{(\tilde{h}^T g_1)^2}{n^2} - 2\frac{(\tilde{h}^T g_2)^2}{n^2} + \frac{(\tilde{h}^T\mathbbm{1}_n)^2}{n^2} \\
-&\approx \frac{\mathbb{E}[\tilde{h}_1^2]+\mathbb{E}[\tilde{h}_2^2]}{2}
--\frac{\mathbb{E}^2[\tilde{h}_1]+\mathbb{E}^2[\tilde{h}_2]}{2} + \frac{\mu^2}{n^2}\\
-&= \frac{\Var[\tilde{h}_1]+\Var[\tilde{h}_2]}{2}
-= O(\log n)
-\end{align*}		
+&=\frac{\norm{\tilde{h}}^2}{n} - 2\frac{(\tilde{h}^T \hat{g}_1)^2}{n^2} - 2\frac{(\tilde{h}^T \hat{g}_2)^2}{n^2} + \frac{(\tilde{h}^T\mathbbm{1}_n)^2}{n^2} \\
+&=\frac{ \sum_{i<j,i,j\in S_1} (\tilde{h}_i - \tilde{h}_j)^2 + \sum_{i<j,i,j\in S_2} (\tilde{h}_i - \tilde{h}_j)^2 }{n^2}+ \frac{\mu^2}{n^2}\\
+& = I_1 + I_2 + \frac{\mu^2}{n^2}
+\end{align*}
+where $I_i=\frac{\sum_{i\in S_i} h_i^2}{n} - 2\frac{(h^T \hat{g}_i)^2}{n^2}$.
+
+If $i\in S_i$, $\mathbb{E}[h_i]=m D_i, \Var[h_i]=m \bar{D}_i, \mathbb{E}[h_i^2]=\Var[h_i]+\mathbb{E}^2[h_i]=m \bar{D}_i+m^2 D^2_i, \Var[h_i^2] \leq m^4 \bar{C}_i$ where
+$D_i, C_i,i=1,2$ are constants irrelevant with $n$.
+We bound $I_i$ by Chebyshev's inequality
+\begin{align*}
+P(\Big| \frac{\sum_{i\in S_i} h_i^2}{n} - \frac{1}{2}(m \bar{D}_i + m^2D_i^2) \Big| \geq \log n) & \leq \frac{m^4 \bar{C}_i}{2n\log^2 n} \\
+P(\Big| \frac{h^T \hat{g}_i}{n} - \frac{m}{2}D_i\Big| \geq \log^{-1} n) & \leq \frac{m \log^{2} n\bar{D}_i}{2n}
+\end{align*}
+Therefore, with probability $1-n^{1-o(1)}$, we have
+$$
+I_i \leq \frac{1}{2}m\bar{D}_i + \frac{1}{2}m^2 D_i^2 + \log n - 2(\frac{1}{2}m D_i - \log^{-1} n)^2 = O(\log n)
+$$
+
 Therefore, the second term is lower bounded by
 $$
 \frac{1}{\sqrt{n}} g^T \Xi_n g^{\perp} \geq -\sqrt{\frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^Tg)^2} = O(\sqrt{\log n})
