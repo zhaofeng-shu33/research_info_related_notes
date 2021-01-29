@@ -63,10 +63,54 @@ The red line is our theoretical line
 given by $a=(\sqrt{2 - \gamma D_{1/2}(p_0||p_1)} + \sqrt{b})^2$,
 which is strictly over the black region. It tells that
 exact recovery condition of Abbe is more stronger than us.
+\subsection{Theoretical Equivalence}
+Recall the definition of $g(\epsilon)$ as
+	\begin{equation}\label{eq:gab}
+	g(a,b,\epsilon) = a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
+	\end{equation}
+	
+We show that $I_+$ is equal to $\theta_1^*$.
+\begin{align}
+\theta^*_1 &= \min_{\widetilde{X}_1} \gamma D(p_{\widetilde{X}_1}|| p_0)+ \frac{1}{2} g(a,b, 2\epsilon)  \label{eq:theta}\\
+\epsilon &= \gamma \frac{D(p_{\widetilde{X}_1} || P_1) - D(p_{\widetilde{X}_1} || P_0) }{\log a /b}\label{eq:equal}
+\end{align}
+We use Lagrange multiplier to solve \eqref{eq:theta}.
+Let
+$$
+L(p_{\widetilde{X}_1},\epsilon, \lambda)
+=\gamma D(p_{\widetilde{X}_1}|| p_0)+ \frac{1}{2} g(a,b, 2\epsilon) - \lambda(\epsilon \log\frac{a}{b}-\gamma
+D(p_{\widetilde{X}_1} || P_1) + \gamma D(p_{\widetilde{X}_1} || P_0))
+$$
+It is equivalent to minimize
+$(1-\lambda)D(p_{\widetilde{X}_1} || P_0) +
+\lambda D(p_{\widetilde{X}_1} || P_1) $, from
+which we get
+\begin{equation}\label{eq:p12}
+p_{\widetilde{X}_1}(x) = \frac{p_0^{1-\lambda}(x)p_1^{\lambda}(x)}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}.
+\end{equation}
+From $\frac{\partial L(p_{\widetilde{X}_1},\epsilon, \lambda)}{\partial \epsilon}=0$ and taking \eqref{eq:p12}
+into \eqref{eq:equal}, we get
+\begin{align*}
+    \lambda \log \frac{a}{b}
+    & = \log \frac{\epsilon + \sqrt{\epsilon^2+ab}}{b} \\
+    \epsilon \log \frac{a}{b}
+    & = \gamma\frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_0(x)}{p_1(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+\end{align*}
+After cancelling $\epsilon$
+from the above two equations, we can get a single equation
+for $\lambda$:
+\begin{equation}
+    \frac{1}{2}\log\frac{a}{b}
+    (a^{\lambda} b^{1-\lambda}
+    -a^{1-\lambda} b^{\lambda})
+    + \gamma \frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_1(x)}{p_0(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}=0
+\end{equation}
+which is the derivative of \eqref{eq:lambda}.
+Then by simple computation we have
+$I_+ = \theta_1^*$.
 
 \begin{thebibliography}{9}
 \bibitem{kl} https://stats.stackexchange.com/questions/145789/kl-divergence-between-two-univariate-poisson-distributions
 \bibitem{abbe} Asadi, Amir R., Emmanuel Abbe, and Sergio Verdú. "Compressing data on graphs with clusters." 2017 IEEE International Symposium on Information Theory (ISIT). IEEE, 2017.
 \end{thebibliography}
 \end{document}
-
