@@ -1,0 +1,1223 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{caption}
+\title{The statistical problem of correlation as variational and eigenvalue problem, including its connection with the curve fitting\footnote{translated by Feng Zhao. The title of the original article is "Das statistische Problem der Korrelation als Variations- und Eigenwertproblem und sein Zusammenhang mit der Ausgleichsrechnung"}}
+
+\date{December,1941}
+\author{Hans Gebelein}
+
+\begin{document}
+\maketitle
+\begin{centering}
+A satisfied correlation metric is required to satisfy
+the property that the two random variables are independent when the metric is zero and one is
+determined by another when the metric is one.
+The task to obtain such correlation metric is conducted
+as a variational problem and can be transformed to solve
+the smallest eigenvalue of a homogeneous Fredholm integral equation. By examining theses variational
+problems we can obtain its relationship with the commonly used correlation metric and the curve fitting.
+\end{centering}
+
+\section{Problem formulation and commonly-used correlation metric}
+One of the notable view for the judgement of two-dimensional probabilistic distribution $w(x,y)$ is by fixing one variable $x$, the distribution of $y$ is more or less influenced or not. As is well known,
+Such influence does not exist when $w(x,y)$
+is the product of a function $w_1(x)$ of $x$ and
+a function $w_2(y)$ of $y$. $x$ and $y$
+are mutually independent in such case. On the
+other hand, it can happen that for each given $x$
+only a single $y$ is corresponded. Then $y$
+is a function of $x$ and we say a complete correlation
+exists between the two variables. In general the result lies between the two extreme cases, and there is a question about a metric for the tightness of the relationship
+between $x$ and $y$. This is the correlation problem of statistics.
+
+To characterize the correlation between $y$ and $x$,
+there are many well-known different metrics, which we firstly quote here. Especially we observe a so-called
+geometric probabilistic distribution for the random variable $x$ and $y$. Such pair is determined by the
+positive function $w(x,y)$ by the normalization condition:
+\begin{equation}\label{eq:wxy}
+    \iint w(x,y) dx dy = 1
+\end{equation}
+Integrating by $x$ or $y$ we can obtain
+\begin{equation}\label{eq:w12}
+    w_1(x) = \int w(x,y)dy \textrm{ and }
+    w_2(y) = \int w(x,y)dx
+\end{equation}
+Their integral about $x$ or $y$ is 1. In the following we use $a$
+and $b$ to describe the mean value of $x$ and $y$
+with respect to the distribution $w(x,y)$.
+This is the center or mass coordinate of the mass
+density on the $xy$-plane. It is
+\begin{align}
+    a = \iint x w(x,y) dx dy = \int x w_1(x)dx \notag \\
+    b = \iint y w(x,y) dx dy = \int y w_2(y)dy \label{eq:ab}
+\end{align}
+Further $s^2$ and $t^2$ mean the stastical dispersion of $x$ around its mean value $a$
+or $y$ around its mean value $b$ respectively.
+These are moment of inertia of the plane with $w(x,y)$ as the density around the axis through the
+center of mass and parallel to the coordinate axis. It is defined as:
+\begin{align}
+    s^2 = \iint (x-a)^2 w(x,y) dx dy = \int (x-a)^2 w_1(x)dx \notag \\
+    t^2 = \iint (y-b)^2 w(x,y) dx dy = \int (y-b)^2 w_2(y)dy 
+    \label{eq:st}
+\end{align}
+As the correlation metric we need consider a numerical quantity, which should satisfy three properties.
+Firstly it can be computed from any given two-parameter distribution. Secondly the value should
+be zero is $x$ and $y$ are statistically independent. Thirdly the value should be one is $x$ and $y$
+are fully dependent.
+
+The classtical correlation coefficient satisfies the first and second condition, which is based on the moment of deviation
+of the distribution:
+\begin{equation}
+r = \frac{1}{st} \iint (x-a)(y-b)w(x,y)dxdy
+\end{equation}
+We always have $r^2 \leq 1$.
+The value $r=+ 1$ occurs when $y$ has positive linear relationship with $x$.
+The value $r= - 1$ occurs when $y$ has negative linear relationship with $x$.
+The disadvantage of this correlation coefficient is that based on $r=0$ we cannot get the
+full independence condition $w(x,y)=w_1(x)w_2(y)$.
+On the other hand, when $x$ and $y$ have full statistical non-linear dependence, $r$
+is different from one.
+
+To remedy the second shortcoming other correlation metrics are proposed.
+A unified method to the detailed analysis of the distribution $w(x,y)$ are the regression line $\bar{y}(x)$ and $\bar{x}(y)$.
+They are the mechanical view of the geometric place for the center of mass of the strip in
+the $xy$-plane parallel to the coordinate axes.
+\begin{align}
+   \bar{y}(x) = \frac{\int y w(x,y) dy}{\int w(x,y) dy} = \frac{1}{w_1(x)} \int y w(x, y)dy \notag \\
+   \bar{x}(y) =  \frac{\int x w(x,y) dx}{\int w(x,y) dx} = \frac{1}{w_2(y)} \int x w(x, y)dx  \label{eq:barxy}
+\end{align}
+In the two extreme cases of statistical independence and
+full dependence, the two regression lines are clearly
+characterized. For independence we have $\bar{y}(x) = b$
+and $\bar{x}(y)=a$ due to $w(x,y) = w_1(x)w_2(y)$.
+That is, the regression lines are the horizontal and
+the vertical straight lines through the center of mass of the
+distribution. It should be noted that from this condition of regression lines,
+the center of mass cannot be inferred reversely based on the assumption of statistical independence.
+Actually we cannot deduce $w(x,y)=w_1(x)w_2(y)$.
+
+On the other hand, under
+the condition of full dependence, $x$ and
+$y$ are determined by the function $y(x)$
+and $x(y)$ explicitly. We have $\bar{y}(x) = y(x)$
+and $\bar{x}(y) = x(y)$ so that in this case
+the two regression lines coincide.
+
+In statistical practice, based on the regression lines,
+Pearson introduced \textsf{correlation ratio}.
+\begin{align}
+   k^2_{yx} = \frac{1}{t^2}\int (\bar{y}(x) - b)^2 w_1(x)dx \textrm{ (correlation ratio of $y$ to $x$}) \notag \\
+   k^2_{xy} = \frac{1}{s^2}\int (\bar{x}(y) - a)^2 w_2(y)dy \textrm{ (correlation ratio of $y$ to $x$}) \label{eq:pr}
+\end{align}
+These correlation ratio take value zero at independence
+condition and in particular take value one at full
+dependence condition. Therefore, the measure of correlation with the help of this quantity is very satisfied when they are equal. If we are not dealing with the two extreme
+cases with $k^2_{yx} = k^2_{xy}=0$ or $1$, then
+generally $k^2_{yx}$ is not equal to $k^2_{xy}$. Only when the regression lines are straight, the two correlation coefficients take the same value, and this
+value also equal to the square of the correlation
+coefficient $r$.
+
+Pearson also suggested another measure of correlation metric as \textsf{Mean square Contingency}.
+\begin{align}
+   f^2 &= \frac{1}{\sqrt{(m-1)(n-1)}}\sum_{ik}
+   \frac{(w(x_i,y_k)-w_1(x_i)w_2(y_k))^2}{w_1(x_i)w_2(y_k)} \notag \\
+   &=\frac{1}{\sqrt{(m-1)(n-1)}}\left(\sum_{ik}
+   \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)} -1\right)\label{eq:pearson}
+\end{align}
+Here the discrete distribution must be assumed, in
+which $m$ and $n$ are the number of rows and columns of the so-called correlation table. Then
+under the condition of statistical independence $w(x_i,y_k) = w_1(x_i)w_2(y_k)$, $f^2=0$ is obvious.
+Under the condition of full dependence, $m=n$ is necessary. $w(x_i,y_k)$ has only $n$ non-zero
+probability values
+$$
+w(x_i, y_k) = w_1(x_i) = w_2(y_k)
+$$
+Then there are $n$ non-zero terms $w^2(x_i, y_k)/w_1(x_i)w_2(y_k)$, which are all one, and due
+to $m=n$ we have $f^2=1$.
+
+The particular advantage of this correlation metric
+of Pearson is that the value depends only on the
+frequency, not on the value of $x$ or $y$.
+Hence this metric also allows other non-numerical
+quantities like color, gender etc. Its disadvantage is
+that $f^2$ is defined only for the discrete distribution and we will show later that the natural generalization to $w(x,y)$ is not possible in general.
+
+All these existing correlation metrics have special
+advantages and disadvantages. Their relationship with
+each other is not easily observed. In the following
+we show that the correlation problem can be formulated
+as a variational problem, and this variational problem
+can be transformed to the homogeneous Fredholm integral equation, where we can solve the eigenvalue problem.
+We find that the commonly used correlation metrics are not others but different method to approximate the smallest eigenvalue of this integral equation.
+If we are dealing with a discrete distribution, then the integral equation degenerates to a homogeneous linear equation system.
+
+The question about the best relation between $y$ and
+$x$ is also met in curve fitting, which deals with
+a sequence of observed points by finding a simple curve
+to best fit the data. We deal with the curve fitting problem by treating it as a correlation problem, which provides new point of view for the solution. It shows that from correlation problem, we can develop good methods to solve the task of curve fitting.
+\section{Variational problem and integral equation}
+All the existing correlation metrics have certain shortcomings. Without consideration of calculability, now we ask the question about a theoretical perfect and conceptual simple correlation metric.
+With respect to the conceptual simplicity, the correlation coefficient is the most satisfying.
+Its main disadvantage is that under non-linear transformation of the random variable $x$
+and $y$, the quantity is not invariant.
+If the two quantities are assigned other values,
+that is, if $x$ is transformed by $f(x)$ and $y$
+is transformed by $g(y)$, then the value of $r$
+varies in general. The disadvantage of the quantity $r$
+is removed when all these kinds of transformations
+are considered. To obtain an improved correlation metric,
+we inquire for the greatest value which $r$ can achieve by
+such transformation. Then we have the following variational problem:
+
+Given a positive function $w(x,y)$ which satisfies the
+normalization condition $\iint w(x,y)dxdy=1$. It is to determine the function $f(x)$ and $g(y)$ such that
+\begin{equation}
+    K^2 = \max\frac{(\iint f(x)g(y)w(x,y)dxdy)^2}
+    {\iint f^2(x)w(x,y)dxdy \iint g^(y) w(x,y)dxdy}
+\end{equation}
+Then $K^2$ is a measure for the correlation of the distribution
+$w(x,y)$. In the term of mechanics,
+the correlation measure is the largest value of the quotient
+of the moment of deviation divided by the two moments of inertia for the distribution when all kinds of distortion in $x$ or $y$ direction are allowed.
+
+We can write the variational problem in a simpler way when 
+only normalized functions $f(x)$ and $g(y)$ are allowed.
+That is:
+\begin{align}
+\iint f^2(x) w(x,y)dxdy &= \iint f^2(x)w_1(x)dx=1\notag\\
+\iint g^2(x) w(x,y)dxdy &= \iint g^2(x)w_2(y)dy=1 \label{eq:fgw}
+\end{align}
+Functions like $f(x)=1, f(x)=\frac{x-a}{s}$
+and $g(y)=1, g(y)=\frac{y-b}{t}$ satisfy \eqref{eq:fgw}
+where $a,b,s,t$ are defined in (\ref{eq:ab}, \ref{eq:st}).
+Owing to this constraint the variational problem of correlation becomes:
+\begin{equation}\label{eq:K2}
+    K^2 = (\max \iint f(x)g(y)dxdy)^2
+\end{equation}
+To guarantee this variational problem meaningful, another
+side condition is necessary. Since $w(x,y)\geq 0$, by
+Cauchy-Schwarz inequality
+\begin{align*}
+    (\iint f(x)g(y)w(x,y)dxdy)^2
+    &= (\iint f(x)\sqrt{w(x,y)} \cdot g(y)\sqrt{w(x,y)}dxdy)^2\\
+    &\le \iint f^2(x)w(x,y)dxdy\cdot 
+    \iint g^2(x)w(x,y)dxdy = 1
+\end{align*}
+From this estimation the equality holds when the function
+$f(x)\sqrt{w(x,y)}$ and $g(y)\sqrt{w(x,y)}$ are proportional.
+This holds for any $w(x,y)$ when $f(x)=g(y)=1$. This case is trivial from \eqref{eq:wxy} and should be excluded. Therefore, for the variational problem we only allow
+functions which are orthogonal to $f(x)=1$ (or $g(y)=1$)
+with respect to $w_1(x)$ (or $w_2(y)$). This condition goes
+as
+\begin{align}
+    \iint f(x)w(x,y)dxdy = \int f(x)w_1(x)dx=0 \notag\\
+        \iint g(x)w(x,y)dxdy = \int g(y)w_2(y)dy=0
+        \label{eq:fwgw0}
+\end{align}
+If this condition is fulfilled, $K^2$ is strictly less than
+one in general. In particular in the case of full
+statistical dependence due to $w(x,y)=w_1(x)w_2(y)$
+$$
+\iint f(x)g(y) w(x,y) dxdy=
+\int f(x)w_1(x)dx \int g(y) w_2(y) dy = 0
+$$
+we have $K^2=0$.
+
+According to (\ref{eq:ab}, \ref{eq:st}), the functions
+$f(x) = \frac{x-a}{s}$
+and $g(y) = \frac{y-b}{t}$
+satisfy the condition \eqref{eq:fwgw0}.
+Using these functions in \eqref{eq:K2},
+we can get the correlation coefficient $r$. Therefore the
+following estimation holds:
+\begin{equation}
+    r^2 \leq K^2 \leq 1
+\end{equation}
+To make sure the above result holds, the correlation
+coefficient $r$ is no more than one for any distribution
+$w(x,y)$.
+
+The variational problem \eqref{eq:K2} 
+contains two available functions.
+We proceed with such case with only one free function,
+in which we firstly treat $f(x)$ or $g(y)$ fix and determine
+the other function such that the double intergral takes the largest
+value. The task can be solved by applying Cauchy-Schwarz
+inequality $(\int FGdx)^2 \leq \int F^2dx \int G^2dx$ where
+$$
+F(x)=f(x)\sqrt{w_1(x)},
+G(x)=\frac{1}{\sqrt{w_1(x)}}\int g(y) w(x,y)dy
+$$
+Then we have
+\begin{align*}
+    (\iint f(x)g(y) w(x,y) dxdy)^2
+    &= \left(\int f(x)\sqrt{w_1(x)} \cdot (\frac{1}{\sqrt{w_1(x)}}
+    \int g(y)w(x,y)dy) dx\right)^2 \\
+    &\leq \int \underbrace{f^2(x) w_1(x) dx}_{=1} \cdot
+    \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx \\
+    &= \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx
+\end{align*}
+This is the largest value that the variational
+integral can take for a determined $g(y)$ and arbitrary
+$f(x)$. The upper bound is reached when $F(x)$ and $G(x)$ are proportional to each other, or $f(x)$ and $g(x)$ satisfy
+the equation
+\begin{align*}
+    \frac{G(x)}{F(x)}
+    = \frac{\int g(y) w(x,y)dy}{w_1(x)f(x)}
+    = \textrm{const.} = C
+\end{align*}
+The constant $C$ is obtained
+by integration on both side of equation $C^2F^2(x) = G^2(x)$.
+Since $\int F^2(x) x = 1$, we obtain
+$$
+C^2 = \int G^2(x)dx
+= \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx
+$$
+which is exactly the value of the upper bound in the
+estimation.
+
+Therefore we obtain the result: Let $g(y)$ fixed and 
+the function $f(x)$ is changeable. Under this condition, the variational integral
+\eqref{eq:K2} takes the largest value
+\begin{equation}\label{eq:C2g}
+    C^2 = \int \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx
+\end{equation}
+when $f(x)$ is set by
+\begin{equation}\label{eq:fbyg}
+    f(x) = \frac{1}{C w_1(x)}
+    \int g(y) w(x,y) dy
+\end{equation}
+If $g(y)$ takes such value that the double integral reaches
+the largest possible value $K^2$, then $C^2=K^2$. Therefore,
+we can treat \eqref{eq:C2g} as a new form of our variational
+problems, in which $g(y)$ is a free function.
+Obviously to get such variational problems with only
+one unknown function we can exchange the role of $f(x)$
+and $g(y)$. We obtain the following two integrals for
+the variational problem of correlation as its second form.
+\begin{align}
+    K^2 & = \max \int  \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx \notag \\
+    K^2 & = \max \int \frac{1}{w_2(y)} (\int f(x) w(x,y)dx)^2 dy \label{eq:K2second}
+\end{align}
+To approximate the maximal value of the integral, we can
+set $f(x)$ or $g(y)$ to linear function, which should
+satisfy the normalization condition \ref{eq:fgw}
+and the orthogonal condition \ref{eq:fwgw0}. These functions
+are $f(x)=\frac{x-a}{s}$
+or $g(y) = \frac{y-b}{t}$.
+Due to \ref{eq:w12} and \ref{eq:barxy} it follows that
+\begin{align*}
+    \int g(y) w(x,y) dy
+    & = \int \frac{y-b}{t} w(x,y) dy =
+    \frac{\bar{y}(x) - b}{t} w_1(x) \\
+    \int f(x) w(x,y) dx
+    & = \int \frac{x-a}{s} w(x,y) dx =
+    \frac{\bar{x}(y) - a}{s} w_2(y)
+\end{align*}
+And according to \ref{eq:K2second},
+\begin{align*}
+    \frac{1}{w_1(x)} (\int g(y) w(x,y)dy)^2 dx 
+    & = \frac{1}{t^2}\int (\bar{y}(x) - b)^2 w_1(x)dx =
+    k^2_{yx}\notag \\
+     \frac{1}{w_2(y)} (\int f(x) w(x,y)dx)^2 dy&= \frac{1}{s^2}\int (\bar{x}(y) - a)^2 w_2(y)dy = k^2_{xy}
+\end{align*}
+These approximated values are the two Pearson correlation
+ratios in \eqref{eq:pr}.
+
+From this result we have shown 
+the position of correlation ratio in the general theory
+and its relationship with the other correlation metric.
+$k^2_{yx}$ and $k^2_{xy}$
+are two different first-order approximation for the general
+correlation metric $K^2$.
+$k^2_{yx}$ corresponds to $g(y)=\frac{y-b}{t}$
+and the optimal $f(x)$ given such $g(y)$ while
+$k^2_{xy}$ corresponds to $f(x)=\frac{x-a}{s}$
+and the optimal $g(y)$ given such $f(x)$.
+
+By these two approaches, the variational problem is not fully exhausted and in general must be smaller than $K^2$, which
+is their upper bound.
+On the other hand, as approximation to the variational
+problems they are better than the value which uses linear
+function $f(x)$ and $g(y)$ in \eqref{eq:K2}.
+Therefore $r^2$ is the lower bound for both of
+the correlation ratio\footnote{Note: $r^2 \leq \min\{k^2_{xy}, k^2_{yx}\}$}.
+
+The second function does not appear explicitly
+in the formula of $k^2_{yx}$
+and $k^2_{xy}$. In the first case $f(x)$ is the same as
+$\bar{y}(x)-b$ up to a normalization factor, and in the
+second case $g(y)$ coincides with $\bar{x}(y)-a$ up to .
+These functions satisfy the orthogonal condition
+\eqref{eq:fwgw0}. If they are linear functions,
+then they must be $\frac{x-a}{s}$
+and $\frac{y-b}{t}$ due to the orthogonality and the normalization. The two function pairs are identical and
+the two correlation ratios also take the same value,
+which must be equal to $r^2$. Therefore we obtain the above
+mentioned result without proof that $k^2_{yx}
+= k^2_{xy}=r^2$ in the case of straight regression lines.
+
+Now we treat $f(x)$ and $g(y)$ as the solution function
+in the variational problem \eqref{eq:K2second}, such that
+the integrals take the value $K^2$. Then according to
+previous equation \eqref{eq:fbyg}, for the two functions
+the integral equations hold simultaneously
+\begin{align}
+    f(x) &= \frac{1}{K w_1(x)}\int g(y)w(x,y)dy \notag \\
+    g(y) &= \frac{1}{K w_2(y)}\int f(x) w(x,y)dx \label{eq:gbyf}
+\end{align}
+Combing the two equations,
+\begin{align*}
+    f(x) = \frac{1}{K}
+    \int \frac{w(x,y)}{w_1(x)} g(y)dy
+    & = \frac{1}{K}
+    \int \frac{w(x,y)}{w_1(x)}  (\frac{1}{K w_2(y)}\int f(z) w(z,y)dz )dy \\
+    &= \frac{1}{K^2}
+    \iint \frac{w(x,y)w(z,y)}{w_1(x)w_2(y)}f(z)dzdy
+\end{align*}
+This result is an homogeneous Fredholm integral
+equation for the function $f(x)$
+\begin{equation}\label{eq:fkernel}
+    f(x) = \lambda \int \frac{W(x,z)}{w_1(x)}f(z) dz
+\end{equation}
+with the kernel
+$$
+W(x,z) = \int \frac{w(x,y)w(z,y)}{w_2(y)} dy
+\textrm{ and with } \lambda = \frac{1}{K^2}
+$$
+We can write the equation down as the symmetric kernel.
+It has the form
+\begin{equation}\label{eq:18a}
+    f(x)\sqrt{w_1(x)}
+    =\lambda \int \frac{W(x,z)}{\sqrt{w_1(x) w_1(z)}}
+    f(z) \sqrt{w_1(z)}dz
+    \tag{18a}
+\end{equation}
+Obviously there is also a corresponding integral equation
+for $g(y)$.
+It can be obtained by the elimination of $f(x)$ 
+from the two integral equations.
+
+The first obvious eigen function of the integral equation
+is $f(x)=1$, corresponding to eigenvalue $\lambda=1$.
+By the side condition \eqref{eq:fwgw0} for $f(x)$ it
+has been already excluded.
+We split it from the kernel and obtain the reduced kernel from \eqref{eq:18a} as
+$$
+\frac{W(x,z)}{\sqrt{w_1(x) w_1(z)}}
+- \frac{1}{\lambda} \sqrt{w_1(x)} f(x) \sqrt{w_1(z)}f(z)
+= \frac{W(x,z) - w_1(x) w_1(z)}{\sqrt{w_1(x) w_1(z)}}
+$$
+After the elimination of root in the integral equation
+% why?
+\begin{equation}\label{eq:fReducedKernel}
+    f(x)=\lambda \int \frac{W(x,z) - w_1(x) w_1(z)}{\sqrt{w_1(x) w_1(z)}} f(z)dz
+\end{equation}
+Since $\lambda = 1/K^2$, the problem to solve the correlation metric $K^2$ from \eqref{eq:K2}
+is equivalent to the problem to solve the smallest eigenvalue of this
+integral equation. By the theory of the integral equation,
+this first eigenvalue is determined by a variational problem, whose
+third form is
+\begin{equation}\label{eq:Kdoublef}
+    K^2 = \frac{1}{\lambda_{\min}}
+    = \max\iint(W(x,z) - w_1(x)w_1(z))f(x)f(z) dxdz
+\end{equation}
+The maximum is reached when $f(x)$ is the first eigen function
+of \eqref{eq:fReducedKernel}.
+If instead of the optimal one we use an approximation function
+$f(x) = \frac{x-a}{s}$, then we can obtain again the Pearson
+correlation ratio $k^2_{xy}$.
+
+Without further assumption about the distribution function
+$w(x,y)$ there is not much to say about the integral equation.
+Firstly the kernel is well defined. Secondly, considering
+the orthogonal condition $\int f(x)w_1(x)dx=0$
+and exchanging the order of integration, we can get
+\eqref{eq:K2second} from \eqref{eq:Kdoublef}. And we can see
+obviously that this variational integral only takes positive
+value. However, it is not easy to compute the eigenvalue.
+The hope of some method to investigate the first eigenvalue
+based on the separation of equations containing only eigenvalues is vain. To get an overview of the existing possibility to proceed,
+we firstly investigate the two extreme cases: independence
+and statistically dependence.
+
+\textbf{a) Independent case}
+
+In this case, due to $w(x,y) = w_1(x) w_2(y)$, the integral
+on the right side of \eqref{eq:fReducedKernel} for any function
+$f(x)$ is
+\begin{align*}
+    \int \frac{W(x,z) - w_1(x) w_1(z)}{w_1(x)}
+    f(z) dz
+    &= \iint \frac{w(x,y) w(z,y)}{w_1(x)w_2(y)} f(z) dy dz- \int w_1(z) f(z) dz \\
+    &= \iint w_1(z) w_2(y) f(z) dydz
+    - \int w_1(z) f(z) dz \\
+    &= \int w_1(z) f(z) dz-\int w_1(z) f(z) dz=0
+\end{align*}
+All functions are the eigen functions of the integral equation in consideration $f(x)$ for all range of the belonging eigenvalue $\lambda$.
+The smallest eigenvalue can be infinitely large and therefore
+$K^2 = \frac{1}{\lambda_{\min}} = 0$.
+
+When the correlation coefficient $r$
+and the correlation ratio $k^2_{yx}$ or $K^2_{xy}$
+are zero, it does not follow that
+$x$ and $y$ are stochastically independent with each other.
+The conclusion is true when the new correlation metric $K^2$
+vanishes. It follows simply from the bilinear form for the integration equation of the kernel. Suppose
+$f_i(x)$ is the eigenfunction and $\lambda_i$
+is the belonging eigenvalue,
+then we have the representation.
+\begin{equation}\label{eq:wxzZero}
+    \frac{W(x,z) - w_1(x) w_1(z)}{\sqrt{w_1(x)w_1(z)}}
+    = \sum \frac{1}{\lambda_i}
+    \sqrt{w_1(x)}f_i(x) \sqrt{w_1(z)}f_i(z)
+\end{equation}
+In the previous case all $\lambda_i$ are infinite\footnote{$\frac{1}{\lambda_{\min}}=K^2=0$},
+and \eqref{eq:wxzZero} is simplified to
+$W(x,z)=w_1(x)w_1(z)=0$. Let $z=x$,
+\begin{equation}
+    W(x,x) - w_1^2(x) = 0
+\end{equation}
+With the help of the definition equation for $W(x,z)$
+and the equation \eqref{eq:w12} it follows
+\begin{align*}
+    W(x,x) - w_1^2(x) &=
+    \int \frac{w^2(x,y)}{w_2(y)}dy
+    - 2 w_1(x) \int w(x,y)dy
+    + w_1^2(x) \int w_2(y) dy \\
+    &= \int \left(\frac{w^2(x,y)}{w_2(y)} - 2w_1(x)w(x,y) + w_1^2(x)w_2(y) \right) dy \\
+    &= \int \frac{1}{w_2(y)}
+    (w(x,y)-w_1(x)w_2(y))^2dy=0
+\end{align*}
+Since the integrand is almost surely positive, the above
+equation holds only when the relation
+$$w(x,y)=w_1(x)w_2(y)$$
+holds. This shows that $x$
+and $y$ are stochastically independent.
+
+\textbf{Full dependent case}
+In this case, the probability distribution takes
+non-zero value 
+only in a curve $y=y(x)$ in the $xy-$plane. The two
+parameter distribution function $w(x,y)$ is degenerated
+in both $x$ and $y$, which is given as
+$$
+w(x,y) = \begin{cases}
+0 & \textrm{ for } y \neq y(x)\\
+\infty &\textrm{ for } y = y(x)
+\end{cases}
+$$
+Also recall the definition of marginal distribution
+$$
+\int w(x,y)dy = w_1(x) \textrm{ and } \int w(x,y)dx= w_2(y)
+$$
+and we always have $\int w_1(x)dx = \int w_2(y) dy = 1$.
+
+We assume now the relation between
+$x$ and $y$ values are reversibly connected, so that
+$y=y(x)$ and the inversion $x=x(y)$ are definite functions.
+Since the probability distribution  is only along
+the curve $y(x)$, there exists the differential formula
+$$
+w_1(x) dx = w_2(y) dy
+$$
+and for any function $f(x)$
+$$
+\int f(x) w(x,y)dx = f(x(y)) \cdot \int w(x,y) dx
+= f(x(y)) \cdot w_2(y)
+$$
+This fact make it possible to calculate the integrals on the right side of
+\eqref{eq:fReducedKernel} for any function $f(x)$ which satisfies
+the orthogonal condition \eqref{eq:fwgw0}. It is
+\begin{align*}
+    \int \frac{W(x,z) - w_1(x) w_1(z)}{w_1(x)} f(z)dz
+    &= \iint  \frac{w(x,y)w(z,y)}{w_1(x)w_2(y)} f(z) dydz- \int w_1(z) f(z)dz \\
+    &= \frac{1}{w_1(x)} \int \frac{1}{w_2(y)}\int f(z)w(z,y)dz\cdot w(x,y)dy\\
+    &= \frac{1}{w_1(x)} \int f(x(y)) w(x,y)dy \\
+    &= f(x(y(x))) = f(x)
+\end{align*}
+In this case, all functions which are orthogonal to $w_1(x)$ or their
+linear combinations
+are eigenfunction of the integral equation.
+The corresponding eigenvalues are all equal to one.
+That is, $\lambda = 1$ is an eigenvalue.
+A normalized eigenfunction is, for example,
+$$
+f(x) = \frac{x-a}{s}
+$$
+To show $K^2=1$, it is enough to compute $k^2_{xy}$
+using this simple expression of $f(x)$.
+To prove the correlation is one, it is not necessary to solve the integral equation.
+
+Now we investigate the question whether $K^2=1$
+leads to the full dependence of the two features.
+That is, there exists a definite functional relation
+between $x$ and $y$. In general case, there is a function
+$f(x)$, together with the corresponding function $g(y)$
+by \eqref{eq:gbyf}, makes the variational integral $K^2$
+take value one. We use the expression of $K^2$ in its
+original form \eqref{eq:K2}. Due to the normalization
+\eqref{eq:fgw} we have
+\begin{align*}
+K^2 = \iint f(x)g(y) w(x,y)dxdy
+&= \frac{1}{2} \iint (f^2(x) + g^2(y) - 
+[f(x) - g(y)]^2) w(x,y) dxdy \\
+& = 1 - \frac{1}{2} \iint [f(x) - g(y)]^2 w(x,y) dxdy
+\end{align*}
+In order for $K^2=1$,
+we must have
+\begin{equation}
+    \iint [f(x) - g(y)]^2 w(x,y)dxdy=0
+\end{equation}
+When $w(x,y)$ is non-zero everywhere, this is the case $f(x)=g(y)=$ const.
+
+The result $K^2=1$ follows simply from the distribution
+$w(x,y)$, which are non-zero only in the rectangular
+area. The rectangular areas are the common cover
+by the strips parallel to
+$y$-axis and those parallel to $x$-axis.
+Within each strip of such strips system (in Figure 1)
+the value of the constant for $f(x) = g(y)$ is the same.
+However, the functions $f(x)$ and $g(y)$, orthogonal to
+$w_1(x)$ or $w_2(y)$, can not equal
+the same constant, but are piece-wise constant stair curves,
+which take at least one positive and negative value respectively. Therefore, the distributional space in
+the $xy$-plane consists of at least two such strip systems.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{a.png}
+\end{figure}
+The figures 2a to c show three examples for such distribution
+planes. $w(x,y)$ is non-zero only in the shaded fields,
+whose horizontal strip and vertical strip has same number.
+If the strip division is infinitely refined, then in the above
+observed case, only along 
+a curve in the $xy$-plane
+that the probability is not zero. The curve is not necessarily a one-to-one correspondence of the $x-$
+and $y-$ value, which is assumed in the previous computation
+and occurs in the first example of the case. It can also be the curve shown in the other two
+examples, which are multi-valued function.
+The curve is marked in the distributional plane, in which
+there is not a one-to-one relation of $x$ and $y$, but a one-to-one relation for
+the $x$-class and $y$-class with the same number.
+For the stochastic relation of $x$ and $y$
+there exists certain room to move, which is not captured
+by the correlation metric $K^2$.
+
+According to the definition of the correlation metric,
+$K^2$ does not depend on the specific value of $x$
+and $y$ in the distribution.
+By now the developed formula of $K^2$ contains explicitly
+the function $f(x)$ and $g(y)$ (or only one function).
+In particular, we want an expression for the smallest
+eigenvalue of the integral equation \eqref{eq:fReducedKernel}.
+Such expression does not contain $f(x)$ and
+$g(y)$ but only depends on the distribution function
+$w(x,y)$.
+To obtain such expression, it is suggested to go from \eqref{eq:wxzZero}
+which uses double series to expand the kernel
+\begin{equation}
+        \frac{W(x,z) - w_1(x) w_1(z)}{\sqrt{w_1(x)w_1(z)}}
+    = \sum \frac{1}{\lambda_i}
+    \sqrt{w_1(x)}f_i(x) \sqrt{w_1(z)}f_i(z) \tag{21}
+\end{equation}
+We regard the above equation formally and disregard
+its convergence and other necessary assumptions.
+For $z=x$ the integration about $x$ provides
+$$
+J = \int \frac{W(x,x) - w_1^2(x)}{w_1(x)} dx
+= \frac{1}{\lambda_1}
++ \frac{1}{\lambda_2}
++ \dots
+$$
+The integrand allows the following two transformations:
+$$
+\frac{W(x,x) - w_1^2(x)}{w_1(x)}
+= \int \frac{w^2(x,y)}{w_1(x)w_2(y)} dy - w_1(x)
+=\int \frac{[w(x,y)-w_1(x)w_2(y)]^2}{w_1(x)w_2(y)} dy 
+$$
+Then it follows for $J$ that
+\begin{equation}\label{eq:JlambdaM}
+    J=\int \frac{[w(x,y)-w_1(x)w_2(y)]^2}{w_1(x)w_2(y)} dxdy
+    = \iint  \frac{w^2(x,y)}{w_1(x)w_2(y)} dxdy-1
+    = \frac{1}{\lambda_1}
++ \frac{1}{\lambda_2}
++ \dots
+\end{equation}
+This expression from its construction coincides with the mean square
+contingency of Pearson.
+When the first eigenvalue $\lambda_1$
+is simple and the series of the reciprocal eigenvalues
+converge, it is righteous to solve $\lambda_1$
+to show the strength of the correlation.
+The two extreme cases do not belong to such situation.
+In the full dependence case, $\lambda_i=1$ and $J$
+is infinitely large. When this singular behavior
+occurs, famous methods from the theory of
+integral equation will fail and is not applicable.
+A clear and self-understandable result follows when full independence of $x$ and $y$
+occurs. $\lambda_1$ is already infinitely large, which
+is also true for the remaining eigenvalues. Therefore,
+according to \eqref{eq:JlambdaM} $J=0$.
+
+For continuous distributions it is not shown that the value $J$ is a useful
+measure of correlation relationship.
+But for arithmetic distribution\footnote{For arithmetic distribution
+the correlation theory present here can be developed by the elementary
+algebra techniques. Such material are introduced thoroughly in the upcoming book about mathematical
+statistics. (Publisher Quelle \& Meyer, university education in monograph.)}
+there is certain information about the correlation relationship. For arithmetic distribution
+the linear equation systems replace the place of integral equation,
+and the number of eigenvalues is finite, equal to the row or column
+number of the correlation table.
+
+Let $w(x_i, y_k)$
+be the probability mass distribution for $m$ possible $x$-values $x_i$
+and $n$ possible $y$-values $y_k$, then corresponding to
+the kernel function $W(x,z)$ of the integral equation \eqref{eq:fkernel}
+we have
+$$
+W(x_i, x_l)
+= \sum_k \frac{w(x_i, y_k) w(x_l, y_k)}{w_2(y_k)}
+\textrm{ with } w_2(y_k) = \sum_i w(x_i, y_k)
+$$
+and the integral equation corresponds to the linear equation system
+with $m$ equations.
+$$
+f(x_i) = \lambda \sum_{l}
+\frac{W(x_i, x_l)}{w_1(x_i)} f(x_l)
+=\lambda  \sum_{l,k} \frac{w(x_i, y_k) w(x_l, y_k)}{w_1(x_i)w_2(y_k)}
+f(x_l).
+$$
+The trace of the determinant of this equation system is
+the sum of all the $m$ reciprocal eigenvalues
+$$
+\sum_{i,k} \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)}
+= \frac{1}{\lambda_0}
++ \frac{1}{\lambda_1}
++ \dots + \frac{1}{\lambda_{m-1}}.
+$$
+Obviously $\lambda_0$ is the eigenvalue, which belongs to the eigenfunction
+$f(x)=1$, which is used to split \eqref{eq:fkernel} to get \eqref{eq:fReducedKernel}.
+Therefore, we obtain the result
+\begin{align}
+    J=\sum_{ik}  \frac{w^2(x_i,y_k)}{w_1(x_i) w_2(y_k)} -1
+    &=\sum_{ik} \frac{[w(x_i,y_k) - w_1(x_i)w_2(y_k)]^2}{w_1(x_i)w_2(y_k)} \notag\\
+    &= \frac{1}{\lambda_1}
++ \frac{1}{\lambda_2}
++ \dots \tag{24a}
+\end{align}
+In the same way we can conduct the computation for $g(y_k)$
+with the help of linear equation system, which corresponds to the
+integral equation for $g(y)$
+and contains $n$ equations. The result in (24a)
+is changed only in the place where the series of reciprocal
+eigenvalues is ended by member $\frac{1}{\lambda_{n-1}}$.
+The left hand side of the expression in both the two cases
+is the same since the expression about $x$
+and $y$ is symmetric. Besides,
+both leads to the representation of the identical system of finite eigenvalues \footnote{The proof can be found in the book of writers.}.
+If $m\neq n$, all the surplus eigenvalues are infinite.
+
+Suppose $n\leq m$. The number of nonzero reciprocal eigenvalue is
+then $n-1$.
+The smallest of these eigenvalues, $\lambda_1$,
+produces our correlation metric $K^2 = \frac{1}{\lambda_1}$.
+For other eigenvalues $1/\lambda_i \leq K^2$ holds. Then $J \leq (n-1)\cdot K^2$ and symmetric estimation formula containing $m$ and $n$ is preferred,
+$$
+J \leq \sqrt{(m-1)(n-1)} K^2 \textrm{ or } K^2 \geq \frac{J}{\sqrt{(m-1)(n-1)} }
+$$
+The expression on the right hand side of this formula is the Pearson's
+mean square contingency according to \eqref{eq:pearson}. Therefore, We obtain the result
+\begin{align}
+       f^2 &= \frac{1}{\sqrt{(m-1)(n-1)}}\sum_{ik}
+   \frac{(w(x_i,y_k)-w_1(x_i)w_2(y_k))^2}{w_1(x_i)w_2(y_k)} \notag \\
+   &=\frac{1}{\sqrt{(m-1)(n-1)}}\left(\sum_{ik}
+   \frac{w^2(x_i,y_k)}{w_1(x_i)w_2(y_k)} -1\right) \label{eq:25} \\
+   &=\frac{1}{\sqrt{(m-1)(n-1)}}(\frac{1}{\lambda_1}
+   + \frac{1}{\lambda_2} + \dots ) \leq K^2 \notag
+\end{align}
+We can see that $f^2$ is definitely smaller than our correlation
+metric $K^2$ and smaller than one as a result. According to its
+construction, $f^2$
+is the mean of $(m-1)$ or $(n-1)$ reciprocal eigenvalues of the eigenvalue
+problems which corresponds to the correlation task.
+
+This relationship indicates two points. Firstly an application
+of the generalization of Pearson's mean square contingency
+to continuous distribution is in principal not possible, because
+the mean of the reciprocal eigenvalue in the case of
+integral equation is either undetermined or zero, which is
+not a suitable quantity to measure the correlation.
+Secondly, this contingency measure does not allow good comparison with the correlation coefficient
+$r$ and the two correlation ratios $k^2_{xy}, k^2_{yx}$, because
+the connection of each quantity with $K^2$ is quite 
+different from \eqref{eq:25}.
+
+The case of fully stochastic dependence is in particular remarkable.
+In this case is $m=n$,
+and for the connected value $x_i$
+and $y_k$ it holds that
+$$
+w(x_i, y_k) = w_1(x_i)
+= w_2(y_k)
+$$
+The equation system, led from the integral equation, in such case is reduced 
+to $n$ equation $f(x_i) = \lambda f(x_i)$, in which
+the solution is $\lambda=1$.
+Hence the multiplicity of $\lambda=1$ is $n$ for the complete
+kernel, and is $n-1$ for the reduced kernel. Then $J=n-1$
+and $f^2=1$. In the case of full dependence of discrete distribution, the correlation metric is clearly visible.
+
+\section{Series expansion for the quantity of the correlation theory}
+The correlation theory developed above is not others but
+a general theory of the two-dimensional distribution
+$w(x,y)$.
+To expand the function $w(x,y)$
+with orthogonal functions, we need two function systems,
+one with functions of $x$
+and the other with functions of $y$.
+For this purpose, we use the normalized
+orthogonal polynomials with increasing degrees $\varphi_n(x)$
+for $w_1(x)=\int w(x,y)dy$ and $\psi_n(y)$
+for $w_2(y) = \int w(x,y)dx$. For this polynomial
+exists the equations
+\begin{equation}
+    \int \varphi_i(x)
+    \varphi_j(x) w_1(x)dx
+    =\begin{cases}
+    0 & \textrm{for } i\neq j\\
+    1 &\textrm{for } i= j\\
+    \end{cases}
+    \textrm{ and } \int \psi_i(x)
+    \psi_j(x) w_2(y)dy
+    =\begin{cases}
+    0 & \textrm{for } i\neq j\\
+    1 &\textrm{for } i= j\\
+    \end{cases}.
+\end{equation}
+The firsts of these polynomials go as
+$$
+\varphi_0(x) = 1;
+\varphi_1(x) = \frac{x-a}{s} \textrm{ and }
+\psi_0(y) = 1;
+\psi_1(y) = \frac{y-b}{t}
+$$
+For general arbitrary functions $f(x)$
+or $g(y)$ the series expansion is
+\begin{equation}
+\begin{aligned}
+f(x) &=\sum_{i=0}^{\infty} a_{i} \varphi_{i}(x) \quad \text { with } \quad a_{i}=\int f(x) \varphi_{i}(x) w_{1}(x) d x \\
+g(y) &=\sum_{j=0}^{\infty} b_{j} \psi_{i}(y) \quad \text { with } \quad b_{j}=\int g(y) \psi_{j}(y) w_{2}(y) d y
+\end{aligned}
+\end{equation}
+In the following we assume that the above series converge, when
+they are not ended in finite terms. Then the exchange of member-like integration is allowed.
+Under this assumption is for example
+$$
+\int f^{2}(x) w_{1}(x) dx=\int\left(\sum_{i=0}^{\infty} a_{i} \varphi_{i}(x)\right)^{2}w_{1}(x) \mathrm{d} x=\sum_{i, k=0}^{\infty} a_{i} a_{k} \int \varphi_{i}(x) \varphi_{k}(x) w_{1}(x) d x=\sum_{i=0}^{\infty} a_{i}^{2}
+$$
+and the corresponding formula for $g(y)$.
+Therefore, for $f(x)$ and $g(y)$ the so-called 
+completeness relation holds as
+\begin{equation}\label{eq:28}
+    \int f^{2}(x) w_{1}(x) d x=\sum_{i=0}^{\infty} a_{i}^{2} ; \quad \int g^{2}(y) w_{2}(y) d y=\sum_{j=0}^{\infty} b_{j}^{2}
+\end{equation}
+For the probability distribution $w(x,y)$ (likewise converges)
+there is an expansion of the form
+$$
+w(x,y) = \sum_{i,j=0}^{\infty}
+c_{ij} \varphi_i(x) \phi_j(y)w_1(x) w_2(y).
+$$
+Considering the orthogonality of $\varphi_i(x)$
+and $\psi_j(y)$, by multiplying both sides with the product of the two
+polynomials $\varphi_i(x)$
+and $\psi_j(y)$ and integrating over $x$
+and $y$
+yields the formula
+$$
+c_{ij} = \iint \varphi_i(x) \varphi_j(y) w(x,y)dxdy.
+$$
+The coefficient $c_{ij}$ for $i=0$ or $j=0$ is given instantly.
+It is
+$$
+\begin{array}{lll}
+&\textrm{for }i=j=0 & c_{00}=\iint w(x, y) \mathrm{d} x \mathrm{d} y=1 \\
+&\textrm{for }i=0, j\neq 0 & c_{0 j}=\iint \psi_{j}(y) w(x, y) \mathrm{d} x \mathrm{d} y=\int \psi_{j}(y) w_{2}(y) d y=0 \\
+\textrm{and} & & \\
+&\textrm{for }i\neq0, j= 0 & c_{i 0}=\iint \varphi_{i}(x) w(x, y) \mathrm{d} x \mathrm{d} y=\int \varphi_{i}(x) w_{1}(x) d x=0.
+\end{array}
+$$
+Therefore, the series expansion for $w(x,y)$ is simplified
+as
+$$
+w(x, y)=w_{1}(x) w_{2}(y)+\sum_{i, j=1}^{\infty} c_{i j} \varphi_{i}(x) \psi_{j}(y) w_{1}(x) w_{2}(y)
+$$
+\begin{equation}\label{eq:29}
+    \frac{w(x, y)}{w_{1}(x) w_{2}(y)}=1+\sum_{i, j=1}^{\infty} c_{i j} \varphi_{i}(x) \psi_{j}(y) \text { with } c_{ij}=\iint \varphi_i(x) \psi_{j}(y) w(x, y) \mathrm{d} x \mathrm{d} y
+\end{equation}
+We make another formula corresponding with the complete relation
+\eqref{eq:28}. It holds
+$$
+\begin{aligned}
+\iint \frac{w^{2}(x, y)}{w_{1}(x) w_{2}(y)} d x d y &=\iint\left(\sum_{i, j=0}^{\infty} c_{i j} \varphi_{i}(x) \psi_{j}(y)\right)^{2} w_{1}(x) w_{2}(y) d x d y \\
+&=\sum_{i, j=0}^{\infty} c_{i j}^{2} \int \varphi_{i}^{2}(x) w_{1}(x) d x \int \psi_{j}^{2}(y) w_{2}(y) d y=\sum_{i, j=0}^{\infty} c_{i j}^{2}
+\end{aligned}
+$$
+or, as $c_{00}=0$ and $c_{0j}=c_{j0}=0$ holds for $i,j\neq j$,
+\begin{equation}
+    \iint \frac{w^{2}(x, y)}{w_{1}(x) w_{2}(y)} d x d y - 1
+    =\sum_{i,j=1}^{\infty} c_{ij}^2
+\end{equation}
+This is the expression $J$ of equation \eqref{eq:JlambdaM},
+which is the basis of the Pearson's mean square contingency
+$f^2$ for discrete distribution.
+
+It is expected that in the case of discrete probability mass
+function $w(x_i, y_k)$ with finite rows and columns of the correlation
+table the functions $\varphi_i(x)$ contains the same number of
+columns and the functions $\psi_j(y)$ contains the same
+number of rows. In this case the series expansion then all terminates with finite members.
+
+In the center of our correlation theory is the expression \eqref{eq:K2}
+\begin{equation*}
+    K^2 = (\max \iint f(x)g(y)dxdy)^2,
+\end{equation*}
+where the allowed functions $f(x)$
+and $g(y)$ must satisfy the conditions
+$$
+\begin{array}{ll}
+\int f(x) w_{1}(x) d x=0, & \int f^{2}(x) w_{1}(x) d x=1 \\
+\int g(y) w_{2}(y) d y=0, & \int g^{2}(y) w_{2}(y) d y=1
+\end{array}
+$$
+According to \eqref{eq:28}
+and \eqref{eq:29}, the orthogonal and normalizing conditions
+can be expressed with respect to the coefficients of series
+expansion for $f(x)$ and $g(y)$:
+\begin{equation}\label{eq:31}
+    a_0 = b_0 = 0 \textrm{ and } 
+    \sum_{i=1}^{\infty} a_i^2
+    =\sum_{i=1}^{\infty} b_j^2 = 1
+\end{equation}
+Now it follows that
+\begin{align}\label{eq:32}
+\iint f(x) g(y) w(x, y) d x d y 
+&=\iint \sum_{i=1}^{\infty} a_{i} \varphi_{i}(x) \sum_{j=1}^{\infty} b_{j} \psi_{j}(y) \sum_{k, l=0}^{\infty} c_{k l} \varphi_{k}(x) \psi_{l}(y) w_{1}(x) w_{2}(y) d x d y \notag\\
+&=\sum_{i, j=1}^{\infty} a_{i} b_{j} c_{i j}
+\end{align}
+The simplest approximation value for $K^2$ arises when
+we set $a_1=b_1=1$ and all other $a_i$
+and $b_i$ equal to zero. That is, we compute $K^2$ by
+the test function $f(x) = \varphi_1(x) = \frac{x-a}{s}$
+and $g(y) = \psi_1(y) = \frac{y-b}{t}$. The result of this
+approximated computation of $K^2$ is the quantity of
+correlation coefficient $r$. By \eqref{eq:32}
+\begin{equation}
+    r = c_{11}
+\end{equation}
+In the second version of the variational problem
+\eqref{eq:K2second} and in the integral equation of the
+correlation \eqref{eq:gbyf} appear the function
+$$
+\int f(x) w(x,y)dx \textrm{ and }
+\int g(y) w(x,y)dy
+$$
+With the help of series expansion is
+$$
+\begin{aligned}
+\int f(x) w(x, y) \mathrm{d} x &=\int \sum_{k=1}^{\infty} a_{k} \varphi_{k}(x)\left\{1+\sum_{i j=1}^{\infty} c_{i j} \varphi_{i}(x) \psi_{j}(y)\right\} w_{1}(x) w_{2}(y) d x \\
+&=\sum_{i j=1}^{\infty} a_{i} c_{i j} \psi_{j}(y) w_{2}(y)
+\end{aligned}
+$$
+and alongside
+$$
+\int g(y) w(x, y) d y=\sum_{i j=1}^{\infty} b_{j} c_{i j} \varphi_{i}(x) w_{1}(x).
+$$
+It follows from the integral equation that 
+$$
+K  g(y) w_{2}(y)=K w_{2}(y) \sum_{j=1}^{\infty} b_{j} \psi_{j}(y)
+$$
+and
+$$
+K f(x) w_{1}(x)=K w_{1}(x) \sum_{i=1}^{\infty} a_{i} \varphi_{i}(x)
+$$
+Through comparison arises the following, which corresponds to the position of the integral equation,
+infinite linear equation systems for the coefficients $a_i$
+and $b_i$:
+\begin{equation}\label{eq:34}
+a_{i}=\frac{1}{K} \sum_{j=1}^{\infty} b_{j} c_{i j}, \quad b_{j}=\frac{1}{K} \sum_{i=1}^{\infty} a_{i} c_{i j}
+\end{equation}
+The question is then seeking the largest value for $K$.
+We can isolate $K$ by squaring both sides of these equations
+and adding them together. By \eqref{eq:31} it turns out
+\begin{align}
+K^{2}=\sum_{i=1}^{\infty}\left(\sum_{j=1}^{\infty} b_{j} c_{i j}\right)^{2} \notag\\
+K^{2}=\sum_{j=1}^{\infty}\left(\sum_{i=1}^{\infty} a_{i} c_{i j}\right)^{2}\label{eq:35}
+\end{align}
+These are the pair of the variational integral in single coefficient version, which we can also obtain immediately from the expression
+\eqref{eq:K2second}.
+
+For the first formula we set $b_1=1, b_2=b_3=\dots=0$,
+then the Pearson's correlation ratio $k^2_{yx}$ is obtained.
+In a similar way we obtain $k^2_{xy}$ when we set
+$a_1=1$ and $a_2=a_3=\dots=0$ in the second formula. As
+a result, the two correlation ratios are obtained as
+\begin{equation}\label{eq:46}
+    k_{y x}^{2}=\sum_{i=1}^{\infty} c_{i 1}^{2}, \quad k_{x y}^{2}=\sum_{j=1}^{\infty} c_{1 j}^{2}
+\end{equation}
+It is seen immediately that the two correlation ratios are definitely larger
+than $r^2=c_{11}^2$, and the equality is taken when the 
+corresponding regression lines are straight lines.
+Connected with \eqref{eq:K2second}, For the regression lines $\bar{y}(x)$
+and $\bar{x}(y)$ holds namely the equation
+\begin{align*}
+\frac{\bar{y}(x)-b}{t}&=\frac{1}{w_{1}(x)} \int \frac{y-b}{t} w(x, y) \mathrm{d} y=\frac{1}{w_{1}(x)} \int \psi_{1}(y) w(x, y) \mathrm{d} y=\sum_{i=1}^{\infty} c_{i1} \varphi_{i}(x),\\
+    \frac{\bar{x}(y)-a}{s}&=\frac{1}{w_{2}(y)} \int \frac{x-a}{s} w(x, y) \mathrm{d} x=\frac{1}{w_{2}(y)} \int \varphi_{1}(x) w(x, y) \mathrm{d} x=\sum_{j=1}^{\infty} c_{1 j} \psi_{j}(y).
+\end{align*}
+They are straight lines if and only if
+the right series
+reduces to the linear functions
+$c_{11}\varphi_1(x)$
+or $c_{11}\psi_1(y)$ respectively.
+The condition turns out to be
+\begin{equation}\label{eq:37}
+    c_{21}=c_{3 i} \cdots=0 \text { and } c_{12}=c_{13}=\cdots=0
+\end{equation}
+and these are the same condition, under which 
+$k^2_{yx} = k^2_{xy}=r^2$ is.
+
+By elimination of the function $g(y)$ from both of the integral
+equation \eqref{eq:gbyf} the Fredholm integral equation 
+\eqref{eq:fkernel} for $f(x)$ alone is obtained. In the same
+way by elimination of $b_j$
+from the equation \eqref{eq:34} a linear equation system
+for the quantities $a_{i}$ is got. It is
+$$
+a_{k}=\frac{1}{K} \sum_{j=1}^{\infty} b_{j} c_{k j}=\frac{1}{K^{2}} \sum_{j=1}^{\infty} \sum_{i=1}^{\infty} a_{i} c_{i j} c_{k j}=\frac{1}{K^{2}} \sum_{i=1}^{\infty} a_{i} C_{i k} \text { with } C_{i k}=\sum_{j=1}^{\infty} c_{i j} c_{k j}
+$$
+Then the integral equation \eqref{eq:fkernel} corresponds to
+\begin{equation}
+a_{k}=\frac{1}{K^{2}} \sum_{i=1}^{\infty} a_{i} C_{i k} \text { with } C_{i k}=\sum_{j=1}^{\infty} c_{i j} c_{k j} \quad(k=1,2, \ldots)
+\end{equation}
+The quantity $K^2$ marks the measure of the correlation. It is
+determined by the ``characteristic equation"
+\begin{equation}
+    \left|\begin{array}{llll}
+C_{11}-K^{2} & C_{12} & C_{13} & \ldots \\
+C_{21} & C_{22}-K^{2} & C_{23} & \ldots \\
+C_{31} & C_{32} & C_{33}  -K^{2} & \ldots \\
+\ldots . & & &
+\end{array}\right|=0
+\end{equation}
+The first approximation for $K^2$
+is $K^2\approx C_{11} = \sum_{j=1}^{\infty} c^2_{1j} = k^2_{xy}$.
+This value is nothing else but the correlation ratio based on
+$f(x) = \varphi_1(x)$.
+
+The fact is noticeable that the quantity 
+$C_{ik}$ can also be computed without using series coefficients $c_{ik}$. In the expansion
+$$
+\int f(x) w(x, y) \mathrm{d} x=\sum_{i, j=1}^{\infty} a_{i} c_{i j} \psi_{j}(y) w_{2}(y)
+$$
+we use $f(x) = \varphi_i(x)$ and $f(x) = \psi_k(x)$
+respectively,
+$$
+\int \varphi_{i}(x) w(x, y) d x=\sum_{j=1}^{\infty} c_{i j} \psi_{j}(y) w_{2}(y) \text { and } \int \varphi_{k}(x) w(x, y) \mathrm{d} x=\sum_{l=1}^{\infty} c_{k l} \psi_{l}(y) w_{2}(y).
+$$
+Hence it follows that
+\begin{align*}
+\int \frac{1}{w_{2}(y)} \int& \varphi_{i}(x) w(x, y) \mathrm{d} x \int \varphi_{k}(x) w(x, y) \mathrm{d} x \cdot \mathrm{d} y \\
+&=\int \sum_{j=1}^{\infty} c_{i j} \psi_{j}(y) \sum_{l=1}^{\infty} c_{k l} \psi_{l}(y) w_{2}(y) d y=\sum_{j=1}^{\infty} c_{i j} \mathrm{c}_{k j}=C_{i k}.
+\end{align*}
+The result is then
+\begin{equation}
+    C_{i k}=\int \frac{1}{w_{2}(y)} \int \varphi_{i}(x) w(x, y) d x \int \varphi_{k}(x) w(x, y) d x \cdot d y
+\end{equation}
+According to this construction, these quantities are generalization of the expressions
+for the correlation ratio $k^2_{xy}$, which is obtained when
+$i=k=1$.
+
+The result of these paragraphs show that all quantities of
+the correlation theory allow simple expression with the help of the
+series coefficients $c_{ij}$ of the expansion of the distribution
+$w(x,y)$. It also allows clear investigation of
+the property of the correlation.
+The correlation problem is therefore the problem of series
+expansion of $w(x,y)$ about the orthogonal polynomials with
+respect to the density function 
+$w_1(x)$ and $w_2(y)$.
+It is worthwhile to give notice to the 
+general series expansion problem and to develop
+practical computational method, which makes the solution
+possible with tolerable time overhead.
+
+The ideas introduced here deals with the case when
+the distribution $w(x,y)$ is known. The theory can be also
+applied to statistical samples. It is known from the computation of probability that the empirical distribution $w(x,y)$ changes as the number of observed
+samples increases. The correlation result is seen clearly from the new correlation metric $K$ due to its
+extreme property, which is also illustrated in the previous mentioned book (Result of Part E, Equation (50)).
+In this work this theory is explained in detail by fully calculated
+examples (Example 34 and 35), so that we omit the reproduction of these examples here.
+\section{Connection between correlation theory and curve fitting}
+As a result, In the correlation theory developed here, function $f(x)$ and $g(y)$ in each case are determined so that the stochastic connection between $x$
+and $y$ is clearly seen as much as possible. This is closed related with the problem of curve
+fitting, which uses simple smooth curve to reproduce observation points as well as possible, as shown in Figure 3.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{fig3.png}
+\caption*{Fig 3. To compensate observation series}
+\end{figure}
+The observation points are depicted with the related coordinate $x$ and $y$.
+From the view of statistics, these points are generated by a two-dimensional statistical
+distribution with probability density function $w(x,y)$.
+To make the curve fitting meaning, the stochastic connection between $x$ and $y$ must be tight. In such case, the correlation metric is also near one. The task of the curve
+fitting is to find a curve given by the equation $y=F(x)$, which lies between the
+observation points. The object is to minimize the quadratic deviation
+\begin{equation}
+    Q = \min \iint(y-F(x))^2 w(x,y) dxdy
+\end{equation}
+We again use the orthogonal polynomials $\varphi_1(x)$
+and $\psi_j(y)$. Then from $\psi_j(y) = \frac{y-b}{t}$
+we have $y=b+t\psi_1(y)$, and for $F(x)$ we make the statement
+$$
+F(x)=b+d_{0}+d_{1} \varphi_{1}(x)+d_{2} \varphi_{2}(x)+\cdots=b+\sum_{i=0}^{\infty} d_{i} \varphi_{i}(x)
+$$
+Then it follows that
+\begin{align*}
+Q &=\iint\left(b+t \psi_{1}(y)-b-\sum_{i=0}^{\infty} d_{i} \varphi_{i}(x)\right)^{2} w(x, y) \mathrm{d} x \mathrm{~d} y \\
+&=\iint\left(t \psi_{1}(y)-\sum_{i=0}^{\infty} d_{i} \varphi_{i}(x)\right)^{2} w(x, y) \mathrm{d} x \mathrm{~d} y \\
+&=t^{2} \iint\psi_{1}^{2}(y) w(x, y) \mathrm{d} x \mathrm{d} y-2 t\iint \psi_{1}(y) \sum_{i=0}^{\infty} d_{i} \varphi_{i}(x) w(x, y) \mathrm{d} x \mathrm{d} y \\
+&+\iint\left(\sum_{i=1}^{\infty} d_{i} \varphi_{i}(x)\right)^{2} w(x, y) \mathrm{d} x \mathrm{d} y \\
+&=t^{2} \int \psi_{1}^{2}(y) w_{2}(y) d y-2 t \sum_{i=0}^{\infty} d_{i} \iint \varphi_{i}(x) \psi_{1}(y) w(x, y) d x d y \\
+&+\int\left(\sum_{i=0}^{\infty} d_{i} \varphi_{i}(x)\right)^{2} w_{1}(x) d x \\
+&=t^{2}-2 t \sum_{i=0}^{\infty} d_{i} c_{i_{1}}+\sum_{i=0}^{\infty} d_{i}^{2}.
+\end{align*}
+It is enough to choose $d_i$ such that
+\begin{equation}
+    Q=t^{2}-2 t \sum_{i=0}^{\infty} d_{i} c_{i_{1}}+\sum_{i=1}^{\infty} d_{1}^{2}\tag{41a}
+\end{equation}
+is achieved. The condition goes as
+$$
+\frac{\mathrm{d} Q}{\mathrm{~d} d_{i}}=-2 t \cdot c_{i1}+2 d_{i}=0, \text { or } d_{i}=t \cdot c_{i} \text{ for } i=0,1,\dots
+$$
+In particular is $d_0=0$ since $c_{01}=0$ always holds.
+Therefore the most favorable fitting function of the form (41) is
+$$
+F(x)=b+t \sum_{i=1}^{\infty} c_{i 1} \varphi_{i}(x),
+$$
+For the accompanying $Q$ it turns out
+\begin{equation}
+    Q=t^{2}\left(1-\sum_{i=1}^{\infty} c_{i 1}^{2}\right)=t^{2}\left(1-k_{y x}^{2} \right)
+\end{equation}
+And the middle, quadratic deviation in the direction of ordinate is therefore
+\begin{equation}
+\overline{\Delta y}=\sqrt{Q}=t \sqrt{1-k_{y x}^{2}}
+\end{equation}
+The coefficient of the fitting function turns out to be
+\begin{align*}
+d_{i}=t \cdot c_{i_{1}} &=t  \int \varphi_{i}(x) \psi_{i}(y) w(x, y) \mathrm{d} x \mathrm{d} y \\
+&=\iint \varphi_{i}(x)(y-b) w(x, y) \mathrm{d} y \mathrm{~d} x \\
+&= \varphi_{i}(x)(\bar{y}(x)-b) w_{1}(x) d x=\int \varphi_{i}(x) \cdot \bar{y}(x) w_{1}(x) \mathrm{d} x.
+\end{align*}
+The quantities $d_i$ are simultaneously the series coefficients of the regression line $\bar{y}(x)$.
+That is, the best fitting function $F(x)$ is this regression line.
+
+As a result, we obtain the following result: To fit series of observation points
+by a function $F(x)$,  the average quadratic deviation $Q$ is minimized, when the regression line $\bar{y}(x)$ is chosen as the fitting function for the distribution $w(x,y)$ of the observation points. The value $Q$ is equal to the deviation of the correlation ratio
+$k^2_{yx}$ from one, multiplied by the variance $t^2$ of the ordinate.
+In the case of full dependence we have $k^2_{yx}=1$ and the quadratic deviation $Q=0$.
+The task is then reduced to an interpolation problem.
+
+If in the described task of computing deviations we exchange the abscissa
+and ordinate, then $\bar{y}(x)$ is replaced by the other regression line $\bar{x}(y)$
+and the second correlation ratio $k^2_{xy}$ replaces $k^2_{yx}$. Generally the two ratios
+are not identical. Hence different fitting curve and different $Q$
+exist. The fitting curve changes if we make distortion in abscissa or ordinate
+direction before fitting the curve, for example, applying logarithmic transformation to observation points. Therefore, the task of curve
+fitting is not clearly formulated. The clarity can be reached in principle
+if we allow two distortion functions $f(x)$ and $g(y)$ instead
+of one function $F(x)$. Instead of the variation problems (47), which leads to the correlation ratio, the general variation problem for $K^2$ should be used. However, the extra cost of such approach makes it hard to 
+use in practice.
+
+Besides the condition (41), the practice of curve fitting
+requires that the fitting curve is smooth and as simple as possible.
+The regression line does not always satisfy this condition especially
+when the number of observation points is relatively small.
+It is not suitable to use polynomials with high degrees as fitting curve.
+This is achieved by cutting off the series expansion (42) as
+\begin{equation}
+F_n(x) = b + t \sum_{i=1}^{n} c_{i1} \varphi_i(x) \tag{42a}
+\end{equation}
+which is a polynomial with $n$ grades. One advantage of using this polynomial is that we can obtain immediately the corresponding value
+\begin{equation}
+    Q = t^2(1-\sum_{i=1}^n c_{i1}^2) \tag{43a}
+\end{equation}
+We can also see that by increasing the degree $n$, better approximation
+is achieved.
+Therefore we only need to add series members if more
+precise fitting if required.
+
+The task of curve fitting is based on the orthogonal polynomials $\varphi_n(x)$
+with respect to $w_1(x)$. Our approach faces difficulty
+unless the computational methods for the general orthogonal
+polynomials are developed. It is noted that for a density
+function $w_1(x)$ we can approximate it by equally choosing $m$ points
+with the same weight $\frac{1}{m}$. This method to compute
+the orthogonal polynomials has been found in practice like the work by the institutes of economic research, which computes
+the temporal trends of the certain economic quantity.
+This computational
+method is developed by Doctor Paul Lorenz, guided by Professor Ernst Wagemann, published in the special issue 9 quarter of the economic research, Berlin
+(1928) and new works in special issue 21, Berlin (1931).
+
+As example we consider the simplest case of curve fitting by using a straight line. Here (42a) ends with linear term. Due to $c_{11}=r$
+we have
+$$
+F(x)=b+t c_{11} \varphi_{1}(x)=b+\frac{t r}{s}(x-a)
+$$
+The fitting line has the equation
+$$
+y-b=\frac{t r}{s}(x-a)
+$$
+This line goes along the direction $\alpha$
+in accordance with the formula $\tan \alpha = \frac{tr}{s}$ through
+the center of gravity $x=a, y=b$ of the distribution. The mean
+quadratic deviation is
+$$
+\overline{\Delta y}=\sqrt{1-r^{2}}
+$$
+The correlation coefficient $r$ replaces the place of correlation ratio $k^2_{yx}$ when we use a straight line for curve fitting.
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

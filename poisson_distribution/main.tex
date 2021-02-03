@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\DeclareMathOperator{\Pois}{Pois}
+\title{Poisson Distribution}
+\author{zhaof17 }
+\date{January 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+An important property for Poisson distribution.
+Suppose $P_1 \sim \Pois(c)$, $P_2 \sim \Pois(d)$.
+And $P_{\lambda}$ is defined as 
+$$
+P_{\lambda}(x) = \frac{P_1^{1-\lambda}(x) P_2^{\lambda} (x)}
+{\sum_{x \in \mathcal{X}}P_1^{1-\lambda}(x) P_2^{\lambda} (x)}
+$$
+\begin{enumerate}
+    \item $P_{\lambda} \sim \Pois(c^{1-\lambda} d^{\lambda})$
+    \item $D_{\mathrm{KL}}(P_{\lambda}||P_1) = c^{1-\lambda}d^{\lambda}\log(\frac{d}{c})^{\lambda} + c-c^{1-\lambda}d^{\lambda}$
+\end{enumerate}
+The second property is proved using the KL divergence
+of two Poisson distributions. See \cite{kl}
+\section{Side Information of Abbe}
+This section discusses theoretical deduction and experimental results for \cite{abbe}.
+
+Let $c_1 = \frac{a}{2}, c_2=\frac{b}{2}$. $p_0, p_1$ are two
+discrete distributions.
+The Abbe's conclusion for side information is solving the following
+optimization problem:
+\begin{equation}\label{eq:lambda}
+    \min_{\lambda \in [0,1]} c_1^{1-\lambda}c_2^{\lambda} +
+    c_2^{1-\lambda}c_1^{\lambda} + \gamma \log(\sum_{x\in \mathcal{X}}p^{1-\lambda}_0(x) p^{\lambda}_1(x))
+\end{equation}
+Let $p_{\lambda}$ be defined as
+$$
+p_{\lambda}(x) = \frac{p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+$$
+After solving $\lambda$ from \eqref{eq:lambda}. The theoretical
+threshold is given by
+\begin{align}
+    I_+ =\lambda (c_1^{1-\lambda}c_2^{\lambda} -
+    c_2^{1-\lambda}c_1^{\lambda})\log\frac{c_2}{c_1}+c_1+c_2\notag \\
+    -c_1^{1-\lambda}c_2^{\lambda} -
+    c_2^{1-\lambda}c_1^{\lambda}+\gamma D_{\mathrm{KL}}(p_{\lambda}||p_0)>1
+\end{align}
+When $\lambda=\frac{1}{2}$ makes $D_{\mathrm{KL}}(p_{\lambda}||p_0)=
+D_{\mathrm{KL}}(p_{\lambda}||p_1)$, the threshold of Abbe is the same as
+us.
+
+\subsection{Experiment Result}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig.png}
+    \label{fig:my_label}
+\end{figure}
+
+The red line is our theoretical line
+given by $a=(\sqrt{2 - \gamma D_{1/2}(p_0||p_1)} + \sqrt{b})^2$,
+which is strictly over the black region. It tells that
+exact recovery condition of Abbe is more stronger than us.
+\subsection{Theoretical Equivalence}
+Recall the definition of $g(\epsilon)$ as
+	\begin{equation}\label{eq:gab}
+	g(a,b,\epsilon) = a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
+	\end{equation}
+	
+We show that $I_+$ is equal to $\theta_1^*$.
+\begin{align}
+\theta^*_1 &= \min_{\widetilde{X}_1} \gamma D(p_{\widetilde{X}_1}|| p_0)+ \frac{1}{2} g(a,b, 2\epsilon)  \label{eq:theta}\\
+\epsilon &= \gamma \frac{D(p_{\widetilde{X}_1} || P_1) - D(p_{\widetilde{X}_1} || P_0) }{\log a /b}\label{eq:equal}
+\end{align}
+We use Lagrange multiplier to solve \eqref{eq:theta}.
+Let
+$$
+L(p_{\widetilde{X}_1},\epsilon, \lambda)
+=\gamma D(p_{\widetilde{X}_1}|| p_0)+ \frac{1}{2} g(a,b, 2\epsilon) - \lambda(\epsilon \log\frac{a}{b}-\gamma
+D(p_{\widetilde{X}_1} || P_1) + \gamma D(p_{\widetilde{X}_1} || P_0))
+$$
+It is equivalent to minimize
+$(1-\lambda)D(p_{\widetilde{X}_1} || P_0) +
+\lambda D(p_{\widetilde{X}_1} || P_1) $, from
+which we get
+\begin{equation}\label{eq:p12}
+p_{\widetilde{X}_1}(x) = \frac{p_0^{1-\lambda}(x)p_1^{\lambda}(x)}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}.
+\end{equation}
+From $\frac{\partial L(p_{\widetilde{X}_1},\epsilon, \lambda)}{\partial \epsilon}=0$ and taking \eqref{eq:p12}
+into \eqref{eq:equal}, we get
+\begin{align*}
+    \lambda \log \frac{a}{b}
+    & = \log \frac{\epsilon + \sqrt{\epsilon^2+ab}}{b} \\
+    \epsilon \log \frac{a}{b}
+    & = \gamma\frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_0(x)}{p_1(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+\end{align*}
+After cancelling $\epsilon$
+from the above two equations, we can get a single equation
+for $\lambda$:
+\begin{equation}
+    \frac{1}{2}\log\frac{a}{b}
+    (a^{\lambda} b^{1-\lambda}
+    -a^{1-\lambda} b^{\lambda})
+    + \gamma \frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_1(x)}{p_0(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}=0
+\end{equation}
+which is the derivative of \eqref{eq:lambda}.
+Then by simple computation we have
+$I_+ = \theta_1^*$.
+
+\begin{thebibliography}{9}
+\bibitem{kl} https://stats.stackexchange.com/questions/145789/kl-divergence-between-two-univariate-poisson-distributions
+\bibitem{abbe} Asadi, Amir R., Emmanuel Abbe, and Sergio Verdú. "Compressing data on graphs with clusters." 2017 IEEE International Symposium on Information Theory (ISIT). IEEE, 2017.
+\end{thebibliography}
+\end{document}
