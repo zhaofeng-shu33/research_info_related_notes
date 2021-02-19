@@ -48,5 +48,34 @@ $$\Pr( S_n - \E[S_n]  \leq -t )  \leq \exp \left( - \frac{2t^2}{\sum_{i=1}^n (b_
 \end{align*}
 取 $ s = {4t \over \sum_{i = 1}^n (b_i - a_i)^2}$ 即得到~\eqref{eq:Hoeffding1} 右端。
 \end{proof}
-
+\section{Other useful inequalities}
+Falls $X_1, \dots, X_n$ unabhängige Bernoullißverteilte Zufallsgrößen mit
+Parameter $p \in (0,1) $ sind, dann gilt
+\begin{equation}\label{eq:3delta}
+P(\sum_{i=1}^n X_i \geq (1+ \delta) pn ) \leq \exp(-\frac{\delta^2}{3} pn),
+\delta \in [0,1], n \in \mathbb{N}
+\end{equation}
+\begin{proof}
+Using Chernoff inequality we can get a tight upper bound
+as
+$$
+P(\sum_{i=1}^n X_i \geq (1+ \delta) pn )  \leq \exp(-tn(1+\delta) p + n\log(1-p+pe^t)).
+$$
+Then use the Taylor approximation $\log(1+x) \leq x$ we have
+$$
+ \exp(-t(1+\delta) p + \log(1-p+pe^t)) \leq \exp(np(-1+e^t - t(1+\delta)).
+$$
+We choose $t$ to minimize the right hand side: $t=\log(1+\delta)$, thus getting
+$$
+P(\sum_{i=1}^n X_i \geq (1+ \delta) pn )  \leq \exp(np (\delta - (1+\delta)\log(1+\delta)).
+$$
+\end{proof}
+Using the inequality $\log(1+\delta) \geq \frac{2\delta}{2+\delta} $ we
+can get
+\begin{align*}
+\delta - (1+\delta)\log(1+\delta) \leq & \delta (1-\frac{2(1+\delta)}{2+\delta}) \\
+& = -\frac{\delta^2}{2+\delta} \leq -\frac{1}{3} \delta^3 \textrm{ since } \delta \leq 1
+\end{align*}
+Therefore, \eqref{eq:3delta} holds.
 \end{document}
+
