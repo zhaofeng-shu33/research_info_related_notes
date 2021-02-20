@@ -77,5 +77,17 @@ can get
 & = -\frac{\delta^2}{2+\delta} \leq -\frac{1}{3} \delta^3 \textrm{ since } \delta \leq 1
 \end{align*}
 Therefore, \eqref{eq:3delta} holds.
+
+Let $X_1, X_2, \dots, $ be i.i.d random variable, with zero mean and variance $\sigma^2$.
+$S_n = \sum_{i=1}^n X_i$.
+By central limit theorem:
+$$
+\lim_{n\to \infty} P(\frac{1}{\sqrt{n\sigma^2}} S_n \geq C) =
+\int_{C}^{+\infty} \frac{e^{-x^2/2}}{\sqrt{2\pi}} dx
+\textrm{ for any } C \in \mathbb{R}
+$$
+Let $C=\frac{x\sqrt{n}}{\sigma}, x>0$, we can estimate the probability
+$P(\frac{S_n}{n} > x)$ by $\int_{\frac{x\sqrt{n}}{\sigma}}^{+\infty}  \frac{e^{-u^2/2}}{\sqrt{2\pi}}du
+= \frac{\sigma}{x\sqrt{n}} \exp(-\frac{nx^2}{2\sigma^2})(1+o(1))$.
 \end{document}
 
