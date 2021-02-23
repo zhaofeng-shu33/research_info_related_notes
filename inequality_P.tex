@@ -3,6 +3,7 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{bbm}
 \usepackage{bm}
 \DeclareMathOperator\E{\mathbb{E}}
 \DeclareMathOperator\Var{\mathrm{Var}}
@@ -14,6 +15,7 @@
 \newtheorem{example}{例}
 \usepackage{mathtools}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter{\ip}{\langle}{\rangle}
 \begin{document}
 \title{概念论常用不等式}
 \author{zhaofeng-shu33}
@@ -111,7 +113,65 @@ For common distributions, there $\log\varphi(t)$ and $I(x)$ are listed in the fo
 	\hline
 \end{tabular}
 \end{table}
+\section{ f-Divergence and its variational representation}
+We use discrete distribution as an illustration.
+Let $f:(0,\infty) \to \mathbb{R}$ be a convex function and $f(1)=0$.
+Let $P,Q$ be two probability distributions on a measurable space
+$(\mathcal{X}, \mathcal{F})$. The f-divergence of $Q$ from $P$
+is defined as
+\begin{equation}
+D_f(P||Q) = \sum_{x\in \mathcal{X}} q(x) f\left(\frac{p(x)}{q(x)}\right)
+\end{equation}
+Based on Legendre transformation, we can give the variational
+representation of $D_f(P||Q)$ as
+\begin{equation}\label{eq:Df}
+D_f(P||Q) = \sup_{t: \mathcal{X} \to R} \left(\mathbb{E}_P[t(X)] - \mathbb{E}_Q[f^*(t(X))]
+\right)
+\end{equation}
+where $f^*$ is the convex conjugate of $f$.
+
+\eqref{eq:Df} can be proved by considering
+$f(\frac{p(x)}{q(x)}) = \sup_{t=t(x)} [t\frac{p(x)}{q(x)} - f^*(t)] $
+for each $x\in \mathcal{X}$. Then summing up $\sum_{x\in\mathcal{X}} f(\frac{p(x)}{q(x)}) q(x)$
+we can get \eqref{eq:Df}.
+
+Choosing $f(x)=x\log x, f^*(t)=e^{t-1}$, the f-divergence reduces to KL-divergence and
+\eqref{eq:Df} becomes
+\begin{equation}\label{eq:DfKL}
+D(P||Q) = \sup_{t: \mathcal{X} \to R} \mathbb{E}_P[t(X)] - \mathbb{E}_Q[\exp(t(X)-1)]
+\end{equation}
+A tighter variational representation of KL divergence is given 
+by Donsker-Varadhan theorem as:
+\begin{equation}\label{eq:DfKL_tight}
+D(P||Q) = \sup_{t: \mathcal{X} \to R} \mathbb{E}_P[t(X)] - \log\mathbb{E}_Q[\exp(t(X))]
+\end{equation}
+using $\log x \leq x-1$ we can show that
+$\mathbb{E}_P[t(X)] - \log\mathbb{E}_Q[\exp(t(X))]
+\geq \mathbb{E}_P[t(X)] - \mathbb{E}_Q[\exp(t(X)-1)]$.
+
+Compared with \eqref{eq:Df}
+, a tighter representation for f-divergence is given in Theorem 1 of
+\cite{imp}.
+\begin{equation}\label{eq:Dft}
+D_f(P||Q) = \sup_{t: \mathcal{X} \to \mathbb{R}} \mathbb{E}_P[t(X)] -  (\mathbbm{1}^R_{f,Q})^* (t)
+\end{equation}
+The joint convex conjugate of $f,Q$ is defined as $g(t) := (\mathbbm{1}^R_{f,Q})^*(t) $
+\begin{equation}
+g(t) = \sup_{r, \mathbb{E}_Q[r(X)] = 1} \ip{t,r}_Q - \mathbb{E}_Q[f(r(X))] 
+\textrm{ for } t: \mathcal{X} \to \mathbb{R}
+\end{equation}
+The inner product $\ip{t,r}_Q = \sum_{x\in \mathcal{X}} t(x)r(x)Q(x)$.
+Choosing $f(x)=x\log x$, we can show that
+\eqref{eq:Dft} reduces to
+\eqref{eq:DfKL_tight} (using Lagrange multiplier).
+
+\begin{thebibliography}{9}
+	\bibitem{imp} Ruderman, Avraham, et al. "Tighter variational representations of f-divergences via restriction to probability measures." arXiv preprint arXiv:1206.4664 (2012).
+\end{thebibliography}
 \end{document}
+
+
+
 
 
 
