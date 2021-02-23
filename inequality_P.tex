@@ -6,6 +6,8 @@
 \usepackage{bm}
 \DeclareMathOperator\E{\mathbb{E}}
 \DeclareMathOperator\Var{\mathrm{Var}}
+\DeclareMathOperator{\Binom}{Binom}
+\DeclareMathOperator{\Pois}{Pois}
 \newtheorem{lemma}{引理}
 \theoremstyle{definition}
 \newtheorem{definition}{定义}
@@ -89,5 +91,28 @@ $$
 Let $C=\frac{x\sqrt{n}}{\sigma}, x>0$, we can estimate the probability
 $P(\frac{S_n}{n} > x)$ by $\int_{\frac{x\sqrt{n}}{\sigma}}^{+\infty}  \frac{e^{-u^2/2}}{\sqrt{2\pi}}du
 = \frac{\sigma}{x\sqrt{n}} \exp(-\frac{nx^2}{2\sigma^2})(1+o(1))$.
+
+\section{Common Examples for Cramér Theorem}
+For the random variable $X$,
+$\varphi(t) = \mathbb{E}[e^{tX}]$ is its moment generating function.
+$\log \varphi(t)$ is called cumulant generating function.
+$I(x) = \sup_{t\in \mathbb{R}} (tx - \log \varphi(t))$ is called Legendre transformation of the function $\log \varphi$.
+For common distributions, there $\log\varphi(t)$ and $I(x)$ are listed in the following table:
+\begin{table}[!ht]
+	\centering
+\begin{tabular}{cccc}
+	\hline  
+	Distribution & pdf & $\log\varphi(t)$ & $I(x)$ \\
+	\hline
+	Gaussian $\mathcal{N}(0, \sigma^2)$ & $\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2}{2\sigma^2}}, x\in \mathbb{R}$ & $\frac{\sigma^2 t^2}{2}$& $\frac{x^2}{2\sigma^2}$ \\
+	Bernoulli $\Binom(p)$ & $p^x(1-p)^{1-x}, x\in \{0,1\}$ & $\log(pe^t + (1-p))$  & $D_{\textrm{KL}}(\Binom(x) || \Binom(p))$ \\
+	Exponential $\textrm{E}(\lambda)$ & $\lambda e^{-\lambda x}, x>0$ & $\log\frac{\lambda}{\lambda - t}$ & $\lambda x - 1 - \log(\lambda x), x>0$ \\
+	Poisson $\Pois(\lambda)$ & $ \frac{\lambda^k}{k!}, e^{-\lambda} k\in \mathbb{N}^+$ & $\lambda(e^t-1)$ & $\lambda - x+ x\log\frac{x}{\lambda}$ \\
+	\hline
+\end{tabular}
+\end{table}
 \end{document}
+
+
+
 
