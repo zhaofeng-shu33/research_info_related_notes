@@ -164,7 +164,12 @@ The inner product $\ip{t,r}_Q = \sum_{x\in \mathcal{X}} t(x)r(x)Q(x)$.
 Choosing $f(x)=x\log x$, we can show that
 \eqref{eq:Dft} reduces to
 \eqref{eq:DfKL_tight} (using Lagrange multiplier).
-
+\section{New variational representation of KL divergence}
+Xiangxiang Xu derives the following expression of KL divergence.
+\begin{equation}
+D(P||Q) = \sup_{t: \mathcal{X} \to R} \mathbb{E}_P[t(X)] - \mathbb{E}_Q[\exp(t(X))] +1
++\frac{1}{2}(\mathbb{E}_Q[\exp(t(X))]-1)^2
+\end{equation}
 \begin{thebibliography}{9}
 	\bibitem{imp} Ruderman, Avraham, et al. "Tighter variational representations of f-divergences via restriction to probability measures." arXiv preprint arXiv:1206.4664 (2012).
 \end{thebibliography}
