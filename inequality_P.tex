@@ -201,22 +201,22 @@ Using Lagrange multiplier, the constraint gradient of \eqref{eq:uPQ} vanishes,
 and we have the following equation system
 \begin{align}
 C_2 \gamma_2(u_i) & = -\frac{p_i}{q_i} + \lambda_1(p, q) \label{eq:deriv1}\\
-C_1 u_i & = \log \frac{p_i}{q_i} + \lambda_2(p, q) \label{eq:deriv2}\\
+C_1 u_i & = \log \frac{p_i}{q_i} + \lambda_2(p, q) +1 \label{eq:deriv2}\\
 C_1 p_i + C_2 q_i \gamma'_2(u_i) &= 0 \label{eq:deriv3}
 \end{align}
 By combining (\ref{eq:deriv1}, \ref{eq:deriv3}) and canceling out $\frac{p_i}{q_i}$,
 we can obtain $C_2 \gamma_2(t) = \frac{C_2}{C_1} \gamma'_2(t) + \lambda_1$.
 Thus, $\gamma_2(t)= \frac{\lambda_1}{C_2} + A e^{C_1 t}$.
 The coefficient $A$ is determined by combining (\ref{eq:deriv1}, \ref{eq:deriv2}), from which
-follows $A=-\frac{e^{-\lambda_2}}{C_2}$. A final constraint is to make sure the equality
-in \eqref{eq:uPQ} holds, and we can obtain from that $\lambda_1 + \lambda_2 = 1$. 
+follows $A=-\frac{e^{-\lambda_2 - 1}}{C_2}$. A final constraint is to make sure the equality
+in \eqref{eq:uPQ} holds, and we can obtain from that $\lambda_1 + \lambda_2 = 0$. 
 Once solving out $\gamma_2(t) = \frac{1-\lambda_2}{C_2} - \frac{e^{-\lambda_2 + C_1t}}{C_2}$,
 we can rewrite \eqref{eq:DfPQr} for the special KL-divergence case as
 \begin{equation}\label{eq:DfPQKL}
-D_{\textrm{KL}}(P, Q) = \sup_{\phi: \mathcal{X} \to R} C_1 \mathbb{E}_P(\phi) -\lambda_2 +1 - \mathbb{E}_Q(e^{-\lambda_2 + C_1 \phi})
+D_{\textrm{KL}}(P, Q) = \sup_{\phi: \mathcal{X} \to R} C_1 \mathbb{E}_P(\phi) -\lambda_2  - \mathbb{E}_Q(e^{-\lambda_2 -1 + C_1 \phi})
 \end{equation}
 after treating $C_1 \phi - \lambda_2 $ as a whole, \eqref{eq:DfPQKL} has the same form with
-\eqref{eq:DfKL2}.
+\eqref{eq:DfKL}.
 \begin{thebibliography}{9}
 	\bibitem{imp} Ruderman, Avraham, et al. "Tighter variational representations of f-divergences via restriction to probability measures." arXiv preprint arXiv:1206.4664 (2012).
 \end{thebibliography}
