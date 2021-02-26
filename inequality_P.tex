@@ -197,11 +197,11 @@ The supremum is reached when $\phi = u$ so that we have
 D_f(P, Q) = C_1 \mathbb{E}_P(u) + C_2 \mathbb{E}_Q(\gamma_2(u))
 \end{equation}
 which holds for any distributional measure $P, Q$.
-Using Lagrange multiplier, the constraint gradient of \eqref{eq:uPQ} vanishes,
+Using Lagrange multiplier method (we assume the multipliers are constant values), the constraint gradient of \eqref{eq:uPQ} vanishes,
 and we have the following equation system
 \begin{align}
-C_2 \gamma_2(u_i) & = -\frac{p_i}{q_i} + \lambda_1(p, q) \label{eq:deriv1}\\
-C_1 u_i & = \log \frac{p_i}{q_i} + \lambda_2(p, q) +1 \label{eq:deriv2}\\
+C_2 \gamma_2(u_i) & = -\frac{p_i}{q_i} + \lambda_1 \label{eq:deriv1}\\
+C_1 u_i & = \log \frac{p_i}{q_i} + \lambda_2 +1 \label{eq:deriv2}\\
 C_1 p_i + C_2 q_i \gamma'_2(u_i) &= 0 \label{eq:deriv3}
 \end{align}
 By combining (\ref{eq:deriv1}, \ref{eq:deriv3}) and canceling out $\frac{p_i}{q_i}$,
@@ -210,13 +210,35 @@ Thus, $\gamma_2(t)= \frac{\lambda_1}{C_2} + A e^{C_1 t}$.
 The coefficient $A$ is determined by combining (\ref{eq:deriv1}, \ref{eq:deriv2}), from which
 follows $A=-\frac{e^{-\lambda_2 - 1}}{C_2}$. A final constraint is to make sure the equality
 in \eqref{eq:uPQ} holds, and we can obtain from that $\lambda_1 + \lambda_2 = 0$. 
-Once solving out $\gamma_2(t) = \frac{1-\lambda_2}{C_2} - \frac{e^{-\lambda_2 + C_1t}}{C_2}$,
+Once solving out $\gamma_2(t) = \frac{-\lambda_2}{C_2} - \frac{e^{-\lambda_2 -1+ C_1t}}{C_2}$,
 we can rewrite \eqref{eq:DfPQr} for the special KL-divergence case as
 \begin{equation}\label{eq:DfPQKL}
 D_{\textrm{KL}}(P, Q) = \sup_{\phi: \mathcal{X} \to R} C_1 \mathbb{E}_P(\phi) -\lambda_2  - \mathbb{E}_Q(e^{-\lambda_2 -1 + C_1 \phi})
 \end{equation}
 after treating $C_1 \phi - \lambda_2 $ as a whole, \eqref{eq:DfPQKL} has the same form with
 \eqref{eq:DfKL}.
+
+Generally, the equation system (\ref{eq:deriv1}, \ref{eq:deriv2}, \ref{eq:deriv3})
+has the following form
+\begin{align}
+C_2 \gamma_2(u_i) & = -\frac{p_i}{q_i}f'(\frac{p_i}{q_i}) + f(\frac{p_i}{q_i}) + \lambda_1 \label{eq:derivg1}\\
+C_1 u_i & = f'( \frac{p_i}{q_i}) + \lambda_2 \label{eq:derivg2}\\
+C_1 p_i + C_2 q_i \gamma'_2(u_i) &= 0 \label{eq:derivg3}
+\end{align}
+Let $t=f'(\frac{p_i}{q_i}), g= (f')^{-1}$ (inverse of $f'$), then the right hand of \eqref{eq:derivg1} has the form
+$-g(t) \cdot t + f(g(t))+\lambda_1 = -f^*(t) + \lambda_1$.
+Combining (\ref{eq:derivg1}, \ref{eq:derivg2}), we have
+$C_2 \gamma_2(u_i) = -f^*(C_1 u_i - \lambda_2) + \lambda_1$.
+The relationship of $\lambda_1 + \lambda_2 = 0$ is obtained similarly as for the special case
+of KL divergence. Then
+\begin{equation}
+\gamma_2(t) = \frac{-\lambda_2}{C_2} - \frac{f^*(C_1 t - \lambda_2)}{C_2}
+\end{equation}
+and \eqref{eq:DfPQKL} is generalized to
+\begin{equation}
+D_{\textrm{KL}}(P, Q) = \sup_{\phi: \mathcal{X} \to R} C_1 \mathbb{E}_P(\phi) -\lambda_2  - \mathbb{E}_Q(f^*(C_1 \phi - \lambda_2))
+\end{equation}
+which is exactly what \eqref{eq:Df} says.
 \begin{thebibliography}{9}
 	\bibitem{imp} Ruderman, Avraham, et al. "Tighter variational representations of f-divergences via restriction to probability measures." arXiv preprint arXiv:1206.4664 (2012).
 \end{thebibliography}
