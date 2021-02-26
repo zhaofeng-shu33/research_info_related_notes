@@ -140,6 +140,12 @@ Choosing $f(x)=x\log x, f^*(t)=e^{t-1}$, the f-divergence reduces to KL-divergen
 \begin{equation}\label{eq:DfKL}
 D(P||Q) = \sup_{t: \mathcal{X} \to R} \mathbb{E}_P[t(X)] - \mathbb{E}_Q[\exp(t(X)-1)]
 \end{equation}
+Treating $t(X)-1$ as an entity, we can rewrite \eqref{eq:DfKL}
+as
+\begin{equation}\label{eq:DfKL2}
+D(P||Q) = \sup_{t: \mathcal{X} \to R} \mathbb{E}_P[t(X)] + 1 - \mathbb{E}_Q[\exp(t(X))]
+\end{equation}
+
 A tighter variational representation of KL divergence is given 
 by Donsker-Varadhan theorem as:
 \begin{equation}\label{eq:DfKL_tight}
@@ -149,6 +155,9 @@ using $\log x \leq x-1$ we can show that
 $\mathbb{E}_P[t(X)] - \log\mathbb{E}_Q[\exp(t(X))]
 \geq \mathbb{E}_P[t(X)] - \mathbb{E}_Q[\exp(t(X)-1)]$.
 
+Comparing \eqref{eq:DfKL2} with \eqref{eq:DfKL_tight}, it is more clearly to see that 
+\eqref{eq:DfKL2} is the first-order expansion of \eqref{eq:DfKL_tight} at $\mathbb{E}_Q[\exp(t(X))]=1$.
+
 Compared with \eqref{eq:Df}
 , a tighter representation for f-divergence is given in Theorem 1 of
 \cite{imp}.
@@ -157,7 +166,7 @@ D_f(P||Q) = \sup_{t: \mathcal{X} \to \mathbb{R}} \mathbb{E}_P[t(X)] -  (\mathbbm
 \end{equation}
 The joint convex conjugate of $f,Q$ is defined as $g(t) := (\mathbbm{1}^R_{f,Q})^*(t) $
 \begin{equation}
-g(t) = \sup_{r, \mathbb{E}_Q[r(X)] = 1} \ip{t,r}_Q - \mathbb{E}_Q[f(r(X))] 
+g(t) = \sup_{\substack{r: \mathcal{X} \to \mathbb{R} \\ \mathbb{E}_Q[r(X)] = 1}} \ip{t,r}_Q - \mathbb{E}_Q[f(r(X))] 
 \textrm{ for } t: \mathcal{X} \to \mathbb{R}
 \end{equation}
 The inner product $\ip{t,r}_Q = \sum_{x\in \mathcal{X}} t(x)r(x)Q(x)$.
@@ -166,10 +175,48 @@ Choosing $f(x)=x\log x$, we can show that
 \eqref{eq:DfKL_tight} (using Lagrange multiplier).
 \section{New variational representation of KL divergence}
 Xiangxiang Xu derives the following expression of KL divergence.
-\begin{equation}
+\begin{equation}\label{eq:DfKL3}
 D(P||Q) = \sup_{t: \mathcal{X} \to R} \mathbb{E}_P[t(X)] - \mathbb{E}_Q[\exp(t(X))] +1
 +\frac{1}{2}(\mathbb{E}_Q[\exp(t(X))]-1)^2
 \end{equation}
+Comparing \eqref{eq:DfKL3} with \eqref{eq:DfKL_tight}, it is more clearly to see that 
+\eqref{eq:DfKL2} is the second-order expansion of \eqref{eq:DfKL_tight} at $\mathbb{E}_Q[\exp(t(X))]=1$.
+
+It is expected that any $n$-th order expansion of \eqref{eq:DfKL_tight} at $\mathbb{E}_Q[\exp(t(X))]=1$ is a valid variational representation of $D(P||Q)$.
+
+\section{Variation representation with simple form}
+Suppose the f-divergence has the following representation:
+\begin{equation}\label{eq:DfPQr}
+D_f(P,Q) = \sup_{\phi: \mathcal{X} \to R} C_1 \mathbb{E}_P(\phi) + C_2 \mathbb{E}_Q(\gamma_2(\phi))
+\end{equation}
+where $C_1, C_2$ are constants.
+We will show that \eqref{eq:DfPQr} reduces to \eqref{eq:Df} under approximate assumptions.
+We first consider the special case when $f(x)=x\log x$ and the f-divergence is KL-divergence.
+The supremum is reached when $\phi = u$ so that we have
+\begin{equation}\label{eq:uPQ}
+D_f(P, Q) = C_1 \mathbb{E}_P(u) + C_2 \mathbb{E}_Q(\gamma_2(u))
+\end{equation}
+which holds for any distributional measure $P, Q$.
+Using Lagrange multiplier, the constraint gradient of \eqref{eq:uPQ} vanishes,
+and we have the following equation system
+\begin{align}
+C_2 \gamma_2(u_i) & = -\frac{p_i}{q_i} + \lambda_1(p, q) \label{eq:deriv1}\\
+C_1 u_i & = \log \frac{p_i}{q_i} + \lambda_2(p, q) \label{eq:deriv2}\\
+C_1 p_i + C_2 q_i \gamma'_2(u_i) &= 0 \label{eq:deriv3}
+\end{align}
+By combining (\ref{eq:deriv1}, \ref{eq:deriv3}) and canceling out $\frac{p_i}{q_i}$,
+we can obtain $C_2 \gamma_2(t) = \frac{C_2}{C_1} \gamma'_2(t) + \lambda_1$.
+Thus, $\gamma_2(t)= \frac{\lambda_1}{C_2} + A e^{C_1 t}$.
+The coefficient $A$ is determined by combining (\ref{eq:deriv1}, \ref{eq:deriv2}), from which
+follows $A=-\frac{e^{-\lambda_2}}{C_2}$. A final constraint is to make sure the equality
+in \eqref{eq:uPQ} holds, and we can obtain from that $\lambda_1 + \lambda_2 = 1$. 
+Once solving out $\gamma_2(t) = \frac{1-\lambda_2}{C_2} - \frac{e^{-\lambda_2 + C_1t}}{C_2}$,
+we can rewrite \eqref{eq:DfPQr} for the special KL-divergence case as
+\begin{equation}\label{eq:DfPQKL}
+D_{\textrm{KL}}(P, Q) = \sup_{\phi: \mathcal{X} \to R} C_1 \mathbb{E}_P(\phi) -\lambda_2 +1 - \mathbb{E}_Q(e^{-\lambda_2 + C_1 \phi})
+\end{equation}
+after treating $C_1 \phi - \lambda_2 $ as a whole, \eqref{eq:DfPQKL} has the same form with
+\eqref{eq:DfKL2}.
 \begin{thebibliography}{9}
 	\bibitem{imp} Ruderman, Avraham, et al. "Tighter variational representations of f-divergences via restriction to probability measures." arXiv preprint arXiv:1206.4664 (2012).
 \end{thebibliography}
