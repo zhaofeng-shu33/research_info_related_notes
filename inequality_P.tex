@@ -225,6 +225,12 @@ C_2 \gamma_2(u_i) & = -\frac{p_i}{q_i}f'(\frac{p_i}{q_i}) + f(\frac{p_i}{q_i}) +
 C_1 u_i & = f'( \frac{p_i}{q_i}) + \lambda_2 \label{eq:derivg2}\\
 C_1 p_i + C_2 q_i \gamma'_2(u_i) &= 0 \label{eq:derivg3}
 \end{align}
+Actually \eqref{eq:derivg3} is redundant, which can be seen by multiplying $q_i$
+in \eqref{eq:derivg1} and multiplying $p_i$ in \eqref{eq:derivg2}. Adding them together,
+we can get
+$C_1 p_i u_i + C_2 q_i\gamma_2 (u_i)  = \lambda_1 + \lambda_2$. Then taking the derivative about
+$u_i$ yields \eqref{eq:derivg3}.
+
 Let $t=f'(\frac{p_i}{q_i}), g= (f')^{-1}$ (inverse of $f'$), then the right hand of \eqref{eq:derivg1} has the form
 $-g(t) \cdot t + f(g(t))+\lambda_1 = -f^*(t) + \lambda_1$.
 Combining (\ref{eq:derivg1}, \ref{eq:derivg2}), we have
