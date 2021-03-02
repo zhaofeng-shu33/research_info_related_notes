@@ -113,7 +113,7 @@ For common distributions, there $\log\varphi(t)$ and $I(x)$ are listed in the fo
 	\hline
 \end{tabular}
 \end{table}
-\section{ f-Divergence and its variational representation}
+\section{ f-divergence and its variational representation}
 We use discrete distribution as an illustration.
 Let $f:(0,\infty) \to \mathbb{R}$ be a convex function and $f(1)=0$.
 Let $P,Q$ be two probability distributions on a measurable space
@@ -245,8 +245,65 @@ and \eqref{eq:DfPQKL} is generalized to
 D_{\textrm{KL}}(P, Q) = \sup_{\phi: \mathcal{X} \to R} C_1 \mathbb{E}_P(\phi) -\lambda_2  - \mathbb{E}_Q(f^*(C_1 \phi - \lambda_2))
 \end{equation}
 which is exactly what \eqref{eq:Df} says.
+\section{$\chi^2$-divergence}
+Choosing $f(x)=(x-1)^2$ whose conjugate is $f^*(y)=y+\frac{y^2}{4}$,
+we get the definition of $\chi^2$-divergence as
+\begin{equation}
+\chi^2(P||Q) = \mathbb{E}_Q[(\frac{P}{Q}-1)^2] =\mathbb{E}_Q[(\frac{P}{Q})^2] -1
+\end{equation}
+Applying \eqref{eq:Df} and
+making some linear transformation on the free variable, we get the
+variational representation for $\chi^2$-divergence as
+\begin{equation}\label{eq:chisquare_div}
+\chi^2(P||Q) = \sup_{h: \mathcal{X} \to \mathbb{R}} 2\mathbb{E}_P[h(X)]
+-\mathbb{E}_Q[h^2(X)] -1
+\end{equation}
+which is mentioned in Example 6.4 of Yihong Wu's lecture note \cite{yihong}.
+
+We can obtain tighter representation than
+\eqref{eq:chisquare_div} by optimizing over shift transformation and affine transformation (method of \cite{trans}).
+For shift transformation only, we consider the optimization problem
+$\max_a  2(\mathbb{E}_P[h(X)] - a)
+-\mathbb{E}_Q[(h(X) - a)^2] -1$. Then $a=\mathbb{E}_Q[(h(X)]-1$, therefore
+we get
+\begin{equation}\label{eq:chisquare_div1}
+\chi^2(P||Q) = \sup_{h: \mathcal{X} \to \mathbb{R}} 2[\mathbb{E}_P[h(X)]
+- \mathbb{E}_Q[h(X)]]
+-\Var_Q[h(X)]
+\end{equation}
+
+If we consider affine transformation, then the optimization problem is
+$\max_{a,b}  2(b\mathbb{E}_P[h(X)] - a)
+-\mathbb{E}_Q[(bh(X) - a)^2] -1$, from which we obtain
+\begin{align*}
+a & = \frac{\mathbb{E}_Q[h(X)]\mathbb{E}_P[h(X)] - \mathbb{E}_Q[h^2(X)]}{\Var_Q[h(X)]}  \\
+b & = \frac{\mathbb{E}_P[h(X)] - \mathbb{E}_Q[h(X)]}{\Var_Q[h(X)]} 
+\end{align*}
+After simplification, the representation becomes
+\begin{equation}\label{eq:chisquare_div2}
+\chi^2(P||Q) = \sup_{h: \mathcal{X} \to \mathbb{R}}
+\frac{(\mathbb{E}_P[h(X)] - \mathbb{E}_Q[h(X)])^2}{\Var_Q[h(X)]}
+\end{equation}
+\section{General representation form}
+We define $\alpha: \mathbb{R}\to \mathbb{R}^{k_1}$
+, $\beta: \mathbb{R}\to \mathbb{R}^{k_2}$ and $\Gamma: \mathbb{R}^{k_1 + k_2} \to \mathbb{R}$.
+The expectation of a vector is applied in element-wise way.
+For f-divergence, suppose it has the following representation:
+\begin{equation}\label{eq:DfPQ}
+D_f(P, Q) = \sup_{\phi: \mathcal{X}\to R} \Gamma(\mathbb{E}_P[\alpha(\phi)], \mathbb{E}_Q[\beta(\phi)])
+\end{equation}
+The functions $\alpha,\beta, \Gamma$ should
+satisfy some conditions to make the representation valid.
+For the representation \eqref{eq:chisquare_div1},
+we have $k_1=1, \alpha(x) = x, k_2=2,\beta(x) = (x, x^2)$
+and $\Gamma(x,y,z)=2x-y-(z-y^2)$. A general question is to investigate
+under which conditions of $(\alpha,\beta, \Gamma)$, the representation \eqref{eq:DfPQ}
+is valid.
 \begin{thebibliography}{9}
 	\bibitem{imp} Ruderman, Avraham, et al. "Tighter variational representations of f-divergences via restriction to probability measures." arXiv preprint arXiv:1206.4664 (2012).
+	\bibitem{yihong} Yihong Wu, "Lecture Notes on: Information-Theoretic Methods
+	for High-dimensional Statistics." (2020)
+	\bibitem{trans} Birrell, Jeremiah, Markos A. Katsoulakis, and Yannis Pantazis. "Optimizing variational representations of divergences and accelerating their statistical estimation." arXiv preprint arXiv:2006.08781 (2020).
 \end{thebibliography}
 \end{document}
 
