@@ -400,6 +400,7 @@ The polynomial term is neglectable compared with the exponential term.
 \begin{lemma}
 	If $\sqrt{a} - \sqrt{b} > \sqrt{2}$ and we consider SSBM $(n, 2, \frac{a\log n}{n}, \frac{b \log n}{n})$, for ML algorithms, the exact recovery error rate $P_e$ satisfies $$
 	\lim_{n\to \infty} \frac{\log P_e}{\log n} =2-(\sqrt{a} - \sqrt{b})^2$$.
+	More careful analysis gives  $P_e = (\frac{1}{2}+o(1))n^{2-(\sqrt{a} - \sqrt{b})^2}$.
 \end{lemma}
 \begin{proof}
 	In Abbe's original proof (Section 6 of \cite{abbe}), he gave an upper bound of the error rate but that bound is not tight.
