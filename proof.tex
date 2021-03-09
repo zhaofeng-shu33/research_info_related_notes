@@ -398,11 +398,31 @@ The polynomial term is neglectable compared with the exponential term.
 	$P(G_1(i,j)) > n^{-(\sqrt{\alpha} - \sqrt{\beta})^2 + C)}$.
 \end{proof}
 \begin{lemma}
-	If $\sqrt{a} - \sqrt{b} > \sqrt{2}$ and we consider SSBM $(n,2, \frac{a\log n}{n}, \frac{b \log n}{n})$, for ML algorithms, the exact recovery error rate is $O( n^{2-(\sqrt{a} - \sqrt{b})^2})$.
+	If $\sqrt{a} - \sqrt{b} > \sqrt{2}$ and we consider SSBM $(n, 2, \frac{a\log n}{n}, \frac{b \log n}{n})$, for ML algorithms, the exact recovery error rate $P_e$ satisfies $$
+	\lim_{n\to \infty} \frac{\log P_e}{\log n} =2-(\sqrt{a} - \sqrt{b})^2$$.
 \end{lemma}
 \begin{proof}
 	In Abbe's original proof (Section 6 of \cite{abbe}), he gave an upper bound of the error rate but that bound is not tight.
-	We enhance his results by more careful analysis to show that $P(F) \leq cn^{-2\epsilon}$.
+	We enhance his results by more careful analysis to show that $P(F) \leq cn^{-2\epsilon}$
+	where $\epsilon=2-(\sqrt{a} - \sqrt{b})^2$. The lower bound is established by applying
+	Bonferroni inequalities to estimate the probability of the union $n$ events:
+	$$
+	P(\bigcap_{i=1}^n A_i) \geq \sum_{i=1}^n P(A_i) - \sum_{i<j} P(A_i \cap A_j)
+	$$
+	We first deal with the lower bound. The summation is $\binom{n}{2}$ pairs
+	By Lemma 4 of \cite{abbe}, $P(A_i)$ is lower bounded by $n^{-(\sqrt{a} - \sqrt{b})^2 +o(1)}$.
+	Therefore, the first sum is of order $\frac{1}{2}n^{2-(\sqrt{a} - \sqrt{b})^2 +o(1)}$.
+	On the other hand, we discuss $P(A_{i,j} \cap A_{r,s})$ according to two cases.
+	Firstly is the case when $|\{i,j,r,s\}|=4$. Then $P(A_{i,j} \cap A_{r,s}) \leq
+	P(\sum_{i=1}^{2n} X_i - Z_i \geq 0) \leq n^{-2(\sqrt{a} - \sqrt{b})^2} $. There are
+	$\binom{n}{4} \leq n^4$ terms. Therefore, the probability sum
+	is bounded by $n^{4-2(\sqrt{a} - \sqrt{b})^2}$ which is inferior to $\frac{1}{2}n^{2-(\sqrt{a} - \sqrt{b})^2 +o(1)}$ since $2-(\sqrt{a} - \sqrt{b})^2 < 0$.
+	Another case happens when $|\{i,j,r,s\}|=3$, which is upper bounded by
+	$P(\sum_{i=1}^{n} X_i - Z_i + 2\sum_{i=1}^{n/2} X'_i - Z'_i\geq 0) \leq n^{-\frac{3}{2} (\sqrt{a}-\sqrt{b})^2}$ by Chernoff inequality. There are at most $n^3$ such terms. Therefore,
+	this sum is upper bounded by  $n^{-\frac{3}{2} ((\sqrt{a}-\sqrt{b})^2-2)}$, which is also inferior
+	to  $\frac{1}{2}n^{2-(\sqrt{a} - \sqrt{b})^2 +o(1)}$. We conclude that the lower bound
+	is $\frac{1}{2}(1+o(1))n^{2-(\sqrt{a} - \sqrt{b})^2}$
+	
 	We start with the following inequality, which is Equation 14 in \cite{abbe}.
 	\begin{equation}
 	P(F) \leq \sum_{k=1}^{n/4} \exp \Big[k\Big( 2\log n - 2 \log 2k + 2 - (\frac{1}{2} - \frac{k}{n})\cdot 4(\frac{a+b}{2} - \sqrt{ab})  \Big)\Big]
