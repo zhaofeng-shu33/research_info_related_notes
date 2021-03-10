@@ -16,6 +16,7 @@
 \newtheorem{corollary}{Corollary}
 \DeclareMathOperator{\E}{\mathbb{E}}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Bern}{Bern}
 \newcommand{\A}{\frac{a \log(n)}{n}}
 \newcommand{\B}{\frac{b \log(n)}{n}}
 \title{Proofs for semi-supervised SBM}
@@ -397,7 +398,7 @@ The polynomial term is neglectable compared with the exponential term.
 	Also we need
 	$P(G_1(i,j)) > n^{-(\sqrt{\alpha} - \sqrt{\beta})^2 + C)}$.
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{lem:UL_bound}
 	If $\sqrt{a} - \sqrt{b} > \sqrt{2}$ and we consider SSBM $(n, 2, \frac{a\log n}{n}, \frac{b \log n}{n})$, for ML algorithms, the exact recovery error rate $P_e$ satisfies $$
 	\lim_{n\to \infty} \frac{\log P_e}{\log n} =2-(\sqrt{a} - \sqrt{b})^2$$.
 	More careful analysis gives  $P_e = (\frac{1}{2}+o(1))n^{2-(\sqrt{a} - \sqrt{b})^2}$.
@@ -408,7 +409,7 @@ The polynomial term is neglectable compared with the exponential term.
 	where $\epsilon=2-(\sqrt{a} - \sqrt{b})^2$. The lower bound is established by applying
 	Bonferroni inequalities to estimate the probability of the union $n$ events:
 	$$
-	P(\bigcap_{i=1}^n A_i) \geq \sum_{i=1}^n P(A_i) - \sum_{i<j} P(A_i \cap A_j)
+	P(\bigcup_{i=1}^n A_i) \geq \sum_{i=1}^n P(A_i) - \sum_{i<j} P(A_i \cap A_j)
 	$$
 	We first deal with the lower bound. The summation is $\binom{n}{2}$ pairs
 	By Lemma 4 of \cite{abbe}, $P(A_i)$ is lower bounded by $n^{-(\sqrt{a} - \sqrt{b})^2 +o(1)}$.
@@ -419,7 +420,8 @@ The polynomial term is neglectable compared with the exponential term.
 	$\binom{n}{4} \leq n^4$ terms. Therefore, the probability sum
 	is bounded by $n^{4-2(\sqrt{a} - \sqrt{b})^2}$ which is inferior to $\frac{1}{2}n^{2-(\sqrt{a} - \sqrt{b})^2 +o(1)}$ since $2-(\sqrt{a} - \sqrt{b})^2 < 0$.
 	Another case happens when $|\{i,j,r,s\}|=3$, which is upper bounded by
-	$P(\sum_{i=1}^{n} X_i - Z_i + 2\sum_{i=1}^{n/2} X'_i - Z'_i\geq 0) \leq n^{-\frac{3}{2} (\sqrt{a}-\sqrt{b})^2}$ by Chernoff inequality. There are at most $n^3$ such terms. Therefore,
+	$P(\sum_{i=1}^{n} X_i - Z_i + 2\sum_{i=1}^{n/2} (X'_i - Z'_i) \geq 0) \leq n^{-\frac{3}{2} (\sqrt{a}-\sqrt{b})^2}$
+	by Chernoff inequality. There are at most $n^3$ such terms. Therefore,
 	this sum is upper bounded by  $n^{-\frac{3}{2} ((\sqrt{a}-\sqrt{b})^2-2)}$, which is also inferior
 	to  $\frac{1}{2}n^{2-(\sqrt{a} - \sqrt{b})^2 +o(1)}$. We conclude that the lower bound
 	is $\frac{1}{2}(1+o(1))n^{2-(\sqrt{a} - \sqrt{b})^2}$
@@ -445,11 +447,49 @@ The polynomial term is neglectable compared with the exponential term.
 	
 
 \end{proof}
-
+\begin{lemma}
+	Consider SBM with side information, 
+	Let $\gamma = \frac{\log m}{n}$, if $p = a \log n /n$ and $q = b \log n / n$, using maximum likelihood estimator,
+	if
+	\begin{equation}\label{eq:positive_condition}
+	\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2 > 0
+	\end{equation}
+	then the error probability
+	of exact recovery is bounded by
+	\begin{equation}\label{eq:PeMain}
+	P_e \leq (1+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2\right)}
+	\end{equation}
+	If the condition $\min \{D_{\frac{2}{3}}(p_0||p_1), 2D_{\frac{1}{3}}(p_0||p_1) \} \geq \frac{3}{2} D_{1/2}(p_0||p_1)$
+	is satisfied, then we can show that $P_e$ is lower bounded by
+	\begin{equation}\label{eq:PeMainL}
+	P_e \geq (1+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2\right)}
+	\end{equation}
+	In such case, $P_e=(1+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2\right)}$.
+\end{lemma}
+\begin{proof}
+	The proof of the conclusion for the lower bound is similar to that of Lemma \ref{lem:UL_bound}.
+	With the exception to discuss the case when $|\{i,j,r,s\}|=3$. In such case, we need to 
+\end{proof}
 \begin{theorem}
-	Exact recovery for SBM with $p_0, p_1$
+	Exact recovery for SBM with $p_0, p_1$.
 \end{theorem}
 \begin{proof}
+	For $k=1$, we need to consider the probability of the following event 
+	$$
+	A: \sum_{i=1}^m \left( \log \frac{p_1(x_{1i})}{p_0(x_{2i})}
+	+ \log \frac{p_0(x_{2i})}{p_1(x_{2i})} \right) + \log \frac{a}{b}(\sum_{i=1}^n (z'_i - z_i)) \geq 0
+	$$
+	where $x_{1i}(x_{2i})$ are sampled from $p_0(p_1)$ and $z'_i(z_i)$ are sampled from $\Bern(\B) (\Bern(\A))$.
+	We can use Chernoff inequality to show that $P(A) \leq n^{-\gamma D_{1/2}(p_0||p_1)-(\sqrt{a}-\sqrt{b})^2}$.
+	\begin{align*}
+	P(A) &\leq \mathbb{E}[\exp( s\sum_{i=1}^m \left( \log \frac{p_1(x_{1i})}{p_0(x_{2i})}
+	+ \log \frac{p_0(x_{2i})}{p_1(x_{2i})} \right) + s\log \frac{a}{b}(\sum_{i=1}^n z'_i - z_i) )] \\
+	& \stackrel{(a)}{=} (\sum_{x\in \mathcal{X}} p_0^{1-s}p_1^{s})^m (\sum_{x\in \mathcal{X}} p_1^{1-s}p_0^{s})^m
+	n^{-a-b+a\exp(-s\log a/b)+b\exp(s\log a/b)}
+	\end{align*}
+	where $(a)$ follows from independence. Choosing $s=\frac{1}{2}$ we then have 
+	$P(A) \leq n^{-\gamma D_{1/2}(p_0||p_1)-(\sqrt{a}-\sqrt{b})^2}$. ($m=\gamma n$)
+		
 	Consideration for general $k$
 	
 	$$
