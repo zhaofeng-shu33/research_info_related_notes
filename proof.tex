@@ -399,7 +399,7 @@ The polynomial term is neglectable compared with the exponential term.
 	$P(G_1(i,j)) > n^{-(\sqrt{\alpha} - \sqrt{\beta})^2 + C)}$.
 \end{proof}
 \begin{lemma}\label{lem:UL_bound}
-	If $\sqrt{a} - \sqrt{b} > \sqrt{2}$ and we consider SSBM $(n, 2, \frac{a\log n}{n}, \frac{b \log n}{n})$, for ML algorithms, the exact recovery error rate $P_e$ satisfies $$
+	If $(\sqrt{a}-\sqrt{b})^2-2 > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2$ and we consider SSBM $(n, 2, \frac{a\log n}{n}, \frac{b \log n}{n})$, for ML algorithms, the exact recovery error rate $P_e$ satisfies $$
 	\lim_{n\to \infty} \frac{\log P_e}{\log n} =2-(\sqrt{a} - \sqrt{b})^2$$.
 	More careful analysis gives  $P_e = (\frac{1}{2}+o(1))n^{2-(\sqrt{a} - \sqrt{b})^2}$.
 \end{lemma}
@@ -419,11 +419,20 @@ The polynomial term is neglectable compared with the exponential term.
 	P(\sum_{i=1}^{2n} X_i - Z_i \geq 0) \leq n^{-2(\sqrt{a} - \sqrt{b})^2} $. There are
 	$\binom{n}{4} \leq n^4$ terms. Therefore, the probability sum
 	is bounded by $n^{4-2(\sqrt{a} - \sqrt{b})^2}$ which is inferior to $\frac{1}{2}n^{2-(\sqrt{a} - \sqrt{b})^2 +o(1)}$ since $2-(\sqrt{a} - \sqrt{b})^2 < 0$.
-	Another case happens when $|\{i,j,r,s\}|=3$, which is upper bounded by
-	$P(\sum_{i=1}^{n} X_i - Z_i + 2\sum_{i=1}^{n/2} (X'_i - Z'_i) \geq 0) \leq n^{-\frac{3}{2} (\sqrt{a}-\sqrt{b})^2}$
-	by Chernoff inequality. There are at most $n^3$ such terms. Therefore,
-	this sum is upper bounded by  $n^{-\frac{3}{2} ((\sqrt{a}-\sqrt{b})^2-2)}$, which is also inferior
-	to  $\frac{1}{2}n^{2-(\sqrt{a} - \sqrt{b})^2 +o(1)}$. We conclude that the lower bound
+	Another case happens when $|\{i,j,r,s\}|=3$. Using Chernoff inequality we have
+	$$
+	P(\sum_{i=1}^{n} X_i - Z_i + 2\sum_{i=1}^{n/2} (X'_i - Z'_i) \geq 0) \leq \exp(\log n (-\frac{3}{2}(a+b) +be^s+ae^{-s} +\frac{1}{2}(be^{2s}+a^{-2s})))
+	$$
+	for any $s$.
+	We choose $x=e^s$ which minimize $bx+\frac{a}{x}+\frac{1}{2}(bx^2+\frac{a}{x^2})$, which gives $x^3=\frac{a}{b}$.
+	Therefore, we obtain
+	$$
+P(\sum_{i=1}^{n} X_i - Z_i + 2\sum_{i=1}^{n/2} (X'_i - Z'_i) \geq 0) \leq \exp(\frac{3}{2}\log n (-a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3}))
+$$		
+ There are at most $n^3$ such terms. Therefore,
+	this sum is upper bounded by  $\exp(\log n (3+\frac{3}{2}(-a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3})))$, which is also inferior
+	to  $\frac{1}{2}n^{2-(\sqrt{a} - \sqrt{b})^2 +o(1)}$ when the condition
+	$(\sqrt{a}-\sqrt{b})^2-2 > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2$ holds. We conclude that the lower bound
 	is $\frac{1}{2}(1+o(1))n^{2-(\sqrt{a} - \sqrt{b})^2}$
 	
 	We start with the following inequality, which is Equation 14 in \cite{abbe}.
@@ -488,7 +497,7 @@ The polynomial term is neglectable compared with the exponential term.
 	n^{-a-b+a\exp(-s\log a/b)+b\exp(s\log a/b)}
 	\end{align*}
 	where $(a)$ follows from independence. Choosing $s=\frac{1}{2}$ we then have 
-	$P(A) \leq n^{-\gamma D_{1/2}(p_0||p_1)-(\sqrt{a}-\sqrt{b})^2}$. ($m=\gamma n$)
+	$P(A) \leq n^{-\gamma D_{1/2}(p_0||p_1)-(\sqrt{a}-\sqrt{b})^2}$. ($m=\gamma \log n$)
 		
 	Consideration for general $k$
 	
