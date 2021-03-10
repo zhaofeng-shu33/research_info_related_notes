@@ -468,8 +468,12 @@ $$
 	\begin{equation}\label{eq:PeMain}
 	P_e \leq (1+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2\right)}
 	\end{equation}
-	If the condition $\min \{D_{\frac{2}{3}}(p_0||p_1), 2D_{\frac{1}{3}}(p_0||p_1) \} \geq \frac{3}{2} D_{1/2}(p_0||p_1)$
-	is satisfied, then we can show that $P_e$ is lower bounded by
+	If the following two conditions
+	\begin{align}
+	\min \{D_{\frac{2}{3}}(p_0||p_1), 2D_{\frac{1}{3}}(p_0||p_1) \} & \geq \frac{3}{2} D_{1/2}(p_0||p_1) \notag\\
+	(\sqrt{a}-\sqrt{b})^2-2 & > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2\label{eq:two_conditions}
+	\end{align}
+	are satisfied, then we can show that $P_e$ is lower bounded by
 	\begin{equation}\label{eq:PeMainL}
 	P_e \geq (1+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2\right)}
 	\end{equation}
@@ -477,7 +481,28 @@ $$
 \end{lemma}
 \begin{proof}
 	The proof of the conclusion for the lower bound is similar to that of Lemma \ref{lem:UL_bound}.
-	With the exception to discuss the case when $|\{i,j,r,s\}|=3$. In such case, we need to 
+	With the exception to discuss the case when $|\{i,j,r,s\}|=3$. In such case, we first suppose the overlap node is from $p_0$, and we need to estimate
+	an upper bound for the event
+	$$
+	A: 2\sum_{i=1}^m  \log \frac{p_1(x_{1i})}{p_0(x_{2i})}
+	+ \sum_{i=1}^{2m} \log \frac{p_0(x_{2i})}{p_1(x_{2i})} +\log\frac{a}{b}\left(
+	\sum_{i=1}^{n} (X_i - Z_i) + 2\sum_{i=1}^{n/2} (X'_i - Z'_i)\right) \geq 0
+	$$
+	Using Chernoff inequality, we can write an upper bound of $P(A)$ as
+	\begin{align*}
+	&P(A) \leq  (\sum_{x\in \mathcal{X}} p_0^{1-2s}p_1^{2s})^m (\sum_{x\in \mathcal{X}} p_1^{1-s}p_0^{s})^{2m} \cdot \\
+	&\exp(\log n (-\frac{3}{2}(a+b)+a\exp(-s\log \frac{a}{b})+b\exp(s\log \frac{a}{b}) + \frac{a}{2}\exp(-2s\log \frac{a}{b})+\frac{b}{2}\exp(2s\log \frac{a}{b})))
+	\end{align*}
+	Let $s=\frac{1}{3}$ we then have
+	$$
+	P(A)\leq (\sum_{x\in \mathcal{X}} p_0^{1/3}(x)p_1^{2/3}(x))^{3m}\exp(\frac{3}{2}\log n (-a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3}))
+	$$
+	From the two conditions mentioned in \eqref{eq:two_conditions},
+	we then have
+	$$
+	P(A) \leq n^{-\frac{3}{2} (\gamma \cdot D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2)}
+	$$
+	If the overlap node is from $p_1$, similar deduction can be made.
 \end{proof}
 \begin{theorem}
 	Exact recovery for SBM with $p_0, p_1$.
