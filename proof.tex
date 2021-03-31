@@ -470,9 +470,9 @@ $$
 	\end{equation}
 	If the following condition
 	\begin{align}
-	(\sqrt{a}-\sqrt{b})^2-2 + \gamma \min \{D_{\frac{2}{3}}(p_0||p_1), D_{\frac{2}{3}}(p_1||p_0) \} & > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2 + \gamma D_{1/2}(p_0||p_1)\label{eq:two_conditions}
+	(\sqrt{a}-\sqrt{b})^2-2 + \gamma \min \{D_{\frac{2}{3}}(p_0||p_1), D_{\frac{2}{3}}(p_1||p_0) \} & > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2 + \gamma D_{1/2}(p_0||p_1)\label{eq:oneC}
 	\end{align}
-	are satisfied, then we can show that $P_e$ is lower bounded by
+	is satisfied, then we can show that $P_e$ is lower bounded by
 	\begin{equation}\label{eq:PeMainL}
 	P_e \geq (1+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2\right)}
 	\end{equation}
@@ -480,6 +480,7 @@ $$
 \end{lemma}
 \begin{proof}
 	The proof of the conclusion for the lower bound is similar to that of Lemma \ref{lem:UL_bound}.
+	Let $\mu = 2 -\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2) $.
 	With the exception to discuss the case when $|\{i,j,r,s\}|=3$. In such case, we first suppose the overlap node is from $p_0$, and we need to estimate
 	an upper bound for the event
 	$$
@@ -496,11 +497,16 @@ $$
 	$$
 	P(A)\leq (\sum_{x\in \mathcal{X}} p_0^{1/3}(x)p_1^{2/3}(x))^{3m}\exp(\frac{3}{2}\log n (-a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3}))
 	$$
-	From the two conditions mentioned in \eqref{eq:two_conditions},
+	From the condition mentioned in \eqref{eq:oneC},
 	we then have
 	$$
-	P(A) \leq n^{-\frac{3}{2} (\gamma \cdot D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2)}
+	P(A) \leq n^{-\mu'-1-(\gamma \cdot D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2)}
 	$$
+	where $\mu'>0$ is the difference of two sides in \eqref{eq:oneC}. 
+	There are at most $n^3$ such terms, then the summation is bounded by
+	$n^{-\mu'-\mu }$,
+	which has smaller order than $n^{-\mu}$.
+	
 	If the overlap node is from $p_1$, similar deduction can be made.
 \end{proof}
 \begin{theorem}
