@@ -282,14 +282,11 @@ The polynomial term is neglectable compared with the exponential term.
 
 \begin{lemma}
 	Suppose $Z \sim Binomial(n, \frac{b\log n}{n}), X\sim Binomial(n, \frac{a\log n}{n})$.
-	For $ t > b - a$, show that
+	For $ \epsilon > b - a$, show that
 	\begin{equation}
-	P(Z - X \geq \epsilon \log n) \geq \exp(-\log n \cdot ( g(a, b, \epsilon) + O(\frac{\log n}{n})))
+	P(Z - X \geq \epsilon \log n) \geq \exp(-\log n \cdot ( g(a, b, \epsilon) + O(\frac{\log \log n}{\log n})))
 	\end{equation}
-	where
-	\begin{equation}\label{eq:galphabeta}
-	g(\alpha,\beta,\epsilon)= (\alpha+\beta)-\epsilon \log(\beta) - 2\sqrt{\left( \frac{\epsilon}{2}\right)^2 +\alpha \beta} +\frac{\epsilon}{2} \log \left( \alpha \beta \frac{\sqrt{(\epsilon/2)^2 +\alpha \beta} +\epsilon/2}{\sqrt{(\epsilon/2)^2 +\alpha \beta} -\epsilon/2} \right)
-	\end{equation}
+	where $g(a,b,\epsilon)$ is given in \eqref{eq:gab}.
 \end{lemma}
 \begin{proof}
 	The proof is similar with that of Corollary \ref{cor:xz}.
@@ -333,13 +330,17 @@ The polynomial term is neglectable compared with the exponential term.
     &+ (\tau+\epsilon) \log n \log\log n - (\tau+\epsilon) \log^2 n + (\tau+\epsilon) \log b \log n +  O(\frac{\log^2 n}{n})
     \end{align*}
     To summarize:
-    \begin{equation}
-    T(\tau)  \geq \Big(
+    \begin{equation}\label{eq:Tsmall}
+    \log T(\tau)  \geq \Big(
     \tau(1-\log \tau) + (\tau + \epsilon)(1-\log(\tau+\epsilon)) + \tau \log a + (\tau+\epsilon) \log b-a-b
     )\Big)\log n -2\log\log n + O(1)
    \end{equation}
-	The way to estimate $\log T(\tau)$ and compute its maximum value 
-    is covered in the proof Lemma 7 of \cite{abbe}.
+   The maximum value on the right-hand side of \eqref{eq:Tsmall} is
+   achieved when $\tau = -\frac{\epsilon}{2} + \sqrt{(\frac{\epsilon}{2})^2+ab}$.
+   Replacing $\tau$ by its maximum value, we get
+   $ \log P(Z-X \geq \epsilon \log n) \geq \log T(\tau^*) = -g(a,b,\epsilon)\log n  + O(\log \log n)$.
+   
+The above proof is very similar to the proof of Lemma 7 in \cite{abbe}.
 \end{proof}
 \begin{lemma}
 	Suppose $m > n, Z \sim Binomial(m, \frac{b\log n}{n}), X\sim Binomial(m, \frac{a\log n}{n})$.
@@ -470,7 +471,7 @@ $$
 	\end{equation}
 	If the following condition
 	\begin{align}
-	(\sqrt{a}-\sqrt{b})^2-2 + \gamma \min \{D_{\frac{2}{3}}(p_0||p_1), D_{\frac{2}{3}}(p_1||p_0) \} & > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2 + \gamma D_{1/2}(p_0||p_1)\label{eq:oneC}
+	(\sqrt{a}-\sqrt{b})^2-2 + 2\gamma \min \{D_{\frac{2}{3}}(p_0||p_1), D_{\frac{2}{3}}(p_1||p_0) \} & > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2 + 2\gamma D_{1/2}(p_0||p_1)\label{eq:oneC}
 	\end{align}
 	is satisfied, then we can show that $P_e$ is lower bounded by
 	\begin{equation}\label{eq:PeMainL}
