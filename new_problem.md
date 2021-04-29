@@ -199,13 +199,9 @@ of $Y_1$.
 Theoretical analysis of spectral clustering for SBM community detection does not have beautiful result.
 
 They use matrix perturbation theory, notably the Davis-Kahan theorem, the conclusion is that
-
 partial recovery is possible by using the first k smallest eigenvector of Laplacian matrix. That is,
-
-the number of misclassified converges to zero. Some authors uses some post processing steps after
-
+the number of misclassified nodes converges to zero. Some authors use some post processing steps after
 spectral clustering to achieve exact recovery. This makes the complete algorithm quite complex. Though
-
 it has theoretical values, it lacks practicality. For some reference,
 
 [1] Yun, Se-Young, and Alexandre Proutiere. "Accurate community detection in the stochastic block model via spectral algorithms." *arXiv preprint arXiv:1412.7335* (2014).
