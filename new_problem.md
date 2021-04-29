@@ -50,7 +50,9 @@ $$
 \frac{1}{2} \sum_{x\in \mathcal{X}} f(x)[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]
 $$
 
-Then we have $f(x)=\frac{1}{C}[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]$
+Then we have $f(x)=\frac{1}{C}[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]$, which is the embedding
+
+of the first node.
 
 where $C$ is the normalization constant such that $\sum_{x\in \mathcal{X}} P(x)f^2(x)=1$.
 
@@ -101,7 +103,23 @@ If $f(x)>0$ we assign $Y_2=1$ otherwise we assign $Y_2=-1$.
 
 For $Y_3, \dots, Y_n$ similar steps can be conducted.
 
+## Relation with spectral clustering within the setting of SBM
 
+$$
+P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)=\frac{1}{2^{n-2}}(\frac{pq}{(1-p)(1-q)})^{|E|/2}(\frac{1-p}{1-q})^{-n/4}\sum_{i=1}^{2^{n-2}} (\exp(h_1(1,1,y_3,\dots, y_n)) - \exp(h_1(-1,1,y_3,\dots, y_n)))
+$$
+
+The function $h(y)$ for $y \in \{\pm 1\}^n$ has the following form:
+$$
+h(y) = \frac{||y||_2^2}{4}\log\frac{1-p}{1-q} + \frac{y^TAy}{4}\log\frac{p(1-q)}{q(1-p)}
+$$
+Conjecture: Suppose $p,q$ are constant, $\hat{y} = \arg\max_{y \in \{\pm 1\}^n} y^T A y$ such that $\hat{y}_2=1.
+
+Then $\sum_{y_3, \dots, y_n} (h_1(\hat{y}_1,1,y_3, \dots) - h_1(-\hat{y}_1,1,y_3, \dots)) > 0$.
+
+If the following conjecture holds, $P(X=x|Y_1=\hat{y}_1,Y_2=1) > P(X=x|Y_1=-\hat{y}_1,Y_2=1)$, then we should choose $\hat{y}_1$ as the estimated label for $Y_1$. This established the connection of spectral clustering
+
+with SBM in a very simple case.
 
 ## Simple example for $n=4$
 
