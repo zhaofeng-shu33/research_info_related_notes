@@ -22,24 +22,66 @@ are loosely connected between different communities.
 
 
 
-$Y$ is the node label (independent Bernoulli random variable).
+$Y$ is one node label (independent Bernoulli random variable).
 
 $X_{ij}$ be the edge connection information, random variable depending only on node $i, j$. We can regard
 
 $X$ as an adjacency matrix.
 
-Suppose $f$ be a function which maps $n(n-1)/2$ vector to a $k$ vector and $g$ is a scalar function
+Suppose $f$ be a function which maps $n(n-1)/2$ vector to a $k$ vector and $g$ is a function
 
-which maps the node label to its higher ($k$) dimension embedding. Suppose there are $r$ communities,
+which maps the node label (of the set $\mathcal{Y}$) to its higher ($k$) dimension embedding. We can also
 
-then we should choose $k=r-1$. For example, if $r=2$, $g(1)=1,g(-1)=-1$. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\textrm{Var}[f(X)] = 1$. 
+treat $f$ as a mapping from $\mathcal{X}\to \mathbb{R}^k$ where $|\mathcal{X}| = 2^{\binom{n}{2}}.$
+
+
+
+Suppose there are $r$ communities,
+
+then we should choose $k=r-1$. For example, we consider $r=2$ first below. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\textrm{Var}[f(X)] = 1$. 
 $$
-\max E[ g(Y_1) \cdot f(X) | Y_2 = 1]
+\max E[ g(Y_1) \cdot f(X)]
 $$
 
 By Cauchy's inequality we know the maximal value is 1.
 
-Is $g(Y_2)$ meaningful?
+Since $Y_1$ only takes two values $\pm 1$, and $\mathbb{E}[g(Y)]=0, \mathrm{Var}[g(Y)]=1$
+
+we must have $g(1)=1,g(-1)=-1$. That is, $g$ is an identity mapping.
+
+Then our goal is to maximize $\sum_{x\in \mathcal{X}} f(x)[P(X=x,Y=1)-P(X=x,Y=-1)]$.
+
+Under the two constraints:
+$$
+\begin{align}
+\sum_{x\in\mathcal{X}} f(x)P(X=x) &= 0 \\
+\sum_{x\in\mathcal{X}} f^2(x) P(X=x) &= 1
+\end{align}
+$$
+From the first constraint, we have
+
+$\sum_{x\in\mathcal{X}} f(x)(P(X=x,Y=1)+P(X=x,Y=-1)) = 0$, therefore, the object
+
+function is transformed to $2\max\sum_{x\in \mathcal{X}} f(x)P(X=x,Y=1)$.
+
+We can use Lagrange multiplier to solve $f(x)$:
+
+$\max \sum_{x\in \mathcal{X}} P(X=x,Y=1)f(x) - \lambda_1 P(X=x)-\lambda_2 P(X=x) f^2(x)$
+
+Then
+$$
+f(x) = \frac{P(X=x,Y=1)-\lambda_1P(X=x)}{2\lambda_2P(X=x)}
+$$
+Using the two constraint equalities we can get $\lambda_1, \lambda_2$ as
+$$
+\begin{align}
+\lambda_1 &= \frac{\sum_{x\in \mathcal{X}} P(X=x)P(X=x,Y=1) }{\sum_{x\in \mathcal{X}} P^2(X=x)}=0.5 \\
+4\lambda_2^2 &= \sum_{x\in \mathcal{X}} \frac{(P(X=x,Y=1)-\lambda_1 P(X=x))^2}{P(X=x)}
+\end{align}
+$$
+Notice that $\lambda_2$ is only a normalization constant, if we want to use the sign
+
+of $f(x) to judge its community belonging, we only need to compare
 
 
 
