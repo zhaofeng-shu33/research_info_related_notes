@@ -30,11 +30,11 @@ def g(a):
     res -= (1 - a) * np.log((1 - a) / (1 - p_1))
     return res
 
-def get_marginal_probability(x, p, q, y1=None):
+def get_marginal_probability(x, p, q, y1=None, consider_y_1_equal_1=True):
     total_sum = 0
     for i in range(16):
         val = [int(j) for j in bin(i).lstrip('0b').zfill(4)]
-        if val[1] == 0:
+        if val[1] == 0 and consider_y_1_equal_1:
             continue
         if y1 is not None and val[0] != y1:
             continue
@@ -48,10 +48,12 @@ def get_marginal_probability(x, p, q, y1=None):
         for i in range(6):
             _sum *= np.power(val_base[i], x[i]) * np.power(1 - val_base[i], 1 - x[i])
         total_sum += _sum
-    if y1 is None:
-        return total_sum / 8
-    else:
-        return total_sum / 4
+    div_num = 16
+    if consider_y_1_equal_1:
+        div_num /= 2
+    if y1 is not None:
+        div_num /= 2
+    return total_sum / div_num
     
 def sbm_graph(n, k, a, b):
     if n % k != 0:
@@ -175,12 +177,12 @@ if __name__ == '__main__':
         print(exact_compare(labels))
         plt.show()
     else:
-        p = 0.7
+        p = 0.8
         q = 0.3
         prob = 0
         f_val = []
         prob_val = []
-        for i in range(64):
+        for i in range(64): # n=4, |E|=6, |\mathcal{X}|=2^6=64
             val = [int(j) for j in bin(i).lstrip('0b').zfill(6)]
             prob_val.append(get_marginal_probability(val, p, q))
             f_val.append(get_first_embedding(val))
@@ -190,12 +192,20 @@ if __name__ == '__main__':
         f_val = (f_val - mean_val) / std_var
 
         _prob_vector = []
+        _prob_vector_2 = []
         for i in range(64):
             val = [int(j) for j in bin(i).lstrip('0b').zfill(6)]
             _prob = get_marginal_probability(val, p, q, y1=1)
-            _prob -= get_marginal_probability(val, p, q, y1=0)
-            _prob /= 2
+            _prob_2 = get_marginal_probability(val, p, q, y1=0)
             _prob_vector.append(_prob)
-        _prob_vector = np.array(_prob_vector)
-        print(np.dot(_prob_vector, _prob_vector) / np.sqrt(np.dot(_prob_vector ** 2, prob_val)))
-        print(np.dot(_prob_vector, f_val))
+            _prob_vector_2.append(_prob_2)
+        _prob_vector = np.array(_prob_vector) / 2
+        _prob_vector_2 = np.array(_prob_vector_2) / 2
+        prob_val = np.array(prob_val)
+        lambda_1 = np.sum(_prob_vector)
+        lambda_2 = np.sqrt(np.sum((_prob_vector - lambda_1 * prob_val) ** 2 / prob_val)) / 2
+        f_val = (_prob_vector - lambda_1 * prob_val) / (2 * lambda_2 * prob_val)
+        hgr_val = f_val @ (_prob_vector - _prob_vector_2)
+        print(hgr_val)
+        # print(np.dot(_prob_vector, _prob_vector) / np.sqrt(np.dot(_prob_vector ** 2, prob_val)))
+        # print(np.dot(_prob_vector, f_val))

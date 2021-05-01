@@ -38,18 +38,20 @@ treat $f$ as a mapping from $\mathcal{X}\to \mathbb{R}^k$ where $|\mathcal{X}| =
 
 Suppose there are $r$ communities,
 
-then we should choose $k=r-1$. For example, we consider $r=2$ first below. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\textrm{Var}[f(X)] = 1$. 
+then we should choose $k=r-1$. For example, we consider $r=2$ first below. Our goal is to maximize the averaged correlation. The optimization problem should have some normalization constraint. We require that $E[f(X)]=0$ and $\textrm{Var}[f(X)] = 1$.  Without specific emphasis, all expectation is take conditioned
+
+on $Y_2=1$ to avoid the trivial symmetric case.
 $$
 \max E[ g(Y_1) \cdot f(X)]
 $$
 
 By Cauchy's inequality we know the maximal value is 1.
 
-Since $Y_1$ only takes two values $\pm 1$, and $\mathbb{E}[g(Y)]=0, \mathrm{Var}[g(Y)]=1$
+Since $Y_1$ only takes two values $\pm 1$, and $Y_1$ is independent with $Y_2$, $\mathbb{E}[g(Y_1)]=0, \mathrm{Var}[g(Y_1)]=1$.
 
 we must have $g(1)=1,g(-1)=-1$. That is, $g$ is an identity mapping.
 
-Then our goal is to maximize $\sum_{x\in \mathcal{X}} f(x)[P(X=x,Y=1)-P(X=x,Y=-1)]$.
+Then our goal is to maximize $\sum_{x\in \mathcal{X}} f(x)[P(X=x,Y_1=1)-P(X=x,Y_1=-1)]$.
 
 Under the two constraints:
 $$
@@ -60,43 +62,38 @@ $$
 $$
 From the first constraint, we have
 
-$\sum_{x\in\mathcal{X}} f(x)(P(X=x,Y=1)+P(X=x,Y=-1)) = 0$, therefore, the object
+$\sum_{x\in\mathcal{X}} f(x)(P(X=x,Y_1=1)+P(X=x,Y_1=-1)) = 0$, therefore, the object
 
-function is transformed to $2\max\sum_{x\in \mathcal{X}} f(x)P(X=x,Y=1)$.
+function is transformed to $2\max\sum_{x\in \mathcal{X}} f(x)P(X=x,Y_1=1)$.
 
 We can use Lagrange multiplier to solve $f(x)$:
 
-$\max \sum_{x\in \mathcal{X}} P(X=x,Y=1)f(x) - \lambda_1 P(X=x)-\lambda_2 P(X=x) f^2(x)$
+$\max \sum_{x\in \mathcal{X}} [P(X=x,Y_1=1)f(x) - \lambda_1 f(x) P(X=x)-\lambda_2 P(X=x) f^2(x)]$
 
 Then
 $$
-f(x) = \frac{P(X=x,Y=1)-\lambda_1P(X=x)}{2\lambda_2P(X=x)}
+f(x) = \frac{P(X=x,Y_1=1)-\lambda_1P(X=x)}{2\lambda_2P(X=x)}
 $$
 Using the two constraint equalities we can get $\lambda_1, \lambda_2$ as
 $$
 \begin{align}
-\lambda_1 &= \frac{\sum_{x\in \mathcal{X}} P(X=x)P(X=x,Y=1) }{\sum_{x\in \mathcal{X}} P^2(X=x)}=0.5 \\
-4\lambda_2^2 &= \sum_{x\in \mathcal{X}} \frac{(P(X=x,Y=1)-\lambda_1 P(X=x))^2}{P(X=x)}
+\lambda_1 &= \sum_{x\in \mathcal{X}}P(X=x,Y_1=1) = P(Y_1=1)=0.5\\
+4\lambda_2^2 &= \sum_{x\in \mathcal{X}} \frac{(P(X=x,Y_1=1)-\lambda_1 P(X=x))^2}{P(X=x)}
 \end{align}
 $$
 Notice that $\lambda_2$ is only a normalization constant, if we want to use the sign
 
-of $f(x) to judge its community belonging, we only need to compare
+of $f(x)$ to judge its community belonging, we only need to compare
+
+$P(Y_1=1|X=x,Y_2=1)$ with $\lambda_1=0.5$.
+
+By the symmetric property we can show that for the embedding of $Y_i$($i\neq 2$) the constant $\lambda_1,\lambda_2$
+
+is not changed. Therefore, we can treat $P(Y_i=1|X=x,Y_2=1)$ as the embedding of $Y_i$ after a linear
+
+transformation.
 
 
-
-($Y_2$ and $Y_1$ are independent; $X$ and $Y$ are independent)
-
-We can empirically estimate the maximum value of:
-$$
-\frac{1}{2} \sum_{x\in \mathcal{X}} f(x)[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]
-$$
-
-Then we have $f(x)=\frac{1}{C}[P(X=x|Y_1=1,Y_2=1) - P(X=x|Y_1=-1,Y_2=1)]$, which is the embedding
-
-of the first node.
-
-where $C$ is the normalization constant such that $\sum_{x\in \mathcal{X}} P(x)f^2(x)=1$.
 
 Without considering the constant $C$, we can use Monte-Carlo method to approximate the likelihood $f$.
 
