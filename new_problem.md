@@ -87,60 +87,39 @@ of $f(x)$ to judge its community belonging, we only need to compare
 
 $P(Y_1=1|X=x,Y_2=1)$ with $\lambda_1=0.5$.
 
-By the symmetric property we can show that for the embedding of $Y_i$($i\neq 2$) the constant $\lambda_1,\lambda_2$
-
-is not changed. Therefore, we can treat $P(Y_i=1|X=x,Y_2=1)$ as the embedding of $Y_i$ after a linear
-
-transformation.
-
+We can rewrite $f(x)$ as 
+$$
+f(x) = \frac{1}{C}\frac{P(X=x | Y_1=1,Y_2=1)-P(X=x|Y_1=-1,Y_2=1)}{ P(X=x | Y_1=1,Y_2=1)+P(X=x|Y_1=-1,Y_2=1)}
+$$
 
 
-Without considering the constant $C$, we can use Monte-Carlo method to approximate the likelihood $f$.
+If we only care about the sign of $f(x)$, then it is enough to consider the magnitude
+
+of $P(X=x | Y_1=1,Y_2=1)$ and $P(X=x | Y_1=-1,Y_2=1)$.
 
 Notice that:
 $$
 \begin{align}
 P(X=x| Y_1=1, Y_2=1) &= \sum_{y_3,\dots, y_n = \pm 1}
 P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n)\cdot P(Y_3=y_3, \dots, Y_n=y_n) \\
-&=\sum_{i=1}^{2^{n-2}}\frac{1}{2^{n-2}}P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n) \\
-&=\sum_{i=1}^N \frac{1}{N}P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n)
+&=\sum_{y_3,\dots, y_n = \pm 1}\frac{1}{2^{n-2}}P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n) \\
 \end{align}
 $$
-in which we only sample $N$ times from $y_3, \dots, y_n$ i.i.d. Bernoulli(1/2).
+in which $y_3, \dots, y_n$ are i.i.d. Bernoulli(1/2).
 
-Suppose the adjacency matrix is $A$, the matrix $A' = J-I-A$ where $J$ is the matrix with all-one element,
+Suppose the adjacency matrix is $A$, which is a function of $x$. The matrix $A' = J-I-A$ where $J$ is the matrix with all-one element,
 
-we define $h(y)=(p/q)^{y^TAy/4}(\frac{1-p}{1-q})^{y^TA'y/4}$.
+we define $h_x(y)=(p/q)^{y^TAy/4}(\frac{1-p}{1-q})^{y^TA'y/4}$.
 
 Then we can write
 $$
-P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n) = (\frac{pq}{(1-p)(1-q)})^{|E|/2}h(y)
+P(X=x|Y_1=1, Y_2=1, Y_3=y_3, \dots, Y_n=y_n) = (\frac{pq}{(1-p)(1-q)})^{|E|/2}h_x(y)
 $$
-Therefore, we can write the Monte-Carlo approximation of $f(x)$ as:
+Let $N=2^{n-2}, \bar{y}=(y_3,\dots,y_n)$, the space for $\bar{y}$ is denoted as $S$,  we can write  $f(x)$ as:
 $$
-f(x) = \frac{1}{C} (\frac{pq}{(1-p)(1-q)})^{|E|/2}\frac{1}{N}\sum_{i=1}^N (h(y|y_1=1,y_2=1) - h(y|y_1=-1,y_2=1))
+f(x) = \frac{1}{C}\frac{\sum_{\bar{y} \in S}(h_x(1,1,\bar{y}) - h_x(-1,1,\bar{y}))}{\sum_{\bar{y} \in S}(h_x(1,1,\bar{y}) + h_x(-1,1,\bar{y}))}
 $$
-Notice that $|E|=\sum_{i<j} x_{ij}$ while $C$ is irrelevant with $x,y$. To compute $C$, we also need to sample
 
-from SBM and compute the standard variance of $f(x_1), \dots, f(x_n)$. But for the community detection
-
-task, only the sign of $f(x)$ matters. and we do not need to compute the exact value of $C$ and $(\frac{pq}{(1-p)(1-q)})^{|E|/2}$. Therefore, we get a community detection method based on Monte-Carlo approximation
-
-of HGR optimization problem. We fix $Y_1=1$ and sample $y_2, y_3, \dots, y_n$ $N$ times. For each sample,
-
-we compute $h(y)$ respectively.
-
-to estimate the label of
-
-$Y_i$ for $i\neq 1$. We first count the number of $N_2=|\{y_2=1,y_2, \dots, y_n\}|$ in the sample and
-
-$N'_2 = |\{y_2=-1, y_2, \dots, y_n\}|$ and compute
-
-$f(x)=\frac{1}{N_1}\sum_{y_2=1} h(y) - \frac{1}{N_2}\sum_{y_2=-1}h(y)$
-
-If $f(x)>0$ we assign $Y_2=1$ otherwise we assign $Y_2=-1$.
-
-For $Y_3, \dots, Y_n$ similar steps can be conducted.
 
 ## Relation with spectral clustering within the setting of SBM
 
