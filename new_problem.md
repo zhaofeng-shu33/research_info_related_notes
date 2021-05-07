@@ -119,7 +119,7 @@ Let $N=2^{n-2}, \bar{y}=(y_3,\dots,y_n)$, the space for $\bar{y}$ is denoted as 
 $$
 f(x) = \frac{1}{C}\frac{\sum_{\bar{y} \in S}(h_x(1,1,\bar{y}) - h_x(-1,1,\bar{y}))}{\sum_{\bar{y} \in S}(h_x(1,1,\bar{y}) + h_x(-1,1,\bar{y}))}
 $$
-
+High dimensional case: svd decomposition.
 
 ## Relation with spectral clustering within the setting of SBM
 
