@@ -235,7 +235,6 @@ The polynomial term is neglectable compared with the exponential term.
 	\begin{equation}\label{eq:gab}
 	g(a,b,\epsilon) = a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
 	\end{equation}
-	Notice that Equation \eqref{eq:gab} is the same as that of Equation \eqref{eq:galphabeta}.
 	\begin{remark}
 		we have $g'(\epsilon) = \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}$ and $g''(\epsilon ) = \frac{1}{\sqrt{4ab + \epsilon^2}}$.
 		\end{remark}
@@ -280,7 +279,7 @@ The polynomial term is neglectable compared with the exponential term.
 \end{proof}
 
 
-\begin{lemma}
+\begin{lemma}\label{lem:lower_bound}
 	Suppose $Z \sim Binomial(n, \frac{b\log n}{n}), X\sim Binomial(n, \frac{a\log n}{n})$.
 	For $ \epsilon > b - a$, show that
 	\begin{equation}
@@ -290,7 +289,7 @@ The polynomial term is neglectable compared with the exponential term.
 \end{lemma}
 \begin{proof}
 	The proof is similar with that of Corollary \ref{cor:xz}.
-	Use Chernoff Inequality to proof the upper bound. For the lower bound, we consider
+	Use Chernoff Inequality to prove the upper bound. For the lower bound, we consider
 	\begin{align*}
 	P(Z - X \geq \epsilon \log n) & \geq P(Z - X = \epsilon \log n) \\
 	& = \sum_{\tau \log n = 0}^{n - \epsilon \log n} P(X = \tau \log n) P(Z = (\tau + \epsilon) \log n)
@@ -342,8 +341,33 @@ The polynomial term is neglectable compared with the exponential term.
    
 The above proof is very similar to the proof of Lemma 7 in \cite{abbe}.
 \end{proof}
+A more careful analysis for the case $\epsilon=0$ gives
+more detailed results than Lemma \ref{lem:lower_bound}:
 \begin{lemma}
-	Suppose $m > n, Z \sim Binomial(m, \frac{b\log n}{n}), X\sim Binomial(m, \frac{a\log n}{n})$.
+	\begin{equation}\label{eq:detailed_lower_bound}
+		P(Z-X\geq 0) \geq (1+o(1))\frac{1}{2\pi \sqrt{ab}\log n}
+		n^{-(\sqrt{a}-\sqrt{b})^2}			
+	\end{equation}
+\end{lemma}
+\begin{proof}
+	From the proof of Lemma \ref{lem:lower_bound},
+	we should choose $\epsilon=\sqrt{ab} \log n$.
+	We first gives the asymptotic expression of
+	$P(X = k \log n)$ for general $k$ by Stirling's
+	formula, which is
+	\begin{equation}\label{eq:xkn}
+		P(X=k\log n)
+		= (1+o(1))\frac{n^{k\log (a/k) + (k-a)}}{\sqrt{2\pi k \log n}}		
+	\end{equation}
+	$P(Z-X\geq 0) \geq P(Z = k \log n)
+	P(X=k \log n)$ for any $k$.
+	Choosing $k=\sqrt{ab}$ and using
+	\eqref{eq:xkn} we can get
+	\eqref{eq:detailed_lower_bound}.
+\end{proof}
+\begin{lemma}
+	Suppose $m > n, Z \sim
+	Binomial(m, \frac{b\log n}{n}), X\sim Binomial(m, \frac{a\log n}{n})$.
 	For $ t > \frac{m}{n}(b - a)$, show that
 	\begin{equation}
 	P(Z - X \geq t \log n) \leq \exp(-\log n \frac{m}{n}\cdot ( g(a, b, \frac{n}{m}t) + O(\frac{\log n}{n})))
