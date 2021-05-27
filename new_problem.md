@@ -281,3 +281,11 @@ As can be seen, the data is clearly separated.
 Roughly speaking, PCA is doing eigen-decomposition to $A^2$, which describes the two-walk metrics between
 
 the nodes.
+
+
+
+
+
+New comments of Professor Huang
+
+Try to find an unsupervised approach to perform maximum correlation.
