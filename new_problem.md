@@ -218,9 +218,47 @@ Binary Symmetric model is the special case of the above 2x2 B matrix. (See for e
 
 ## Neural Network Approach
 
-We can treat the $X$ as a zero-one image ($n\times n$) and $Y_1$ as its classification label. We consider the joint
+We can treat the $X$ as n data points. We are dealing with an unsupervised machine learning problems.
 
-distribution.
+We use auto-encoder framework to obtain low-dimensional embedding for each node of the graph.
+
+ Since SBM model is very simple, for the encoder and decoder, we only use one fully connected layer
+
+to represent it. The intermediate layer is regarded as the embedding of the graph.
+
+For $k$ community, we require that the intermediate layer has $k-1$ units. Suppose $X$ is the input and
+
+$\widehat{X}$ is the output (reconstruction of the graph), we wish $\widehat{X}$ is as close to $X$ as possible.
+
+The loss function is defined as
+$$
+L = ||(X-\widehat{X}) \odot B ||_F^2
+$$
+where $\odot$ means the Hadamard product. The matrix $B$ is the weight matrix, which assigns higher weight
+
+for positive samples (edge observations). The reason to use $B$ is that the graph is sparse as $n$ becomes large. With uniform weight, $\widehat{X}$ tends to be zero matrix, which can not capture the property of the graph.
+
+The idea to use weighted loss comes from the model SDNE (2016, Structural Deep Network Embedding).
+
+In this paper, $X$ is adjacency matrix, and $B$ is chosen to have weight $\beta > 1$ for positive samples and weight
+
+1 for other positions. In our experiment, we find that using $X$ directly as input to the neural network
+
+does not work well. This can be empirically explained as the fact that the encoder only uses the first-order proximity for each node, which is not stable enough for reconstruction. In experiment, we found that
+
+using the cosine similarity matrix as the input to the neural network works better than
+
+that of the adjacency matrix. Though the cosine similarity matrix is a dense matrix, we also need a parameter $\beta>1$ to assign more weight for node pairs $(i,j)$ which are more similar. That is, we enlarge
+
+the similarity effect. In the paper of SDNE, there are many other techniques to enhance the embedding.
+
+By ablation study we found that the most important factor is the weight matrix $B$. If we do not use $B$,
+
+the embedding is almost rubbish.
+
+Once obtaining the embedding vectors for each node, we can use KMeans to cluster the nodes and obtain
+
+the community belonging for each node.
 
 
 
