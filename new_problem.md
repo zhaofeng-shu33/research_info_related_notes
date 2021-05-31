@@ -229,6 +229,14 @@ to represent it. The intermediate layer is regarded as the embedding of the grap
 For $k$ community, we require that the intermediate layer has $k-1$ units. Suppose $X$ is the input and
 
 $\widehat{X}$ is the output (reconstruction of the graph), we wish $\widehat{X}$ is as close to $X$ as possible.
+$$
+\widehat{X} = g(f(X))
+$$
+where $f$ maps $X$ from $\mathbb{R}^n$ to $\mathbb{R}^{k-1}$ with the form $f= \sigma(W_1 X + b_1)$.
+
+Let $Z=f(X)$ represents the embedding of $X$ (a certain node),
+
+then $g$ maps $Z$ from $\mathbb{R}^{k-1}$ to $\mathbb{R}^{n}$ with the form $g= \sigma(W_2 X + b_2)$.
 
 The loss function is defined as
 $$
@@ -240,9 +248,15 @@ for positive samples (edge observations). The reason to use $B$ is that the grap
 
 The idea to use weighted loss comes from the model SDNE (2016, Structural Deep Network Embedding).
 
-In this paper, $X$ is adjacency matrix, and $B$ is chosen to have weight $\beta > 1$ for positive samples and weight
+In that paper, $X$ is adjacency matrix, and $B$ is chosen to have weight $\beta > 1$ for positive samples and weight
 
-1 for other positions. In our experiment, we find that using $X$ directly as input to the neural network
+1 for other positions. The definition of $B$ is
+$$
+B = (\beta - 1) X + \mathbf{1}_n \mathbf{1}_n^T
+$$
+
+
+In our experiment, we find that using $X$ directly as input to the neural network
 
 does not work well. This can be empirically explained as the fact that the encoder only uses the first-order proximity for each node, which is not stable enough for reconstruction. In experiment, we found that
 
@@ -250,7 +264,11 @@ using the cosine similarity matrix as the input to the neural network works bett
 
 that of the adjacency matrix. Though the cosine similarity matrix is a dense matrix, we also need a parameter $\beta>1$ to assign more weight for node pairs $(i,j)$ which are more similar. That is, we enlarge
 
-the similarity effect. In the paper of SDNE, there are many other techniques to enhance the embedding.
+the similarity effect. Suppose $v_i = A_{i\cdot}$ is the $i$-th row of the adjacency matrix.
+
+$X_{ij} = \textrm{cosine_similarity}(v_i, v_j)$.
+
+In the paper of SDNE, there are many other techniques to enhance the embedding.
 
 By ablation study we found that the most important factor is the weight matrix $B$. If we do not use $B$,
 
