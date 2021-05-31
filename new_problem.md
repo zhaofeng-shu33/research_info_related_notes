@@ -226,17 +226,19 @@ We use auto-encoder framework to obtain low-dimensional embedding for each node 
 
 to represent it. The intermediate layer is regarded as the embedding of the graph.
 
-For $k$ community, we require that the intermediate layer has $k-1$ units. Suppose $X$ is the input and
+For $k$ community, we require that the intermediate layer has $k-1$ units. Suppose $X_i$ is the input and
 
-$\widehat{X}$ is the output (reconstruction of the graph), we wish $\widehat{X}$ is as close to $X$ as possible.
+$\widehat{X}_i$ is the output (reconstruction of the graph for the $i$-th node), we wish $\widehat{X}_i$is as close to $X_i$ as possible.
 $$
-\widehat{X} = g(f(X))
+\widehat{X}_i = g(f(X_i))
 $$
-where $f$ maps $X$ from $\mathbb{R}^n$ to $\mathbb{R}^{k-1}$ with the form $f= \sigma(W_1 X + b_1)$.
+where $f$ maps $X_i$ from $\mathbb{R}^n$ to $\mathbb{R}^{k-1}$ with the form $f(X_i)= \sigma(W_1 X_i + b_1)$.
 
-Let $Z=f(X)$ represents the embedding of $X$ (a certain node),
+Let $Z_i=f(X_i)$ represents the embedding of $X_i$ (a certain node),
 
-then $g$ maps $Z$ from $\mathbb{R}^{k-1}$ to $\mathbb{R}^{n}$ with the form $g= \sigma(W_2 X + b_2)$.
+then $g$ maps $Z_i$ from $\mathbb{R}^{k-1}$ to $\mathbb{R}^{n}$ with the form $g(Z_i)= \sigma(W_2 Z_i + b_2)$.
+
+$X=(X_1, \dots, X_n)$ be an $n\times n$ matrix. The same is true for $\widehat{X}$.
 
 The loss function is defined as
 $$
@@ -277,6 +279,18 @@ the embedding is almost rubbish.
 Once obtaining the embedding vectors for each node, we can use KMeans to cluster the nodes and obtain
 
 the community belonging for each node.
+
+#### Low-rank approximation interpretation
+
+If $\beta=1$ and $\sigma=\textrm{iv}$ (identity mapping), then minimization problem is
+$$
+||W_2 W_1 X + (W_2 b_1 + b_2)\mathbf{1}_n^T - X||_F^2
+$$
+Let $W_1 X = W_1', b_1' = W_2 b_1 + b_2$. We can rewrite the above loss as:
+$$
+||W_2 W_1' X + b_1'\mathbf{1}_n^T - X||_F^2
+$$
+Therefore, we are trying to get a $k$ rank approximation of $X$. For $X_{ij}$ chosen from cosine similarity or adjacency matrix, $\mathbb{E}[X]$ has an eigenvector $\mathbf{1}_n$. Therefore, we are actually solving the other $k-1$ largest eigenvectors of $X$.
 
 
 
