@@ -129,6 +129,15 @@ The polynomial term is neglectable compared with the exponential term.
 	$\lambda$ is that $(1-p)q\exp(\lambda)=(1-q)p\exp(-\lambda)$ (the inequality constraint becomes equality), in which we can solve out
 	$P^*_{Z^n} = [\sqrt{pq(1-p)(1-q)}, qp+(1-p)(1-q), \sqrt{pq(1-p)(1-q)}]/C'$ and $C'=(\sqrt{pq}+\sqrt{(1-p)(1-q)})^2$.
 	The KL-Divergence of $D_{KL}(P_{Z^n}|| Q)$ can be simplified to $-\log C'$, which is exactly $-2\log (\sqrt{pq}+\sqrt{(1-p)(1-q)})$.
+	
+	We can also use Cramér's theorem to get the error exponent.
+	The moment generating function for $Z_i$ is
+	$\varphi(t) = \E[\exp(t Z_i)]
+	= qp + (1-p)(1-q) + (1-q)p e^{-t} + q(1-p) e^t$.
+	Its conjugate is $\varphi^*(s) = \sup_{t \in \mathbb{R}} (ts - \log \varphi(t))$.
+	The exponent is $\varphi^*(0)$ in a sense that $P(\frac{1}{n}\sum_{i=1}^n Z_i\geq 0) \doteq \exp(-n \varphi^*(0))$. $\varphi^*(0)$
+	is achieved when $e^t=\frac{(1-q)p}{q(1-p)}$. After simplification,
+	we get $\varphi^*(0) = -2\log(\sqrt{pq}+\sqrt{(1-p)(1-q)})$.
 \end{remark}
 \begin{theorem}\label{thm:2pq}
 	For a $\textrm{SBM}(n,2,p, q)$ with $p,q$ as constant, $p > q$. The
