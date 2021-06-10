@@ -1,8 +1,10 @@
 \documentclass{article}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{graphicx}
 \DeclareMathOperator{\Bern}{Bern}
 \DeclareMathOperator{\Pois}{Pois}
+\newtheorem{lemma}{Lemma}
 \title{Poisson Distribution}
 \author{zhaof17 }
 \date{January 2021}
@@ -156,12 +158,32 @@ which is the derivative of \eqref{eq:lambda}.
 Then by simple computation we have
 $I_+ = \theta_2^*$.
 
-Let $\theta_3 = \gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2$.
-If $\theta_3 > 1 + \theta_1^* > 2$, then the error rate of ML
-algorithm for the SBMSI with equal probability is given by
-$\exp(1-\theta_1^*)$.
+Let $\theta^*_3 = \frac{1}{2}[\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2]$.
+We can verify that $\theta_1^*=\theta_2^*>\theta^*_3$.
+A prove of this conclusion is considering
+linear approximation of $g(a,b,2\epsilon)$
+in \eqref{eq:theta2}.
+\begin{equation}\label{eq:g_linear}
+		g(a,b,\epsilon) \geq  (\sqrt{a} - \sqrt{b})^2 + \frac{\epsilon}{2}\log \frac{a}{b}. 
+	\end{equation}
+	Then, by Lemma \ref{lem:p0p12},
+	\begin{align*}
+		\theta^*_1 \geq \frac{1}{2}(\sqrt{a}-\sqrt{b})^2+\gamma \frac{D(P_{\widetilde{X}_1} || P_1) + D(P_{\widetilde{X}_1} || P_0)}{2} \\
+		\geq \frac{1}{2}((\sqrt{a}-\sqrt{b})^2+\gamma D_{1/2}(P_0||P_1))=\theta^*_3,
+	\end{align*}
+	where the equality holds when $P_{\widetilde{X}_1}$ is given by \eqref{eq:p012}. 
+	\begin{lemma}\label{lem:p0p12}
+		Let $p_0, p_1$ be probability distribution functions defined over $\mathcal{X}$. The minimizer
+		of $D(p_X||p_0) + D(p_X||p_1)$ for any discrete random variable $X$ is
+		\begin{equation}\label{eq:p012}
+			P(X=x)=\frac{\sqrt{p_0(x)p_1(x)}}{ \sum_{x\in \mathcal{X}} \sqrt{p_0(x) p_1(x)}}
+		\end{equation}
+		and the minimal value is
+		$-2\log \sum_{x\in \mathcal{X}} \sqrt{p_0(x) p_1(x)}$.
+	\end{lemma}
 \begin{thebibliography}{9}
 \bibitem{kl} https://stats.stackexchange.com/questions/145789/kl-divergence-between-two-univariate-poisson-distributions
 \bibitem{abbe} Asadi, Amir R., Emmanuel Abbe, and Sergio Verdú. "Compressing data on graphs with clusters." 2017 IEEE International Symposium on Information Theory (ISIT). IEEE, 2017.
 \end{thebibliography}
 \end{document}
+
