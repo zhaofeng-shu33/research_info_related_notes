@@ -292,9 +292,11 @@ The polynomial term is neglectable compared with the exponential term.
 	Suppose $Z \sim Binomial(n, \frac{b\log n}{n}), X\sim Binomial(n, \frac{a\log n}{n})$.
 	For $ \epsilon > b - a$, show that
 	\begin{equation}
-	P(Z - X \geq \epsilon \log n) \geq \exp(-\log n \cdot ( g(a, b, \epsilon) + O(\frac{\log \log n}{\log n})))
+	P(Z - X \geq \epsilon \log n) \geq \frac{C}{\log^2 n}
+	n^{-g(a, b, \epsilon)}
 	\end{equation}
-	where $g(a,b,\epsilon)$ is given in \eqref{eq:gab}.
+	where $g(a,b,\epsilon)$ is given in \eqref{eq:gab},
+	and $C$ is a constant.
 \end{lemma}
 \begin{proof}
 	The proof is similar with that of Corollary \ref{cor:xz}.
@@ -321,21 +323,40 @@ The polynomial term is neglectable compared with the exponential term.
 	Therefore,
 	\begin{align*}
 	\binom{n}{\tau \log n} &\geq \tau \log^2 n - (\tau \log n + 1)\log(\tau \log n + 1) + \tau \log n  - \log 4 \\
-	&=  \tau \log^2 n - (\tau \log n + 1)(\log(\tau \log n) + \frac{1}{\tau \log n}) + \tau \log n  - \log 4 + O(\frac{1}{\log n}) \\
-	& = \tau \log^2 n - \tau \log n\log\log n + \tau (  1 - \log \tau)\log n - \log\log n- (1 + \log 4 + \log \tau)  + O(\frac{1}{\log n}) 
+	&\stackrel{(a)}{\geq}  \tau \log^2 n - (\tau \log n + 1)(\log(\tau \log n) + \frac{1}{\tau \log n}) + \tau \log n  - \log 4 \\
+	& = \tau \log^2 n - 
+	\tau \log n(\log\log n) + \tau (  1 - \log \tau)\log n - \log\log n- (1 + \log 4 + \log \tau) -\frac{1}{\tau \log n}
 	\end{align*}
+	In (a), we use the inequality:
+	$\log(\tau\log n + 1) = \log(\tau\log n) + \log(1+\frac{1}{\tau \log n})
+	\leq \log(\tau\log n) + \frac{1}{\tau \log n}$.
 	Similarly we can write
 	\begin{align*}
-	\binom{n}{(\tau + \epsilon) \log n} \geq -(\tau + \epsilon) \log n\log\log n & +(\tau + \epsilon) \log^2 n\\
-	+ (\tau + \epsilon) (1-\log (\tau + \epsilon) )\log n &- \log\log n - (1 + \log 4 + \log (\tau+\epsilon))  + O(\frac{1}{\log n}) 
+	\binom{n}{(\tau + \epsilon) \log n} \geq
+	(\tau + \epsilon) \log^2 n&
+	-(\tau + \epsilon) \log n(\log\log n) \\
+	+ (\tau + \epsilon) (1-\log (\tau + \epsilon) )\log n &- \log\log n 
+	- (1 + \log 4 + \log (\tau+\epsilon)) 
+	-\frac{1}{(\tau + \epsilon)\log n}
 	\end{align*}
-	For the other term, using Taylor expansion we have
+	For the other terms, using Taylor expansion we have
+	\begin{align*}
+		\tau \log n \log p &=
+		\tau \log a \log n + \tau \log n (\log\log n)
+		- \tau \log^2 n\\
+		(n - \tau  \log n ) \log (1 - p )
+		&\geq (n - \tau  \log n )(-p - \frac{p^2}{2})
+		\geq -a \log n -\frac{a^2 \log^2 n}{2n}
+	\end{align*}
+	Similar results can be obtained by replacing $\tau$
+	with $\tau + \epsilon$. Then
 	\begin{align*}
 	& \tau \log n \log p + (\tau + \epsilon) \log n \log q 
     + (n - \tau \log n) \log (1 - p)
     + (n - (\tau + \epsilon) \log n ) \log (1 - q ) \\
-    =&-\log n (a+b) + \tau \log n \log\log n - \tau \log^2 n + \tau \log a \log n \\
-    &+ (\tau+\epsilon) \log n \log\log n - (\tau+\epsilon) \log^2 n + (\tau+\epsilon) \log b \log n +  O(\frac{\log^2 n}{n})
+    =&-(a+b)\log n  + \tau \log n \log\log n - \tau \log^2 n + \tau \log a \log n \\
+	&+ (\tau+\epsilon) \log n \log\log n - (\tau+\epsilon) \log^2 n + (\tau+\epsilon) \log b \log n 
+	-\frac{(a^2+b^2)\log^2 n}{2n}
     \end{align*}
     To summarize:
     \begin{equation}\label{eq:Tsmall}
@@ -879,6 +900,25 @@ Then
 which is exactly the same as \eqref{eq:gab}.
 In this case $\Gamma=[0, +\infty)$. $\Lambda^*(s)$ is an increasing function on $\Gamma$.
 $\Lambda^*(0)= (\sqrt{a} - \sqrt{b})^2$.
+
+\section{Necessary condition for exact recovery}
+We consider SBM with two communities.
+If ML fails with large probability,
+all other algorithms will fail too. If we can find
+a node pair $i,j$, such that $y_i=1, y_j=-1$ and
+exchanging the label assignment of $i,j$ will increase
+the maximum likelihood function $p(x|\hat{y})$ ($y$ is the
+true labels, $x$ is the edge information),
+then ML will fail. This is the probability of error
+with one pair (denoted as $\delta_2$). Actually we can lower bound this error
+probability by the square of the error probability
+with one node.
+That is, suppose $\delta_1$ is the probability that
+changing one label assignment will increase
+$p(x|\hat{y})$.
+Then we claim that
+$\delta_2 > \delta_1^2$. Then if $\delta_1$ is lower bounded by a positive
+constant asymtotically. So is $\delta_2$.
 \begin{thebibliography}{9}
 	\bibitem{div} König, Wolfgang. Große Abweichungen: Techniken und Anwendungen. Springer International Publishing, 2020.
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
