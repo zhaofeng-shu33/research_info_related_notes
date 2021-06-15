@@ -381,7 +381,7 @@ more detailed results than Lemma \ref{lem:lower_bound}:
 \end{lemma}
 \begin{proof}
 	From the proof of Lemma \ref{lem:lower_bound},
-	we should choose $\epsilon=\sqrt{ab} \log n$.
+	we should choose $\tau=\sqrt{ab} $.
 	We first gives the asymptotic expression of
 	$P(X = k \log n)$ for general $k$ by Stirling's
 	formula, which is
@@ -910,15 +910,79 @@ exchanging the label assignment of $i,j$ will increase
 the maximum likelihood function $p(x|\hat{y})$ ($y$ is the
 true labels, $x$ is the edge information),
 then ML will fail. This is the probability of error
-with one pair (denoted as $\delta_2$). Actually we can lower bound this error
+with one pair (denoted as $\delta_2$).
+Actually we can lower bound this error
 probability by the square of the error probability
-with one node.
+with one node (by Harris inequality).
 That is, suppose $\delta_1$ is the probability that
 changing one label assignment will increase
 $p(x|\hat{y})$.
 Then we claim that
 $\delta_2 > \delta_1^2$. Then if $\delta_1$ is lower bounded by a positive
-constant asymtotically. So is $\delta_2$.
+constant asymptotically. So is $\delta_2$.
+
+To be more specific, let $S_1,
+S_2$ represent the two communities.
+$V=S_1\cup S_2$.
+Then event $A$ is that
+$\exists u \in S_1$ such that $u$ connects
+to more edges in $S_2$ than in $S_1$.
+And the event $B$ is that
+$\exists v \in S_2$
+such that $v$ connects
+to more edges in $S_1$ than in $S_2$.
+Suppose $P(A)>\delta$, by symmetric property
+we have $P(B)>\delta$. We will use
+Harris inequality \cite{hi} to show $P(A\cap B)
+\geq P(A)P(B) > \delta^2$.
+We define $\binom{n}{2}$ Bernoulli random
+variables $x_{ij}, 1\leq i < j\leq n$. such that
+$x_{ij}=\frac{1 - y_iy_j}{2}$ where $y_i \in \{\pm 1\}$
+is the $i$-th node label. Then the event
+$A$ can be represented as a subset of
+$\{(x_{ij})| \exists u, s.t. \sum_{j\neq u} x_{uj} \geq \frac{n}{2}\}$.
+(We assume $x_{ij}=x_{ji}$). From this
+representation we see clearly that $A$
+is an increasing event. The analysis
+is the same for $B$, and $B$
+is also an increasing event. Then
+by Harris inequality, these two
+events are positively correlated.
+That is $P(A\cap B)
+\geq P(A)P(B)$.
+
+In Abbe's proof (Section 5 of \cite{abbe}), he needs to show
+$P(A) \geq \frac{2}{3}$ (actually $P(A)\to 1$)
+if $\sqrt{a} - \sqrt{b} < \sqrt{2}$).
+Then $P(A\cap B) = P(A)
++ P(B) - P(A\cup B) \geq \frac{2}{3}
++ \frac{2}{3} - 1 \geq \frac{1}{3}
+$. The lower bound of $P(A\cap B)$ is
+also a target in his proof but derived
+with different method.
+To show $P(A) \to 1$ asymptotically.
+We can use the second moment method.
+Let $\psi_u$ be the indicator function
+that $A_u$ ($u$ connects to more edges
+in $S_1$ than in $S_2$) happens, and we consider
+$Z=\sum_{u \in S_1} \psi_u$.
+Then we claim that there exists $\alpha >
+0$ such that
+\begin{align}\label{eq:ez}
+	\E[Z] &\geq n^{\alpha} \\
+	\Var[Z] &\leq C\E^2[Z]
+\end{align}
+and
+\eqref{eq:ez} tells us that
+$\E[Z]$ is increasing as $n$. Then
+by Paley-Zygmund inequality,
+$P(Z \geq \theta \E[Z])
+\geq \frac{(1-\theta)^2\E^2[Z]}{\Var[Z]
++ \E^2[Z]}$.
+Take $\theta = n^{-\alpha}$ we have
+$P(Z \geq 1) \geq \frac{1}{C + 1}$.
+$Z>1$ is equivalent
+to the event $A$.
 \begin{thebibliography}{9}
 	\bibitem{div} König, Wolfgang. Große Abweichungen: Techniken und Anwendungen. Springer International Publishing, 2020.
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
@@ -931,5 +995,6 @@ constant asymtotically. So is $\delta_2$.
 	J.~Lei, A.~Rinaldo \emph{et~al.}, ``Consistency of spectral clustering in
 	stochastic block models,'' \emph{The Annals of Statistics}, vol.~43, no.~1,
 	pp. 215--237, 2015.
+	\bibitem{hi} \url{https://ocw.mit.edu/courses/mathematics/18-218-probabilistic-method-in-combinatorics-spring-2019/lecture-notes/MIT18_218S19_ch7.pdf}
 \end{thebibliography}
 \end{document}
