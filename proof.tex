@@ -10,6 +10,7 @@
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclareMathOperator{\SDP}{SDP}
 \DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{remark}{Remark}
@@ -971,6 +972,7 @@ Then we claim that there exists $\alpha >
 \begin{align}\label{eq:ez}
 	\E[Z] &\geq n^{\alpha} \\
 	\Var[Z] &\leq C\E^2[Z]
+	\label{eq:varz}
 \end{align}
 and
 \eqref{eq:ez} tells us that
@@ -983,6 +985,85 @@ Take $\theta = n^{-\alpha}$ we have
 $P(Z \geq 1) \geq \frac{1}{C + 1}$.
 $Z>1$ is equivalent
 to the event $A$.
+Notice that by the second moment method,
+we did not obtain the strong condition $P(A) \to 1$.
+
+\eqref{eq:ez} holds since $\E[Z]
+= n P(A_u)$ while the lower bound
+of $P(A_u)$ is obtained
+in Lemma \ref{lem:lower_bound} as $\frac{n^{-(\sqrt{a}-\sqrt{b})^2/2}}{\log n}$.
+Since $\sqrt{a} - \sqrt{b}<\sqrt{2}$,
+we can choose a positive $\alpha>0$ such
+that $P(A_u) \geq n^{-1+\alpha}$.
+
+\eqref{eq:varz} is guaranteed when
+$\Cov(\xi_u, \xi_v) \leq C P(A_u)^2$
+holds for
+some constant. Then $\Var[Z]=nP(A_u)+(n^2-n)
+\Cov(\xi_u, \xi_v) \leq Cn^2P(A_u)^2=C\E^2[Z]$.
+
+To prove $\Cov(\xi_u, \xi_v) \leq 
+C P(A_u)^2$ for $u \in S_1, v\in S_2$,
+we construct another
+random variable $\xi$, which
+indicates whether there is an edge
+between $u$ and $v$.
+Then $\xi_u$ and $\xi_v$ are conditionally
+independent given $\xi$.
+By the law of total expectation,
+$\Cov(\xi_u, \xi_v)
+= \E[\xi_u\xi_v] - \E[\xi_u]
+\E[\xi_v]= \E[\E[\xi_u\xi_v|\xi]]
+- \E[\E[\xi_u|\xi]]
+\E[\E[\xi_v| \xi]]
+= \E[\E[\xi_u|\xi]\E[\xi_v|\xi]]
+- \E[\E[\xi_u|\xi]]
+\E[\E[\xi_v| \xi]]
+=\Cov(\E[\xi_u|\xi], \E[\xi_v|\xi])
+\leq \sqrt{\Var[\E[\xi_u|\xi]]
+\Var[\E[\xi_v|\xi]]}=\Var[\E[\xi_u|\xi]]$.
+Notice that $\E[\xi_u|\xi]$ is a random
+variable taking two values
+$P(A_u | \xi=0)$
+and $P(A_u | \xi=1)$.
+By law of total expectation we have
+\begin{equation}\label{eq:qA_u_mean}
+	(1-q) P(A_u | \xi = 0)
+	+ q P(A_u | \xi = 1)
+	= \E[\E[\xi_u | \xi]]=P(A_u)
+\end{equation}
+We have the inequality:
+$P(A_u | \xi = 0)\leq P(A_u) \leq P(A_u | \xi = 1)$.
+
+If we can show that $P(A_u | \xi = 1) \leq c P(A_u | \xi=0)$
+for some constant $c>1$, then from
+\eqref{eq:qA_u_mean}, we have
+$P(A_u | \xi=0)
+\geq \frac{1-cq}{1-q} P(A_u) \geq \frac{1}{2} P(A_u)$.
+Therefore, $\Var[\E[\xi_u | \xi]]$ is bounded
+by $C P(A_u)^2$.
+
+The inequality $P(A_u | \xi = 1) \leq c P(A_u | \xi=0)$
+can be reformulated as 
+$\Pr(Y\geq X - 1) \leq c \Pr(Y\geq X)$ while
+$X, Y$ are Binomial random variables with parameter
+$(n, p), (n, q)$ respectively.
+
+If $\Pr(X=k+1) \leq \beta \Pr(X=k)$, then
+\begin{align*}
+	\Pr(Y\geq X-1)
+	& = \Pr(X=0) + \sum_{k=0}^n \Pr(Y\geq k)\Pr(X=k+1) \\
+	& \leq \Pr(Y\geq X)+ \beta\sum_{k=0}^n \Pr(Y\geq k)\Pr(X=k) \\
+	& = (1+\beta)\Pr(Y\geq X)
+\end{align*}
+
+The inequality $\Pr(X=k+1) \leq \beta \Pr(X=k)$ can be proved directly assuming
+$p=\frac{a \log n}{n}$:
+\begin{align*}
+\frac{\Pr(X=k+1)}{\Pr(X=k)}
+= \frac{p}{1-p} \frac{n-k}{k+1} \leq \frac{a}{1-p}\leq 2a
+\end{align*}
+
 \begin{thebibliography}{9}
 	\bibitem{div} König, Wolfgang. Große Abweichungen: Techniken und Anwendungen. Springer International Publishing, 2020.
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
