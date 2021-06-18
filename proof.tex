@@ -7,6 +7,7 @@
 \usepackage{url}
 \usepackage{amssymb}
 \usepackage{mathtools}
+\usepackage{hyperref}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclareMathOperator{\SDP}{SDP}
 \DeclareMathOperator{\Var}{Var}
@@ -1064,6 +1065,48 @@ $p=\frac{a \log n}{n}$:
 = \frac{p}{1-p} \frac{n-k}{k+1} \leq \frac{a}{1-p}\leq 2a
 \end{align*}
 
+There is a tiny problem for
+$A\cap B \subset F_1$. $F_1$ is the event that
+there exists $u \in S_1, v \in S_2$ such that exchanging
+the position of $u$ and $v$ can increase
+the likelihood function, or equivalently
+the number of outer edges (edges between $S_1$ and $S_2$ but not including $e_{uv}$)
+is larger than the number of inner edges (within $S_1$ or $S_2$).
+When there is no edge between $u$ and $v$, we can
+simply add the two conditions together to derive
+$F_1$. However, when an edge exists, we can
+only get $1 + N(\textrm{outer edges}) \geq N(\textrm{inner edges})$,
+which does not imply $-1+N(\textrm{outer edges}) \geq N(\textrm{inner edges})$.
+Therefore, we need to show a slightly stronger condition
+than $A\cap B$. That is, we must require the event that $u$ and $v$
+are non-adjacent occurs simultaneously.
+
+Lemma 7.3 of \cite{mossel} gives techniques to overcome this issue.
+In the proof of Lemma 7.3, $S_i$ is divided into three sets,
+and the problem is transformed to show that in an Erdos-Rényi
+graph $G(n, \frac{a\log n}{n})$, the probability that it contains $K_{3,3}$
+is asymptotically zero. The detail of the first moment method
+omitted in that Lemma is given here. Let $X$ be the random
+variable that represents the number of $K_{3,3}$ in the
+random graph, by Markov's inequality, we have $P(X\neq 0)
+=P(X\geq 1)\leq \E[X]$.
+$X = \sum X_{ijk,i'j'k'}$ where $X_{ijk,i'j'k'}$ is an
+indicator random variable for the existence of $K_{3,3}
+$ between $(i,j,k)$ and $(i',j',k')$. Since $K_{3,3}$
+has 9 edges,
+$\E[X_{ijk,i'j'k'}] = (\frac{a \log n}{n})^9$. The summation
+has at most $(\binom{n}{3})^2$ terms, which is of order $O(n^6)$.
+Therefore, $\E[X] = O(\frac{\log^9 n}{n^3}) = o(1)$.
+
+We comment that the choice of $K_{3,3}$ is reasonable.
+If we choose $K_{2,2}$ then $(\frac{a \log n}{n})^4 (\binom{n}{2})^2$
+is not $o(1)$. Therefore, we need $K_{3,3}$ at least.
+
+A final comment is that by the method of Mossel, we
+can only show that the error probability of ML algorithm 
+has a strictly positive lower bound value. This is weaker
+than the conclusion that the error probability tends to 1.
+
 \begin{thebibliography}{9}
 	\bibitem{div} König, Wolfgang. Große Abweichungen: Techniken und Anwendungen. Springer International Publishing, 2020.
 	\bibitem{abbe} Abbe, Emmanuel, Afonso S. Bandeira, and Georgina Hall. "Exact recovery in the stochastic block model." *IEEE Transactions on Information Theory* 62.1 (2015): 471-487.
@@ -1077,5 +1120,6 @@ $p=\frac{a \log n}{n}$:
 	stochastic block models,'' \emph{The Annals of Statistics}, vol.~43, no.~1,
 	pp. 215--237, 2015.
 	\bibitem{hi} \url{https://ocw.mit.edu/courses/mathematics/18-218-probabilistic-method-in-combinatorics-spring-2019/lecture-notes/MIT18_218S19_ch7.pdf}
+	\bibitem{mossel} Mossel, Elchanan, Joe Neeman, and Allan Sly. "Consistency thresholds for the planted bisection model." Proceedings of the forty-seventh annual ACM symposium on Theory of computing. 2015.
 \end{thebibliography}
 \end{document}
