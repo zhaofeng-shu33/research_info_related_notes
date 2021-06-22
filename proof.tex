@@ -906,7 +906,20 @@ $\Lambda^*(0)= (\sqrt{a} - \sqrt{b})^2$.
 \section{Necessary condition for exact recovery}
 We consider SBM with two communities.
 If ML fails with large probability,
-all other algorithms will fail too. If we can find
+all other algorithms will fail too.
+This statement is based on Bayesian estimator (the true label
+$\sigma$ is a random variable) with the
+uniform risk
+function: $R(\hat{\sigma}, \sigma) =
+\mathbbm{1}_{\norm{\hat{\sigma} - \sigma}\geq \Delta}$. When
+$\Delta$ is small, the mean value of this risk function
+approximates the probability $P(\hat{\sigma} \neq \sigma)$
+while the estimator that minimizes the mean risk
+approximates the MAP estimator. Since the prior distribution
+of $\sigma$ is uniform, MAP estimator is the same as the ML
+estimator.
+
+If we can find
 a node pair $i,j$, such that $y_i=1, y_j=-1$ and
 exchanging the label assignment of $i,j$ will increase
 the maximum likelihood function $p(x|\hat{y})$ ($y$ is the
