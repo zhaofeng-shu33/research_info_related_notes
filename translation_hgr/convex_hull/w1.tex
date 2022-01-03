@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algorithm,algorithmic}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\title{A stochastic convex hull problem}
+\begin{document}
+\maketitle
+\section{Two dimensions}
+$(x_i, y_i) \sim p(x,y)$ are i.i.d. distributions
+for $i=1,2,\dots, n, n+1$. We consider the event
+$A_n =\{(x_{n+1}, y_{n+1}) \in ConvexHull\{(x_1, y_1),
+\dots, (x_n, y_n)\} \}$. We give a lower bound on $A_n^c$
+(complement) as follows:
+\begin{theorem}\label{thm:lower_bound}
+    \begin{equation}
+        P(A_n^c) \geq \frac{2}{n+1}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+We use the method of projection to prove Theorem
+\ref{thm:lower_bound}.
+Consider a direction $(\cos\theta, \sin \theta)$
+characterized by $\theta$. The projection of $(x_i, y_i)$
+is given by $x_i \cos\theta + y_i \sin \theta$.
+If $\exists \theta$ such that
+$x_{n+1}\cos\theta + y_{n+1} \sin \theta$
+is larger than $\max_{i=1,\dots, n} \{x_{i}\cos\theta +
+y_{i} \sin \theta\}$ or smaller than
+$\min_{i=1,\dots, n} \{x_{i}\cos\theta +
+y_{i} \sin \theta\}$, $A_n^c$ happens.
+Let $z_i = x_i \cos \theta + y_i \sin \theta$,
+$z_{\max}=\max\{z_1, \dots, z_n\}$ and
+$z_{\min}=\min\{z_1, \dots, z_n\}$.
+Then we have $P(A_n^c) \geq P(\exists \theta, z_{n+1} > z_{\max})
++ P(\exists \theta, z_{n+1} < z_{\min})
+\geq P(\theta=\theta', z_{n+1} > z_{\max})
++ P(\theta=\theta', z_{n+1} < z_{\min}) $.
+
+Now we compute $P(z_{n+1} > z_{\max})$
+for a number $\theta'$.
+The PDF of $z=x\cos \theta' + y \sin \theta'$
+is given as $p(z)=\int
+\frac{p(x, \frac{z-x \cos \theta'}
+{\sin \theta'})}{|\sin \theta'|}dx$.
+$P(z_{n+1} > z_{\max}) = \int P(z_{\max} < z)p(z)dz
+= \int F(z)^n p(z)dz$ where $F(z)$ is the CDF of the
+random variable $Z$. Therefore, the integral evaluates
+to $\frac{1}{n+1}$. Similarly,
+$P(\theta=\theta', z_{n+1} < z_{\min})=
+\frac{1}{n+1}$.
+ 
+
+\end{proof}
+\end{document}
