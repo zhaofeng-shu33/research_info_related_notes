@@ -9,6 +9,7 @@
 \usepackage{mathtools}
 \usepackage{hyperref}
 \newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
 \title{A stochastic convex hull problem}
 \begin{document}
 \maketitle
@@ -55,7 +56,38 @@ random variable $Z$. Therefore, the integral evaluates
 to $\frac{1}{n+1}$. Similarly,
 $P(\theta=\theta', z_{n+1} < z_{\min})=
 \frac{1}{n+1}$.
- 
-
 \end{proof}
+
+\section{Crofton's formula}
+This part mainly consults \cite{crofton}.
+
+Crofton's formula gives a way to compute the arc length
+by integration. Suppose we have a two dimensional
+parametrized curve $\gamma: [0, 1] \to \mathbb{R}^2$.
+Then the arc length of $\gamma$ is
+\begin{equation}\label{eq:gamma}
+    len(\gamma) = \frac{1}{2}\iint n(p, \theta)
+    dp d\theta
+\end{equation}
+where $p, \theta$ is the polar coordinate representation
+of a straight line. $n(p, \theta)$ is the number of times the 
+straight line intersects the curve. The integration
+in \eqref{eq:gamma} is over $p\in [0, +\infty)$
+and $\theta \in [0, 2\pi]$.
+\begin{example}
+    The perimeter of the circle $x^2+y^2=r^2$.
+    Using the integration formula \eqref{eq:gamma},
+    we obtain $\frac{1}{2}\int_{0}^{2\pi} d\theta \int_0^r 2 dp=2\pi r$.
+\end{example}
+\begin{example}
+    The line segment $0\leq x \leq 1, y=0$.
+    The integral is $\frac{1}{2}\int_0^1 2 dp
+    \int_0^{\arccos p} d\theta = \int_0^1 \arccos p dp=1$.
+\end{example}
+\begin{thebibliography}{9}
+    \bibitem{crofton} \url{https://math.osu.edu/sites/math.osu.edu/files/What%20is%202017%20Croftons%20Formula.pdf}
+\end{thebibliography}
 \end{document}
+
+
+
