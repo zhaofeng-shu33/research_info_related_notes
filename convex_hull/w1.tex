@@ -74,7 +74,7 @@ We are interested in the decaying rate of $P(A_n^c)$
 when $n\to \infty$, which is given in Lemma \ref{lem:gaussian}
 \begin{lemma}\label{lem:gaussian}
 The equation in \eqref{eq:gaussian_2d} has decaying rate
-$\frac{\sqrt{2\pi}}{n+1}$ as $n\to \infty$.
+$\frac{\sqrt{2}\pi}{n+1}$ as $n\to \infty$.
 \end{lemma}
 \begin{proof}
 First use integration by parts:
@@ -93,7 +93,8 @@ Then use change of variables ($y=\Phi^{n+1}(u)$):
 \end{align*}
 Using the relationship
 $\Phi^{-1}(z)
-= \sqrt{2} \erf^{-1}(2z-1)$,
+= \sqrt{2} \erf^{-1}(2z-1)$
+where $\erf$ is the error function,
 we have
 \begin{align*}
     P(A_n^c) 
@@ -101,21 +102,69 @@ we have
     \left(\frac{x+1}{2} \right)^n
     \erf^{-1} (x)dx
 \end{align*}
-$ \lim_{n\to \infty}
-\int_{0}^{1}\Phi^{-1}(y^{1/(n+1)})dy  = 1$
-using the definition of singular integration.
-That is, for any sufficiently small $\delta>0
-$,
-\begin{align*}
-\lim_{n\to \infty}\lim_{\delta\to 0}
-\int_{0}^{1-\delta}\Phi^{-1}(y^{1/(n+1)})dy  &=\\
-\lim_{\delta\to 0}\lim_{n\to \infty}
-\int_{0}^{1-\delta}\Phi^{-1}(y^{1/(n+1)})dy  &= 01
-\end{align*}
+Below we give a lower bound for $P(A_n^c)$
+\begin{lemma}\label{lem:bound_erf_integral}
+    \begin{align}
+        \int_{-1}^{1}
+    \left(\frac{x+1}{2} \right)^n
+    \erf^{-1} (x)dx & \geq \sqrt{\pi}
+    \left[\frac{2}{n+2} - \frac{1}{n+1}\right]
+    \end{align}
+\end{lemma}
+Combining Lemma \ref{lem:bound_erf_integral},
+we have $P(A_n^c) \geq  \frac{\sqrt{2}\pi}{n+1}$
+approximately, which is a more tight lower bound than
+Theorem \ref{thm:lower_bound}.
 
 \end{proof}
 
+\section{A high dimensional ball}
+Suppose $X$ is an n dimensional random gaussian vector
+sampled from
+$\mathcal{N}(\bm{0}, I_n)$. The upper bound of probability that it
+falls within a hyperball with radius $R$ is computed
+as follows:
+\begin{align*}
+    P(||X||\leq R) &= \int_{x_1^2 + \dots + x_n^2 \leq R^2}
+    \frac{1}{(2\pi)^{n/2}}
+    e^{-\frac{x_1^2 + \dots x_n^2}{2}}
+    dx_1 \dots dx_n\\
+    &= \frac{S_{n-1}(1) }{(2\pi)^{n/2}}
+    \int_0^R r^{n-1} e^{-r^2/2}dr
+    \\
+    &=\frac{2\pi^{n/2}}{(2\pi)^{n/2}\Gamma(n/2)}
+    \int_0^R r^{n-1} e^{-r^2/2}dr \\
+    &=\frac{2\pi^{n/2}}{(2\pi)^{n/2}\Gamma(n/2)}
+    \int_0^R r^{n-1} e^{-r^2/2}dr \\
+    &=\frac{1}{\Gamma(n/2)}
+    \int_0^{\frac{R^2}{2}} x^{\frac{n}{2} - 1} e^{-x}dx\\
+    &=\frac{\gamma(n/2, \frac{R^2}{2})}{\Gamma(n/2)}
+\end{align*}
+We can use the recurrence relation for the
+incomplete gamma function $\gamma(s,x)$:
+\begin{equation}
+    \gamma(s+1, x)
+    = s\gamma(s, x) - x^s e^{-x}
+\end{equation}
+We consider the recurrence formula for the
+following sequence:
+$a_{n+1} = n a_n - bk^n$.
+Dividing both sides by $n!$, we obtain
+$\frac{a_{n+1}}{n!} =
+\frac{a_n}{(n-1)!} - b\frac{k^n}{n!}$.
+Therefore, $\frac{a_n}{(n-1)!} = a_1 - b\sum_{i=1}^{n-1}
+\frac{k^i}{i!}$ while $a_1 = \gamma(1, k)=1-e^{-k}$
+and $b=e^{-k}$.
+$\frac{a_n}{(n-1)!} = e^{-k}(e-\sum_{i=0}^{n-1} \frac{k^i}{i!})
+\sim e^{-k}\frac{k^n}{n!}$.
+Therefore, suppose $n$ is an even number,
+$P(||X||\leq R) \sim e^{-k}\frac{(R^2/2))^n}{n!}$.
+The decaying rate is faster than exponential rate.
 
+A looser bound is obtained by replacing the hyperball
+with a bounding hypercube. Then
+$P(||X||\leq R) \leq P(|X_1|\leq R)^n$, which is an
+exponential rate.
 \section{Crofton's formula}
 This part mainly consults \cite{crofton}.
 
