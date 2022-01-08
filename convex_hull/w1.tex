@@ -10,6 +10,8 @@
 \usepackage{hyperref}
 \newtheorem{theorem}{Theorem}
 \newtheorem{example}{Example}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator{\erf}{erf}
 \title{A stochastic convex hull problem}
 \begin{document}
 \maketitle
@@ -58,6 +60,62 @@ $P(\theta=\theta', z_{n+1} < z_{\min})=
 \frac{1}{n+1}$.
 \end{proof}
 
+A case for Gaussian.
+Suppose $p(x,y)=\frac{1}{2\pi}\exp(-\frac{x^2}{2}
+-\frac{y^2}{2})$,
+then the exact formula for $P(A_n^c)$
+is
+\begin{equation}\label{eq:gaussian_2d}
+    P(A_n^c) = \frac{n}{\sqrt{\pi}} \int_{-\infty}^{+\infty}
+    \Phi^{n-1}(u)e^{-u^2}du
+\end{equation}
+where $\Phi$ is the CDF of standard normal distribution.
+We are interested in the decaying rate of $P(A_n^c)$
+when $n\to \infty$, which is given in Lemma \ref{lem:gaussian}
+\begin{lemma}\label{lem:gaussian}
+The equation in \eqref{eq:gaussian_2d} has decaying rate
+$\frac{\sqrt{2\pi}}{n+1}$ as $n\to \infty$.
+\end{lemma}
+\begin{proof}
+First use integration by parts:
+\begin{align*}
+    P(A_n^c) &= \sqrt{2} \int_{-\infty}^{+\infty}
+    e^{-u^2/2}d\Phi^n(u)
+    =\sqrt{2} \int_{-\infty}^{+\infty}\Phi^n(u)
+    ue^{-u^2/2}du \\
+    &=2\sqrt{\pi} \int_{-\infty}^{+\infty}
+    \Phi(u)^n ud\Phi(u)
+\end{align*}
+Then use change of variables ($y=\Phi^{n+1}(u)$):
+\begin{align*}
+    P(A_n^c) 
+    =2\sqrt{\pi} \int_{0}^{1}z^n \Phi^{-1}(z)dz
+\end{align*}
+Using the relationship
+$\Phi^{-1}(z)
+= \sqrt{2} \erf^{-1}(2z-1)$,
+we have
+\begin{align*}
+    P(A_n^c) 
+    =\sqrt{2\pi} \int_{-1}^{1}
+    \left(\frac{x+1}{2} \right)^n
+    \erf^{-1} (x)dx
+\end{align*}
+$ \lim_{n\to \infty}
+\int_{0}^{1}\Phi^{-1}(y^{1/(n+1)})dy  = 1$
+using the definition of singular integration.
+That is, for any sufficiently small $\delta>0
+$,
+\begin{align*}
+\lim_{n\to \infty}\lim_{\delta\to 0}
+\int_{0}^{1-\delta}\Phi^{-1}(y^{1/(n+1)})dy  &=\\
+\lim_{\delta\to 0}\lim_{n\to \infty}
+\int_{0}^{1-\delta}\Phi^{-1}(y^{1/(n+1)})dy  &= 01
+\end{align*}
+
+\end{proof}
+
+
 \section{Crofton's formula}
 This part mainly consults \cite{crofton}.
 
@@ -82,7 +140,8 @@ and $\theta \in [0, 2\pi]$.
 \begin{example}
     The line segment $0\leq x \leq 1, y=0$.
     The integral is $\frac{1}{2}\int_0^1 2 dp
-    \int_0^{\arccos p} d\theta = \int_0^1 \arccos p dp=1$.
+    \int_0^{\arccos p} d\theta =
+    \int_0^1 \arccos p dp=1$.
 \end{example}
 \begin{thebibliography}{9}
     \bibitem{crofton} \url{https://math.osu.edu/sites/math.osu.edu/files/What%20is%202017%20Croftons%20Formula.pdf}
