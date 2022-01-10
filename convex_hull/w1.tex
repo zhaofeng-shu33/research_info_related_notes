@@ -156,7 +156,11 @@ we have
     \left(\frac{x+1}{2} \right)^n
     \erf^{-1} (x)dx
 \end{align*}
-Below we give a lower bound for $P(A_n^c)$
+Combining Lemma \ref{lem:bound_erf_integral},
+we have $P(A_n^c) \geq  \frac{\sqrt{2}\pi}{n+1}$
+approximately, which is a more tight lower bound than
+Theorem \ref{thm:lower_bound}.
+\end{proof}
 \begin{lemma}\label{lem:bound_erf_integral}
     \begin{align}\label{eq:bound_erf_integral}
         \int_{-1}^{1}
@@ -207,12 +211,65 @@ Below we give a lower bound for $P(A_n^c)$
     the inequality \eqref{eq:ieq_erf_inverse}.
 
 \end{proof}
-Combining Lemma \ref{lem:bound_erf_integral},
-we have $P(A_n^c) \geq  \frac{\sqrt{2}\pi}{n+1}$
-approximately, which is a more tight lower bound than
-Theorem \ref{thm:lower_bound}.
 
+\subsection{Special cases}
+We consider $n=3$.
+In this case, $P(A_n)$
+is the expected volume of the triangles
+whose three vertices are drawn randomly.
+
+\begin{lemma}
+    Under the Gaussian assumption of
+    Lemma \ref{lem:gaussian},
+    we have $P(A_n^c)=\frac{3}{2}
+    (1-\frac{\arccos(1/3)}{\pi})
+    \approx 0.91$.
+\end{lemma}
+\begin{proof}
+From  \eqref{eq:gaussian_2d},
+we should compute the integration
+$\int_{\mathbb{R}} \Phi^2(x)e^{-x^2}
+dx$.
+From \cite{ruben1954moments},
+this integral can be computed recursively
+by the following formula:
+\begin{align}
+    \int_{\mathbb{R}} \Phi^n(x)e^{-x^2}
+    dx &= \sqrt{\pi} \bar{V}_{n,n}(3) \\
+    \bar{V}_{n,n}(x)
+    &=\frac{1}{2^n}
+    + \frac{n(n-1)}{4\pi}
+    \int_{x}^{+\infty}
+    \bar{V}_{n-2,n-2}(x'+2)
+    \frac{dx'}{x'\sqrt{x'^2-1}}
+    \label{eq:recursive}
+\end{align}
+Notice that \eqref{eq:recursive}
+holds for $n\geq 2$. The starting
+function is $\bar{V}_{0,0}(x)=1
+,\bar{V}_{1,1}(x)=\frac{1}{2}$.
+From \eqref{eq:recursive},
+we have $\bar{V}_{n,n}(3)=
+\frac{1}{4} + \frac{1}{2\pi}
+(\frac{\pi}{2} - \arccos\frac{1}{3})
+$
+Then
+\begin{equation}
+\int_{\mathbb{R}} \Phi^2(x)e^{-x^2}
+dx = \sqrt{\pi}(\frac{1}{2} - \frac{1}{2\pi}\arccos\frac{1}{3})
+\end{equation}
+Finally,
+$P(A_n^c)=\frac{3}{\pi}
+\int_{\mathbb{R}} \Phi^2(x)e^{-x^2}
+=\frac{3}{2}
+(1-\frac{\arccos(1/3)}{\pi})
+$.
 \end{proof}
+If the points are drawn uniformly
+from a square $[0,1]^2$, then
+$P(A_n^c)=\frac{25}{36}$
+(See the formula in \cite{valtr1995probability}).
+
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
@@ -289,11 +346,8 @@ and $\theta \in [0, 2\pi]$.
     \int_0^{\arccos p} d\theta =
     \int_0^1 \arccos p dp=1$.
 \end{example}
-\begin{thebibliography}{9}
-    \bibitem{crofton} \url{https://math.osu.edu/sites/math.osu.edu/files/What%20is%202017%20Croftons%20Formula.pdf}
-    \bibitem{inverseErf}
-    \url{https://mathworld.wolfram.com/InverseErf.html}
-\end{thebibliography}
+\bibliographystyle{plain}
+\bibliography{ref.bib}
 \end{document}
 
 
