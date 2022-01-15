@@ -20,9 +20,26 @@
 $p_i$ are i.i.d. distributions in $d$ dimensional space
 for $i=1,2,\dots, n, n+1$. We consider the event
 $A_n =\{p_{n+1} \in ConvexHull\{p_1,
-\dots, p_n\} \}$.
+\dots, p_n\} \}$. $P(A_n)$ is also called
+the probability content.
 $P(A_n^c)$ increases if $d$ increases,
-and it   decreases if $d$ increases.
+and it decreases if $d$ increases.
+
+Notice that the event $A^c_n$ is different
+from the event that $p_1, \dots, p_{n+1}$
+are in convex position.
+
+According to the survey article
+\cite{barany2008random},
+the problem originally comes from Sylvester's four point problem
+in 1864. Then there are two directions afterwards.
+One is studying the probability of all points are in convex
+position, denoted as $p(n, K)$ in $d$ dimension where $K$ is the convex body
+and $n$ is the number of points.
+The other direction is to study $P(A_n)$.
+The second direction diverges from the first direction
+from the paper of Rényi in 1963.
+
 \section{Two dimensions}
 $(x_i, y_i) \sim p(x,y)$ are i.i.d. distributions
 for $i=1,2,\dots, n, n+1$. We consider the event
@@ -260,7 +277,7 @@ Then
 dx = \sqrt{\pi}(\frac{1}{2} - \frac{1}{2\pi}\arccos\frac{1}{3})
 \end{equation}
 Finally,
-$P(A_n^c)=\frac{3}{\pi}
+$P(A_3^c)=\frac{3}{\pi}
 \int_{\mathbb{R}} \Phi^2(x)e^{-x^2}
 =\frac{3}{2}
 (1-\frac{\arccos(1/3)}{\pi})
@@ -268,9 +285,15 @@ $.
 \end{proof}
 If the points are drawn uniformly
 from a square $[0,1]^2$, then
-$P(A_n^c)=\frac{25}{36}$
+$P(A_3^c)=\frac{133}{144}$
 (See the formula in \cite{valtr1995probability}
 or the result on page 123 in \cite{henze1983random}).
+
+When we require that the distribution is uniform in some bounded region.
+An interesting conclusion (from the introduction of \cite{barany2008random})
+is that $P(A_3)$ is the largest when
+the distribution is uniform in a triangle and
+smallest when the distribution is uniform in a disk.
 
 \section{Expected number of vertices}
 In section 3 of \cite{efron1965convex},
@@ -287,6 +310,31 @@ $P(A_n)$ is also called the probability content.
 However, the method used in 
 \cite{efron1965convex} is hard to generalize in
 higher dimensions.
+
+Using the traditional conclusion on the
+asymptotic analysis of $\E[V_n]$
+in two-dimensional space,
+we can obtain the following
+asymptotic behavior for $P(A_n^c)$,
+which is consistent with our lower bound
+derived above, though the bound is
+not tight in the sense of order.
+\begin{theorem}
+    $\E[V_n] = O(n^{1/3})$ for uniform distribution
+    within a unit circle while
+    $\E[V_n] = O(\log(n))$ for uniform distribution
+    within a unit square.
+\end{theorem}
+\subsection{Convex hull in 4d}
+Euler's characteristic:
+\begin{equation}
+    V_N - E_N + F_N - \tilde{V}_N = 0
+\end{equation}
+\begin{itemize}
+    \item $E_N$: the number of edges
+    \item $F_N$: the number of faces (triangles)
+    \item $\tilde{V}_N$: the number of volumes (tetrahedra)
+\end{itemize}
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
