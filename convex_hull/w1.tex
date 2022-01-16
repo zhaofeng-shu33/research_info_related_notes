@@ -325,6 +325,62 @@ not tight in the sense of order.
     $\E[V_n] = O(\log(n))$ for uniform distribution
     within a unit square.
 \end{theorem}
+A refinement for uniform distribution in a 2d circle states that $\E[V_n] \sim C n^{1/3}$ where
+the constant $C$ is given as:
+\begin{equation}\label{eq:Cn3}
+    C = \Gamma\left(\frac{5}{3}\right) \left(\frac{16\pi^2}{3}
+    \right)^{1/3}
+\end{equation}
+This formula is derived in
+Section 3 of \cite{renyi1963konvexe}.
+
+Below we give another derivation of
+\eqref{eq:Cn3} starting from (7.13)
+of \cite{efron1965convex}, which states that
+$\E[V_n] = \frac{2\pi^2}{3}\binom{N}{2}
+\int_{-1}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp$.
+
+The first step is to shrink the integration interval.
+\begin{align*}
+    \int_{-1}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp
+    &=\int_{0}^{1} \left(\Lambda_2^{N-2}(p)
+    +(1-\Lambda_2(p))^{N-2}\right)\lambda_2^3(p)dp
+\end{align*}
+Since $\Lambda_2(p) > \frac{1}{2}$ for $p>0$, the term
+$(1-\Lambda_2(p))^{N-2}$ is neglectful when
+$N$ is large.
+Therefore, we only need to concern about
+$\int_{0}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp$,
+Let $p=\cos\theta$, we then have
+\begin{align*}
+    \int_{0}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp
+    &=\frac{8}{\pi^3}\int_{0}^{\frac{\pi}{2}}
+    \left(1+\frac{\sin\theta\cos\theta - \theta}{\pi}\right)^{N-2}
+    \sin^4 \theta d\theta
+\end{align*}
+We can change the integral interval to $[0, \epsilon]$
+for any constant $\epsilon<\frac{\pi}{2}$ without changing
+the asymptotic behavior of the above value.
+When $\epsilon$ is small, we can also use the approximation
+$\theta \approx \sin\theta$. The term inside
+the bracket becomes $1-\frac{1}{2}(2\theta)^3\frac{1}{6}\cdot \frac{1}{\pi}
+=1-\frac{2\theta^3}{3\pi}$. We make the change
+of variables from $\theta$ to $t$ by:
+\begin{align*}
+    \frac{t}{N} = \frac{2\theta^3}{3\pi}
+\end{align*}
+Then $\theta = \left(\frac{3\pi t}{2N}\right)^{1/3}$.
+When $N$ is large, we have:
+\begin{align*}
+\int_{0}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp
+\sim \frac{8}{3\pi^3} \left(\frac{3\pi}{2N}\right)^{5/3}\int_0^{\infty}
+\left(1-\frac{t}{N}\right)^{N-2}t^{2/3}dt
+\sim\frac{8}{3\pi^3} \left(\frac{3\pi}{2N}\right)^{5/3}
+\Gamma\left(\frac{5}{3}\right)
+\end{align*}
+Then the coefficient $C=\frac{\pi^2}{3}\cdot\frac{8}{3\pi^3} \left(\frac{3\pi}{2}\right)^{5/3}
+\Gamma\left(\frac{5}{3}\right)$,
+which reduces to \eqref{eq:Cn3}.
 \subsection{Convex hull in 4d}
 Euler's characteristic:
 \begin{equation}
