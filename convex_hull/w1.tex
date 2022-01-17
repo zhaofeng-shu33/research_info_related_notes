@@ -58,7 +58,90 @@ based their deductions on integration techniques.
 Afterwards, discrete mathematics has been
 employed to prove these old results (only the order
 is recoverable) \cite{har2011expected}.
+\section{Asymptotic result}
+In this section, we review two important asymptotic result,
+which is obtained in \cite{raynaud1970enveloppe}.
+\begin{theorem}
+    Let $X_1, \dots, X_n$ be i.i.d. random variables
+    drawn from uniform distribution in a $d$-dimensional sphere.
+    $H$ is the convex hull of $X_1, \dots, X_n$, which is also
+    a random object.
+    Then the expected number of vertices of $H$ is
+    \begin{equation}
+    \E[V_n] \sim f(d)n^{\frac{d-1}{d+1}}
+    \end{equation}
+    The asymptotic relationship holds when $n\to \infty$.
+\end{theorem}
+\begin{theorem}\label{thm:x1xnvn}
+    Let $X_1, \dots, X_n$ be i.i.d. random variables
+    drawn from standard normal distribution in a $d$-dimensional space.
+    Then the expected number of vertices of $H$ is
+    \begin{equation}
+    \E[V_n] \sim g(d) (\log n)^{\frac{1}{2}(d-1)}
+    \end{equation}
+\end{theorem}
+The above two theorems rely on the relationship between
+$V_n$ and $F_n$(the $(d-1)$-dimensional faces of $H$).
 
+\begin{equation}\label{eq:fv}
+    F_n = (d-1) V_n - d^2 + d + 2
+\end{equation}
+Using mathematical induction to prove
+\eqref{eq:fv}.
+
+Below we illustrate the techniques used to prove Theorem
+\ref{thm:x1xnvn} by letting $d=2$.
+That is, we will show that
+\begin{equation}
+    \E[V_n] \sim 2\sqrt{2\pi \log n}
+\end{equation}
+starting from
+\begin{equation}
+    \E[V_n] \sim \frac{n^2}{\sqrt{\pi}}
+    \int_0^{+\infty} \Phi(p)^{n-2}e^{-p^2}dp
+\end{equation}
+The first observation is that we can use the approximation
+$\Phi(p) = 1-\frac{\exp(-p^2/2)}{\sqrt{2\pi} p}$
+when $p$ is large.
+Given any $\epsilon>0$, the maximal value of $\Phi(p)^{n-2}e^{-p^2}$
+is achieved within the interval $[\sqrt{2\log n} - \epsilon, \sqrt{2\log n}]$
+for sufficiently large $n$. We can use $\exp(-p^2/2) \sim \frac{1}{n}$
+to estimate the boundary.
+Therefore:
+\begin{equation*}
+    \E[V_n] \sim \frac{n^2}{\sqrt{\pi}}
+    \int_{\sqrt{2\log n} - \epsilon}^{\sqrt{2\log n}}
+    e^{-n\left(\frac{\exp(-p^2/2)}{\sqrt{2\pi}p}\right)-p^2}dp
+\end{equation*}
+We first make the transformation $u=\sqrt{2\log n} - p$.
+\begin{equation}\label{eq:middle}
+    \E[V_n] \sim \frac{1}{\sqrt{\pi}}
+    \int_{0}^{\epsilon}
+    e^{-\left(\frac{\exp(-u^2/2+u\sqrt{2\log n})}{\sqrt{2\pi}(\sqrt{2\log n}-u)}\right)+(2\sqrt{2\log n}u-u^2)}du
+\end{equation}
+Since $\epsilon $ can be sufficiently small, some terms of $u$
+without the coefficient $\sqrt{\log n}$ contribute minor to the integral.
+And we can use $u=0$ as an approximation. Therefore,
+\eqref{eq:middle} reduces to
+\begin{equation*}
+    \E[V_n] \sim \frac{1}{\sqrt{\pi}}
+    \int_{0}^{\epsilon}
+    e^{-\left(\frac{\exp(u\sqrt{2\log n})}{\sqrt{2\pi}(\sqrt{2\log n})}\right)+2\sqrt{2\log n}u}du
+\end{equation*}
+The next step is to let $t=\sqrt{2\log n} u$, then we have
+\begin{equation*}
+    \E[V_n] \sim \frac{1}{\sqrt{\pi} \sqrt{2\log n}}
+    \int_{0}^{\epsilon \sqrt{2\log n}}
+    e^{-\left(\frac{\exp(t)}{2\sqrt{\pi\log n}}\right)+2t}dt
+\end{equation*}
+Finally, we use $v=\frac{e^t}{2\sqrt{\pi \log n}}$,
+then
+\begin{equation*}
+    \E[V_n] \sim \frac{(2\sqrt{\pi \log n})^2}{\sqrt{\pi} \sqrt{2\log n}}
+    \int_{0}^{+\infty}
+    e^{-v}vdv = 2\sqrt{2\pi \log n}
+\end{equation*}
+The above deduction can be extended to handle $d\geq 2$.
 \section{Two dimensions}
 $(x_i, y_i) \sim p(x,y)$ are i.i.d. distributions
 for $i=1,2,\dots, n, n+1$. We consider the event
