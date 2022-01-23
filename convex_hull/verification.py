@@ -7,6 +7,13 @@ import matplotlib.pyplot as plt
 nTrial = 1000
 DISTRIBUTION = 'unit_circle'
 
+def random_points_2d_cauchy(n):
+    y = np.random.random(n)
+    r = np.sqrt(2 * y - y * y) / (1 - y)
+    theta = np.random.random(n)
+    theta *= 2 * np.pi
+    return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
+
 def random_points_in_unit_circle(n):
     r = np.random.random(n)
     r = np.sqrt(r)
@@ -19,6 +26,8 @@ def transform(n_list):
         return n_list ** (1/3)
     elif DISTRIBUTION == 'gaussian':
         return np.sqrt(np.log(n_list))
+    elif DISTRIBUTION == 'cauchy':
+        return n_list
     else:
         raise ValueError("")
 
@@ -27,6 +36,8 @@ def countVertex(n):
         points = random_points_in_unit_circle(n)
     elif DISTRIBUTION == 'gaussian':
         points = np.random.normal(size=(n, 2))
+    elif DISTRIBUTION == 'cauchy':
+        points = random_points_2d_cauchy(n)
     else:
         raise ValueError("")
     hull = ConvexHull(points)
@@ -46,7 +57,7 @@ def testAllN(n_list):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--distribution',
-        choices=['unit_circle', 'gaussian'], default='unit_circle')
+        choices=['unit_circle', 'gaussian', 'cauchy'], default='unit_circle')
     args = parser.parse_args()
     DISTRIBUTION = args.distribution
     n_list = np.array(range(5, 100, 5))
@@ -57,4 +68,7 @@ if __name__ == '__main__':
     print(reg.coef_, reg.intercept_)
     print(reg.score(transformed_n_list.reshape(-1, 1), result))
     plt.plot(transformed_n_list, result)
+    plt.xlabel('N')
+    plt.ylabel('$E(V_N)$')
+    plt.title('2d cauchy')
     plt.show()

@@ -505,6 +505,19 @@ The marginal distribution for $X$ is 1d Cauchy,
 given by $p(x)=\frac{1}{\pi(1+x^2)}$, which
 can be verified by direct integration of
 \eqref{eq:pxy_cauchy}.
+
+The 2d Cauchy specified in
+\eqref{eq:pxy_cauchy} can be generated in the following way.
+Let $y \sim U[0,1]$ and $\theta \sim
+U[0, 2\pi]$. Then we obtain $r$
+by $r=F^{-1}(y) = \frac{\sqrt{2y-y^2}}{1-y}$.
+$F^{-1}$ is the inverse function
+of $F(r)=1-(r^2+1)^{-1/2}$, the CDF of
+$p(r)= \frac{r}{(r^2+1)^{3/2}}$.
+Finally $x,y$ are obtained from polar transformation
+of $(r,\theta)$.
+
+
 According to (2.13) of \cite{efron1965convex},
 the expected number of vertices is
 \begin{equation}\label{eq:general_2d}
@@ -556,7 +569,7 @@ We compute the integration directly:
 \end{proof}
 \begin{lemma}
     For bivariate Cauchy distribution,
-$\lim_{N\to \infty}\E(V_N) = \frac{\pi^2}{2}$.
+$\lim_{N\to \infty}\E(V_N) = \frac{\pi^2}{2} \approx 4.93$.
 \end{lemma}
 \begin{proof}
 From \eqref{eq:general_2d},
@@ -591,6 +604,17 @@ $y=\frac{\pi}{N}t$:
     e^{-t}dt \sim  \frac{\pi^2}{2}
 \end{align*}
 \end{proof}
+Empirical verification shown in Figure \ref{fig:2d_cauchy}. Use 1000 samples to compute $\E(V_N)$
+for each $N$. Notice that as $N$ is large, the expected
+number of vertices tend to be a constant (no more than 5).
+This behavior is different with Gaussian or unit circle.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{2d_cauchy_vertices.pdf}
+    \caption{}\label{fig:2d_cauchy}
+\end{figure}
+
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
 sampled from
