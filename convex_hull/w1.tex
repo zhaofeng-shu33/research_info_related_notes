@@ -91,6 +91,7 @@ $V_n$ and $F_n$(the $(d-1)$-dimensional faces of $H$).
 Using mathematical induction to prove
 \eqref{eq:fv}.
 
+% Über die konvexe Hülle von n zufällig gewälhlten Punkten
 Below we illustrate the techniques used to prove Theorem
 \ref{thm:x1xnvn} by letting $d=2$.
 That is, we will show that
@@ -100,7 +101,7 @@ That is, we will show that
 starting from
 \begin{equation}
     \E[V_n] \sim \frac{n^2}{\sqrt{\pi}}
-    \int_0^{+\infty} \Phi(p)^{n-2}e^{-p^2}dp
+    \int_{0}^{+\infty} \Phi(p)^{n-2}e^{-p^2}dp
 \end{equation}
 The first observation is that we can use the approximation
 $\Phi(p) = 1-\frac{\exp(-p^2/2)}{\sqrt{2\pi} p}$
@@ -335,7 +336,7 @@ Theorem \ref{thm:lower_bound}.
 \end{proof}
 
 \subsection{Special cases}
-We consider $n=3$.
+We consider $n=3 (d=2)$.
 In this case, $P(A_n)$
 is the expected volume of the triangles
 whose three vertices are drawn randomly.
