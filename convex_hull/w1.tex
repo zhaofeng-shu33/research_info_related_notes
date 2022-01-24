@@ -616,6 +616,80 @@ This behavior is different with Gaussian or unit circle.
     \caption{}\label{fig:2d_cauchy}
 \end{figure}
 
+\section{3d case}
+A useful formula is given as Lemma \ref{lem:abs_gaussian}.
+\begin{lemma}\label{lem:abs_gaussian}
+Suppose $X \in \mathcal{N}(0,1)$,
+then $\E[|X|]=\sqrt{\frac{2}{\pi}}$.
+Generally, $X \in \mathcal{N}(0,\sigma^2)$,
+then $\E[|X|]=\frac{\sqrt{2}\sigma}{\sqrt{\pi}}$.
+\end{lemma}
+A straight line on the plane
+can be represented as:
+\begin{align}
+    x & = p \cos \theta - t \sin \theta \notag \\
+    y & = p \sin \theta + t \cos \theta \label{eq:straight_line_rep}
+\end{align}
+The $p \in \R, \theta \in [0, \pi]$ are fixed while
+$t \in \R$ is changeable.
+The geometric interpretation of \eqref{eq:straight_line_rep}
+is shown in Figure \ref{fig:transformation}.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{transformation.pdf}
+    \caption{}\label{fig:transformation}
+\end{figure}
+Below we prove a necessary conclusion for Gaussian distribution.
+\begin{lemma}
+    The expectation of the random triangles whose
+    vertices are drawn independently
+    from standard Gaussian distribution is $\frac{\sqrt{3}}{2}$.
+\end{lemma}
+\begin{proof}
+    Let the three points be represented by
+    $P_1(x_1, y_1), P_2(x_2, y_2), P_3(x_3, y_3)$.
+    We transform the first two points to coordinate
+    systems of $(p, \theta, t_1, t_2)$.
+    The Jacobian is $|t_1 - t_2|$. Then the first two
+    points are represented as
+    $P_1(p, \theta, t_1), P_2(p, \theta, t_2)$.
+    \begin{equation}\label{eq:EA123_first}
+        \E[A_{123}]
+        = \frac{1}{2}\int
+        |x_3 \cos\theta + y_3 \sin\theta - p|
+        (t_2-t_1)^2 f(x_3, y_3) dt_1dt_2 d\theta dp dx_3dy_3
+    \end{equation}
+    where $f$ is the density function.
+    We can use the notation of (2.10) in \cite{efron1965convex}
+    and rewrite \eqref{eq:EA123_first} as:
+    \begin{equation}\label{eq:EA123_second}
+        E[A_{123}] = \frac{1}{2}\int |x_3 \cos\theta + y_3 \sin\theta - p|
+        E(L^2_{12} | Q_1=p, Q_2=p)
+        \tilde{g}_2(p, \theta)f(x_3,y_3) d\theta dp dx_3dy_3
+    \end{equation}
+    For spherical-symmetric distribution, from \eqref{eq:EA123_second}
+    we can choose the x-axis and obtain
+    \begin{equation}\label{eq:EA123_third}
+        E[A_{123}] =\frac{\pi}{2}
+        \int E(L^2_{12} | X_1=p, X_2=p)
+        |x-p|f(x)f^2(p)dxdp
+    \end{equation}
+    In \eqref{eq:EA123_third},
+    the integration of $p(x_3,y_3)$
+    is wiped out,
+    it can be made by using the transformation
+    $x'_3 = x_3 \cos \theta + y_3 \sin \theta$
+    and $y'_3 = x_3 \sin \theta - y_3 \cos \theta$.
+    Now we assume standard Gaussian distribution in \eqref{eq:EA123_third}.
+    Since $E(L^2_{12} | X_1=p, X_2=p)=2$, we then have
+    \begin{equation}\label{eq:EA123_fourth}
+        E[A_{123}] =\frac{\sqrt{\pi}}{2}\int \Big\vert x-\frac{y}{\sqrt{2}} \Big\vert p(x)p(y)dxdy
+    \end{equation}
+    Since $X-\frac{Y}{\sqrt{2}} \sim \mathcal{N}(0, \frac{3}{2})$,
+    from Lemma
+    \ref{lem:abs_gaussian},
+    we obtain $\E[A_{123}] = \frac{\sqrt{3}}{2}$.
+\end{proof}
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
 sampled from
