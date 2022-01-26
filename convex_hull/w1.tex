@@ -690,6 +690,23 @@ Below we prove a necessary conclusion for Gaussian distribution.
     \ref{lem:abs_gaussian},
     we obtain $\E[A_{123}] = \frac{\sqrt{3}}{2}$.
 \end{proof}
+If the vertices are drawn from uniform distribution
+of a unit circle (area equal to $\pi$). Then
+$\E[A_{123}] = \frac{35}{48 \pi}$,
+which can be computed from (7.13) of 
+\cite{efron1965convex} by letting $N=3$.
+The result $\E[A_{123}] = \frac{35}{48 \pi}$
+can also be computed from \eqref{eq:EA123_third}
+by using $E(L_{12}^2|X_1=p,X_2=p)=\frac{\pi^2}{6}f^2(p)$.
+Then the integral equals
+\begin{equation*}
+    \E[A_{123}] =
+    \frac{\pi^3}{12}
+    \int_{-1}^{1}\int_{-1}^{1}
+    |x-y|f(x)f^4(y)dxdy, \textrm{ where }
+    f(x) = \frac{2}{\pi}\sqrt{1-x^2}
+\end{equation*}
+
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
 sampled from
