@@ -95,7 +95,7 @@ Using mathematical induction to prove
 Below we illustrate the techniques used to prove Theorem
 \ref{thm:x1xnvn} by letting $d=2$.
 That is, we will show that
-\begin{equation}
+\begin{equation}\label{eq:gaussian_2d_evn}
     \E[V_n] \sim 2\sqrt{2\pi \log n}
 \end{equation}
 starting from
@@ -670,7 +670,7 @@ Below we prove a necessary conclusion for Gaussian distribution.
     For spherical-symmetric distribution, from \eqref{eq:EA123_second}
     we can choose the x-axis and obtain
     \begin{equation}\label{eq:EA123_third}
-        E[A_{123}] =\frac{\pi}{2}
+        E[A_{123}|X_1=X_2=X_3=p] =\frac{\pi}{2}
         \int E(L^2_{12} | X_1=p, X_2=p)
         |x-p|f(x)f^2(p)dxdp
     \end{equation}
@@ -706,6 +706,63 @@ Then the integral equals
     |x-y|f(x)f^4(y)dxdy, \textrm{ where }
     f(x) = \frac{2}{\pi}\sqrt{1-x^2}
 \end{equation*}
+
+For 3d cases, two formulas are essential to compute $\E[V_N]$
+for spherical symmetric distribution.
+They are listed below:
+\begin{align}
+    V_N &= \frac{1}{2} F_N + 2 \\
+    \E[F_N]&=8\pi \binom{N}{3}
+    \int_{\R} 
+    E[A_{123}|X_1=X_2=X_3=p] F^{N-3}(p)
+    f^3(p) dp\label{eq:gaussian_efn}
+\end{align}
+For Gaussian distribution, from \eqref{eq:gaussian_efn}
+we obtain that $\E[F_N]
+= 4\sqrt{3}\pi \binom{N}{3}\int_{\R} \Phi^{N-3}(x)p^3(x)dx$.
+The contribution of the order comes from $p^3(x)$.
+Using the same method as that used to prove \eqref{eq:gaussian_2d_evn},
+we can show that
+$\E[F_N] \sim C\log n$.
+
+For uniform distribution
+within a sphere,
+we get
+$\E[F_N]
+=\frac{70}{9}
+\binom{N}{3}
+\int_R F^{N-3}(x)f^4(x)dx$,
+we can estimate its order by
+the following equation:
+\begin{align*}
+    \int_R F^{N-3}(x)f^4(x)dx
+    &\sim (\frac{3}{2})^4
+    \int_{1-\epsilon}^{1}
+    (1-\frac{3}{4}(1-x)^2)^{N-3}
+    (1-x)^4dx \\
+    &\sim  (\frac{3}{2})^4
+    \int_{0}^{\epsilon}
+    (1-\frac{3}{4}y^2)^{N}
+    (1-y)^4dy
+\end{align*}
+Making the change of variable by $\frac{3}{4}y^2=\frac{t}{N}$,
+we have
+\begin{align*}
+    \int_R F^{N-3}(x)f^4(x)dx
+    \sim 3\sqrt{3}\Gamma(\frac{5}{2})\frac{1}{N^{5/2}}
+\end{align*}
+Therefore, we have
+$\E[F_N] \sim \frac{35\sqrt{3\pi}}{6}\sqrt{N}$.
+The coefficient is approximately 8.95.
+This result is consistent with
+Theorem 1 $n=3$ of \cite{raynaud1970enveloppe}.
+
+For multivariate Cauchy distribution in $d$
+dimension, its pdf is given by:
+\begin{equation}
+    p(x) = \frac{\Gamma(\frac{1+d}{2})}{\Gamma(\frac{1}{2})\pi^{d/2}
+    [1+||x||^2]^{(1+d)/2}}
+\end{equation}
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector

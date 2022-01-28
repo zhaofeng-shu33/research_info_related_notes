@@ -250,7 +250,7 @@ for positive samples (edge observations). The reason to use $B$ is that the grap
 
 The idea to use weighted loss comes from the model SDNE (2016, Structural Deep Network Embedding).
 
-In that paper, $X$ is adjacency matrix, and $B$ is chosen to have weight $\beta > 1$ for positive samples and weight
+In that paper, $X$ is the adjacency matrix, and $B$ is chosen to have weight $\beta > 1$ for positive samples and weight
 
 1 for other positions. The definition of $B$ is
 $$
