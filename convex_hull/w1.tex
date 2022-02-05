@@ -670,7 +670,7 @@ Below we prove a necessary conclusion for Gaussian distribution.
     For spherical-symmetric distribution, from \eqref{eq:EA123_second}
     we can choose the x-axis and obtain
     \begin{equation}\label{eq:EA123_third}
-        E[A_{123}|X_1=X_2=X_3=p] =\frac{\pi}{2}
+        E[A_{123}] =\frac{\pi}{2}
         \int E(L^2_{12} | X_1=p, X_2=p)
         |x-p|f(x)f^2(p)dxdp
     \end{equation}
@@ -763,6 +763,10 @@ dimension, its pdf is given by:
     p(x) = \frac{\Gamma(\frac{1+d}{2})}{\Gamma(\frac{1}{2})\pi^{d/2}
     [1+||x||^2]^{(1+d)/2}}
 \end{equation}
+We can verify that $\int p(x)dx=1$
+using high-dimensional spherical integration.
+We can also verify that the marginal distribution is Cauchy
+distribution in lower dimension.
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
