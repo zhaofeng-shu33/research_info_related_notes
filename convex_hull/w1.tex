@@ -697,7 +697,20 @@ which can be computed from (7.13) of
 \cite{efron1965convex} by letting $N=3$.
 The result $\E[A_{123}] = \frac{35}{48 \pi}$
 can also be computed from \eqref{eq:EA123_third}
-by using $E(L_{12}^2|X_1=p,X_2=p)=\frac{\pi^2}{6}f^2(p)$.
+by using $E(L_{12}^2|X_1=p,X_2=x)=\frac{\pi^2}{6}f^2(x)
+=\frac{2}{3}(1-x^2)$.
+This can be seen easily from the fact that
+$\E(L^2_{12}) = \frac{2}{3}$ where $X_1, X_2$ are uniform within $[-1,1]$.
+Then the integral is scaled to be $[-\sqrt{1-x^2}, \sqrt{1-x^2}]$.
+The corresponding integral scales with the coefficient $1-x^2$.
+BTW, to compute
+$\E(L^2_{12})$ for uniform distributions,
+we use the fact that $\E[X_1]=0$ and
+$X_1, X_2$ are independent. So that
+$\E(L^2_{12}) =\E[(X_1-X_2)^2] 
+=\E[X_1^2]+\E[X_2^2]
+-2\E[X_1X_2]=2\E[X_1^2]$.
+
 Then the integral equals
 \begin{equation*}
     \E[A_{123}] =
@@ -723,7 +736,14 @@ we obtain that $\E[F_N]
 The contribution of the order comes from $p^3(x)$.
 Using the same method as that used to prove \eqref{eq:gaussian_2d_evn},
 we can show that
-$\E[F_N] \sim C\log n$.
+$\E[F_N] \sim C\log n$. This follows from
+the fact that conditioning on $X_1=X_2=X_3=x$,
+$(Y_i, Z_i) (i=1,2,3)$
+are uniform distribution in a sphere with
+radius $\sqrt{1-x^2}$. Therefore, the expected
+area of the triangle is proportional to $1-x^2$.
+That is
+$\E[A_{123}] = \frac{35}{48 \pi}(1-x^2)$.
 
 For uniform distribution
 within a sphere,
@@ -731,7 +751,9 @@ we get
 $\E[F_N]
 =\frac{70}{9}
 \binom{N}{3}
-\int_R F^{N-3}(x)f^4(x)dx$,
+\int_R F^{N-3}(x)f^4(x)dx$
+where $f(x)=\frac{3}{4}(1-x^2)$ is the
+marginal pdf.
 we can estimate its order by
 the following equation:
 \begin{align*}
@@ -759,7 +781,7 @@ Theorem 1 $n=3$ of \cite{raynaud1970enveloppe}.
 
 For multivariate Cauchy distribution in $d$
 dimension, its pdf is given by:
-\begin{equation}
+\begin{equation}\label{eq:cauchy_d_dim}
     p(x) = \frac{\Gamma(\frac{1+d}{2})}{\Gamma(\frac{1}{2})\pi^{d/2}
     [1+||x||^2]^{(1+d)/2}}
 \end{equation}
@@ -767,6 +789,23 @@ We can verify that $\int p(x)dx=1$
 using high-dimensional spherical integration.
 We can also verify that the marginal distribution is Cauchy
 distribution in lower dimension.
+
+\section{Cauchy distribution in 3d}
+Similar to equation
+\ref{eq:EA123_third},
+\begin{equation}\label{eq:EA123_third_conditional}
+    E[A_{123}|X_1=X_2=X_3=x] =\frac{\pi}{2}
+    \int E(L^2_{12} | X_1=x, X_2=x,Y_1=p, Y_2=p)
+    |y-p|f(y)f^2(p)dydp
+\end{equation}
+Here $f$ is the pdf of $Y|X=x$.
+Choosing $d=3$ in \eqref{eq:cauchy_d_dim},
+we obtain:
+\begin{equation}
+    p(x,y,z)=\frac{1}{\pi^2 \left(
+        1 + x^2 + y^2 + z^2
+    \right)^2}
+\end{equation}
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
