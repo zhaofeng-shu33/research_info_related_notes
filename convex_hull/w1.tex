@@ -795,17 +795,55 @@ Similar to equation
 \ref{eq:EA123_third},
 \begin{equation}\label{eq:EA123_third_conditional}
     E[A_{123}|X_1=X_2=X_3=x] =\frac{\pi}{2}
-    \int E(L^2_{12} | X_1=x, X_2=x,Y_1=p, Y_2=p)
-    |y-p|f(y)f^2(p)dydp
+    \int E(L^2_{12} | X_1=x, X_2=x,Y_1=y, Y_2=y)
+    |z-y|f(z)f^2(y)dzdy
 \end{equation}
 Here $f$ is the pdf of $Y|X=x$.
 Choosing $d=3$ in \eqref{eq:cauchy_d_dim},
 we obtain:
-\begin{equation}
+\begin{equation}\label{eq:3d_cauchy_pdf}
     p(x,y,z)=\frac{1}{\pi^2 \left(
         1 + x^2 + y^2 + z^2
     \right)^2}
 \end{equation}
+Below we first show that
+\begin{equation}\label{eq:EL212}
+    E(L^2_{12} | X_1=x, X_2=x,Y_1=y, Y_2=y) = 2(1+x^2+y^2)
+\end{equation}
+\begin{lemma}\label{lemma_xyz_t_distribution}
+    If $X, Y, Z$ are multivariate Cauchy distribution whose pdf is
+    given in \eqref{eq:3d_cauchy_pdf}.
+    Then $\sqrt{\frac{3}{a}} Z|_{X=x,Y=y}$ follows Student's t distribution with $v=3$.
+\end{lemma}
+\begin{proof}
+    The pdf of $Z|_{X=x,Y=y}$
+    can be written as
+    \begin{align}
+        p(z|X=x,Y=y)
+        & = \frac{p(x,y,z)}{p(x,y)}\notag \\
+        & = \frac{2(x^2+y^2+1)^{3/2}}{
+            \pi (1+x^2+y^2+z^2)^2
+        } \notag\\
+        & = \frac{2}{\pi a^{1/2} (1+\frac{z^2}{a})^2}
+        \label{eq:pxy_a}
+    \end{align}
+    where $ a = 1+x^2+y^2$.
+\end{proof}
+
+We can see from \eqref{eq:pxy_a} that
+$Z|_{X=x,Y=y}$ is multivariate t distribution with $v=3, p =1, \Sigma=\frac{a}{3}$.
+Therefore, $Z|_{X=x,Y=y}/\sqrt{\Sigma}$ follows
+t distribution with $v=3$.
+
+\eqref{eq:EL212} is actually computing
+$\E[(Z_1 - Z_2)^2]$ with $Z_1, Z_2$ follows distribution with pdf in
+\eqref{eq:pxy_a}. Since these two random variables are zero-mean and independent.
+We obtain $\E[(Z_1 - Z_2)^2]
+=2\E[Z_1^2] = 2 \frac{a}{3} \sigma^2=2a, $
+where $\sigma^2$ is the variance of t distribution with $v=3$.
+This last deduction follows from 
+Lemma \ref{lemma_xyz_t_distribution}.
+
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
