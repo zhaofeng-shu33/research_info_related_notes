@@ -546,7 +546,8 @@ used in the proof first, which come from \cite{integration}.
     & = \frac{\pi}{4a^3} \textrm{ See P108, 47. } \\
     \int \frac{dx}{(x^2+a^2)^{3/2}}
     & = \frac{x}{a^2\sqrt{x^2+a^2}}
-    \textrm{ See P27 346.}\\
+    \textrm{ See P27 346.}
+    \label{eq:indefinite_inverse_32}\\
     \int \frac{x^2}{(c^2+x^2)^2}dx
     &=-\frac{x}{2(c^2+x^2)}
     +\frac{1}{2c}\arctan\frac{x}{c}
@@ -583,14 +584,15 @@ we have
 Using the relationship $\arctan x =
 \frac{\pi}{2} - \arctan \frac{1}{x}
 $, we have (for any given $K>0$):
-\begin{align*}
+\begin{align}
     \E(V_N) &\sim \frac{N^2}{2}\int_{K}^{+\infty}
     \frac{1}{(1+x^2)^{3/2}}
-    \left(1-\frac{1}{\pi}\arctan \frac{1}{x} \right)^{N-2}dx\\
+    \left(1-\frac{1}{\pi}\arctan \frac{1}{x} \right)^{N}dx\notag \\
     &=\frac{N^2}{2}\int_{0}^{1/K}
     \frac{y}{(1+y^2)^{3/2}}
-    \left(1-\frac{1}{\pi}\arctan y\right)^{N}dy\\
-\end{align*}
+    \left(1-\frac{1}{\pi}\arctan y\right)^{N}dy
+    \label{eq:cauchy_inverse_K_y}\\
+\end{align}
 When $y$ is small, $\arctan y \approx y$ (Taylor expansion).
 Therefore, we can replace $\arctan y$ by $y$ without changing the
 asymptotic behavior of the above expression.
@@ -741,16 +743,10 @@ Then we integrate the above expression by parts.
     \E[A_{123}] & = \frac{8}{3\pi^2}
     \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
     \cos^5\varphi d\varphi
-    \left[
-    \int_{-\frac{\pi}{2}}^{\varphi}
-    (\sin\varphi - \sin\theta)
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\sin\varphi - \sin\theta|
     \cos^2\theta
     d\theta
-    + \int_{\varphi}^{\frac{\pi}{2}}
-    (\sin\theta - \sin\varphi)
-    \cos^2\theta
-    d\theta
-    \right]
 \end{align*}
 Using the indefinite integrals
 \begin{align*}
@@ -760,8 +756,12 @@ Using the indefinite integrals
 - \frac{\cos^3 \theta}{3} + C
 \end{align*}
 we obtain
-\begin{align*}
-    &\left[
+\begin{align} \label{eq:abs_integral_computation}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\sin\varphi - \sin\theta|
+    \cos^2\theta
+    d\theta
+    &=\left[
     \int_{-\frac{\pi}{2}}^{\varphi}
     (\sin\varphi - \sin\theta)
     \cos^2\theta
@@ -777,19 +777,19 @@ we obtain
     + \frac{\sin 2 \theta}{4}
     \right)
     \Big\vert_{-\frac{\pi}{2}}^{\varphi}
-    + \frac{\cos^3\theta}{3}\Big\vert_{-\frac{\pi}{2}}^{\varphi}\\
+    + \frac{\cos^3\theta}{3}\Big\vert_{-\frac{\pi}{2}}^{\varphi}\notag\\
     &-\frac{\cos^3\theta}{3}\Big\vert_{\varphi}^{\frac{\pi}{2}}
     -\sin\varphi
     \left(
         \frac{\theta}{2}
     + \frac{\sin 2 \theta}{4}
-    \right)\Big\vert_{\varphi}^{\frac{\pi}{2}}\\
+    \right)\Big\vert_{\varphi}^{\frac{\pi}{2}}\notag\\
     &=
     \varphi\sin\varphi
     + \frac{1}{2}\sin\varphi
     \sin 2\varphi
-    + 2\frac{\cos^3 \varphi}{3}
-\end{align*}
+    + 2\frac{\cos^3 \varphi}{3}\notag
+\end{align}
 Then after simplification, we obtain
 \begin{align*}
     \E[A_{123}] =
@@ -928,6 +928,93 @@ where $\sigma^2$ is the variance of t distribution with $v=3$.
 This last deduction follows from 
 Lemma \ref{lemma_xyz_t_distribution}.
 
+Below we will show that
+\begin{equation}\label{eq:cauchy_a_123}
+E[A_{123}|X_1=X_2=X_3=x] = \frac{\pi}{2}(1+x^2)
+\end{equation}
+
+We first write the expression for $f_x(z)$
+as
+$$
+f_x(z) = \frac{1+x^2}{2(1+x^2+z^2)^{3/2}}
+$$
+Then from \eqref{eq:EA123_third_conditional},
+we have:
+\begin{equation}\label{eq:cauchy_ea123}
+    E[A_{123}|X_1=X_2=X_3=x]
+    = \frac{\pi}{8} (1+x^2)^3
+    \iint_{\R^2} \frac{|z-y|}{(1+x^2+y^2)^2
+    (1+x^2+z^2)^{3/2}}dydz
+\end{equation}
+The computation of 
+\eqref{eq:cauchy_ea123} is similar to that of \eqref{eq:ea123}. We need the following two indefinite integration formulas (from \cite{integration}):
+\begin{align}
+\int \frac{dy}{(a^2+y^2)^2}
+& = \frac{1}{2a^3} \left( 
+    \frac{ay}{a^2 + y^2} + \arctan \frac{y}{a}
+\right)  \textrm{ See P12, 131}  \\
+\int \frac{ydy}{(a^2+y^2)^2}
+& = -\frac{1}{2(a^2+y^2)}
+\textrm{ See P12, 134}
+\end{align}
+Let $a^2=1+x^2$, we first compute
+$\int \frac{|z-y|}{(a^2+y^2)^2}dy$.
+The computational process is similar to that of
+\eqref{eq:abs_integral_computation},
+and we can obtain
+\begin{align*}
+\int \frac{|z-y|}{(a^2+y^2)^2}dy
+&= \frac{1}{a^2 + z^2}
++ \frac{z}{a^3}
+\left(
+    \frac{az}{a^2+z^2}
+    + \arctan \frac{z}{a}
+\right)\\
+&= \frac{1}{a^2} + \frac{z}{a^3}\arctan\frac{z}{a}
+\end{align*}
+Then
+\begin{align*}
+    \iint_{\R^2} \frac{|z-y|}{(1+x^2+y^2)^2
+    (1+x^2+z^2)^{3/2}}dydz
+    & = \int_{\R} \frac{1}{(a^2+z^2)^{3/2}}\left[\frac{1}{a^2} + \frac{z}{a^3}\arctan\frac{z}{a}\right] dz \\
+    &=\frac{2}{a^4}\int_0^{\infty}
+    \left(
+        \frac{1}{(1+x^2)^{3/2}}
+        + \frac{x\arctan x}{(1+x^2)^{3/2}}
+    \right)
+    dx
+\end{align*}
+From \eqref{eq:indefinite_inverse_32},
+$\int_0^{\infty} \frac{1}{(1+x^2)^{3/2}}dx
+= 1
+$. On the other hand,
+\begin{align*}
+    \int_0^{\infty}
+    \frac{x\arctan x}{(1+x^2)^{3/2}}dx
+    & = \int_0^{\frac{\pi}{2}} y \sin y dy
+    \textrm{ where } x = \tan y \\
+    & = (\sin y - y \cos y)\Big\vert_0^{\frac{\pi}{2}} = 1
+\end{align*}
+As a result, we obtain \eqref{eq:cauchy_a_123}.
+
+Now we proceed to compute $\E[F_N]$ for 3d Cauchy.
+From \eqref{eq:gaussian_efn},
+
+\begin{align*}
+\E[F_N]& = \frac{4}{\pi} \binom{N}{3}
+\int_{\R} 
+\frac{(\frac{1}{2} + \frac{1}{\pi})^{N-3}
+}{(1+x^2)^2} dx \\
+& \sim \frac{2}{3\pi} N^3 \int_{K}^{\infty}
+\frac{(1-\frac{1}{\pi}\arctan\frac{1}{x})^{N-3}
+}{(1+x^2)^2} dx
+\end{align*}
+Similar to the procedure in \eqref{eq:cauchy_inverse_K_y},
+we obtain
+\begin{equation}
+    \lim_{N\to \infty} \E[F_N]
+    = \frac{4}{3} \pi^2        
+\end{equation}
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
