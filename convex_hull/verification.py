@@ -4,7 +4,7 @@ from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
-NTRIAL = 1000
+NTRIAL = 100
 DISTRIBUTION = 'unit_circle'
 
 def random_points_2d_cauchy(n):
@@ -23,7 +23,7 @@ def random_points_3d_cauchy(n):
     phi = 2 * np.pi * np.random.random(n)
     theta = np.pi * np.random.random(n)
     return np.vstack((r * np.cos(phi) * np.sin(theta),
-                      r * np.sin(theta) * np.sin(theta),
+                      r * np.sin(phi) * np.sin(theta),
                       r * np.cos(theta))).T
 
 def random_points_in_unit_circle(n):
@@ -53,7 +53,7 @@ def countVertex(n):
     else:
         raise ValueError("")
     hull = ConvexHull(points)
-    return hull.nsimplex
+    return hull.nsimplex # number of (d-1) faces
 
 def testN(n, nTrial=20):
     return np.array( [ countVertex(n) for i in range(nTrial) ])
@@ -63,6 +63,7 @@ def testAllN(n_list):
     nN = len(n_list)
     result = np.zeros(nN)
     for i, n in enumerate(n_list):
+        print(i)
         result[i] = np.mean(testN(n, NTRIAL))
     return result
 

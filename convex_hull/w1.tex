@@ -1003,7 +1003,7 @@ From \eqref{eq:gaussian_efn},
 \begin{align*}
 \E[F_N]& = \frac{4}{\pi} \binom{N}{3}
 \int_{\R} 
-\frac{(\frac{1}{2} + \frac{1}{\pi})^{N-3}
+\frac{(\frac{1}{2} + \frac{1}{\pi}\arctan x)^{N-3}
 }{(1+x^2)^2} dx \\
 & \sim \frac{2}{3\pi} N^3 \int_{K}^{\infty}
 \frac{(1-\frac{1}{\pi}\arctan\frac{1}{x})^{N-3}
@@ -1013,7 +1013,7 @@ Similar to the procedure in \eqref{eq:cauchy_inverse_K_y},
 we obtain
 \begin{equation}
     \lim_{N\to \infty} \E[F_N]
-    = \frac{4}{3} \pi^2        
+    = \frac{4}{3} \pi^2 \approx 13.159
 \end{equation}
 
 Below we conduct experiments to verify our results.
