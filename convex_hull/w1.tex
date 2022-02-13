@@ -1016,6 +1016,24 @@ we obtain
     = \frac{4}{3} \pi^2        
 \end{equation}
 
+Below we conduct experiments to verify our results.
+
+
+The 3d Cauchy specified in
+\eqref{eq:3d_cauchy_pdf} can be generated in the following way.
+Let $y \sim U[0,1]$ and $\theta \sim
+U[0, \pi], \phi \in U[0, 2\pi]$.
+Then we obtain $r$
+by $r=F^{-1}(y)$.
+$F^{-1}$ is the inverse function
+of $F(r)=\frac{4}{\pi}(
+-\frac{r}{2(r^2+1)}
++\frac{1}{2}\arctan r
+)$, the CDF of
+$p(r)= \frac{4}{\pi}\frac{r^2}{(r^2+1)^{2}}$.
+Finally $x,y$ are obtained from polar transformation
+of $(r,\theta, \phi)$.
+
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
 sampled from
