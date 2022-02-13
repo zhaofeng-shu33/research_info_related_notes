@@ -4,7 +4,7 @@ from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
-NTRIAL = 100
+NTRIAL = 1000
 DISTRIBUTION = 'unit_circle'
 
 def random_points_2d_cauchy(n):
@@ -82,7 +82,15 @@ if __name__ == '__main__':
         print(reg.coef_, reg.intercept_)
         print(reg.score(transformed_n_list.reshape(-1, 1), result))
     plt.plot(transformed_n_list, result)
+    if args.distribution == '2d-cauchy':
+        const_value = np.pi ** 2 / 2
+        plt.plot([0, 100], [const_value, const_value], color='red')
+    elif args.distribution == '3d-cauchy':
+        const_value = 4 * np.pi ** 2 / 3
+        plt.plot([0, 100], [const_value, const_value], color='red')
+
     plt.xlabel('N')
-    plt.ylabel('$E(V_N)$')
+    plt.ylabel('$E(F_N)$')
     plt.title(args.distribution)
+    plt.savefig(f'build/{args.distribution}.pdf')
     plt.show()
