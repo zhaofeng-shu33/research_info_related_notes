@@ -1024,6 +1024,52 @@ of $F(r)=\frac{4}{\pi}(
 $p(r)= \frac{4}{\pi}\frac{r^2}{(r^2+1)^{2}}$.
 Finally $x,y$ are obtained from polar transformation
 of $(r,\theta, \phi)$.
+\section{Bivariate t distribution}
+Now we consider the case in 2d when the underlining
+distribution is Student's t-distribution (spherical symmetric). That is, the pdf is
+\begin{equation}\label{eq:pxy_student_t}
+    p(x,y) = \frac{\Gamma(\frac{v}{2} + 1)}
+    {v\pi
+    \Gamma(\frac{v}{2})}
+    \left(1+\frac{1}{v}(x^2+y^2)
+    \right)^{\frac{v}{2}+1}
+\end{equation}
+The parameter $v>1$ is the degree of freedom.
+Notice that Cauchy distribution is the special
+case of t distribution with $v=1$.
+The marginal distribution for $X$ is 1d t-distribution, given by
+\begin{equation}\label{eq:px_student_t}
+    p(x)=
+    \frac{\Gamma(\frac{v+1}{2})}
+    {\sqrt{v\pi}
+    \Gamma(\frac{v}{2})}
+    \left(1+\frac{x^2}{v}
+    \right)^{-\frac{v+1}{2}}
+\end{equation}
+which can be verified as follows:
+\begin{align*}
+\int_{\R} p(x,y) dy & =
+\frac{\Gamma(\frac{v}{2} + 1)}
+    {\sqrt{v}\pi
+    \Gamma(\frac{v}{2})}
+    \int_R 
+    \left(1+\frac{x^2}{v}+y^2
+    \right)^{\frac{v}{2}+1}dy \\
+    & =
+    \frac{2\Gamma(\frac{v}{2} + 1)}
+        {\sqrt{v}\pi
+        \Gamma(\frac{v}{2}) a^{v+1}}
+        \int_0^{\frac{\pi}{2}} \cos^v \theta d\theta
+\end{align*}
+where $a^2=1+\frac{x^2}{v}, y=a\tan \theta$.
+Using the formula of Beta function we have
+$$
+2\int_0^{\frac{\pi}{2}}
+\cos^v \theta d\theta
+= B\left(\frac{1}{2}, \frac{v+1}{2}\right)
+$$
+Then after simplification, we can obtain \eqref
+{eq:px_student_t}.
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
