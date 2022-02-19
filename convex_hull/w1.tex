@@ -9,6 +9,7 @@
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage{xcolor}
 \newtheorem{theorem}{Theorem}
 \newtheorem{example}{Example}
 \newtheorem{lemma}{Lemma}
@@ -524,7 +525,7 @@ For the expectation term, we have the following lemma:
     distribution, with pdf specified in \eqref{eq:pxy_cauchy}.
     Furthermore, these two random vectors are independent.
     Then we have,
-    \begin{equation}
+    \begin{equation}\label{eq:cauchy_conditional_expectation}
         \E(|Y_2-Y_1| \Big\vert X_1= x, X_2=x)
         = \frac{\pi}{2}\sqrt{1+x^2}
     \end{equation}
@@ -560,7 +561,7 @@ We compute the integration directly:
         &=\frac{\pi}{2}\sqrt{1+x^2}
 \end{align*}
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{lem:lim_V_N_2d_cauchy}
     For bivariate Cauchy distribution,
 $\lim_{N\to \infty}\E(V_N) = \frac{\pi^2}{2} \approx 4.93$.
 \end{lemma}
@@ -1032,7 +1033,7 @@ distribution is Student's t-distribution (spherical symmetric). That is, the pdf
     {v\pi
     \Gamma(\frac{v}{2})}
     \left(1+\frac{1}{v}(x^2+y^2)
-    \right)^{\frac{v}{2}+1}
+    \right)^{-\frac{v}{2}-1}
 \end{equation}
 The parameter $v>1$ is the degree of freedom.
 Notice that Cauchy distribution is the special
@@ -1070,6 +1071,126 @@ $$
 $$
 Then after simplification, we can obtain \eqref
 {eq:px_student_t}.
+
+Now we extend the result in \eqref{eq:cauchy_conditional_expectation}
+to general student's t distribution.
+Firstly, from \eqref{eq:pxy_student_t} 
+and \eqref{eq:px_student_t},
+the conditional distribution can be written as:
+\begin{equation*}
+    p_{Y|X=x}(y) = \frac{p(x,y)}{p(x)}
+    = \frac{\Gamma\left( \frac{v}{2} + 1 \right)}
+    {\sqrt{v\pi} \Gamma \left( \frac{v+1}{2} \right)}
+    \frac{\left( 1+\frac{x^2}{v} \right)^{(v+1)/2}}
+    {\left(1+\frac{1}{v}(x^2+y^2) \right)^{\frac{v}{2}+1}}
+\end{equation*}
+Let $I(x)=\E(|Y_2-Y_1| \Big\vert X_1= x, X_2=x)$, then
+\begin{align*}
+   I(x) &= C(x) \iint \frac{|y_2-y_1|
+     }{
+    \left(1+\frac{1}{v}(x^2+y_1^2) \right)^{\frac{v}{2}+1}
+    \left(1+\frac{1}{v}(x^2+y_2^2) \right)^{\frac{v}{2}+1}}
+    dy_1dy_2 \\
+    & = v^{3/2} C(x)\iint \frac{|y_2-y_1|
+    }{
+    \left(1+\frac{x^2}{v}+y_1^2 \right)^{\frac{v}{2}+1}
+    \left(1+\frac{x^2}{v}+y_2^2 \right)^{\frac{v}{2}+1}
+   }
+   dy_1dy_2 
+\end{align*}
+where
+\begin{align*}
+    C(x) = \frac{\Gamma^2\left( \frac{v}{2} + 1 \right)}
+    {v\pi \Gamma^2 \left( \frac{v+1}{2} \right)}
+    \left(1+\frac{x^2}{v} \right)^{v+1}
+\end{align*}
+Let $a^2=1+\frac{x^2}{v}$, we can obtain that
+\begin{align*}
+    I(x) &= \frac{C(x)v^{3/2}}{a^{2v+1}}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\tan \theta - \tan \psi|
+    \cos^v\theta \cos^v \psi
+    d\theta d\psi \\
+    &= C(v)\sqrt{1+\frac{x^2}{v}}
+\end{align*}
+where $C(v)$ does not contain the term of $x$:
+\begin{align*}
+    C(v) = \frac{\sqrt{v}\Gamma^2\left( \frac{v}{2} + 1 \right)}
+    {\pi \Gamma^2 \left( \frac{v+1}{2} \right)}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\tan \theta - \tan \psi|
+    \cos^v\theta \cos^v \psi
+    d\theta d\psi 
+\end{align*}
+We can verify that when $v=1$, then $C(v) = \frac{\pi}{2}$,
+which coincides with the result of
+\eqref{eq:cauchy_conditional_expectation}.
+
+Below we will show that for student's t distribution,
+$\lim_{n \to \infty} \E[V_N]$ is a constant value depending on $v$.
+We have already computed this constant for $v=1$(Cauchy distribution).
+For general $v$, though we are unable to obtain the analytic expression
+for the constant, we can at least show that the limit exists and does not depend on $N$.
+
+Let $g(v):=\lim_{n \to \infty} \E[V_N]$. We can even claim the monotonic property
+of the function $g(v)$, which is an \textcolor{red}{increasing}
+function.
+
+The starting point to prove the existence of $g(v)$ 
+is from \eqref{eq:general_2d}.
+We also need an expansion of the CDF, which is just the tail area
+of the t distribution. Denote the CDF as $F(x)$, then we list the result found in \cite{andrew1976}.
+\begin{equation}
+    F(x) \sim 1 - D(v)x^{-v} \textrm{ where } D(v)
+    =v^{\frac{v}{2}-1} \frac{\Gamma \left(\frac{v+1}{2} \right)}
+    {\sqrt{\pi} \Gamma\left(\frac{v}{2}\right)}
+\end{equation}
+Equation tells that for bivariate t distribution,
+we have
+\begin{align*}
+    \E[V_N] & = 2\pi \int_{\R}
+    C(v) \sqrt{1+\frac{x^2}{v}} p^2(x)F^{N-2}(x)dx\\
+    &\sim \frac{ \mathcal{I}(v)\Gamma^2 \left(\frac{v}{2} +1\right) }
+    {\sqrt{v}\pi
+    \Gamma^2\left(\frac{v}{2}\right)}  N^2
+    \int_{K}^{+\infty} \left(1+\frac{x^2}{v}\right)^{-v-\frac{1}{2}}
+    \left(1-D(v)x^{-v} \right)^N dx
+\end{align*}
+where
+\begin{align*}
+    \mathcal{I}(v) = \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\tan \theta - \tan \psi|
+    \cos^v\theta \cos^v \psi
+    d\theta d\psi 
+\end{align*}
+Making the transformation $\frac{t}{N}=D(v)x^{-v}$
+directly, we obtain:
+\begin{align*}
+    \E[V_N] &\sim
+    \frac{ \mathcal{I}(v)
+    \Gamma^2 \left(\frac{v}{2} +1\right) }
+    {\sqrt{v}\pi
+    \Gamma^2\left(\frac{v}{2}\right)}  N^2
+    \int_{0}^{+\infty} \frac{1}{N^{2+\frac{1}{v}}}\left(\frac{vt^{2/v}}{D^{2/v}(v)}\right)^{v+\frac{1}{2}}
+    \left(1- \frac{t}{N} \right)^N \frac{1}{v} t^{-\frac{1}{v}-1} N^{1/v} D^{1/v}(v)dt
+    \\&\sim \frac{ \mathcal{I}(v)
+    \Gamma^2 \left(\frac{v}{2} +1\right) }
+    {\sqrt{v}\pi
+    \Gamma^2\left(\frac{v}{2}\right)} \frac{v^{v-\frac{1}{2}}}
+    {D^2(v)} = \frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
+    {\Gamma^2 \left(\frac{v+1}{2} \right)}
+\end{align*}
+That is
+\begin{equation}
+    g(v)=\frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
+    {\Gamma^2 \left(\frac{v+1}{2} \right)}
+\end{equation}
+We can verify that $g(1) = \frac{\pi^2}{2}$,
+which is consistent with Lemma \ref{lem:lim_V_N_2d_cauchy}.
+Without too much difficulty, we obtain $g(2)=6>g(1)$.
 
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
