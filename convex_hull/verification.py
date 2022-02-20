@@ -2,14 +2,24 @@ import argparse
 import numpy as np
 from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
+from scipy.special import gamma
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 NTRIAL = 1000
 DISTRIBUTION = 'unit_circle'
+DOF = 1.0
 
 def random_points_2d_cauchy(n):
     y = np.random.random(n)
     r = np.sqrt(2 * y - y * y) / (1 - y)
+    theta = np.random.random(n)
+    theta *= 2 * np.pi
+    return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
+
+def random_points_2d_t_distribution(n, v):
+    y = np.random.random(n)
+    C = 2 / v * gamma(v/2 + 1) / gamma(v/2)
+    r = np.sqrt(np.power(1-y/C, -2/v) - 1)
     theta = np.random.random(n)
     theta *= 2 * np.pi
     return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
@@ -50,6 +60,9 @@ def countVertex(n):
         points = random_points_2d_cauchy(n)
     elif DISTRIBUTION == '3d-cauchy':
         points = random_points_3d_cauchy(n)
+    elif DISTRIBUTION == '2d-t-distribution':
+        global DOF
+        points = random_points_2d_t_distribution(n, DOF)
     else:
         raise ValueError("")
     hull = ConvexHull(points)
@@ -70,9 +83,13 @@ def testAllN(n_list):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--distribution',
-        choices=['unit_circle', 'gaussian', '2d-cauchy', '3d-cauchy'], default='unit_circle')
+            choices=['unit_circle', 'gaussian',
+                 '2d-cauchy', '3d-cauchy', '2d-t-distribution'],
+            default='unit_circle')
+    parser.add_argument('--dof', help='degree of freedom for t distribution', default=1, type=float)
     args = parser.parse_args()
     DISTRIBUTION = args.distribution
+    DOF = args.dof
     n_list = np.array(range(5, 100, 5))
     result = testAllN(n_list)
     transformed_n_list = transform(n_list)
@@ -88,7 +105,6 @@ if __name__ == '__main__':
     elif args.distribution == '3d-cauchy':
         const_value = 4 * np.pi ** 2 / 3
         plt.plot([0, 100], [const_value, const_value], color='red')
-
     plt.xlabel('N')
     plt.ylabel('$E(F_N)$')
     plt.title(args.distribution)

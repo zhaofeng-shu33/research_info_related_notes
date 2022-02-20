@@ -1192,6 +1192,23 @@ We can verify that $g(1) = \frac{\pi^2}{2}$,
 which is consistent with Lemma \ref{lem:lim_V_N_2d_cauchy}.
 Without too much difficulty, we obtain $g(2)=6>g(1)$.
 
+To verify our above result by experiment,
+we need a way
+to generate bivariate t distribution.
+Let $y \sim U[0,1]$ and $\theta \sim
+U[0, 2\pi]$. Then we obtain $r$
+by $r=F^{-1}(y) = \sqrt{(1-y/C)^{-2/v}-1}$.
+$F^{-1}$ is the inverse function
+of $F(r)=C
+\left(1-(r^2+1)^{-v/2}
+\right)$, the CDF of
+$p(r)= \frac{2\Gamma(v/2+1)}{v\Gamma(v/2)}
+\frac{r}{(1+r^2/v)^{v/2 + 1}}$.
+The constant $C=\frac{2}{v}\frac{\Gamma(v/2+1)}{
+    \Gamma(v/2)
+}$.
+Finally $x,y$ are obtained from polar transformation
+of $(r,\theta)$.
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
 sampled from
