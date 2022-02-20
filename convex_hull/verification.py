@@ -2,6 +2,7 @@ import argparse
 import numpy as np
 from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
+from scipy.integrate import dblquad
 from scipy.special import gamma
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
@@ -99,12 +100,19 @@ if __name__ == '__main__':
         print(reg.coef_, reg.intercept_)
         print(reg.score(transformed_n_list.reshape(-1, 1), result))
     plt.plot(transformed_n_list, result)
+    const_value = -1
     if args.distribution == '2d-cauchy':
         const_value = np.pi ** 2 / 2
-        plt.plot([0, 100], [const_value, const_value], color='red')
     elif args.distribution == '3d-cauchy':
         const_value = 4 * np.pi ** 2 / 3
+    elif args.distribution == '2d-t-distribution':
+        v = DOF
+        _int = dblquad(lambda x, y: np.abs(np.tan(x) - np.tan(y)) * np.power(np.cos(x) * np.cos(y), v),
+            -np.pi/2, np.pi/2, -np.pi/2, np.pi/2)[0]
+        const_value = v * gamma(v/2 + 1) ** 2 / gamma((v+1)/2) ** 2 * _int
+    if const_value > 0:
         plt.plot([0, 100], [const_value, const_value], color='red')
+
     plt.xlabel('N')
     plt.ylabel('$E(F_N)$')
     plt.title(args.distribution)
