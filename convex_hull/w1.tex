@@ -100,10 +100,15 @@ That is, we will show that
     \E[V_n] \sim 2\sqrt{2\pi \log n}
 \end{equation}
 starting from
-\begin{equation}
+\begin{equation}\label{eq:gaussian_2d_v_n}
     \E[V_n] \sim \frac{n^2}{\sqrt{\pi}}
     \int_{0}^{+\infty} \Phi(p)^{n-2}e^{-p^2}dp
 \end{equation}
+\eqref{eq:gaussian_2d_v_n} follows
+from \eqref{eq:general_2d} with
+$\E[|Y_1-Y_2| \Big\vert X_1=X_2=x] = \frac{2}{\sqrt{\pi}}$,
+which comes Lemma \ref{lem:abs_gaussian} from with $\sigma=\sqrt{2}$.
+
 The first observation is that we can use the approximation
 $\Phi(p) = 1-\frac{\exp(-p^2/2)}{\sqrt{2\pi} p}$
 when $p$ is large.
@@ -336,7 +341,9 @@ Theorem \ref{thm:lower_bound}.
 
 \end{proof}
 
-\subsection{Special cases}
+\subsection{
+Special cases for three points in the plane
+}
 We consider $n=3 (d=2)$.
 In this case, $P(A_n)$
 is the expected volume of the triangles
@@ -812,8 +819,8 @@ we obtain that $\E[F_N]
 The contribution of the order comes from $p^3(x)$.
 Using the same method as that used to prove \eqref{eq:gaussian_2d_evn},
 we can show that
-$\E[F_N] \sim C\log n$. This follows from
-the fact that conditioning on $X_1=X_2=X_3=x$,
+$\E[F_N] \sim C\log n$. For the uniform
+distribution in the 3d sphere, conditioning on $X_1=X_2=X_3=x$,
 $(Y_i, Z_i) (i=1,2,3)$
 are uniform distribution in a sphere with
 radius $\sqrt{1-x^2}$. Therefore, the expected
