@@ -451,7 +451,9 @@ Below we give another derivation of
 \eqref{eq:Cn3} starting from (7.13)
 of \cite{efron1965convex}, which states that
 $\E[V_n] = \frac{2\pi^2}{3}\binom{N}{2}
-\int_{-1}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp$.
+\int_{-1}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp$
+where $\lambda_2(p) = \frac{2}{\pi}\sqrt{1-p^2}$
+and $\Lambda_2(p)$ is the CDF of $\lambda_2(p)$.
 
 The first step is to shrink the integration interval.
 \begin{align*}
@@ -810,8 +812,8 @@ They are listed below:
     V_N &= \frac{1}{2} F_N + 2 \\
     \E[F_N]&=8\pi \binom{N}{3}
     \int_{\R} 
-    E[A_{123}|X_1=X_2=X_3=p] F^{N-3}(p)
-    f^3(p) dp\label{eq:gaussian_efn}
+    E[A_{123}|X_1=X_2=X_3=x] F^{N-3}(x)
+    f^3(x) dp\label{eq:gaussian_efn}
 \end{align}
 For Gaussian distribution, from \eqref{eq:gaussian_efn}
 we obtain that $\E[F_N]
@@ -826,7 +828,7 @@ are uniform distribution in a sphere with
 radius $\sqrt{1-x^2}$. Therefore, the expected
 area of the triangle is proportional to $1-x^2$.
 That is
-$\E[A_{123}] = \frac{35}{48 \pi}(1-x^2)$.
+$\E[A_{123}|X_1=X_2=X_3=x] = \frac{35}{48 \pi}(1-x^2)$.
 
 For uniform distribution
 within a sphere,
