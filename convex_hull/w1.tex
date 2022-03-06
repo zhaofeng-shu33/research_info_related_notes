@@ -1168,15 +1168,15 @@ we have
     \left(1-D(v)x^{-v} \right)^N dx
 \end{align*}
 where
-\begin{align*}
+\begin{align}
     \mathcal{I}(v) &= \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
     \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
     |\tan \theta - \tan \psi|
     \cos^v\theta \cos^v \psi
-    d\theta d\psi \\
+    d\theta d\psi \notag\\
     &= \frac{4}{v} B\left(v+\frac{1}{2}, \frac{1}{2}
-    \right)
-\end{align*}
+    \right)\label{eq:I_v_analytical}
+\end{align}
 Making the transformation $\frac{t}{N}=D(v)x^{-v}$
 directly, we obtain:
 \begin{align*}
@@ -1223,6 +1223,73 @@ The constant $C=\frac{2}{v}\frac{\Gamma(v/2+1)}{
 }$.
 Finally $x,y$ are obtained from polar transformation
 of $(r,\theta)$.
+
+Before moving to other discussions, we supplement a deduction
+of \eqref{eq:I_v_analytical}.
+Similar to \eqref{eq:abs_integral_computation},
+we first integrate with respect to $\theta$.
+\begin{align*}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\tan\theta - \tan \psi|
+    \cos^v\theta
+    d\theta
+    &=\left[
+    \int_{\psi}^{\frac{\pi}{2}}
+    (\tan\theta - \tan\psi)
+    \cos^v\theta
+    d\theta
+    +
+    \int_{-\frac{\pi}{2}}^{\psi}
+    (\tan\psi - \tan\theta)
+    \cos^v\theta
+    d\theta
+    \right]\\
+\end{align*}
+To simplify the notation, we define an intermediate function
+$F(\psi) = \int_{-\frac{\pi}{2}}^{\psi} \cos^v\theta d\theta$.
+Then $ \int_{\psi}^{\frac{\pi}{2}}
+\cos^v\theta d\theta
+= F(-\frac{\pi}{2}) - F(\psi)$.
+Besides, using
+$\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+\tan\theta \cos^v \theta d\theta= 0
+$  (odd function), we obtain that:
+\begin{equation*}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\tan\theta - \tan \psi|
+    \cos^v\theta
+    d\theta = 2 \frac{\cos^v \psi}{v}
+    +2\tan\psi F(\psi) - \tan \psi F(-\frac{\pi}{2})
+\end{equation*}
+Notice that the last term disappears in the outer integration.
+Then what we are dealing with is:
+\begin{equation*}
+    \mathcal{I}(v)
+    =\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \cos^v \psi \left[ 2 \frac{\cos^v \psi}{v}
+    +2\tan\psi F(\psi) \right] d\psi
+\end{equation*}
+For the last term in the above equation, we exchange
+the sequence of integration order between $\theta$ and $\psi$,
+and can obtain immediately:
+\begin{align*}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \cos^v \tan\psi F(\psi) d\psi
+    &=  \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \cos^v \theta d\theta
+    \int_{\theta}^{\frac{\pi}{2}}\tan \psi \cos^v \psi d\psi \\
+    &=\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \frac{\cos^{2v}\theta}{\theta}d\theta
+\end{align*}
+Finally, we obtain:
+\begin{equation*}
+    \mathcal{I}(v)
+    =4\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \frac{\cos^{2v}\theta}{\theta}d\theta
+\end{equation*}
+Using the alternative expression for Beta function,
+\eqref{eq:I_v_analytical} is obtained.
+
 \section{A high dimensional ball}
 Suppose $X$ is an n dimensional random gaussian vector
 sampled from
