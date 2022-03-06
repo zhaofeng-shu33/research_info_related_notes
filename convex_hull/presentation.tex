@@ -60,18 +60,33 @@ as $n\to\infty$
             & $\frac{4\pi}{\sqrt{3}}\frac{\log n}{n}$ & $D_d\frac{(\log n)^{(d-1)/2}}{n}$ \\
             \hline
             Multivariate Cauchy & 
-            \textcolor{red}{$\frac{\pi^2}{2}n^{-1}$} &
-            \textcolor{red}{$\frac{2\pi^2}{3}n^{-1}$} &\\
+            $\frac{\pi^2}{2}n^{-1}$ &
+            $\frac{2\pi^2}{3}n^{-1}$ &\\
+            \hline
+            Multivariate t-distribution &
+            \textcolor{red}{$g(v) n^{-1}$} & & \\
             \hline
         \end{tabular}
         \caption{Asymptotic behavior of $P(H_n^c)$}
     \end{table}
     Some known constants:
     \begin{align*}
-    C_2 &= \Gamma\left(\frac{5}{3}\right) \left(\frac{16\pi^2}{3}
-    \right)^{1/3} \\
-    C_3 &= \frac{35\sqrt{3\pi}}{12}
+    g(v) &= \frac{4\sqrt{\pi}
+    \Gamma(v+\frac{1}{2})\Gamma^2\left(\frac{v}{2}+1\right)}
+    {\Gamma(v+1)\Gamma^2 \left(\frac{v+1}{2} \right)}
     \end{align*}
+\end{frame}
+\begin{frame}
+    \frametitle{Property of $g(v)$}
+    \begin{enumerate}
+        \item $g(1)=\frac{\pi^2}{2}$
+        (2d-Cauchy)
+        \item $g(v)$ is monotonic increasing
+    \end{enumerate}
+    \begin{figure}
+        \includegraphics[width=0.6\linewidth]{2d_t_distribution_g_v.pdf}
+        \caption{Illustration of $g(v)$. The red point represents the special case for 2d Cauchy.}
+    \end{figure}
 \end{frame}
 \begin{frame}
     \frametitle{Simulation}

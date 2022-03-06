@@ -1169,11 +1169,13 @@ we have
 \end{align*}
 where
 \begin{align*}
-    \mathcal{I}(v) = \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    \mathcal{I}(v) &= \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
     \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
     |\tan \theta - \tan \psi|
     \cos^v\theta \cos^v \psi
-    d\theta d\psi 
+    d\theta d\psi \\
+    &= \frac{4}{v} B\left(v+\frac{1}{2}, \frac{1}{2}
+    \right)
 \end{align*}
 Making the transformation $\frac{t}{N}=D(v)x^{-v}$
 directly, we obtain:
@@ -1193,10 +1195,13 @@ directly, we obtain:
     {\Gamma^2 \left(\frac{v+1}{2} \right)}
 \end{align*}
 That is
-\begin{equation}
-    g(v)=\frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
-    {\Gamma^2 \left(\frac{v+1}{2} \right)}
-\end{equation}
+\begin{align}
+    g(v) &= \frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
+    {\Gamma^2 \left(\frac{v+1}{2} \right)} \notag \\
+    &= \frac{4\sqrt{\pi}
+    \Gamma(v+\frac{1}{2})\Gamma^2\left(\frac{v}{2}+1\right)}
+    {\Gamma(v+1)\Gamma^2 \left(\frac{v+1}{2} \right)}
+\end{align}
 We can verify that $g(1) = \frac{\pi^2}{2}$,
 which is consistent with Lemma \ref{lem:lim_V_N_2d_cauchy}.
 Without too much difficulty, we obtain $g(2)=6>g(1)$.

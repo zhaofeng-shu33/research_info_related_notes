@@ -109,7 +109,7 @@ if __name__ == '__main__':
         v = DOF
         _int = dblquad(lambda x, y: np.abs(np.tan(x) - np.tan(y)) * np.power(np.cos(x) * np.cos(y), v),
             -np.pi/2, np.pi/2, -np.pi/2, np.pi/2)[0]
-        const_value = v * gamma(v/2 + 1) ** 2 / gamma((v+1)/2) ** 2 * _int
+        const_value = 4 * np.sqrt(np.pi) * gamma(v+ 1/2) / gamma(v+1) * gamma(v/2 + 1) ** 2 / gamma((v+1)/2) ** 2
     if const_value > 0:
         plt.plot([0, 100], [const_value, const_value], color='red')
 
