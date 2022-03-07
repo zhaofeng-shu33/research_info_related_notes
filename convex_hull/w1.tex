@@ -197,8 +197,8 @@ $P(\theta=\theta', z_{n+1} < z_{\min})=
 \end{proof}
 
 If we consider two directions $\theta_1, \theta_2$
-such that $z(\theta_1)=x\cos \theta_1 + y \theta_1$
-is independent with $z(\theta_2)=x\cos \theta_2 + y \theta_2$.
+such that $z(\theta_1)=x\cos \theta_1 + y\sin \theta_1$
+is independent with $z(\theta_2)=x\cos \theta_2 + y\sin \theta_2$.
 For example, If $(X,Y)\sim \mathcal{N}(0, I_2)$,
 we choose $\theta_1=0, \theta_2=\frac{\pi}{2}$.
 Then
@@ -209,32 +209,41 @@ P(z_{n+1}(\theta_1)>z_{\max}(\theta_1)
 \vee z_{n+1}(\theta_1)<z_{\min}(\theta_1)
 \vee z_{n+1}(\theta_2)<z_{\min}(\theta_2)
 )
-$
+$.
 Using the inclusion-exclusion principle,
 we have
 $
 P(A_n^c) \geq
 4P(z_{n+1}(\theta_1)>z_{\max}(\theta_1))
 -4P(z_{n+1}(\theta_1)>z_{\max}(\theta_1)
-\wedge z_{n+1}(\theta_1)<z_{\min}(\theta_1)
+\wedge z_{n+1}(\theta_2)>z_{\max}(\theta_2)
 )
 $.
 Below we show that
 \begin{equation}
     P(z_{n+1}(\theta_1)>z_{\max}(\theta_1)
-\wedge z_{n+1}(\theta_1)<z_{\min}(\theta_1))
+\wedge z_{n+1}(\theta_2)>z_{\max}(\theta_2))
 = \frac{1}{(n+1)^2}
 \end{equation}
-Let $z=z(\theta_1), z'=z(\theta_2)$,
+Let $z=z(\theta_1), z'=z(\theta_2),
+z_i = x_i \cos \theta_1 + y_i \sin \theta_1
+z'_i = x_i \cos \theta_2 + y_i
+\sin \theta_2$,
 then
 \begin{align*}
     P(z_{n+1}(\theta_1)>z_{\max}(\theta_1)
-    \wedge z_{n+1}(\theta_1)<z_{\min}(\theta_1))
+\wedge z_{n+1}(\theta_2)>z_{\max}(\theta_2))
     &= \iint P(z>z_1 \wedge z'>z'_1)^n p(z,z')dzdz'\\
     &= \iint F(z,z')^n p(z,z')dzdz'\\
     &= \iint F(z)^nF(z')^n p(z)p(z')dzdz'= \frac{1}{(n+1)^2}
 \end{align*}
-Therefore, $P(A_n^c) \geq \frac{4}{n+1} - \frac{4}{(n+1)^2}$.
+In the last equation, the independence assumption
+of $z$ and $z'$ is used.
+Therefore, 
+\begin{equation}\label{eq:Anc_2_directions}
+    P(A_n^c) \geq \frac{4}{n+1} - \frac{4}{(n+1)^2}
+\end{equation}
+
 
 
 Now we study the case for Gaussian.
@@ -1206,6 +1215,18 @@ We can verify that $g(1) = \frac{\pi^2}{2}$,
 which is consistent with Lemma \ref{lem:lim_V_N_2d_cauchy}.
 Without too much difficulty, we obtain $g(2)=6>g(1)$.
 
+Though the distribution is not defined at $v=0$,
+we can compute formally the value $g(0)=4$.
+The number is loosely connected with the lower bound in \eqref{eq:Anc_2_directions}.
+But as the independent assumption is violated, this is not
+a strict connection.
+
+Using the Stirling's formula for gamma function, we can also
+obtain the asymptotic behavior of $g(v)$
+as $v$ tends to infinity.
+$g(v) \sim 2\pi \sqrt{v}$
+as $v\to \infty$.
+
 To verify our above result by experiment,
 we need a way
 to generate bivariate t distribution.
@@ -1284,7 +1305,7 @@ and can obtain immediately:
 Finally, we obtain:
 \begin{equation*}
     \mathcal{I}(v)
-    =4\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    =4\int_{-\frac{\pi}{2}}^{\frac{\pi}{   2}}
     \frac{\cos^{2v}\theta}{\theta}d\theta
 \end{equation*}
 Using the alternative expression for Beta function,
