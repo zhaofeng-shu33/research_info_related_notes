@@ -107,8 +107,6 @@ if __name__ == '__main__':
         const_value = 4 * np.pi ** 2 / 3
     elif args.distribution == '2d-t-distribution':
         v = DOF
-        _int = dblquad(lambda x, y: np.abs(np.tan(x) - np.tan(y)) * np.power(np.cos(x) * np.cos(y), v),
-            -np.pi/2, np.pi/2, -np.pi/2, np.pi/2)[0]
         const_value = 4 * np.sqrt(np.pi) * gamma(v+ 1/2) / gamma(v+1) * gamma(v/2 + 1) ** 2 / gamma((v+1)/2) ** 2
     if const_value > 0:
         plt.plot([0, 100], [const_value, const_value], color='red')
