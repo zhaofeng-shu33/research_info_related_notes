@@ -1388,15 +1388,24 @@ for n dimensional Cauchy.
 \end{proof}
 
 \subsection{Convex hull in 4d}
-Euler's characteristic:
+Euler's characteristic (or more generally using Dehn–Sommerville equations):
 \begin{equation}
     V_N - E_N + F_N - \tilde{V}_N = 0
-\end{equation}
+\end{equation}   
+Using $F_N = 2 \tilde{V}_N$
+we can obtain $V_N - E_N + F_N = 0$
 \begin{itemize}
     \item $E_N$: the number of edges
     \item $F_N$: the number of faces (triangles)
     \item $\tilde{V}_N$: the number of volumes (tetrahedra)
 \end{itemize}
+\section{Random notes}
+Expected volume and probability content are two different concepts.
+Only in the case of uniform distribution within a sphere are they equivalent
+by a scaling factor of the volume of the hyper-ball.
+
+In \cite{affentranger1991convex},
+the expected volume for different distribution in $\R^d$ is discussed in detail.
 
 \bibliographystyle{plain}
 \bibliography{ref.bib}
