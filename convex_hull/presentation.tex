@@ -2,7 +2,9 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{amssymb}
+\usepackage{pifont}
 \usepackage{subcaption}
+\DeclareMathOperator{\Vol}{Vol}
 \newif\ifbeamer
 \beamertrue
 
@@ -31,16 +33,21 @@ of $n$ random points in $\mathbb{R}^d$
 \item the random points are i.i.d. sampled from a given distribution $\Gamma$
 \item we are more interested in the asymptotic behavior of $P(H_n)$
 as $n\to\infty$
+\item $P(H_n)$ is different from the expected volume $\mathbb{E}[\Vol]$
 \end{itemize}
 \end{frame}
 \begin{frame}
 	\frametitle{Equivalent problem}
     \begin{align}
         P(H_n^c) & = \frac{1}{n+1}\mathbb{E}[V_{n+1}]\\
-        F_{n+1} & = V_{n+1} (d-1) - d^2 + d + 2
+        F_{n+1} & = V_{n+1} (d-1) - d^2 + d + 2 \textrm{ \textcolor{red}{\ding{55}}}
+        \label{eq:FV_d}
     \end{align}   
-    Therefore, we only need to integrate
-    $\mathbb{E}[F_{n+1}]$
+    \begin{itemize}
+    \item We can obtain
+    $\mathbb{E}[F_{n+1}]$ and $\mathbb{E}[\Vol]$ for any $d$, 
+    \item \eqref{eq:FV_d} comes from Raynaud 1970
+    \end{itemize}
 \end{frame}   
 \begin{frame}
     \frametitle{Special cases}
@@ -57,7 +64,9 @@ as $n\to\infty$
             \hline
             Multivariate Gaussian &
             $2\sqrt{2\pi}\frac{\sqrt{\log n}}{n}$
-            & $\frac{4\pi}{\sqrt{3}}\frac{\log n}{n}$ & $D_d\frac{(\log n)^{(d-1)/2}}{n}$ \\
+            & $\frac{4\pi}{\sqrt{3}}\frac{\log n}{n}$
+            & 
+            \textcolor{purple}{$D_d\frac{(\log n)^{(d-1)/2}}{n}$} \\
             \hline
             Multivariate Cauchy & 
             $\frac{\pi^2}{2}n^{-1}$ &
@@ -76,6 +85,53 @@ as $n\to\infty$
     \Gamma(v+\frac{1}{2})\Gamma^2\left(\frac{v}{2}+1\right)}
     {\Gamma(v+1)\Gamma^2 \left(\frac{v+1}{2} \right)}
     \end{align*}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Geometric counting in 4d}
+    Euler's characteristic (Dehn–Sommerville equations):
+    \begin{equation}
+        V_N - E_N + F_N - \widetilde{V}_N = 0
+    \end{equation}   
+    \begin{itemize}
+        \item $E_N$: the number of edges
+        \item $F_N$: the number of triangular faces
+        \item $\widetilde{V}_N$: the number of tetrahedras (tetrahedra)
+    \end{itemize}    
+    Using $F_N = 2 \widetilde{V}_N$,
+    we can obtain $V_N - E_N + F_N = 0$
+\end{frame}
+
+\begin{frame}
+    \frametitle{The limit of equivalent distribution for convex hull of spherically symmetric samples}
+    \begin{itemize}
+        \item Eddy and Gale 1981
+        \item one to one mapping from a convex hull and functions defined on unit sphere
+    \end{itemize}
+    \begin{block}{2d example}
+        \begin{itemize}
+        \item Given random samples $X_1, \dots, X_n$,
+        \item The function is defined on $\gamma \in [0,2\pi]$
+        $X_i$
+        \item Define $b_k(\gamma) =  k_1\cos\gamma + k_2 \sin \gamma$
+        \item $D_n(\gamma):=\max_{1\leq i \leq n}\{b_{X_i}(\gamma)\}$
+        \end{itemize}
+    \end{block}
+    Studies the limit distribution of $D_n(\gamma)$ for three types of distributions
+
+    \footnotesize{William~F Eddy and James~D Gale.
+     The convex hull of a spherically symmetric sample.
+    {\em Advances in Applied Probability}, 13(4):751--763, 1981.
+    }
+\end{frame}
+\begin{frame}
+    \frametitle{Three types of spherically symmetric distribution}
+    Depending on how $\Pr(R>r)$ decreases as $r\to \infty$
+    \begin{itemize}
+        \item Algebraic tails: $\Pr(R>r) = r^{-\alpha} L(r)$ where $L(r)$ is a slowly varying function
+        \item Exponential tails: $\Pr(R>r) = r^{\alpha} \exp(-r^{\beta})$
+        \item Truncated tails: $\Pr(R>r) = (1-r)^{\alpha}$ for $r<1$ and $\Pr(R>r)=1$ for $r>1$
+    \end{itemize}
 \end{frame}
 \begin{frame}
     \frametitle{Property of $g(v)$}
