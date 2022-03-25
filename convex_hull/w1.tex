@@ -108,7 +108,7 @@ starting from
 \eqref{eq:gaussian_2d_v_n} follows
 from \eqref{eq:general_2d} with
 $\E[|Y_1-Y_2| \Big\vert X_1=X_2=x] = \frac{2}{\sqrt{\pi}}$,
-which comes Lemma \ref{lem:abs_gaussian} from with $\sigma=\sqrt{2}$.
+which comes from Lemma \ref{lem:abs_gaussian} with $\sigma=\sqrt{2}$.
 
 The first observation is that we can use the approximation
 $\Phi(p) = 1-\frac{\exp(-p^2/2)}{\sqrt{2\pi} p}$
@@ -535,7 +535,7 @@ the expected number of vertices is
 \begin{equation}\label{eq:general_2d}
     \E(V_N) = 2\pi \binom{N}{2}
     \int_{\R}\E(|Y_2-Y_1| \Big\vert X_1= x, X_2=x)
-    G^{N-2}_2(x) g^2_  2(x)dx
+    G^{N-2}_2(x) g^2_2(x)dx
 \end{equation}
 we have $g_2(x) = p(x)$ and $G(x)=\frac{1}{2}+ \frac{1}{\pi}\arctan(x)$.
 For the expectation term, we have the following lemma:
@@ -1414,6 +1414,61 @@ I think this conceptual construction is
 loosely connected with three typical distributions:
 t-distribution, Gaussian and uniform distribution in a sphere.
 
+\section{Exponential Tails}
+Exponential tails: $\Pr(R>r) = C(\alpha, \beta, \gamma) r^{\alpha} \exp(-\gamma r^{\beta})$.
+When $\alpha=0, \beta=2, \gamma=\frac{1}{2}$,
+this distribution is standard multivariate distribution in polar coordinate of $\R^d$.
+
+Below we first consider a simple case in $\R^2$,
+$\alpha=2,\beta=2, \gamma=\frac{1}{2}$.
+The pdf of the distribution in Cartesian coordinate
+can be written
+as 
+\begin{equation}\label{eq:exponential_tail_2d_alpha_2}
+    p(x,y) = C(x^2+y^2) \exp(-\frac{x^2+y^2}{2})    
+\end{equation}
+.
+
+Based on \eqref{eq:general_2d}, we would like to obtain $\E[V_N]$.
+In the case $\alpha=0$, $\E(|Y_2-Y_1|X_1=x,X_2=x)$ is a constant.
+But we will show that in the case of $\alpha=2$,
+$\E(|Y_2-Y_1|X_1=x,X_2=x)$ is asymptotically a constant as $|x|\to\infty$.
+Notice that in the derivation of \eqref{eq:gaussian_2d_v_n},
+only the asymptotic expression of each element is required.
+Therefore we conclude that
+$\lim_{N\to \infty} \E[V_N]$ is also of the order $\sqrt{\log n}$
+but the coefficient is different.
+\begin{lemma}
+If $(X_1,Y_1), (X_2,Y_2)$ are independently
+sampled from the distribution specified in \eqref{eq:exponential_tail_2d_alpha_2}.
+Then 
+\begin{equation}\label{eq:abs_y1_y2_x_exp_tail}
+\lim_{x\to \infty} \E[|Y_1-Y_2| \Big\vert X_1=X_2=x] = \frac{2}{\sqrt{\pi}}
+\end{equation}
+\end{lemma}
+Notice that in \eqref{eq:abs_y1_y2_x_exp_tail}, the asymptotic constant is the same
+with the case when $\alpha=0$. Then we conclude that the asymptotic behavior
+of $\E[V_N]$ is exactly the same for $\alpha=0$ and $\alpha=2$.
+\begin{proof}
+    The marginal distribution $p(x)=\sqrt{2\pi} C(1+x^2) \exp(-x^2/2)$.
+    Then the conditional distribution is $p(y|x)
+    = \frac{(x^2+y^2)\exp(-y^2/2)}{(1+x^2)\sqrt{2\pi}}$.
+    \begin{align*}
+        \E(|Y_2-Y_1|X_1=x,X_2=x)
+        & = \iint |y_2-y_1| p(y_1 |x_1=x)p(y_2 | x_2=x)
+        dy_1dy_2 \\
+        & = \frac{1}{\sqrt{2\pi}(1+x^2)^2} \iint |y_1-y_2|
+        (x^2+y_1^2)(x^2+y_2^2) \exp(-\frac{1}{2} (y^2_1+y^2_2)) dy_1dy_2\\
+        &= \frac{C_1 x^4 + C_2x^2+C_3}{(1+x^2)^2}
+    \end{align*}
+    We see that the limit is $C_1$ as $x\to \infty$ where
+    \begin{align*}
+        C_1 &= \frac{1}{2\pi} \iint |y_1-y_2| \exp(-\frac{1}{2} (y^2_1+y^2_2)) dy_1dy_2 \\
+        &= \frac{1}{2\pi} \iint |\sin \theta- \cos \theta|
+        r^2\exp(-r^2/2) drd\theta \\
+        &= \frac{2}{\sqrt{\pi}}
+    \end{align*}
+\end{proof}
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
