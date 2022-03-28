@@ -1491,7 +1491,15 @@ This is because we can make some transformations to normalize $\gamma=\frac{1}{2
 See also the discussion in Section 6 of \cite{efron1965convex}, which states that
 linear transformation (scaling and translation)
 does not influence the expected number of vertices.
-
+\section{Truncated tail}
+Consider  $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$
+and $p(x,y)=0$ for $r>1$.
+For this distribution, we can use
+Corollary 1 of \cite{affentranger1991convex}
+directly to obtain
+$\E[V_N] \sim D_{\alpha} n^{1/(2\alpha + 3)}$.
+Notice that $\alpha$ influences the asymptotic order of
+$\E[V_N]$ in this case.
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
