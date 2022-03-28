@@ -1438,7 +1438,7 @@ only the asymptotic expression of each element is required.
 Therefore we conclude that
 $\lim_{N\to \infty} \E[V_N]$ is also of the order $\sqrt{\log n}$
 but the coefficient is different.
-\begin{lemma}
+\begin{lemma}\label{lem:limit_expectation_y1_minus_y2}
 If $(X_1,Y_1), (X_2,Y_2)$ are independently
 sampled from the distribution specified in \eqref{eq:exponential_tail_2d_alpha_2}.
 Then 
@@ -1457,7 +1457,7 @@ of $\E[V_N]$ is exactly the same for $\alpha=0$ and $\alpha=2$.
         \E(|Y_2-Y_1|X_1=x,X_2=x)
         & = \iint |y_2-y_1| p(y_1 |x_1=x)p(y_2 | x_2=x)
         dy_1dy_2 \\
-        & = \frac{1}{\sqrt{2\pi}(1+x^2)^2} \iint |y_1-y_2|
+        & = \frac{1}{2\pi(1+x^2)^2} \iint |y_1-y_2|
         (x^2+y_1^2)(x^2+y_2^2) \exp(-\frac{1}{2} (y^2_1+y^2_2)) dy_1dy_2\\
         &= \frac{C_1 x^4 + C_2x^2+C_3}{(1+x^2)^2}
     \end{align*}
@@ -1469,6 +1469,29 @@ of $\E[V_N]$ is exactly the same for $\alpha=0$ and $\alpha=2$.
         &= \frac{2}{\sqrt{\pi}}
     \end{align*}
 \end{proof}
+
+We can generalize the above result to any $\alpha>0$.
+\begin{lemma}
+    If $(X_1,Y_1), (X_2,Y_2)$ are independently
+    sampled from the distribution specified as
+    \begin{equation}\label{eq:exponential_tail_2d_alpha}
+        p(x,y) = C(x^2+y^2)^{\alpha/2} \exp(-\frac{x^2+y^2}{2})    
+    \end{equation}   
+    Then 
+    \begin{equation}\label{eq:abs_y1_y2_x_exp_tail_2}
+    \lim_{x\to \infty} \E[|Y_1-Y_2| \Big\vert X_1=X_2=x] = \frac{2}{\sqrt{\pi}}
+    \end{equation}
+    \end{lemma}
+The key idea to prove the above lemma is using the fact that
+$(x^2+y^2)^{\alpha/2} \sim x^{\alpha}$ as $x\to \infty$.
+Other computation is just the same as the proof of Lemma \ref{lem:limit_expectation_y1_minus_y2}.
+
+Next we discuss the influence of the coefficient $\gamma$, which also does not influence $\E[V_N]$.
+This is because we can make some transformations to normalize $\gamma=\frac{1}{2}$.
+See also the discussion in Section 6 of \cite{efron1965convex}, which states that
+linear transformation (scaling and translation)
+does not influence the expected number of vertices.
+
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}

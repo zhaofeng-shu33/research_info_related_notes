@@ -2,8 +2,11 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{amssymb}
+\usepackage{amsfonts}
 \usepackage{pifont}
 \usepackage{subcaption}
+\def\E{\mathbb{E}}
+\def\R{\mathbb{R}}
 \DeclareMathOperator{\Vol}{Vol}
 \newif\ifbeamer
 \beamertrue
@@ -129,8 +132,30 @@ as $n\to\infty$
     Depending on how $\Pr(R>r)$ decreases as $r\to \infty$
     \begin{itemize}
         \item Algebraic tails: $\Pr(R>r) = r^{-\alpha} L(r)$ where $L(r)$ is a slowly varying function
-        \item Exponential tails: $\Pr(R>r) = r^{\alpha} \exp(-r^{\beta})$
+        \item Exponential tails: $\Pr(R>r) = r^{\alpha} \exp(-\gamma r^{\beta})$, $\gamma$ is scale factor
         \item Truncated tails: $\Pr(R>r) = (1-r)^{\alpha}$ for $r<1$ and $\Pr(R>r)=1$ for $r>1$
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{
+        2D formula for the expected number of vertices
+    }
+    \begin{align*}
+        \E[V_N]
+        & \sim \pi N^2 \int_{\R} F^{N}(x) dx \cdot \int_{\R} |y_1-y_2| f(x, y_1) f(x,y_2)dy_1dy_2
+    \end{align*}
+    \begin{itemize}
+        \item $F(x)$: CDF of the marginal distribution of $X$
+        \item $f(x,y)$: joint distribution of $(X,Y)$
+    \end{itemize}
+    Suppose $\alpha \geq 0$
+    \begin{itemize}
+        \item Algebraic tails: $p(x,y) = C_{\alpha}(1+x^2+y^2)^{-\alpha-1}$,
+        $\E[V_N] \sim D_{\alpha}$
+        \item Exponential tails: $p(x,y) = C_{\alpha}(x^2+y^2)^{\alpha} \exp(-(x^2+y^2))$
+        ,$\E[V_N] \sim D \sqrt{\log n}$
+        \item Truncated tails: $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$ and $p(x,y)=0$ for $r>1$
+        ,$\E[V_N] \sim D_{\alpha} n^{1/(2\alpha + 3)}$ [Affentranger, 1991]
     \end{itemize}
 \end{frame}
 \begin{frame}
