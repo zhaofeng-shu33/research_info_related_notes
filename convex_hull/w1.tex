@@ -1491,6 +1491,23 @@ This is because we can make some transformations to normalize $\gamma=\frac{1}{2
 See also the discussion in Section 6 of \cite{efron1965convex}, which states that
 linear transformation (scaling and translation)
 does not influence the expected number of vertices.
+
+Below, we give the simulation scheme
+for $p(x,y)=C\exp(-(x^2+y^2)^\beta)$.
+In polar coordinate, it can be written as
+$p(r) = C r \exp(-r^{2\beta})$.
+Its CDF is given by $F(r) = \frac{1}{\Gamma(1/\beta)}
+\gamma(\frac{1}{\beta}, r^{2\beta})$,
+or in the regularized lower gamma function
+form $F(r) = P(\frac{1}{\beta}, r^{2\beta})$.
+We can use numerical routine to obtain $F^{-1}(u)$
+for $u\in (0,1)$. Thus we get the random generator for
+the radius direction.
+\section{Linear combination of algebraic tails}
+When we consider the distribution in the form
+$p(x)=\sum_{i=1}^n c_1\frac{1}{(1+x^2+y^2)^{-\alpha_i-1}}$,
+then the dominant term is the one with minimal $\alpha_i$.
+This proposition can be shown easily.
 \section{Truncated tail}
 Consider  $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$
 and $p(x,y)=0$ for $r>1$.

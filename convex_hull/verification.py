@@ -3,12 +3,23 @@ import numpy as np
 from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
 from scipy.integrate import dblquad
-from scipy.special import gamma
+from scipy.special import gamma, gammainc
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 NTRIAL = 1000
 DISTRIBUTION = 'unit_circle'
 DOF = 1.0
+
+def exponential_tail(n, beta=1):
+    # beta=1: gaussian
+    y = np.random.random(n)
+    r = np.zeros(n)
+    for i in range(n):
+        f = lambda r: gammainc(1/beta, np.power(r, 2*beta)) - y[i]
+        r[i] = fsolve(f, [1.0])[0]
+    theta = 2 * np.pi * np.random.random(n)
+    return np.vstack((r * np.cos(theta),
+                      r * np.sin(theta))).T
 
 def random_points_2d_cauchy(n):
     y = np.random.random(n)
@@ -47,12 +58,13 @@ def random_points_in_unit_circle(n):
 def transform(n_list):
     if DISTRIBUTION == 'unit_circle':
         return n_list ** (1/3)
-    elif DISTRIBUTION == 'gaussian':
+    elif DISTRIBUTION == 'gaussian' or DISTRIBUTION == 'exponential-tail':
         return np.sqrt(np.log(n_list))
     else:
         return n_list
 
 def countVertex(n):
+    global DOF
     if DISTRIBUTION == 'unit_circle':
         points = random_points_in_unit_circle(n)
     elif DISTRIBUTION == 'gaussian':
@@ -61,8 +73,9 @@ def countVertex(n):
         points = random_points_2d_cauchy(n)
     elif DISTRIBUTION == '3d-cauchy':
         points = random_points_3d_cauchy(n)
-    elif DISTRIBUTION == '2d-t-distribution':
-        global DOF
+    elif DISTRIBUTION == 'exponential-tail':
+        points = exponential_tail(n, DOF)
+    elif DISTRIBUTION == '2d-t-distribution':        
         points = random_points_2d_t_distribution(n, DOF)
     else:
         raise ValueError("")
@@ -85,7 +98,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--distribution',
             choices=['unit_circle', 'gaussian',
-                 '2d-cauchy', '3d-cauchy', '2d-t-distribution'],
+                 '2d-cauchy', '3d-cauchy', '2d-t-distribution', 'exponential-tail'],
             default='unit_circle')
     parser.add_argument('--dof', help='degree of freedom for t distribution', default=1, type=float)
     args = parser.parse_args()
