@@ -1505,30 +1505,53 @@ for $u\in (0,1)$. Thus we get the random generator for
 the radius direction.
 
 If we consider the case $\alpha=0$ while $\beta > 0$,
-that is $p(x,y)=C\exp(-\frac{(x^2+y^2)^{\beta}}{2})$,
-we conclude that $\lim_{N\to \infty} \E[V_N]$
-is of the order $(\log n)^{1-\frac{1}{2\beta}}$.
-To prove this, we first show that when $
-\beta \geq 1$, we can first obtain an upper bound
-for $p(x, y)$ as $p(x,y)\leq C\exp(-\frac{1}{2} (x^{2\beta} 
-+ y^{2\beta}))$.
+that is $p(x,y)=C\exp(-\frac{(x^2+y^2)^{\beta}}{2})$.
+We make an approximation of $p(x,y)$ when $y$ is fixed and $x\to \infty$.
+That is $p(x,y)=C \exp(-x^{2\beta}/2) \exp(-\beta y^2 x^{2\beta-2}/2)$.
+In such a case $Y|X=x$ is Gaussian.
+We get the marginal distribution easily as 
+$$
+p(x) =C x^{1-\beta} \exp(-x^{2\beta}/2)
+$$
+Besides,
+$$
+\lim_{x\to \infty} \E[V_N]
+\sim C_{\beta} x^{3-3\beta} \exp(-x^{2\beta})
+$$
+and (by integration by parts)
+$$
+1-\Phi(x) \sim C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta - 2}}
+$$
 
-
-The marginal distribution
-$p(x) = 2C\exp(-x^{2\beta}/2) \leq C' \exp(-\frac{1}{2}x^{2\beta})$.
-Since $1-\Phi(x) = \int_{x}^{\infty} p(u)du$,
-Then we show that $1-\Phi(x) \leq C\frac{\exp(-x^{2\beta}/2)}{x^{2\beta - 1}}$
-as $x\to \infty$.
-By integration by part we have
+We conclude that $\lim_{N\to \infty} \E[V_N]$
+is of the order $(\log n)^{2-\frac{3}{2\beta}}$.
+To prove this, we use the same procedure for $\beta=1$
+in \eqref{eq:gaussian_2d_v_n}
+$$
+E[V_N]
+\sim C'
+N^2 \int_{\R}
+x^{3-3\beta} \exp(-x^{2\beta}) \left(
+1-C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta-2}}
+\right)^N dx
+$$
+The term $x^{3-3\beta}$
+is neglectful compared with other
+exponential terms.
+Therefore, we deal with 
 \begin{align*}
-    1-\Phi(x) &\leq C' \int_x^{+\infty} \exp(-\frac{1}{2}u^{2\beta})du \\
-    &= \frac{C'}{\beta}
-    \left(\frac{\exp(-x^{2\beta}/2)}{x^{2\beta-1}}
-    -(2\beta-1) \int_{x}^{+\infty}
-    \frac{\exp(-u^{2\beta}/2)}{u^{2\beta}}du
-    \right)
+    N^2 \int_{(2\log n)^{1/(2\beta)}-\epsilon}^{(2\log n)^{1/(2\beta)}}
+\exp\left(
+    -x^{2\beta} -N
+    C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta-2}}
+ \right) dx
 \end{align*}
-The second term is of smaller order.
+Let $x=(2\log n)^{1/(2\beta)}-u$ (change of variables).
+Only reserving dominant terms in $\log n$:
+$
+x^{2\beta} = 2\log n - 2\beta
+(2 \log n)^{1-1/(2\beta)}u$.
+
 \section{Linear combination of algebraic tails}
 When we consider the distribution in the form
 $p(x)=\sum_{i=1}^n c_1\frac{1}{(1+x^2+y^2)^{-\alpha_i-1}}$,
