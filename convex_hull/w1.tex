@@ -1415,12 +1415,12 @@ loosely connected with three typical distributions:
 t-distribution, Gaussian and uniform distribution in a sphere.
 
 \section{Exponential Tails}
-Exponential tails: $\Pr(R>r) = C(\alpha, \beta, \gamma) r^{\alpha} \exp(-\gamma r^{\beta})$.
+Exponential tails: $\Pr(R>r) = C(\alpha, \beta, \gamma) r^{\alpha} \exp(-\gamma r^{2\beta})$.
 When $\alpha=0, \beta=2, \gamma=\frac{1}{2}$,
 this distribution is standard multivariate distribution in polar coordinate of $\R^d$.
 
 Below we first consider a simple case in $\R^2$,
-$\alpha=2,\beta=2, \gamma=\frac{1}{2}$.
+$\alpha=2,\beta=1, \gamma=\frac{1}{2}$.
 The pdf of the distribution in Cartesian coordinate
 can be written
 as 
@@ -1503,11 +1503,38 @@ form $F(r) = P(\frac{1}{\beta}, r^{2\beta})$.
 We can use numerical routine to obtain $F^{-1}(u)$
 for $u\in (0,1)$. Thus we get the random generator for
 the radius direction.
+
+If we consider the case $\alpha=0$ while $\beta > 0$,
+that is $p(x,y)=C\exp(-\frac{(x^2+y^2)^{\beta}}{2})$,
+we conclude that $\lim_{N\to \infty} \E[V_N]$
+is of the order $(\log n)^{1-\frac{1}{2\beta}}$.
+To prove this, we first show that when $
+\beta \geq 1$, we can first obtain an upper bound
+for $p(x, y)$ as $p(x,y)\leq C\exp(-\frac{1}{2} (x^{2\beta} 
++ y^{2\beta}))$.
+
+
+The marginal distribution
+$p(x) = 2C\exp(-x^{2\beta}/2) \leq C' \exp(-\frac{1}{2}x^{2\beta})$.
+Since $1-\Phi(x) = \int_{x}^{\infty} p(u)du$,
+Then we show that $1-\Phi(x) \leq C\frac{\exp(-x^{2\beta}/2)}{x^{2\beta - 1}}$
+as $x\to \infty$.
+By integration by part we have
+\begin{align*}
+    1-\Phi(x) &\leq C' \int_x^{+\infty} \exp(-\frac{1}{2}u^{2\beta})du \\
+    &= \frac{C'}{\beta}
+    \left(\frac{\exp(-x^{2\beta}/2)}{x^{2\beta-1}}
+    -(2\beta-1) \int_{x}^{+\infty}
+    \frac{\exp(-u^{2\beta}/2)}{u^{2\beta}}du
+    \right)
+\end{align*}
+The second term is of smaller order.
 \section{Linear combination of algebraic tails}
 When we consider the distribution in the form
 $p(x)=\sum_{i=1}^n c_1\frac{1}{(1+x^2+y^2)^{-\alpha_i-1}}$,
 then the dominant term is the one with minimal $\alpha_i$.
 This proposition can be shown easily.
+
 \section{Truncated tail}
 Consider  $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$
 and $p(x,y)=0$ for $r>1$.

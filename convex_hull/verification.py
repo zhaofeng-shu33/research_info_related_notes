@@ -1,5 +1,6 @@
 import argparse
 import numpy as np
+import pickle
 from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
 from scipy.integrate import dblquad
@@ -58,8 +59,10 @@ def random_points_in_unit_circle(n):
 def transform(n_list):
     if DISTRIBUTION == 'unit_circle':
         return n_list ** (1/3)
-    elif DISTRIBUTION == 'gaussian' or DISTRIBUTION == 'exponential-tail':
+    elif DISTRIBUTION == 'gaussian':
         return np.sqrt(np.log(n_list))
+    elif DISTRIBUTION == 'exponential-tail':
+        return np.power(np.log(n_list), 1-1/(2*DOF))
     else:
         return n_list
 
@@ -106,6 +109,8 @@ if __name__ == '__main__':
     DOF = args.dof
     n_list = np.array(range(5, 100, 5))
     result = testAllN(n_list)
+    with open('build/sim_data_0.pickle', 'wb') as f:
+        pickle.dump({'n_list': n_list, 'result': result}, f)
     transformed_n_list = transform(n_list)
     if args.distribution.find('cauchy') < 0:
         model = LinearRegression()        
