@@ -152,14 +152,37 @@ as $n\to\infty$
     \begin{itemize}
         \item Algebraic tails: $p(x,y) = C_{\alpha}(1+x^2+y^2)^{-\alpha-1}$,
         $\E[V_N] \sim D_{\alpha}$
-        \item Exponential tails: $p(x,y) = C_{\alpha}(x^2+y^2)^{\alpha} \exp(-(x^2+y^2)^{\beta}/2)$
-        ,$\E[V_N] \sim D (\log N)^{2-\frac{3}{2\beta}}$
         \item Truncated tails: $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$ and $p(x,y)=0$ for $r>1$
         ,$\E[V_N] \sim D_{\alpha} N^{1/(2\alpha + 3)}$ [Affentranger, 1991]
     \end{itemize}
 \end{frame}
-\begin{frame}{Tails family}
-    finite linear combination: the rate depends on the dominant term.
+\begin{frame}{Exponential tails}
+    Suppose $\beta > 0$
+\begin{equation*}
+    p(x,y) = C  \exp(-(x^2+y^2)^{\beta}/2)    
+\end{equation*}
+Then 
+\begin{equation*}
+    \E[V_N] \sim D_{\beta} (\log N)^{2-\frac{3}{2\beta}}
+\end{equation*}
+Idea: approximate the pdf by
+$(1+x)^{\alpha} \approx 1+\alpha x$
+\begin{equation*}
+    \tilde{p}(x,y)=
+    C \exp(-x^{2\beta}/2) \exp(-\beta y^2 x^{2\beta-2}/2)
+\end{equation*}
+\end{frame}
+\begin{frame}{Algebraic tails family}
+    \begin{itemize}
+        \item finite linear combination: the rate depends on the dominant term, e.g.
+        \begin{equation*}
+            p(x,y) = \sum_{i=1}^k C_i (1+x^2+y^2)^{-\alpha_i - 1}
+        \end{equation*}
+        \item only the dominant term contributes to the rate, e.g.
+        \begin{equation*}
+            \E[V_N] \sim D_{\min_{1\leq i\leq k} \alpha_i}
+        \end{equation*}
+    \end{itemize}
 \end{frame}
 \begin{frame}
     \frametitle{Property of $g(v)$}
