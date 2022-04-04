@@ -62,7 +62,7 @@ def transform(n_list):
     elif DISTRIBUTION == 'gaussian':
         return np.sqrt(np.log(n_list))
     elif DISTRIBUTION == 'exponential-tail':
-        return np.power(np.log(n_list), 1-1/(2*DOF))
+        return np.power(np.log(n_list), 2-3/(2*DOF))
     else:
         return n_list
 
@@ -104,10 +104,11 @@ if __name__ == '__main__':
                  '2d-cauchy', '3d-cauchy', '2d-t-distribution', 'exponential-tail'],
             default='unit_circle')
     parser.add_argument('--dof', help='degree of freedom for t distribution', default=1, type=float)
+    parser.add_argument('--max_points', help='maximal N', default=100, type=int)
     args = parser.parse_args()
     DISTRIBUTION = args.distribution
     DOF = args.dof
-    n_list = np.array(range(5, 100, 5))
+    n_list = np.array(range(5, args.max_points, 5))
     result = testAllN(n_list)
     with open('build/sim_data_0.pickle', 'wb') as f:
         pickle.dump({'n_list': n_list, 'result': result}, f)
