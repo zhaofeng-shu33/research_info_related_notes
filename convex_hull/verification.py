@@ -62,7 +62,7 @@ def transform(n_list):
     elif DISTRIBUTION == 'gaussian':
         return np.sqrt(np.log(n_list))
     elif DISTRIBUTION == 'exponential-tail':
-        return np.power(np.log(n_list), 2-3/(2*DOF))
+        return np.log(n_list)
     else:
         return n_list
 
@@ -115,9 +115,9 @@ if __name__ == '__main__':
     transformed_n_list = transform(n_list)
     if args.distribution.find('cauchy') < 0:
         model = LinearRegression()        
-        reg = model.fit(transformed_n_list.reshape(-1, 1), result)
+        reg = model.fit(np.log(transformed_n_list.reshape(-1, 1)), np.log(result))
         print(reg.coef_, reg.intercept_)
-        print(reg.score(transformed_n_list.reshape(-1, 1), result))
+        print(reg.score(np.log(transformed_n_list.reshape(-1, 1)), np.log(result)))
     plt.plot(transformed_n_list, result)
     const_value = -1
     if args.distribution == '2d-cauchy':
