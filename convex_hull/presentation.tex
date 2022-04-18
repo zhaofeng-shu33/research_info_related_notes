@@ -150,7 +150,7 @@ as $n\to\infty$
     \end{itemize}
     Suppose $\alpha \geq 0$
     \begin{itemize}
-        \item Algebraic tails: $p(x,y) = C_{\alpha}(1+x^2+y^2)^{-\alpha-1}$,
+        \item Algebraic tails: $p(x,y) = C_{\alpha}(1+x^2+y^2)^{-\alpha-3/2}$,
         $\E[V_N] \sim D_{\alpha}$
         \item Truncated tails: $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$ and $p(x,y)=0$ for $r>1$
         ,$\E[V_N] \sim D_{\alpha} N^{1/(2\alpha + 3)}$ [Affentranger, 1991]
@@ -181,6 +181,10 @@ $(1+x)^{\alpha} \approx 1+\alpha x$
         \item only the dominant term contributes to the rate, e.g.
         \begin{equation*}
             \E[V_N] \sim D_{\min_{1\leq i\leq k} \alpha_i}
+        \end{equation*}
+        \item Infinite sum case:
+        \begin{equation*}
+            p(x,y) = C \log \left(1+\frac{1}{1+x^2+y^2} \right)
         \end{equation*}
     \end{itemize}
 \end{frame}

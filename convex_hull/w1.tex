@@ -1166,10 +1166,10 @@ of the t distribution. Denote the CDF as $F(x)$, then we list the result found i
     =v^{\frac{v}{2}-1} \frac{\Gamma \left(\frac{v+1}{2} \right)}
     {\sqrt{\pi} \Gamma\left(\frac{v}{2}\right)}
 \end{equation}
-Equation tells that for bivariate t distribution,
+Equation \eqref{eq:general_2d} tells that for bivariate t distribution,
 we have
 \begin{align*}
-    \E[V_N] & = 2\pi \int_{\R}
+    \E[V_N] & = 2\pi \binom{N}{2} \int_{\R}
     C(v) \sqrt{1+\frac{x^2}{v}} p^2(x)F^{N-2}(x)dx\\
     &\sim \frac{ \mathcal{I}(v)\Gamma^2 \left(\frac{v}{2} +1\right) }
     {\sqrt{v}\pi
@@ -1509,6 +1509,7 @@ that is $p(x,y)=C\exp(-\frac{(x^2+y^2)^{\beta}}{2})$.
 We make an approximation of $p(x,y)$ when $y$ is fixed and $x\to \infty$.
 That is
 $p(x,y)=C \exp(-x^{2\beta}/2) \exp(-\beta y^2 x^{2\beta-2}/2)$.
+\textcolor{red}{This approximation seems not valid by validation of experiments.}
 In such a case $Y|X=x$ is Gaussian.
 We get the marginal distribution easily as 
 $$
