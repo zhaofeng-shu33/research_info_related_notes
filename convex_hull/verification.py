@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 NTRIAL = 1000
 DISTRIBUTION = 'unit_circle'
 DOF = 1.0
+TWOPIC1 = 1.0
 
 def exponential_tail(n, beta=1):
     # beta=1: gaussian
@@ -22,6 +23,18 @@ def exponential_tail(n, beta=1):
     return np.vstack((r * np.cos(theta),
                       r * np.sin(theta))).T
 
+def mixture_t_1_2(n, C_1):
+    # mixture t distribution of v=1 and v=2
+    C_2 =  1 / (2 * np.pi) - C_1
+    y = np.random.random(n)
+    r = np.zeros(n)
+    for i in range(n):
+        f = lambda r: 1 - 2 * np.pi * C_1 / np.sqrt(1+r*r) - 2 * np.pi * C_2 / (1+r*r/2) - y[i]
+        r[i] = fsolve(f, [1.0])[0]
+    theta = 2 * np.pi * np.random.random(n)
+    return np.vstack((r * np.cos(theta),
+                      r * np.sin(theta))).T
+    
 def random_points_2d_cauchy(n):
     y = np.random.random(n)
     r = np.sqrt(2 * y - y * y) / (1 - y)
@@ -31,8 +44,7 @@ def random_points_2d_cauchy(n):
 
 def random_points_2d_t_distribution(n, v):
     y = np.random.random(n)
-    C = 2 / v * gamma(v/2 + 1) / gamma(v/2)
-    r = np.sqrt(np.power(1-y/C, -2/v) - 1)
+    r = np.sqrt(v) * np.sqrt(np.power(1-y, -2/v) - 1)
     theta = np.random.random(n)
     theta *= 2 * np.pi
     return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
@@ -67,7 +79,7 @@ def transform(n_list):
         return n_list
 
 def countVertex(n):
-    global DOF
+    global DOF, TWOPIC1
     if DISTRIBUTION == 'unit_circle':
         points = random_points_in_unit_circle(n)
     elif DISTRIBUTION == 'gaussian':
@@ -78,7 +90,9 @@ def countVertex(n):
         points = random_points_3d_cauchy(n)
     elif DISTRIBUTION == 'exponential-tail':
         points = exponential_tail(n, DOF)
-    elif DISTRIBUTION == '2d-t-distribution':        
+    elif DISTRIBUTION == 'mixture_t_1_2':
+        points = mixture_t_1_2(n, TWOPIC1 / (2 * np.pi))
+    elif DISTRIBUTION == '2d-t-distribution':
         points = random_points_2d_t_distribution(n, DOF)
     else:
         raise ValueError("")
@@ -101,13 +115,17 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--distribution',
             choices=['unit_circle', 'gaussian',
-                 '2d-cauchy', '3d-cauchy', '2d-t-distribution', 'exponential-tail'],
+                     '2d-cauchy', '3d-cauchy',
+                     '2d-t-distribution', 'exponential-tail',
+                     'mixture_t_1_2'],
             default='unit_circle')
     parser.add_argument('--dof', help='degree of freedom for t distribution', default=1, type=float)
+    parser.add_argument('--TWOPIC1', help='mixture coefficient for Cauchy distribution', default=1.0, type=float)
     parser.add_argument('--max_points', help='maximal N', default=100, type=int)
     args = parser.parse_args()
     DISTRIBUTION = args.distribution
     DOF = args.dof
+    TWOPIC1 = args.TWOPIC1
     n_list = np.array(range(5, args.max_points, 5))
     result = testAllN(n_list)
     with open('build/sim_data_0.pickle', 'wb') as f:
@@ -128,7 +146,7 @@ if __name__ == '__main__':
         v = DOF
         const_value = 4 * np.sqrt(np.pi) * gamma(v+ 1/2) / gamma(v+1) * gamma(v/2 + 1) ** 2 / gamma((v+1)/2) ** 2
     if const_value > 0:
-        plt.plot([0, 100], [const_value, const_value], color='red')
+        plt.plot([0, args.max_points], [const_value, const_value], color='red')
 
     plt.xlabel('N')
     plt.ylabel('$E(F_N)$')

@@ -1048,13 +1048,11 @@ of $(r,\theta, \phi)$.
 Now we consider the case in 2d when the underlining
 distribution is Student's t-distribution (spherical symmetric). That is, the pdf is
 \begin{equation}\label{eq:pxy_student_t}
-    p(x,y) = \frac{\Gamma(\frac{v}{2} + 1)}
-    {v\pi
-    \Gamma(\frac{v}{2})}
+    p(x,y) = \frac{1}{2\pi}
     \left(1+\frac{1}{v}(x^2+y^2)
     \right)^{-\frac{v}{2}-1}
 \end{equation}
-The parameter $v>1$ is the degree of freedom.
+The parameter $v\geq 1$ is the degree of freedom.
 Notice that Cauchy distribution is the special
 case of t distribution with $v=1$.
 The marginal distribution for $X$ is 1d t-distribution, given by
@@ -1074,7 +1072,7 @@ which can be verified as follows:
     \Gamma(\frac{v}{2})}
     \int_R 
     \left(1+\frac{x^2}{v}+y^2
-    \right)^{\frac{v}{2}+1}dy \\
+    \right)^{-\frac{v}{2}-1}dy \\
     & =
     \frac{2\Gamma(\frac{v}{2} + 1)}
         {\sqrt{v}\pi
@@ -1233,16 +1231,13 @@ we need a way
 to generate bivariate t distribution.
 Let $y \sim U[0,1]$ and $\theta \sim
 U[0, 2\pi]$. Then we obtain $r$
-by $r=F^{-1}(y) = \sqrt{(1-y/C)^{-2/v}-1}$.
+by $r=F^{-1}(y) = \sqrt{v}\sqrt{(1-y)^{-2/v}-1}$.
 $F^{-1}$ is the inverse function
-of $F(r)=C
-\left(1-(r^2+1)^{-v/2}
+of $F(r)=
+\left(1-(r^2/v+1)^{-v/2}
 \right)$, the CDF of
-$p(r)= \frac{2\Gamma(v/2+1)}{v\Gamma(v/2)}
+$p(r)= 
 \frac{r}{(1+r^2/v)^{v/2 + 1}}$.
-The constant $C=\frac{2}{v}\frac{\Gamma(v/2+1)}{
-    \Gamma(v/2)
-}$.
 Finally $x,y$ are obtained from polar transformation
 of $(r,\theta)$.
 
@@ -1572,6 +1567,11 @@ depends only the dominant term:
     \E[V_N] \sim D_{\min_{1\leq i\leq k} v_i}
 \end{equation}
 \end{theorem}
+Theorem \ref{thm:combination_all} tells us that
+the rate $\E[V_N]$ is not an average from $v_1, \dots, v_k$
+weighted by $C_1, \dots, C_k$. Instead, it is totally determined by
+the smallest $v_i$.
+
 \begin{proof}
     WLOG, we suppose $v_1 < v_2 < \dots < v_k$.
     We can rewrite \eqref{eq:general_2d}
@@ -1654,8 +1654,14 @@ The CDF of the marginal distribution is:
 Since $\lim_{x\to \infty} \Phi(x) = 1$,
 we obtain the constraint for $C_1$ and $C_2$:
 \begin{equation}
-2\pi C_1 + 2\sqrt{\pi} C_2 = 1    
+2\pi C_1 + 2 \pi C_2 = 1    
 \end{equation}
+The random number generator in polar coordinate
+for $r$ is given by solving:
+\begin{equation}
+    u = 1 - \frac{2\pi C_1}{\sqrt{1+r^2}} - \frac{2\pi C_2}{1+r^2/2}
+\end{equation}
+where $u\sim U[0,1]$.
 
 \section{Truncated tail}
 Consider  $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$
