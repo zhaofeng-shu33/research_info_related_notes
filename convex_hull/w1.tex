@@ -1189,7 +1189,7 @@ where
 \end{align}
 Making the transformation $\frac{t}{N}=D(v)x^{-v}$
 directly, we obtain:
-\begin{align*}
+\begin{align}\label{eq:EV_N_general}
     \E[V_N] &\sim
     \frac{ \mathcal{I}(v)
     \Gamma^2 \left(\frac{v}{2} +1\right) }
@@ -1202,8 +1202,8 @@ directly, we obtain:
     {\sqrt{v}\pi
     \Gamma^2\left(\frac{v}{2}\right)} \frac{v^{v-\frac{1}{2}}}
     {D^2(v)} = \frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
-    {\Gamma^2 \left(\frac{v+1}{2} \right)}
-\end{align*}
+    {\Gamma^2 \left(\frac{v+1}{2} \right)} \notag
+\end{align}
 That is
 \begin{align}
     g(v) &= \frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
@@ -1558,11 +1558,104 @@ x^{2\beta} = 2\log n - 2\beta
 When we consider the distribution in the form
 $p(x)=\sum_{i=1}^n c_1\frac{1}{(1+x^2+y^2)^{-\alpha_i-1}}$,
 then the dominant term is the one with minimal $\alpha_i$.
-This proposition can be shown easily.
+We will also show that the constant is only dominated by the minimal $\alpha_i$.
+
+\begin{theorem}\label{thm:combination_all}
+Suppose the pdf is the finite linear combination of t-distribution with
+different degrees of freedom, shown as:
+\begin{equation}
+    p(x,y) = \sum_{i=1}^k C_i (1+\frac{1}{v_i}(x^2+y^2))^{-v_i/2 - 1}
+\end{equation}
+Then the asymptotic rate of the number of vertices $\E[V_N]$
+depends only the dominant term:
+\begin{equation}
+    \E[V_N] \sim D_{\min_{1\leq i\leq k} v_i}
+\end{equation}
+\end{theorem}
+\begin{proof}
+    WLOG, we suppose $v_1 < v_2 < \dots < v_k$.
+    We can rewrite \eqref{eq:general_2d}
+    in the following form of
+    \begin{align}
+        \Lambda(x) &= \int_{\R} |y_1-y_2| f(x, y_1) f(x,y_2)
+        dy_1dy_2
+        \\
+        \E[V_N]
+        &\sim \pi N^2 \int_{\R} F^{N}(x) \Lambda(x)dx
+    \end{align}
+    First we compute $\Lambda(x)$,
+    we only reserve the dominant term about $x$.
+    Let $v=v_1$ to simplify the notation.
+    We then have
+    \begin{equation}
+        \Lambda(x) \sim \frac{ \mathcal{I}(v)\Gamma^2 \left(\frac{v}{2} +1\right) }
+        {\sqrt{v}\pi^2
+        \Gamma^2\left(\frac{v}{2}\right)} (1+x^2/v)^{-v-\frac{1}{2}} C^2_1
+         \left( \frac{\Gamma(1+v/2)}
+         {v\pi \Gamma(v/2)}
+         \right)^{-2}
+    \end{equation}
+    For the marginal CDF, we can obtain
+    $$
+    F(x) \sim 1 - D(v)x^{-v} C_1
+    \left( \frac{\Gamma(1+v/2)}
+         {v\pi \Gamma(v/2)}
+         \right)^{-1}
+    $$
+    using
+    the equality constraint for
+    $C_1, \dots, C_k$:
+    $\int p(x,y)dxy=1$.
+    Let $D_1 = C_1\left( \frac{\Gamma(1+v/2)}
+    {v\pi \Gamma(v/2)}
+    \right)^{-1} $.
+    With the transformation
+    $\frac{t}{N}=D_1D(v)x^{-v}$,
+    we use the same techniques
+    as in \eqref{eq:EV_N_general},
+    \begin{align}
+        \E[V_N] &\sim
+        \frac{ D_1^2\mathcal{I}(v)
+        \Gamma^2 \left(\frac{v}{2} +1\right) }
+        {\sqrt{v}\pi
+        \Gamma^2\left(\frac{v}{2}\right)}  N^2
+        \int_{0}^{+\infty} \frac{1}
+        {N^{2+\frac{1}{v}}}
+        \left(\frac{v t^{2/v}}{D_1^{2/v}D^{2/v}(v)}\right)^{v+\frac{1}{2}}
+        \left(1- \frac{t}{N} \right)^N \frac{1}{v} t^{-\frac{1}{v}-1} N^{1/v} D^{1/v}(v)dt
+        \notag \\
+        &\sim \frac{ D_1^2\mathcal{I}(v)
+        \Gamma^2 \left(\frac{v}{2} +1\right) }
+        {\sqrt{v}\pi
+        \Gamma^2\left(\frac{v}{2}\right)} \frac{v^{v-\frac{1}{2}}}
+        {D^2(v)D_1^2} = \frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
+        {\Gamma^2 \left(\frac{v+1}{2} \right)} = D_{v}\notag
+    \end{align}
+    The result is the same as the previous one, since
+    $D_1$ cancels each other.
+\end{proof}
 
 Each polynomial tail function can be represented
 by $(1+L(x)) \frac{1}{(1+x^2+y^2)^{-1-\alpha}}$
 where $\lim_{x\to \infty} L(x) = 0$.
+
+Below we verify the result of Themorem \ref{thm:combination_all}
+by experiments. The example we considered is a mixture of $v=1$
+(Cauchy distribution) and $v=2$. That is, we have:
+\begin{equation}
+    p(x,y) = \frac{C_1}{(1+x^2+y^2)^{3/2}}
+    + \frac{C_2}{(1+(x^2+y^2)/2)^{2}}
+\end{equation}
+The CDF of the marginal distribution is:
+\begin{equation}
+    \Phi(x) = 2C_1 (\arctan x + \frac{\pi}{2})
+    + \pi C_2 (1 + \frac{x}{\sqrt{x^2 + 2}})
+\end{equation}
+Since $\lim_{x\to \infty} \Phi(x) = 1$,
+we obtain the constraint for $C_1$ and $C_2$:
+\begin{equation}
+2\pi C_1 + 2\sqrt{\pi} C_2 = 1    
+\end{equation}
 
 \section{Truncated tail}
 Consider  $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$
