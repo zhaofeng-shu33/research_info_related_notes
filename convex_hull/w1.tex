@@ -1200,7 +1200,8 @@ directly, we obtain:
     {\sqrt{v}\pi
     \Gamma^2\left(\frac{v}{2}\right)} \frac{v^{v-\frac{1}{2}}}
     {D^2(v)} = \frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
-    {\Gamma^2 \left(\frac{v+1}{2} \right)} \notag
+    {\Gamma^2 \left(\frac{v+1}{2} \right)} 
+    =: g(v) \notag
 \end{align}
 That is
 \begin{align}
@@ -1209,6 +1210,7 @@ That is
     &= \frac{4\sqrt{\pi}
     \Gamma(v+\frac{1}{2})\Gamma^2\left(\frac{v}{2}+1\right)}
     {\Gamma(v+1)\Gamma^2 \left(\frac{v+1}{2} \right)}
+    \label{eq:def_g_v}
 \end{align}
 We can verify that $g(1) = \frac{\pi^2}{2}$,
 which is consistent with Lemma \ref{lem:lim_V_N_2d_cauchy}.
@@ -1550,22 +1552,23 @@ x^{2\beta} = 2\log n - 2\beta
 (2 \log n)^{1-1/(2\beta)}u$.
 
 \section{Linear combination of algebraic tails}
-When we consider the distribution in the form
-$p(x)=\sum_{i=1}^n c_1\frac{1}{(1+x^2+y^2)^{-\alpha_i-1}}$,
-then the dominant term is the one with minimal $\alpha_i$.
-We will also show that the constant is only dominated by the minimal $\alpha_i$.
+When we consider the distribution in the linear combination
+of pdf with different $v_i$.
+Then the dominant term is the one with minimal $v_i$,
+which is summarized in the following theorem.
 
 \begin{theorem}\label{thm:combination_all}
 Suppose the pdf is the finite linear combination of t-distribution with
-different degrees of freedom, shown as:
+different degrees of freedom, defined as:
 \begin{equation}
     p(x,y) = \sum_{i=1}^k C_i (1+\frac{1}{v_i}(x^2+y^2))^{-v_i/2 - 1}
 \end{equation}
 Then the asymptotic rate of the number of vertices $\E[V_N]$
 depends only the dominant term:
 \begin{equation}
-    \E[V_N] \sim D_{\min_{1\leq i\leq k} v_i}
+    \E[V_N] \sim g(\min_{1\leq i\leq k} v_i)
 \end{equation}
+where $g(v)$ is defined in \eqref{eq:def_g_v}.
 \end{theorem}
 Theorem \ref{thm:combination_all} tells us that
 the rate $\E[V_N]$ is not an average from $v_1, \dots, v_k$
@@ -1642,7 +1645,7 @@ where $\lim_{x\to \infty} L(x) = 0$.
 In fact, Theorem \ref{thm:combination_all}
 is just a special case of such kind of pdf.
 
-Below we verify the result of Themorem \ref{thm:combination_all}
+Below we verify the result of Theorem \ref{thm:combination_all}
 by experiments. The example we considered is a mixture of $v=1$
 (Cauchy distribution) and $v=2$. That is, we have:
 \begin{equation}

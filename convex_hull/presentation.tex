@@ -176,15 +176,15 @@ $(1+x)^{\alpha} \approx 1+\alpha x$
     \begin{itemize}
         \item finite linear combination: the rate depends on the dominant term, e.g.
         \begin{equation*}
-            p(x,y) = \sum_{i=1}^k C_i (1+x^2+y^2)^{-\alpha_i - 1}
+            p(x,y) = \sum_{i=1}^k C_i (1+\frac{1}{v_i}(x^2+y^2))^{-v_i/2 - 1}
         \end{equation*}
         \item only the dominant term contributes to the rate, e.g.
         \begin{equation*}
-            \E[V_N] \sim D_{\min_{1\leq i\leq k} \alpha_i}
+            \E[V_N] \sim g(\min_{1\leq i\leq k} v_i)
         \end{equation*}
-        \item Infinite sum case:
+        \item Same $\E[V_N]$ with Cauchy distribution
         \begin{equation*}
-            p(x,y) = C \log \left(1+\frac{1}{1+x^2+y^2} \right)
+            p(x,y) = C \log \left(1+\frac{1}{(1+x^2+y^2)^{3/2}} \right)
         \end{equation*}
     \end{itemize}
 \end{frame}
