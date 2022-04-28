@@ -52,43 +52,7 @@ as $n\to\infty$
     \item \eqref{eq:FV_d} comes from Raynaud 1970
     \end{itemize}
 \end{frame}   
-\begin{frame}
-    \frametitle{Special cases}
-    $d=1,P(H_n^c) = \frac{2}{n+1}$ for any distribution.
-    
-    Consider $d$ is fixed, $n\to \infty$.
-    \begin{table}
-        \begin{tabular}{|c|c|c|c|}
-            \hline
-            Distribution & $d=2$ & $d=3$ &  general $d$ \\
-            \hline
-            Uniform sphere & $C_2 n^{-1/3}$ & $C_3 n^{-1/2}$ &
-            $C_{d} n^{-2/(d+1)}$ \\
-            \hline
-            Multivariate Gaussian &
-            $2\sqrt{2\pi}\frac{\sqrt{\log n}}{n}$
-            & $\frac{4\pi}{\sqrt{3}}\frac{\log n}{n}$
-            & 
-            \textcolor{purple}{$D_d\frac{(\log n)^{(d-1)/2}}{n}$} \\
-            \hline
-            Multivariate Cauchy & 
-            $\frac{\pi^2}{2}n^{-1}$ &
-            $\frac{2\pi^2}{3}n^{-1}$ &
-            \textcolor{red}{$E_d n^{-1}$}\\
-            \hline
-            Multivariate t-distribution &
-            $g(v) n^{-1}$ & & \\
-            \hline
-        \end{tabular}
-        \caption{Asymptotic behavior of $P(H_n^c)$}
-    \end{table}
-    Some known constants:
-    \begin{align*}
-    g(v) &= \frac{4\sqrt{\pi}
-    \Gamma(v+\frac{1}{2})\Gamma^2\left(\frac{v}{2}+1\right)}
-    {\Gamma(v+1)\Gamma^2 \left(\frac{v+1}{2} \right)}
-    \end{align*}
-\end{frame}
+
 
 \begin{frame}
     \frametitle{Geometric counting in 4d}
@@ -148,13 +112,93 @@ as $n\to\infty$
         \item $F(x)$: CDF of the marginal distribution of $X$
         \item $f(x,y)$: joint distribution of $(X,Y)$
     \end{itemize}
-    Suppose $\alpha \geq 0$
+    Suppose  $v\geq 1, \alpha \geq 0$
     \begin{itemize}
-        \item Algebraic tails: $p(x,y) = C_{\alpha}(1+x^2+y^2)^{-\alpha-3/2}$,
-        $\E[V_N] \sim D_{\alpha}$
+        \item Algebraic tails: $p(x,y) = C_{\alpha}(1+x^2+y^2)^{-1-v/2}$,
+        $\E[V_N] \sim g(v)$
         \item Truncated tails: $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$ and $p(x,y)=0$ for $r>1$
         ,$\E[V_N] \sim D_{\alpha} N^{1/(2\alpha + 3)}$ [Affentranger, 1991]
     \end{itemize}
+\end{frame}
+\begin{frame}{Algebraic tails family}
+    \begin{itemize}
+        \item finite linear combination of t-distributions: the rate depends on the dominant term, e.g.
+        \begin{equation*}
+            p(x,y) = \sum_{i=1}^k C_i (1+\frac{1}{v_i}(x^2+y^2))^{-v_i/2 - 1}
+        \end{equation*}
+        \item only the dominant term contributes to the rate, e.g.
+        \begin{equation*}
+            \E[V_N] \sim g\left(
+                \min_{1\leq i\leq k} v_i
+                \right)
+        \end{equation*}
+        \item Scaling t-distribution, $\E[V_N] \sim g(v)$
+        \begin{equation}
+            p(x,y)= \frac{v}{2\pi}(1+x^2+y^2)^{-\frac{v}{2}-1}
+        \end{equation}
+    \end{itemize}
+\end{frame}
+\begin{frame}{Asymptotic algebraic tails}
+    \begin{itemize}
+        \item The coefficient is perturbed by $L(x)$, $\E[V_N] \sim g(v)$
+        $$
+        \left(C+L(x^2+y^2) \right)
+        \frac{1}{(1+x^2+y^2)^{-1-v/2}}
+        $$
+        where $\lim_{x\to \infty} L(x) = 0$.
+        \item  Same $\E[V_N]$ with Cauchy distribution
+        \begin{equation*}
+            p(x,y) = C \log \left(1+\frac{1}{(1+x^2+y^2)^{3/2}} \right)
+        \end{equation*}
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{Special cases}
+    $d=1,P(H_n^c) = \frac{2}{n+1}$ for any distribution.
+    
+    Consider $d$ is fixed, $n\to \infty$.
+    \begin{table}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            Distribution & $d=2$ & $d=3$ &  general $d$ \\
+            \hline
+            Uniform sphere & $C_2 n^{-1/3}$ & $C_3 n^{-1/2}$ &
+            $C_{d} n^{-2/(d+1)}$ \\
+            \hline
+            Multivariate Gaussian &
+            $2\sqrt{2\pi}\frac{\sqrt{\log n}}{n}$
+            & $\frac{4\pi}{\sqrt{3}}\frac{\log n}{n}$
+            & 
+            \textcolor{purple}
+            {$D_d\frac{(\log n)^{(d-1)/2}}{n}$}
+            \footnote{the deduction has defects
+            in [Raynaud, 1970]} \\
+            \hline
+            Multivariate Cauchy & 
+            $\frac{\pi^2}{2}n^{-1}$ &
+            $\frac{2\pi^2}{3}n^{-1}$ &
+            \textcolor{red}{$E_d n^{-1}$}\\
+            \hline
+            Multivariate t-distribution &
+            \textcolor{red}{$g(v) n^{-1}$} & & \\
+            \hline
+        \end{tabular}
+        \caption{Asymptotic behavior of $P(H_n^c)$}
+    \end{table}
+    Some known constants:
+    \begin{align*}
+    g(v) &= \frac{4\sqrt{\pi}
+    \Gamma(v+\frac{1}{2})\Gamma^2\left(\frac{v}{2}+1\right)}
+    {\Gamma(v+1)\Gamma^2 \left(\frac{v+1}{2} \right)}
+    \end{align*}
+\end{frame}
+\begin{frame}{Contribution}
+    \begin{enumerate}
+        \item Derive $\E[F_N]$ for multivariate Cauchy distribution in higher dimension
+        and prove $\E[V_N]$ is constant in such a case
+        \item Derive $\E[V_N]$ for bivariate t-distribution
+        \item Derive $\E[V_N]$ for algebraic tails family
+    \end{enumerate}
 \end{frame}
 \begin{frame}{Exponential tails}
     Suppose $\beta > 0$
@@ -171,22 +215,6 @@ $(1+x)^{\alpha} \approx 1+\alpha x$
     \tilde{p}(x,y)=
     C \exp(-x^{2\beta}/2) \exp(-\beta y^2 x^{2\beta-2}/2)
 \end{equation*}
-\end{frame}
-\begin{frame}{Algebraic tails family}
-    \begin{itemize}
-        \item finite linear combination: the rate depends on the dominant term, e.g.
-        \begin{equation*}
-            p(x,y) = \sum_{i=1}^k C_i (1+\frac{1}{v_i}(x^2+y^2))^{-v_i/2 - 1}
-        \end{equation*}
-        \item only the dominant term contributes to the rate, e.g.
-        \begin{equation*}
-            \E[V_N] \sim g(\min_{1\leq i\leq k} v_i)
-        \end{equation*}
-        \item Same $\E[V_N]$ with Cauchy distribution
-        \begin{equation*}
-            p(x,y) = C \log \left(1+\frac{1}{(1+x^2+y^2)^{3/2}} \right)
-        \end{equation*}
-    \end{itemize}
 \end{frame}
 \begin{frame}
     \frametitle{Property of $g(v)$}

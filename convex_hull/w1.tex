@@ -1355,7 +1355,7 @@ and we modify it to the n-dimensional Cauchy distribution.
     It reduces to $k_d=\int_0^{\frac{\pi}{2}} \cos\theta^{d-1} d\theta$.
     Finally, \eqref{eq:k_d_dim_Cauchy} follows.
 \end{proof}
-We can verify the validness of Lemma \ref{lem:p_distribution_d_dim_Cauchy}
+We can verify Lemma \ref{lem:p_distribution_d_dim_Cauchy}
 for $d=2,d=3$ in \eqref{eq:d_2_cauchy_E_V_n} and \eqref{eq:d_3_cauchy_f_n}.
 Both the order of $p$ and the coefficient $k_d$ are correct.
 
@@ -1668,6 +1668,18 @@ for $r$ is given by solving:
     u = 1 - \frac{2\pi C_1}{\sqrt{1+r^2}} - \frac{2\pi C_2}{1+r^2/2}
 \end{equation}
 where $u\sim U[0,1]$.
+
+We further comment that we can scale the distribution
+without changing the statistical property of $\E[V_N]$
+(See Section 6 in \cite{efron1965convex}).
+Suppose the original pdf is $p(x,y)$. Then for the new
+pdf $a^2 p(ax, ay)$, $\E[V_N]$ is the same.
+For example,  let $a=\sqrt{v}$ in 
+\eqref{eq:pxy_student_t} then we have the new
+pdf:
+\begin{equation}
+    p(x,y)= \frac{v}{2\pi}(1+x^2+y^2)^{-\frac{v}{2}-1}
+\end{equation}
 
 \section{Truncated tail}
 Consider  $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$
