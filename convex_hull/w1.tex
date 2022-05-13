@@ -1690,6 +1690,44 @@ directly to obtain
 $\E[V_N] \sim D_{\alpha} n^{1/(2\alpha + 3)}$.
 Notice that $\alpha$ influences the asymptotic order of
 $\E[V_N]$ in this case.
+
+\section{Outer level}
+Estimate the order (about $N$)
+of $\int_K^{+\infty} G(x)
+(1-\widetilde{F}(x))^N dx
+$ as $n\to \infty$.
+
+Change of variables from $x$ to $t$
+: $\frac{t}{N} = \widetilde{F}(x)$,
+and use the estimate $(1-\frac{t}{N})^N
+=e^{-t}$.
+Then the integral becomes:
+\begin{align*}
+    \int_K^{+\infty} G(x)
+(1-\widetilde{F}(x))^N dx
+&\sim -\frac{1}{N}\int_0^{+\infty}
+e^{-t} (\widetilde{F}^{-1})'(\frac{t}{N})
+\cdot G(\widetilde{F}^{-1}(\frac{t}{N}))dt \\
+&=
+-\frac{1}{N}\int_0^{+\infty}
+e^{-t} 
+\frac
+{G(\widetilde{F}^{-1}(\frac{t}{N}))
+}
+{
+\widetilde{F}'
+\left(\widetilde{F}^{-1}(\frac{t}{N})
+\right)
+}dt 
+\end{align*}
+
+Example: for Cauchy distribution $G(x)=\frac{1}{(1+x^2)^{3/2}}$
+and $\widetilde{F}(x)
+= \frac{1}{\pi} \frac{1}{x}$.
+
+For Gaussian distribution:
+$\widetilde{F}(x)=\frac{e^{-x^2/2}}{\sqrt{2\pi}x}$
+and $G(x)=e^{-x^2}$.
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
