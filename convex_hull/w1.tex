@@ -1694,9 +1694,10 @@ $\E[V_N]$ in this case.
 \section{Outer level}
 Estimate the order (about $N$)
 of $\int_K^{+\infty} G(x)
-(1-\widetilde{F}(x))^N dx
+F(x)^N dx
 $ as $n\to \infty$.
 
+Let $F(x)=1-\widetilde{F}(x)$.
 Change of variables from $x$ to $t$
 : $\frac{t}{N} = \widetilde{F}(x)$,
 and use the estimate $(1-\frac{t}{N})^N
@@ -1746,6 +1747,27 @@ the first term in the expansion is $\frac{1}{N^2}$
 since $\lambda=1, N=0$ in such a case. The dominant term
 comes out from the integral near 0 since $1-y$ is strictly
 decreasing.
+
+Laplace's method is an extension of Watson's formula.
+To complete the extension of Laplace's method in the case $h'(t)<0$.
+We summarize the result in the following theorem:
+\begin{theorem}
+Suppose $G(x) = t^{m} \phi(t)$, where $\phi(0)\neq 0$
+and $m$ is a non-negative integer.
+Further suppose $h'(x)<0$ for $x\geq 0$.
+Then
+\begin{equation}\label{eq:Laplace_ext_1}
+    \int_0^{+\infty} G(x) e^{h(x)N} dx
+    \sim \frac{\Gamma(m+1) \phi(0)}{N^{m+1} (-h'(0))^{m+1}}  e^{Nh(0)}     
+\end{equation}
+\end{theorem}
+The procedure to prove
+\eqref{eq:Laplace_ext_1} is similar to (2.37)
+in \cite{murray2012asymptotic}.
+
+In Laplace's method, there is another case when $h'(0)=0$ happens.
+This case can be used to obtain the result for uniform distribution.
+
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
