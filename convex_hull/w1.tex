@@ -1766,7 +1766,21 @@ The procedure to prove
 in \cite{murray2012asymptotic}.
 
 In Laplace's method, there is another case when $h'(0)=0$ happens.
-This case can be used to obtain the result for uniform distribution.
+This case can be used to obtain the result
+of $\E[V_N]$ for uniform distribution.
+
+\begin{theorem}
+    Suppose $G(x) = t^{m} \phi(t)$, where $\phi(0)\neq 0$
+    and $m$ is a non-negative integer.
+    Further suppose $h'(x)<0$ for $x> 0$ and $h'(0)=0$.
+    Then
+    \begin{equation}\label{eq:Laplace_ext_2}
+        \int_0^{+\infty} G(x) e^{h(x)N} dx
+        \sim \left(\frac{-2}{N h''(0)}\right)^{\frac{m+1}{2}}
+        \frac{1}{2}\Gamma\left(\frac{m+1}{2} \right)
+        \phi(0)e^{Nh(0)}     
+    \end{equation}
+\end{theorem}
 
 \bibliographystyle{plain}
 \bibliography{ref.bib}
