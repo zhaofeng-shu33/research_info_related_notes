@@ -1,0 +1,55 @@
+\documentclass{ctexbeamer}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{pifont}
+\usepackage{bm}
+\usepackage{subcaption}
+\def\E{\mathbb{E}}
+\def\R{\mathbb{R}}
+\DeclareMathOperator{\Vol}{Vol}
+\newif\ifbeamer
+\beamertrue
+
+%further improvement
+%background intro added Chen Chuan's work
+%simulation add hierarchical method
+%find suitable dataset to apply info-clustering
+%Yang Li's suggestion: compared with other clustering method, the threshold is the same or not
+%early stopping technique, complexity from n -> log(n)
+\title{Elements of Ensemble Theory}
+%\author{Feng Zhao}
+\date{\today}
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+\section{2.1 Phase space of a classical system}
+
+\begin{frame}
+\frametitle{经典系统的相空间}
+\begin{itemize}
+    \item 系综的概念：同一观测时间不同系统的集合
+    \item Hamiltonian 系统 $H(q_i,p_i)$
+    \item Hamiltonian 方程描述了 Hamiltonian 系统各粒子的位置和动量如何演化
+    \item Hamiltonian 量相当于系统的能量
+    \item 物理量 $f(q, p)$ 的系综平均：$\langle f \rangle$
+    \item 稳态的系综：密度不显示依赖于时间 $\phi(q, p)$
+\end{itemize}
+
+\end{frame}
+\section{2.2 Liouville's theorem and its consequences}
+\begin{frame}{刘维尔定理及其结果}
+    \begin{itemize}
+        \item 刘维尔定理：相空间的密度随着相空间的点的运动轨迹不发生变化
+        \item 结果：稳态系综的泊松括号为零
+        \item 微正则系综：相空间的密度函数是常数
+        \item 正则系综
+    \end{itemize}
+\end{frame}
+
+\end{document}
