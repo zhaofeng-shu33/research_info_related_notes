@@ -13,6 +13,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{example}{Example}
 \newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
 \def\E{\mathbb{E}}
 \def\R{\mathbb{R}}
 \DeclareMathOperator{\erf}{erf}
@@ -477,12 +478,12 @@ $N$ is large.
 Therefore, we only need to concern about
 $\int_{0}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp$,
 Let $p=\cos\theta$, we then have
-\begin{align*}
+\begin{align}\label{eq:uniform_integration}
     \int_{0}^{1} \Lambda_2^{N-2}(p)\lambda_2^3(p)dp
     &=\frac{8}{\pi^3}\int_{0}^{\frac{\pi}{2}}
     \left(1+\frac{\sin\theta\cos\theta - \theta}{\pi}\right)^{N-2}
     \sin^4 \theta d\theta
-\end{align*}
+\end{align}
 We can change the integral interval to $[0, \epsilon]$
 for any constant $\epsilon<\frac{\pi}{2}$ without changing
 the asymptotic behavior of the above value.
@@ -506,7 +507,30 @@ When $N$ is large, we have:
 Then the coefficient $C=\frac{\pi^2}{3}\cdot\frac{8}{3\pi^3} \left(\frac{3\pi}{2}\right)^{5/3}
 \Gamma\left(\frac{5}{3}\right)$,
 which reduces to \eqref{eq:Cn3}.
-
+\begin{remark}
+    We comment on the connection of
+    \eqref{eq:uniform_integration} with
+    the second last equation on Page 365
+    of \cite{affentranger1991convex}.
+    Firstly, the case in our consideration is equivalent
+    to $s=t=0, d=2$ in \cite{affentranger1991convex}.
+    Then the evaluation ($ a=\frac{2^{5/2}}{3\pi}$)
+    becomes
+    $$
+    \E[V_N] \sim b_2 N^2 \int_0^1 (1-a \eta^{3/2})^N \eta^{3/2} d\eta
+    $$
+    Notice that the asymptotic behavior of $\E[V_N]$
+    only depends on the integral interval $[0, \epsilon]$
+    where $\epsilon$ can be arbitrary small.
+    We make the transformation $\theta=\sqrt{2\eta}$,
+    then we obtain
+    $$
+    \E[V_N] \sim b_2 N^2 \int_0^1 (1-\frac{2\theta^3}{3\pi})^N
+    \theta^4d\theta
+    $$
+    The integral in the above equation
+    is equivalent to \eqref{eq:uniform_integration}.
+\end{remark}
 \section{Bivariate Cauchy distribution}
 Now we consider the case in 2d when the underlining
 distribution is Cauchy (spherical symmetric). That is, the pdf is
