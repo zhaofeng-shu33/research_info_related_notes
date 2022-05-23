@@ -516,9 +516,10 @@ which reduces to \eqref{eq:Cn3}.
     to $s=t=0, d=2$ in \cite{affentranger1991convex}.
     Then the evaluation ($ a=\frac{2^{5/2}}{3\pi}$)
     becomes
-    $$
-    \E[V_N] \sim b_2 N^2 \int_0^1 (1-a \eta^{3/2})^N \eta^{3/2} d\eta
-    $$
+    \begin{equation}\label{eq:E_VN_qzero}
+        \E[V_N] \sim b_2 N^2 \int_0^1 (1-a \eta^{3/2})^N \eta^{3/2} d\eta         
+    \end{equation}
+
     Notice that the asymptotic behavior of $\E[V_N]$
     only depends on the integral interval $[0, \epsilon]$
     where $\epsilon$ can be arbitrary small.
@@ -1795,7 +1796,7 @@ but $h'(0)=h''(0)=0$. The first non-zero term comes from
 the third order derivative.
 
 In Laplace's method, there is another case which is summarized in the following:
-\begin{theorem}
+\begin{theorem}\label{thm:second_derivative_laplace}
     Suppose $G(x) = t^{m} \phi(t)$, where $\phi(0)\neq 0$
     and $m$ is a non-negative integer.
     Further suppose $h'(x)<0$ for $x> 0$ and $h'(0)=0, h''(0)<0$.
@@ -1807,6 +1808,22 @@ In Laplace's method, there is another case which is summarized in the following:
         \phi(0)e^{Nh(0)}     
     \end{equation}
 \end{theorem}
+Theorem \ref{thm:second_derivative_laplace}
+can be used to derive $\E[V_N]$ for the following
+distribution:
+\begin{equation}
+    p(x,y) =\begin{cases} 
+        \frac{1}{2\pi \sqrt{1-x^2-y^2}} & x^2+y^2<1 \\
+        0 & x^2 + y^2 \geq 1
+    \end{cases}
+\end{equation}
+This distribution is a special case of $q=\frac{1}{2}$
+in \cite{affentranger1991convex}.
+Similar to \eqref{eq:E_VN_qzero},
+the corresponding
+integral is $\int_0^1 (1-a x^{3+2q})^N x^{4q+4} dx$.
+When $q=-\frac{1}{2}$, the derivatives of $1-ax^2$
+satisfies the condition in Theorem \ref{thm:second_derivative_laplace}.
 
 \bibliographystyle{plain}
 \bibliography{ref.bib}
