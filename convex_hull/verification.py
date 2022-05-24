@@ -5,7 +5,7 @@ from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
 from scipy.integrate import dblquad
 from scipy.special import gamma, gammainc
-from sklearn.linear_model import LinearRegression
+# from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 NTRIAL = 1000
 DISTRIBUTION = 'unit_circle'
@@ -68,21 +68,21 @@ def random_points_in_unit_circle(n):
     theta *= 2 * np.pi
     return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
 
-def transform(n_list):
+def transform(n_list, result):
     if DISTRIBUTION == 'unit_circle':
-        return n_list ** (1/3)
-    elif DISTRIBUTION == 'gaussian':
-        return np.sqrt(np.log(n_list))
+        result = result / n_list ** (1/3)
+    elif DISTRIBUTION == '2d-gaussian':
+        result = result / np.sqrt(np.log(n_list))
     elif DISTRIBUTION == 'exponential-tail':
-        return np.log(n_list)
+        result = result / np.log(n_list)
     else:
-        return n_list
+        pass
 
 def countVertex(n):
     global DOF, TWOPIC1
     if DISTRIBUTION == 'unit_circle':
         points = random_points_in_unit_circle(n)
-    elif DISTRIBUTION == 'gaussian':
+    elif DISTRIBUTION == '2d-gaussian':
         points = np.random.normal(size=(n, 2))
     elif DISTRIBUTION == '2d-cauchy':
         points = random_points_2d_cauchy(n)
@@ -114,7 +114,7 @@ def testAllN(n_list):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--distribution',
-            choices=['unit_circle', 'gaussian',
+            choices=['unit_circle', '2d-gaussian',
                      '2d-cauchy', '3d-cauchy',
                      '2d-t-distribution', 'exponential-tail',
                      'mixture_t_1_2'],
@@ -130,13 +130,13 @@ if __name__ == '__main__':
     result = testAllN(n_list)
     with open('build/sim_data_0.pickle', 'wb') as f:
         pickle.dump({'n_list': n_list, 'result': result}, f)
-    transformed_n_list = transform(n_list)
-    if args.distribution.find('cauchy') < 0:
-        model = LinearRegression()        
-        reg = model.fit(np.log(transformed_n_list.reshape(-1, 1)), np.log(result))
-        print(reg.coef_, reg.intercept_)
-        print(reg.score(np.log(transformed_n_list.reshape(-1, 1)), np.log(result)))
-    plt.plot(transformed_n_list, result)
+    transform(n_list, result)
+    # if args.distribution.find('cauchy') < 0:
+        # model = LinearRegression()        
+        # reg = model.fit(np.log(transformed_n_list.reshape(-1, 1)), np.log(result))
+        # print(reg.coef_, reg.intercept_)
+        # print(reg.score(np.log(transformed_n_list.reshape(-1, 1)), np.log(result)))
+    plt.plot(n_list, result)
     const_value = -1
     if args.distribution == '2d-cauchy':
         const_value = np.pi ** 2 / 2
