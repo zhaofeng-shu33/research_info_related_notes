@@ -17,10 +17,14 @@
 An important property for Poisson distribution.
 Suppose $P_1 \sim \Pois(c)$, $P_2 \sim \Pois(d)$.
 And $P_{\lambda}$ is defined as 
-$$
-P_{\lambda}(x) = \frac{P_1^{1-\lambda}(x) P_2^{\lambda} (x)}
-{\sum_{x \in \mathcal{X}}P_1^{1-\lambda}(x) P_2^{\lambda} (x)}
-$$
+\begin{equation}\label{eq:P_lambda}
+    P_{\lambda}(x) = \frac{P_1^{1-\lambda}(x) P_2^{\lambda} (x)}
+    {\sum_{y \in \mathcal{X}}
+    P_1^{1-\lambda}(y)
+    P_2^{\lambda} (y)
+    }    
+\end{equation}
+
 \begin{enumerate}
     \item $P_{\lambda} \sim \Pois(c^{1-\lambda} d^{\lambda})$
     \item $D_{\mathrm{KL}}(P_{\lambda}||P_1) = c^{1-\lambda}d^{\lambda}\log(\frac{d}{c})^{\lambda} + c-c^{1-\lambda}d^{\lambda}$
@@ -173,14 +177,63 @@ in \eqref{eq:theta2}.
 	\end{align*}
 	where the equality holds when $P_{\widetilde{X}_1}$ is given by \eqref{eq:p012}. 
 	\begin{lemma}\label{lem:p0p12}
-		Let $p_0, p_1$ be probability distribution functions defined over $\mathcal{X}$. The minimizer
-		of $D(p_X||p_0) + D(p_X||p_1)$ for any discrete random variable $X$ is
+		Let $P_1, P_2$ be two different
+        probability distribution functions defined over $\mathcal{X}$.
+        The minimizer
+		of $D(P_{\lambda}||P_1) + 
+        D(P_{\lambda}||P_2)$ 
+        over $0<\lambda < 1$
+        (The definition of $P_{\lambda}$
+        can be seen from \eqref{eq:P_lambda})
+        is achieved when $\lambda=\frac{1}{2}$,
+        then the PMF of $P_{\lambda}$ has the following form:
 		\begin{equation}\label{eq:p012}
-			P(X=x)=\frac{\sqrt{p_0(x)p_1(x)}}{ \sum_{x\in \mathcal{X}} \sqrt{p_0(x) p_1(x)}}
+			P(X=x)=\frac{\sqrt{P_1(x)
+            P_2(x)}}
+            { \sum_{y\in \mathcal{X}} 
+            \sqrt{P_1(y)
+                P_2(y)}
+            }
 		\end{equation}
 		and the minimal value is
-		$-2\log \sum_{x\in \mathcal{X}} \sqrt{p_0(x) p_1(x)}$.
+		$-2\log \sum_{x\in \mathcal{X}} 
+        \sqrt{P_1(x) P_2(x)}$.
 	\end{lemma}
+\begin{proof}
+    Let $H(\lambda)=D(P_{\lambda}||P_1) + 
+    D(P_{\lambda}||P_2), C(\lambda)=\sum_{y \in \mathcal{X}}
+    P_1^{1-\lambda}(y)
+    P_2^{\lambda} (y)$.
+    Then
+    \begin{equation}
+        H(\lambda)
+        = \sum_{x\in \mathcal{X}}
+        (1-2\lambda)\frac{P^{1-\lambda}_1(x)P^{\lambda}_2(x)}
+        {C(\lambda)}\frac{P_1(x)}
+        {P_2(x)} - 2 \log C(\lambda)
+    \end{equation}
+    The first derivative of $H(\lambda)$ is
+    \begin{equation}
+        H'(\lambda) = \frac{1-2\lambda}{C^2}
+        \left[
+            \left(\sum_{x\in \mathcal{X}}
+            P_1^{1-\lambda}(x)
+            P_2^{\lambda}(x) \log\frac{P_2(x)}{P_1(x)}
+            \right)^2
+            - C \sum_{x\in \mathcal{X}}P_1^{1-\lambda}(x)
+            P_2^{\lambda}(x) \log\frac{P^2_2(x)}{P^2_1(x)}
+        \right]
+    \end{equation}
+    By Cauchy's inequality and $P_1\neq P_2$,
+    the term inside the
+    square bracket is negative.
+    Therefore, $H'(\lambda)$ is monotonic increasing within
+    the interval $(0,1)$. Since $H'(\lambda)=0$,
+    $H(\lambda)$ achieves its minimal value at $\lambda=\frac{1}{2}$.
+    Finally, we can verify that 
+    $H(\frac{1}{2})=-2\log \sum_{x\in \mathcal{X}} 
+    \sqrt{P_1(x) P_2(x)}$.
+\end{proof}
 \begin{thebibliography}{9}
 \bibitem{kl} https://stats.stackexchange.com/questions/145789/kl-divergence-between-two-univariate-poisson-distributions
 \bibitem{abbe} Asadi, Amir R., Emmanuel Abbe, and Sergio Verdú. "Compressing data on graphs with clusters." 2017 IEEE International Symposium on Information Theory (ISIT). IEEE, 2017.
