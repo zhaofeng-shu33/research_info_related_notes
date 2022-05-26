@@ -77,6 +77,7 @@ def transform(n_list, result):
         result = result / np.log(n_list)
     else:
         pass
+    return result
 
 def countVertex(n):
     global DOF, TWOPIC1
@@ -130,7 +131,7 @@ if __name__ == '__main__':
     result = testAllN(n_list)
     with open('build/sim_data_0.pickle', 'wb') as f:
         pickle.dump({'n_list': n_list, 'result': result}, f)
-    transform(n_list, result)
+    result = transform(n_list, result)
     # if args.distribution.find('cauchy') < 0:
         # model = LinearRegression()        
         # reg = model.fit(np.log(transformed_n_list.reshape(-1, 1)), np.log(result))
