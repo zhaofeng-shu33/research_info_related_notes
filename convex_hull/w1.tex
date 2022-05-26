@@ -1191,15 +1191,17 @@ of the t distribution. Denote the CDF as $F(x)$, then we list the result found i
 \end{equation}
 Equation \eqref{eq:general_2d} tells that for bivariate t distribution,
 we have
-\begin{align*}
+\begin{align}
     \E[V_N] & = 2\pi \binom{N}{2} \int_{\R}
-    C(v) \sqrt{1+\frac{x^2}{v}} p^2(x)F^{N-2}(x)dx\\
+    C(v) \sqrt{1+\frac{x^2}{v}} p^2(x)F^{N-2}(x)dx
+    \notag \\
     &\sim \frac{ \mathcal{I}(v)\Gamma^2 \left(\frac{v}{2} +1\right) }
     {\sqrt{v}\pi
     \Gamma^2\left(\frac{v}{2}\right)}  N^2
     \int_{K}^{+\infty} \left(1+\frac{x^2}{v}\right)^{-v-\frac{1}{2}}
     \left(1-D(v)x^{-v} \right)^N dx
-\end{align*}
+    \label{eq:v2bivariate_t_dis}
+\end{align}
 where
 \begin{align}
     \mathcal{I}(v) &= \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}

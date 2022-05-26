@@ -123,11 +123,15 @@ if __name__ == '__main__':
     parser.add_argument('--dof', help='degree of freedom for t distribution', default=1, type=float)
     parser.add_argument('--TWOPIC1', help='mixture coefficient for Cauchy distribution', default=1.0, type=float)
     parser.add_argument('--max_points', help='maximal N', default=100, type=int)
+    parser.add_argument('--interval', default=5, type=int)
+    parser.add_argument('--num_trials', default=1000, type=int)
+
     args = parser.parse_args()
     DISTRIBUTION = args.distribution
     DOF = args.dof
     TWOPIC1 = args.TWOPIC1
-    n_list = np.array(range(5, args.max_points, 5))
+    NTRIAL = args.num_trials
+    n_list = np.array(range(5, args.max_points, args.interval))
     result = testAllN(n_list)
     with open('build/sim_data_0.pickle', 'wb') as f:
         pickle.dump({'n_list': n_list, 'result': result}, f)
