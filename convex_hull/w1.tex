@@ -1214,7 +1214,7 @@ where
 \end{align}
 Making the transformation $\frac{t}{N}=D(v)x^{-v}$
 directly, we obtain:
-\begin{align}\label{eq:EV_N_general}
+\begin{align}
     \E[V_N] &\sim
     \frac{ \mathcal{I}(v)
     \Gamma^2 \left(\frac{v}{2} +1\right) }
@@ -1222,13 +1222,14 @@ directly, we obtain:
     \Gamma^2\left(\frac{v}{2}\right)}  N^2
     \int_{0}^{+\infty} \frac{1}{N^{2+\frac{1}{v}}}\left(\frac{vt^{2/v}}{D^{2/v}(v)}\right)^{v+\frac{1}{2}}
     \left(1- \frac{t}{N} \right)^N \frac{1}{v} t^{-\frac{1}{v}-1} N^{1/v} D^{1/v}(v)dt
-    \\&\sim \frac{ \mathcal{I}(v)
+    \label{eq:EV_N_general}    \\
+    &\sim \frac{ \mathcal{I}(v)
     \Gamma^2 \left(\frac{v}{2} +1\right) }
     {\sqrt{v}\pi
     \Gamma^2\left(\frac{v}{2}\right)} \frac{v^{v-\frac{1}{2}}}
     {D^2(v)} = \frac{\mathcal{I}(v) v \Gamma^2\left(\frac{v}{2}+1\right)}
     {\Gamma^2 \left(\frac{v+1}{2} \right)} 
-    =: g(v) \notag
+    =: g(v) \label{eq:E_V_N_v_v_12_D}
 \end{align}
 That is
 \begin{align}
@@ -1829,7 +1830,20 @@ satisfies the condition in Theorem \ref{thm:second_derivative_laplace}.
 
 Another example to illustrate Theorem \ref{thm:second_derivative_laplace}
 is considering bivariate t distribution with $v=2$.
-
+From \eqref{eq:v2bivariate_t_dis},
+after making the transformation
+$t=\frac{1}{x}$,
+we find the integral in consideration is equivalent with:
+\begin{equation}
+    \int_{0}^{+\infty}
+    4\sqrt{2} \frac{t^3}{(1+2t^2)^{5/2}}
+    (1-D(2)t^2)^N dt
+    \sim \frac{1}{N^2}\frac{2\sqrt{2}}{D^2(2)}
+    \textrm { with } m=3, \phi(0)=2\sqrt{2}
+\end{equation}
+This result is consistent with the term 
+$\frac{v^{v-\frac{1}{2}}{D^2(v)}$
+in \eqref{eq:E_V_N_v_v_12_D}.
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
