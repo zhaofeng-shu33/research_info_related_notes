@@ -1540,13 +1540,20 @@ That is
 $p(x,y)=C \exp(-x^{2\beta}/2) \exp(-\beta y^2 x^{2\beta-2}/2)$.
 In such a case $Y|X=x$ is a Gaussian.
 We get the marginal distribution easily as 
-$$
-p(x) =C x^{1-\beta} \exp(-x^{2\beta}/2)
-$$
+%$$
+%p(x) =C x^{1-\beta} \exp(-x^{2\beta}/2)
+%$$
 Besides,
 $$
-G(x)
+G(x) = \int_{\R^2}
+|y_1 - y_2| p(x,y_1)p(x,y_2)dy_1dy_2
 \sim C_{\beta} x^{3-3\beta} \exp(-x^{2\beta})
+$$
+where
+$$
+C_{\beta}
+= \frac{\beta^{1/2}}{\pi^{3/2} 2^{\frac{2}{\beta}-2}
+\Gamma^2(\frac{1}{\beta})}
 $$
 and (by integration by parts)
 $$
@@ -1564,8 +1571,8 @@ $ for general $\beta>0$.}
 To prove this, we use the same procedure for $\beta=1$
 in \eqref{eq:gaussian_2d_v_n}.
 $$
-E[V_N]
-\sim C'
+E[V_N] = \pi N^2\int_{\R}G(x)\Phi^N(x)
+dx\sim \pi C_\beta
 N^2 \int_{\R}
 x^{3-3\beta} \exp(-x^{2\beta}) \left(
 1-C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta-2}}
