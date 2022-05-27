@@ -1533,15 +1533,16 @@ the radius direction.
 
 If we consider the case $\alpha=0$ while $\beta > 0$,
 that is
-$$
-p(x,y)=\frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
-\exp \left(-\frac{(x^2+y^2)^{\beta}}{2} \right)
-$$
+\begin{equation}\label{eq:joint_pdf_beta_x_y}
+    p(x,y)=\frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
+    \exp \left(-\frac{(x^2+y^2)^{\beta}}{2} \right)        
+\end{equation}
+
 We make an approximation of $p(x,y)$ when $y$ is fixed and $x\to \infty$.
 That is
 $p(x,y)=C \exp(-x^{2\beta}/2) \exp(-\beta y^2 x^{2\beta-2}/2)$.
 In such a case $Y|X=x$ is a Gaussian.
-We get the marginal distribution easily as 
+%We get the marginal distribution easily as 
 %$$
 %p(x) =C x^{1-\beta} \exp(-x^{2\beta}/2)
 %$$
@@ -1557,15 +1558,33 @@ C_{\beta}
 = \frac{\beta^{1/2}}{\pi^{3/2} 2^{\frac{2}{\beta}-2}
 \Gamma^2(\frac{1}{\beta})}
 $$
-and (by integration by parts)
+For the CDF of the marginal distribution,
+we have the following lemma:
+\begin{lemma}\label{lem:phi_asymptotic}
+    Suppose the joint pdf of $(X,Y)$
+    is given in \eqref{eq:joint_pdf_beta_x_y}, then
+    the marginal CDF $F(x)$ satisfies
 $$
-1-\Phi(x) \sim C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta - 2}}
-$$ 
+1-F(x) \sim C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta - 2}}
+$$ as $x\to \infty$,
 where
 $$
 C=\frac{1}{2^{1/\beta} \Gamma(1/\beta)} \sqrt{\frac{2}{\beta \pi}
 }$$
+\end{lemma}
+\begin{proof}
+    We can write down the integration
+    of $1-F(x)$
+    explicitly as:
+    \begin{equation}
+    1-F(x) =   \frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
+    \int_x^{+\infty}   \int_{\R} \exp \left(
+        -\frac{(u^2+y^2)^{\beta}}{2}\right)
+        dudy   
+    \end{equation}
+    and (by integration by parts)
 
+\end{proof}
 \textcolor{red}{We conclude that
 $\lim_{N\to \infty} \E[V_N]$
 is of the order $ 2\sqrt{2\pi \beta} \sqrt{\log n}
@@ -1573,7 +1592,7 @@ $ for general $\beta>0$.}
 To prove this, we use the same procedure for $\beta=1$
 in \eqref{eq:gaussian_2d_v_n}.
 $$
-E[V_N] = \pi N^2\int_{\R}G(x)\Phi^N(x)
+E[V_N] = \pi N^2\int_{\R}G(x)F^N(x)
 dx\sim \pi C_\beta
 N^2 \int_{\R}
 x^{3-3\beta} \exp(-x^{2\beta}) \left(
