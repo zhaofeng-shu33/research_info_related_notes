@@ -74,7 +74,7 @@ def transform(n_list, result):
     elif DISTRIBUTION == '2d-gaussian':
         result = result / np.sqrt(np.log(n_list))
     elif DISTRIBUTION == 'exponential-tail':
-        result = result / np.log(n_list)
+        result = result / np.sqrt(np.log(n_list))
     else:
         pass
     return result
