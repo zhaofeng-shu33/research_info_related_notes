@@ -1568,7 +1568,7 @@ C=\frac{1}{2^{1/\beta} \Gamma(1/\beta)} \sqrt{\frac{2}{\beta \pi}
 
 \textcolor{red}{We conclude that
 $\lim_{N\to \infty} \E[V_N]$
-is of the order $\sqrt{\log n}
+is of the order $ 2\sqrt{2\pi \beta} \sqrt{\log n}
 $ for general $\beta>0$.}
 To prove this, we use the same procedure for $\beta=1$
 in \eqref{eq:gaussian_2d_v_n}.
@@ -1589,40 +1589,52 @@ We deal with
  \right) dx
 \end{align*}
 The term $x^{3-3\beta}$ takes the value
-$(2\log n)^{\frac{3-3\beta}{2\beta}}$ directly.
+$(2\log N)^{\frac{3-3\beta}{2\beta}}$ directly.
 
-Let $x=(2\log n)^{1/(2\beta)}-u$ (change of variables).
-Only reserving dominant terms in $\log n$:
+Let $x=(2\log N)^{1/(2\beta)}-u$ (change of variables).
+Only reserving dominant terms in $\log N$:
 $
-x^{2\beta} = 2\log n - 2\beta
-(2 \log n)^{1-1/(2\beta)}u$.
+x^{2\beta} = 2\log N - 
+2\beta
+(2 \log N)^{1-1/(2\beta)}u$.
 
 \begin{align*}
-    (\log n)^{\frac{3-3\beta}{2\beta}}
+    (2\log N)^{\frac{3-3\beta}{2\beta}}
     \int_{0}^{\epsilon}
 \exp\left(
-    2\beta (2\log n)^{1-\frac{1}{2\beta}} u -
-    C\frac{\exp(\beta (2\log n)^{1-\frac{1}{2\beta}} u)}{(2\log n)^{\frac{3\beta-2}{2\beta}}}
+    2\beta (2\log N)^{1-\frac{1}{2\beta}} u -
+    C\frac{\exp(\beta (2\log N)^{1-\frac{1}{2\beta}} u)}{(2\log N)^{\frac{3\beta-2}{2\beta}}}
  \right) du
 \end{align*}
 Let $t=\beta (2\log n)^{1-\frac{1}{2\beta}}u$
 \begin{align*}
-    \frac{(\log n)^{\frac{3-3\beta}{2\beta}}
-    }{(2\log n)^{1-\frac{1}{2\beta}}}
+    \frac{(2\log N)^{\frac{3-3\beta}{2\beta}}
+    }{\beta(2\log N)^{1-\frac{1}{2\beta}}}
     \int_{0}^{\epsilon}
 \exp\left(
     2t -
-    C\frac{e^t}{(2\log n)^{\frac{3\beta-2}{2\beta}}}
+    C\frac{e^t}{(2\log N)^{\frac{3\beta-2}{2\beta}}}
  \right) dt
 \end{align*}
-Then let $v=\frac{e^t}{(2\log n)^{\frac{3 \beta - 2}{2\beta}}}$
+Then let $v=C\frac{e^t}{(2\log N)^{\frac{3 \beta - 2}{2\beta}}}$
 \begin{align*}
-    (\log n)^{\frac{2}{\beta} - \frac{5}{2}}
-    (2\log n)^{\frac{3 \beta - 2}{\beta}}
+   \frac{1}{C^2\beta} (2\log N)^{\frac{2}{\beta} - \frac{5}{2}}
+    (2\log N)^{\frac{3 \beta - 2}{\beta}}
     \int_{0}^{+\infty}
-ve^{-Cv}dv
-\stackrel{\cdot}{=} \sqrt{\log n}
+ve^{-v}dv
+%\stackrel{\cdot}{=}
+= \frac{\sqrt{2}}{C^2\beta}
+\sqrt{\log N}
 \end{align*}
+Finally, we obtain $\E[V_N] 
+\sim \pi C_{\beta} \cdot \frac{\sqrt{2}}{C^2\beta} \sqrt{\log N}
+ = 2\sqrt{2\pi \beta} \sqrt{\log N}$.
+
+Notice that the coefficient increases with $\beta$,
+which is consistent with the fact that the number of nodes increase
+more rapidly 
+when the distribution decreases faster.
+
 \section{Linear combination of algebraic tails}
 When we consider the distribution in the linear combination
 of pdf with different $v_i$.
