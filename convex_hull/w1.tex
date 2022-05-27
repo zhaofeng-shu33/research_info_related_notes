@@ -109,7 +109,7 @@ starting from
 \eqref{eq:gaussian_2d_v_n} follows
 from \eqref{eq:general_2d} with
 $\E[|Y_1-Y_2| \Big\vert X_1=X_2=x] = \frac{2}{\sqrt{\pi}}$,
-which comes from Lemma \ref{lem:abs_gaussian} with $\sigma=\sqrt{2}$.
+which comes from Lemma \ref{lem:abs_gaussian} with $\sigma=1$.
 
 The first observation is that we can use the approximation
 $\Phi(p) = 1-\frac{\exp(-p^2/2)}{\sqrt{2\pi} p}$
@@ -661,6 +661,8 @@ Suppose $X \in \mathcal{N}(0,1)$,
 then $\E[|X|]=\sqrt{\frac{2}{\pi}}$.
 Generally, $X \in \mathcal{N}(0,\sigma^2)$,
 then $\E[|X|]=\frac{\sqrt{2}\sigma}{\sqrt{\pi}}$.
+If $X,Y\sim \mathcal{N}(0,\sigma^2)$ and $X,Y$ are independent,
+then $\E[|X-Y|]=\frac{2\sigma}{\sqrt{\pi}}$.
 \end{lemma}
 A straight line on the plane
 can be represented as:
