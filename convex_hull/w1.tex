@@ -1530,11 +1530,14 @@ for $u\in (0,1)$. Thus we get the random generator for
 the radius direction.
 
 If we consider the case $\alpha=0$ while $\beta > 0$,
-that is $p(x,y)=C\exp(-\frac{(x^2+y^2)^{\beta}}{2})$.
+that is
+$$
+p(x,y)=\frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
+\exp \left(-\frac{(x^2+y^2)^{\beta}}{2} \right)
+$$
 We make an approximation of $p(x,y)$ when $y$ is fixed and $x\to \infty$.
 That is
 $p(x,y)=C \exp(-x^{2\beta}/2) \exp(-\beta y^2 x^{2\beta-2}/2)$.
-\textcolor{red}{This approximation seems not valid by validation of experiments.}
 In such a case $Y|X=x$ is a Gaussian.
 We get the marginal distribution easily as 
 $$
@@ -1548,12 +1551,18 @@ $$
 and (by integration by parts)
 $$
 1-\Phi(x) \sim C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta - 2}}
+$$ 
+where
 $$
+C=\frac{1}{2^{1/\beta} \Gamma(1/\beta)} \sqrt{\frac{2}{\beta \pi}
+}$$
 
-We conclude that $\lim_{N\to \infty} \E[V_N]$
-is of the order $(\log n)^{2-\frac{3}{2\beta}}$.
+\textcolor{red}{We conclude that
+$\lim_{N\to \infty} \E[V_N]$
+is of the order $\sqrt{\log n}
+$ for general $\beta>0$.}
 To prove this, we use the same procedure for $\beta=1$
-in \eqref{eq:gaussian_2d_v_n}
+in \eqref{eq:gaussian_2d_v_n}.
 $$
 E[V_N]
 \sim C'
@@ -1562,23 +1571,49 @@ x^{3-3\beta} \exp(-x^{2\beta}) \left(
 1-C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta-2}}
 \right)^N dx
 $$
-The term $x^{3-3\beta}$
-is neglectful compared with other
-exponential terms.
-Therefore, we deal with 
+We deal with 
 \begin{align*}
     N^2 \int_{(2\log n)^{1/(2\beta)}-\epsilon}^{(2\log n)^{1/(2\beta)}}
-\exp\left(
+    x^{3-3\beta}\exp\left(
     -x^{2\beta} -N
     C\frac{\exp(-x^{2\beta}/2)}{x^{3\beta-2}}
  \right) dx
 \end{align*}
+The term $x^{3-3\beta}$ takes the value
+$(2\log n)^{\frac{3-3\beta}{2\beta}}$ directly.
+
 Let $x=(2\log n)^{1/(2\beta)}-u$ (change of variables).
 Only reserving dominant terms in $\log n$:
 $
 x^{2\beta} = 2\log n - 2\beta
 (2 \log n)^{1-1/(2\beta)}u$.
 
+\begin{align*}
+    (\log n)^{\frac{3-3\beta}{2\beta}}
+    \int_{0}^{\epsilon}
+\exp\left(
+    2\beta (2\log n)^{1-\frac{1}{2\beta}} u -
+    C\frac{\exp(\beta (2\log n)^{1-\frac{1}{2\beta}} u)}{(2\log n)^{\frac{3\beta-2}{2\beta}}}
+ \right) du
+\end{align*}
+Let $t=\beta (2\log n)^{1-\frac{1}{2\beta}}u$
+\begin{align*}
+    \frac{(\log n)^{\frac{3-3\beta}{2\beta}}
+    }{(2\log n)^{1-\frac{1}{2\beta}}}
+    \int_{0}^{\epsilon}
+\exp\left(
+    2t -
+    C\frac{e^t}{(2\log n)^{\frac{3\beta-2}{2\beta}}}
+ \right) dt
+\end{align*}
+Then let $v=\frac{e^t}{(2\log n)^{\frac{3 \beta - 2}{2\beta}}}$
+\begin{align*}
+    (\log n)^{\frac{2}{\beta} - \frac{5}{2}}
+    (2\log n)^{\frac{3 \beta - 2}{\beta}}
+    \int_{0}^{+\infty}
+ve^{-Cv}dv
+\stackrel{\cdot}{=} \sqrt{\log n}
+\end{align*}
 \section{Linear combination of algebraic tails}
 When we consider the distribution in the linear combination
 of pdf with different $v_i$.
