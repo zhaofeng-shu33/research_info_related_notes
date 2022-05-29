@@ -1576,13 +1576,49 @@ C=\frac{1}{2^{1/\beta} \Gamma(1/\beta)} \sqrt{\frac{2}{\beta \pi}
     We can write down the integration
     of $1-F(x)$
     explicitly as:
-    \begin{equation}
-    1-F(x) =   \frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
+    \begin{align}
+    1-F(x)  & = \frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
     \int_x^{+\infty}   \int_{\R} \exp \left(
         -\frac{(u^2+y^2)^{\beta}}{2}\right)
-        dudy   
-    \end{equation}
-    and (by integration by parts)
+        dudy \notag \\
+        & \sim \frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
+        \int_x^{+\infty}  \exp(-\frac{u^{2\beta}}{2})
+        \int_{\R} \exp \left(
+            -\frac{\beta u^{2\beta - 2} y^2 }
+            {2}
+            \right)
+            dudy\notag \\
+        & = \frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
+        \int_x^{+\infty} \frac{1}{u^{\beta-1}}
+        \exp
+        \left(
+            -\frac{u^{2\beta}}{2}
+        \right)du
+        \int_{\R} \exp \left(
+            -\frac{\beta v^2}{2}\right)
+            dy \notag\\
+        & = \frac{\beta}{\pi 2^{1/\beta} \Gamma(1/\beta)}
+        \cdot \sqrt{\frac{2\pi}{\beta}}
+        \int_x^{+\infty} \frac{1}{u^{\beta-1}}
+        \exp
+        \left(
+            -\frac{u^{2\beta}}{2}
+        \right)du
+        \label{eq:integration_by_parts} \\
+        &
+        = \frac{\beta}{ 2^{1/\beta} \Gamma(1/\beta)}
+        \cdot \sqrt{\frac{2}{\beta \pi}}
+        \left(\frac{1}{\beta}
+        \frac{\exp(-x^{2\beta}/2)}{x^{3\beta -2}}
+        -(3\beta-2)
+        \int_x^{+\infty} \frac{1}{u^{3\beta-1}}
+        \exp
+        \left( 
+            -\frac{u^{2\beta}}{2}
+        \right)du \right)\notag
+    \end{align}
+    In \eqref{eq:integration_by_parts},
+    we proceed by integration by parts.
 
 \end{proof}
 \textcolor{red}{We conclude that
