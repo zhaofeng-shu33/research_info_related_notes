@@ -556,13 +556,28 @@ of $(r,\theta)$.
 
 
 According to (2.13) of \cite{efron1965convex},
+for general spherical distribution,
 the expected number of vertices is
 \begin{equation}\label{eq:general_2d}
-    \E(V_N) = 2\pi \binom{N}{2}
+    \E [V_N] = 2\pi \binom{N}{2}
     \int_{\R}\E(|Y_2-Y_1| \Big\vert X_1= x, X_2=x)
-    G^{N-2}_2(x) g^2_2(x)dx
+    F^{N-2}(x) g^2_2(x)dx
 \end{equation}
-we have $g_2(x) = p(x)$ and $G(x)=\frac{1}{2}+ \frac{1}{\pi}\arctan(x)$.
+we have $g_2(x) = p(x)$ and $F(x)=\frac{1}{2}+ \frac{1}{\pi}\arctan(x)$
+for Cauchy distribution.
+
+\eqref{eq:general_2d}
+can also be written in a concise form:
+\begin{align}
+    \E[V_N] & \sim \pi N^2 \int_{\R}F^N(x)G(x)dx 
+    \label{eq:E_V_N_F_N_G}\\
+    G(x) & = \int_{\R^2} |y_1-y_2| f(x,y_1)f(x,y_2)
+    dy_1dy_2
+    \label{eq:G_x_y_1_y_2_f}
+\end{align}
+where $f(x,y)$ is the joint distribution while $F(x)$ is the CDF
+of the marginal distribution.
+
 For the expectation term, we have the following lemma:
 \begin{lemma}
     If $(X_1, Y_1), (X_2, Y_2)$ follow the bivariate Cauchy
@@ -1546,7 +1561,7 @@ In such a case $Y|X=x$ is a Gaussian.
 %$$
 %p(x) =C x^{1-\beta} \exp(-x^{2\beta}/2)
 %$$
-Besides,
+Besides, from \eqref{eq:G_x_y_1_y_2_f},
 $$
 G(x) = \int_{\R^2}
 |y_1 - y_2| p(x,y_1)p(x,y_2)dy_1dy_2
@@ -1627,6 +1642,7 @@ is of the order $ 2\sqrt{2\pi \beta} \sqrt{\log n}
 $ for general $\beta>0$.}
 To prove this, we use the same procedure for $\beta=1$
 in \eqref{eq:gaussian_2d_v_n}.
+From \eqref{eq:E_V_N_F_N_G},
 $$
 E[V_N] = \pi N^2\int_{\R}G(x)F^N(x)
 dx\sim \pi C_\beta
@@ -1925,12 +1941,15 @@ In Laplace's method, there is another case which is summarized in the following:
 Theorem \ref{thm:second_derivative_laplace}
 can be used to derive $\E[V_N]$ for the following
 distribution:
-\begin{equation}
+\begin{equation}\label{eq:p12_dis_x_y}
     p(x,y) =\begin{cases} 
         \frac{1}{2\pi \sqrt{1-x^2-y^2}} & x^2+y^2<1 \\
         0 & x^2 + y^2 \geq 1
     \end{cases}
 \end{equation}
+The distribution specified in \eqref{eq:p12_dis_x_y}
+has marginal distribution $p(x)=-\frac{1}{2}$.
+
 This distribution is a special case of $q=\frac{1}{2}$
 in \cite{affentranger1991convex}.
 Similar to \eqref{eq:E_VN_qzero},
@@ -1938,6 +1957,10 @@ the corresponding
 integral is $\int_0^1 (1-a x^{3+2q})^N x^{4q+4} dx$.
 When $q=-\frac{1}{2}$, the derivatives of $1-ax^2$
 satisfies the condition in Theorem \ref{thm:second_derivative_laplace}.
+We can obtain $m=2$ in this case and the integral
+in \eqref{eq:Laplace_ext_2} is of order $N^{-3/2}$.
+Then $\E[V_N] \stackrel{\cdot}{=} \sqrt{N}$,
+also consistent with the formula (3.3) of \cite{affentranger1991convex}.
 
 Another example to illustrate Theorem \ref{thm:second_derivative_laplace}
 is considering bivariate t distribution with $v=2$.
