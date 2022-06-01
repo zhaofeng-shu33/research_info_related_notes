@@ -1944,7 +1944,7 @@ Laplace's method is an extension of Watson's formula.
 To complete the extension of Laplace's method in the case $h'(t)<0$.
 We summarize the result in the following theorem:
 \begin{theorem}
-Suppose $G(x) = t^{m} \phi(t)$, where $\phi(0)\neq 0$
+Suppose $G(t) = t^{m} \phi(t)$, where $\phi(0)\neq 0$
 and $m$ is a non-negative integer.
 Further suppose $h'(x)<0$ for $x\geq 0$.
 Then
@@ -1964,7 +1964,7 @@ the third order derivative.
 
 In Laplace's method, there is another case which is summarized in the following:
 \begin{theorem}\label{thm:second_derivative_laplace}
-    Suppose $G(x) = t^{m} \phi(t)$, where $\phi(0)\neq 0$
+    Suppose $G(t) = t^{m} \phi(t)$, where $\phi(0)\neq 0$
     and $m$ is a non-negative integer.
     Further suppose $h'(x)<0$ for $x> 0$ and $h'(0)=0, h''(0)<0$.
     Then
@@ -2015,6 +2015,16 @@ we find the integral in consideration is equivalent with:
 This result is consistent with the term 
 $\frac{v^{v-\frac{1}{2}}}{D^2(v)}$
 in \eqref{eq:E_V_N_v_v_12_D}.
+\section{New distribution}
+We can construct the distribution
+whose decay rate lies between $\frac{1}{x^2+1}$
+and $\exp(-\frac{x^2}{2})$. For example,
+\begin{equation}
+    p(x,y) = C \exp(-\log^2 (x^2+y^2+1))
+\end{equation}
+We are interested in the asymptotic rate of $\E[V_N]$
+in such a case.
+
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
