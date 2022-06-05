@@ -112,7 +112,10 @@ $\E[|Y_1-Y_2| \Big\vert X_1=X_2=x] = \frac{2}{\sqrt{\pi}}$,
 which comes from Lemma \ref{lem:abs_gaussian} with $\sigma=1$.
 
 The first observation is that we can use the approximation
-$\Phi(p) = 1-\frac{\exp(-p^2/2)}{\sqrt{2\pi} p}$
+\begin{equation}\label{eq:gaussian_marginal}
+    \Phi(p) = 1-\frac{\exp(-p^2/2)}{\sqrt{2\pi} p}
+\end{equation}
+
 when $p$ is large.
 Given any $\epsilon>0$, the maximal value of $\Phi(p)^{n-2}e^{-p^2}$
 is achieved within the interval $[\sqrt{2\log n} - \epsilon, \sqrt{2\log n}]$
@@ -2028,6 +2031,38 @@ and $\exp(-\frac{x^2}{2})$. For example,
 \end{equation}
 We are interested in the asymptotic rate of $\E[V_N]$
 in such a case.
+\section{Marginal CDF}
+In this section, we provide another way to derive
+\eqref{eq:gaussian_marginal} inspired by (1.8)
+of \cite{carnal1970konvexe}.
+The starting point is \eqref{eq:joint_pdf_beta_x_y}
+with $\beta=1$. By making the polar coordinate
+transformation, we can obtain $p(r)=r\exp(-\frac{r^2}{2})$.
+Then $F(x) = \int_x^{+\infty} r\exp(-\frac{r^2}{2})dr=
+\exp(-\frac{x^2}{2})$. The definition of $F(x)$
+in this subsection comes from the first unlabeled equation
+in Section 1 of \cite{carnal1970konvexe}.
+Then,
+\begin{align*}
+    \pi G(x) & = \int_x^{+\infty}
+    \arccos \frac{x}{y} d(\exp(-\frac{y^2}{2})) \\
+    & \sim x \int_x^{Ax} \frac{\exp(-\frac{y^2}{2})}
+    {y\sqrt{y^2-x^2}} dy \\
+\end{align*}
+Let $y=x\sqrt{z}$, we have
+\begin{align*}
+    \pi G(x) &\sim \int_1^{+\infty} \frac{\exp(-\frac{x^2z}{2})}
+    {2z\sqrt{z-1}} dz \\
+    &=\int_0^{+\infty} \frac{\exp(-\frac{x^2(z+1)}{2})}
+    {2(z+1)\sqrt{z}} dz
+\end{align*}
+Then we can use \eqref{eq:Laplace_ext_1} with $\lambda=-\frac{1}{2},
+N=x^2, h(x)=-\frac{z+1}{2}, \phi(z)=-\frac{1}{2(z+1)}$.
+Then
+\begin{equation}
+    \pi G(x) \sim \frac{\Gamma(1/2)}{\sqrt{2} x } \exp(-\frac{1}{2}x^2)
+\end{equation}
+That is: $G(x) \sim \frac{1}{\sqrt{2 \pi} x} \exp(-\frac{1}{2}x^2)$.
 
 \bibliographystyle{plain}
 \bibliography{ref.bib}
