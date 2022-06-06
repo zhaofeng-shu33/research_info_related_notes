@@ -2027,10 +2027,31 @@ We can construct the distribution
 whose decay rate lies between $\frac{1}{x^2+1}$
 and $\exp(-\frac{x^2}{2})$. For example,
 \begin{equation}
-    p(x,y) = C \exp(-\log^2 (x^2+y^2+1))
+    F(r)= P(\sqrt{x^2+y^2} \geq r)
+    = \exp(-4\log^2 (r+1))
 \end{equation}
 We are interested in the asymptotic rate of $\E[V_N]$
 in such a case.
+
+First we compute $v(x), L(x), \epsilon(x)$
+based on the following formulas:
+\begin{align*}
+v(x) &= \frac{-1}{x (\log F(x))'} \\ 
+L(x)  & = \textrm{Inverse}(\frac{1}{F(x)}) \\
+\epsilon(x) &= x (\log L(x))'
+\end{align*}
+We should make sure that $v(x)$ is monotonic decreasing function
+and $x v'(x) \log v(x) \to 0$ as $x\to \infty$.
+
+$v(x) \sim \frac{1}{8 \log x}$, $L(x)
+= \exp(\frac{\sqrt{\log x}}{2})- 1$
+and $\epsilon(x) \sim \frac{1}{4\sqrt{\log x}}$.
+Then from (2.20) of \cite{carnal1970konvexe}
+$$
+\E[V_N] \sim 2\sqrt{\pi} (\epsilon(N))^{-1/2}
+$$, 
+we obtain $4\sqrt{\pi}(\log N)^{1/4}$.
+
 \section{Marginal CDF}
 In this section, we provide another way to derive
 \eqref{eq:gaussian_marginal} inspired by (1.8)
