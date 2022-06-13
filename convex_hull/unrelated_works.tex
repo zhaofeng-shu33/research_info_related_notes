@@ -35,37 +35,63 @@ as follows:
     \\
     &=\frac{2\pi^{n/2}}{(2\pi)^{n/2}\Gamma(n/2)}
     \int_0^R r^{n-1} e^{-r^2/2}dr \\
-    &=\frac{2\pi^{n/2}}{(2\pi)^{n/2}\Gamma(n/2)}
-    \int_0^R r^{n-1} e^{-r^2/2}dr \\
+    (x=\frac{r^2}{2})
     &=\frac{1}{\Gamma(n/2)}
     \int_0^{\frac{R^2}{2}} x^{\frac{n}{2} - 1} e^{-x}dx\\
     &=\frac{\gamma(n/2, \frac{R^2}{2})}{\Gamma(n/2)}
 \end{align*}
+The function $\gamma(s,x)$
+is called the lower
+incomplete gamma function.
+Or we can write
+\begin{equation}
+P(||X||\geq R)
+= \frac{\Gamma(n/2, \frac{R^2}{2})}
+{\Gamma(n/2)}
+\end{equation}
+The function $\Gamma(s,x)$
+is called the upper incomplete
+gamma function.
+For $x\to \infty$,
+we have the asymptotic behavior for $\Gamma(s,x)$
+as:
+\begin{equation}
+    \Gamma(s,x) \sim x^{s-1} \exp(-x)
+\end{equation}
+%Therefore, suppose $n$ is an even number,
+$P(||X||\geq R) \sim e^{-R^2/2}\frac{(R^2/2)^{n/2-1}}{\Gamma(n/2)}$.
+The decaying rate exponential.
+
+If $n=1$, we obtain $P(X\geq x) = \frac{1}{2}P(|X|\geq x)
+= \frac{1}{\sqrt{2\pi }x}\exp(-x^2/2)$, which is consistent with
+the asymptotic behavior of the Gaussian tail.
+
+\begin{proof}
 We can use the recurrence relation for the
 incomplete gamma function $\gamma(s,x)$:
 \begin{equation}
     \gamma(s+1, x)
     = s\gamma(s, x) - x^s e^{-x}
 \end{equation}
+
 We consider the recurrence formula for the
-following sequence:
-$a_{n+1} = n a_n - bk^n$.
+following sequence. Let $a_{n}=\gamma(n, x), b=e^{-x}$.
+Then $a_{n+1} = n a_n - bx^n$.
 Dividing both sides by $n!$, we obtain
 $\frac{a_{n+1}}{n!} =
-\frac{a_n}{(n-1)!} - b\frac{k^n}{n!}$.
+\frac{a_n}{(n-1)!} - b\frac{x^n}{n!}$.
 Therefore, $\frac{a_n}{(n-1)!} = a_1 - b\sum_{i=1}^{n-1}
-\frac{k^i}{i!}$ while $a_1 = \gamma(1, k)=1-e^{-k}$
-and $b=e^{-k}$.
-$\frac{a_n}{(n-1)!} = e^{-k}(e-\sum_{i=0}^{n-1} \frac{k^i}{i!})
-\sim e^{-k}\frac{k^n}{n!}$.
-Therefore, suppose $n$ is an even number,
-$P(||X||\leq R) \sim e^{-k}\frac{(R^2/2))^n}{n!}$.
-The decaying rate is faster than exponential rate.
+\frac{x^i}{i!}$ while $a_1 = \gamma(1, x)
+=1-e^{-x}$.
+$\frac{a_n}{(n-1)!} = e^{-x}
+(e^x-\sum_{i=0}^{n-1} \frac{x^i}{i!})$
+.
+\end{proof}
 
 A looser bound is obtained by replacing the hyperball
 with a bounding hypercube. Then
-$P(||X||\leq R) \leq P(|X_1|\leq R)^n$, which is an
-exponential rate.
+$P(||X||\leq R) \leq P(|X_1|\leq R)^n$, which is also of
+exponential decaying rate.
 
 \section{Crofton's formula}
 This part mainly consults \cite{crofton}.
