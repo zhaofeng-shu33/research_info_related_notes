@@ -1884,9 +1884,15 @@ and $p(x,y)=0$ for $r>1$.
 For this distribution, we can use
 Corollary 1 of \cite{affentranger1991convex}
 directly to obtain
-$\E[V_N] \sim D_{\alpha} n^{1/(2\alpha + 3)}$.
+$\E[V_N] \sim D_{\alpha} N^{1/(2\alpha + 3)}$.
 Notice that $\alpha$ influences the asymptotic order of
 $\E[V_N]$ in this case.
+
+The truncated tail is also considered in \cite{carnal1970konvexe}.
+For $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ 
+we can compute $k=\alpha - 1$ in Section 3 of \cite{carnal1970konvexe}
+and the asymptotic order is consistent in (3.4) of \cite{carnal1970konvexe}
+with $N^{1/(2\alpha+3)}$.
 
 \section{Outer level}
 Estimate the order (about $N$)
@@ -2054,6 +2060,7 @@ we obtain $4\sqrt{\pi}(\log N)^{1/4}$.
 
 If we consider $F(x) = \exp(-\exp(x))$,
 then $\E[V_N]$ is of the order $\sqrt{\log N \log \log N}$.
+
 
 \section{Marginal CDF}
 In this section, we provide another way to derive
