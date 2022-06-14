@@ -4,8 +4,8 @@ import numpy as np
 from itertools import combinations
 import matplotlib.pyplot as plt
 d = 4
-num_points = 100
-N = 50
+num_points = 200
+N = 100
 v_list = np.zeros(num_points) # vertices list
 f2_list = np.zeros(num_points) # edge list
 f_list = np.zeros(num_points) # volume list
@@ -35,7 +35,7 @@ for i in range(num_points):
     v_list[i] = v
 
 # print(v_list - f2_list + f3_list - f_list)
-_score = test_linear(np.array(v_list).reshape(-1, 1), f2_list)
+_score = test_linear(np.array(f3_list).reshape(-1, 1), f2_list)
 print(_score)
 # plt.scatter(v_list_total, f2_list_total, label='f2-f1')
 # plt.scatter(f3_list, f2_list, label='f3-f2')

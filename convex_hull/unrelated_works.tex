@@ -49,15 +49,17 @@ P(||X||\geq R)
 = \frac{\Gamma(n/2, \frac{R^2}{2})}
 {\Gamma(n/2)}
 \end{equation}
-The function $\Gamma(s,x)$
+The function
+$\Gamma(s,x)=\int_x^{+\infty} t^{s-1} e^{-t} dt$
 is called the upper incomplete
 gamma function.
 For $x\to \infty$,
 we have the asymptotic behavior for $\Gamma(s,x)$
 as:
-\begin{equation}
+\begin{equation}\label{eq:incomplete_upper_gamma}
     \Gamma(s,x) \sim x^{s-1} \exp(-x)
 \end{equation}
+
 %Therefore, suppose $n$ is an even number,
 $P(||X||\geq R) \sim e^{-R^2/2}\frac{(R^2/2)^{n/2-1}}{\Gamma(n/2)}$.
 The decaying rate exponential.
@@ -67,25 +69,33 @@ If $n=1$, we obtain $P(X\geq x) = \frac{1}{2}P(|X|\geq x)
 the asymptotic behavior of the Gaussian tail.
 
 \begin{proof}
-We can use the recurrence relation for the
-incomplete gamma function $\gamma(s,x)$:
+    We prove \eqref{eq:incomplete_upper_gamma}
+    for $s=n$ (a positive integer).
+For this purpose,
+we can use the recurrence relation for the
+incomplete gamma function $\Gamma(s,x)$:
 \begin{equation}
-    \gamma(s+1, x)
-    = s\gamma(s, x) - x^s e^{-x}
+    \Gamma(s+1, x)
+    = s\Gamma(s, x) + x^s e^{-x}
 \end{equation}
 
 We consider the recurrence formula for the
-following sequence. Let $a_{n}=\gamma(n, x), b=e^{-x}$.
-Then $a_{n+1} = n a_n - bx^n$.
+following sequence. Let $a_{n}=\Gamma(n, x),
+b=e^{-x}$.
+Then $a_{n+1} = n a_n + bx^n$.
 Dividing both sides by $n!$, we obtain
 $\frac{a_{n+1}}{n!} =
-\frac{a_n}{(n-1)!} - b\frac{x^n}{n!}$.
-Therefore, $\frac{a_n}{(n-1)!} = a_1 - b\sum_{i=1}^{n-1}
-\frac{x^i}{i!}$ while $a_1 = \gamma(1, x)
-=1-e^{-x}$.
+\frac{a_n}{(n-1)!} + b\frac{x^n}{n!}$.
+Therefore, $\frac{a_n}{(n-1)!} = a_1 + b\sum_{i=1}^{n-1}
+\frac{x^i}{i!}$ while $a_1 = \Gamma(1, x)
+=e^{-x}$.
 $\frac{a_n}{(n-1)!} = e^{-x}
-(e^x-\sum_{i=0}^{n-1} \frac{x^i}{i!})$
+(\sum_{i=0}^{n-1} \frac{x^i}{i!})$
 .
+When $x\to \infty$, the dominant term
+in the summation is $x^{n-1}$. Therefore,
+$\Gamma(n,x) = a_n \sim x^{n-1} e^{-x}$.
+
 \end{proof}
 
 A looser bound is obtained by replacing the hyperball
