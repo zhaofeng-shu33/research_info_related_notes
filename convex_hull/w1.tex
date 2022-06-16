@@ -2102,7 +2102,7 @@ That is: $G(x) \sim \frac{1}{\sqrt{2 \pi} x} \exp(-\frac{1}{2}x^2)$.
 
 \section{Upper bound}
 In d dimension, we have
-$V_N \leq F_N + C$.
+$V_N \leq F_N   + C$.
 When $N=d+1$, the equality is taken.
 Whenever we add one vertex, the number of faces
 at least increase by 1.
@@ -2126,10 +2126,17 @@ The ratio of the solid angle is computed as follows:
 where $\cos\theta_0=\frac{x}{y}$.
 
 We can verify \eqref{eq:G_from_F} for 3d Cauchy with
-$|dF(y)|=\frac{y^2}{\pi^2(1+y^2)^2}$.
+$|F'(y)|=\frac{4y^2}{\pi(1+y^2)^2}$.
 Then from \eqref{eq:G_from_F}, 
-we obtain $G'(x)=-\frac{1}{\pi (1+x^2)}$, which is the pdf of 1d Cauchy.
+we obtain $G'(x)=-\frac{1}{\pi (1+x^2)}$, which corresponds to
+the pdf of 1d Cauchy.
 
+Suppose $F(x) = x^{-k} L(x)$, then from
+\eqref{eq:G_from_F}
+we can derive
+\begin{equation}
+    G(x) \sim \frac{L(x)x^{-k}}{2(k+1)}
+\end{equation}
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
