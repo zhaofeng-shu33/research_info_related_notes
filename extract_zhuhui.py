@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 import html
 from bs4 import BeautifulSoup
+import shutil
 import warnings
 import sqlite3
 import re
@@ -10,7 +11,7 @@ warnings.filterwarnings("ignore", message=".*HTML parser.*")
 conn = sqlite3.connect("C:/Users/zhaofeng/Apple/MobileSync/Backup/00008030-000C64C63446402E/6a/6ae5cb798aec8bf1e444ce8d19f0a961469f884f")
 cursor = conn.cursor()
 table = 'a008711ad1fdc9f567f38778552cbbd3'
-statement = 'SELECT CreateTime,Message,Des,Type,MesLocalID FROM Chat_a008711ad1fdc9f567f38778552cbbd3 limit 100;'
+statement = 'SELECT CreateTime,Message,Des,Type,MesLocalID FROM Chat_a008711ad1fdc9f567f38778552cbbd3 limit 2500;'
 cursor.execute(statement)
 
 displayname = '赵丰与朱慧'
@@ -33,9 +34,11 @@ for entry in cursor.fetchall():
     message = entry[1]
     des = entry[2]
     type = entry[3]
-    msgid = entry[4]
+    msgid = str(entry[4])
 
-                           
+    if type == 10002:
+        # revoke message
+        continue                           
     if type == 10000:
         _html += "<tr><td width=""80"">&nbsp;</td><td width=""100"">&nbsp;</td><td>系统消息: " + message + "</td></tr>"
         continue
@@ -53,47 +56,52 @@ for entry in cursor.fetchall():
         else:
             message = "<audio controls><source src=\"" + _id + "_files/" + msgid + ".mp3\" type=\"audio/mpeg\"><a href=\"" + _id + "_files/" + msgid + ".mp3\">播放</a></audio>"
     elif type == 47:
-        match = re.search("cdnurl ?= ?""(.+?)""", message)
-        if (match.Success):
-            localfile = RemoveCdata( match.group(1))
-            match2 = re.search(localfile, "\/(\w+?)\/\w*$")
-            if (not match2.Success):
+        match = BeautifulSoup(message).find("emoji").get('cdnurl')
+        if (match):
+            localfile = RemoveCdata(match)
+            match2 = localfile.split('/')[-2]
+            if (not match2):
+                import pdb
+                pdb.set_trace()
                 localfile = RandomString(10)
             else:
-                localfile = match2.group(1)
+                localfile = match2
+            # emoji_file_name = root_dir + "Emoji/" + localfile + ".gif"
+            # emoji_target_directory = root_dir + "Emoji_2/" + localfile + ".gif"
+            # shutil.copy(emoji_file_name, emoji_target_directory)
             # emojidown.Add(new DownloadTask() { url = match.group(1), filename = localfile + ".gif" })
-            message = "<img src=\"Emoji/" + localfile + ".gif\" style=\"max-width:100px;max-height:60px\" />"
+            message = "<img src=\"Emoji_2/" + localfile + ".gif\" style=\"max-width:100px;max-height:60px\" />"
         else:
             message = "[表情]"
     elif type == 62 or type == 43:    
-        hasthum = RequireResource(MyPath.Combine(userBase, "Video", table, msgid + ".video_thum"), Path.Combine(assetsdir, msgid + "_thum.jpg"))
-        hasvid = RequireResource(MyPath.Combine(userBase, "Video", table, msgid + ".mp4"), Path.Combine(assetsdir, msgid + ".mp4"))
+        hasthum = os.path.exists(root_dir + _id + "_files/" + msgid + "_thum.jpg")
+        hasvid = os.path.exists(root_dir + _id + "_files/" + msgid + ".mp4")
         if (hasthum and hasvid):
-            message = "<video controls poster=\"" + id + "_files/" + msgid + "_thum.jpg\"><source src=\"" + id + "_files/" + msgid + ".mp4\" type=\"video/mp4\"><a href=\"" + id + "_files/" + msgid + ".mp4\">播放</a></video>"
+            message = "<video controls poster=\"" + _id + "_files/" + msgid + "_thum.jpg\"><source src=\"" + _id + "_files/" + msgid + ".mp4\" type=\"video/mp4\"><a href=\"" + _id + "_files/" + msgid + ".mp4\">播放</a></video>"
         elif (hasthum):
-            message = "<img src=\"" + id + "_files/" + msgid + "_thum.jpg\" /> （视频丢失）"
+            message = "<img src=\"" + _id + "_files/" + msgid + "_thum.jpg\" /> （视频丢失）"
         elif (hasvid):
-            message = "<video controls><source src=\"" + id + "_files/" + msgid + ".mp4\" type=\"video/mp4\"><a href=\"" + id + "_files/" + msgid + ".mp4\">播放</a></video>"
+            message = "<video controls><source src=\"" + _id + "_files/" + msgid + ".mp4\" type=\"video/mp4\"><a href=\"" + _id + "_files/" + msgid + ".mp4\">播放</a></video>"
         else:
             message = "[视频]"
     elif type == 50:
         message = "[视频/语音通话]"
     elif type == 3:
-        hasthum = RequireResource(MyPath.Combine(userBase, "Img", table, msgid + ".pic_thum"), Path.Combine(assetsdir, msgid + "_thum.jpg"))
-        haspic = RequireResource(MyPath.Combine(userBase, "Img", table, msgid + ".pic"), Path.Combine(assetsdir, msgid + ".jpg"))
+        hasthum = os.path.exists(root_dir + _id + "_files/" + msgid + "_thum.jpg")
+        haspic = os.path.exists(root_dir + _id + "_files/" + msgid + ".jpg")
         if (hasthum and haspic):
-            message = "<a href=\"" + id + "_files/" + msgid + ".jpg\"><img src=\"" + id + "_files/" + msgid + "_thum.jpg\" style=\"max-width:100px;max-height:60px\" /></a>"
+            message = "<a href=\"" + _id + "_files/" + msgid + ".jpg\"><img src=\"" + _id + "_files/" + msgid + "_thum.jpg\" style=\"max-width:100px;max-height:60px\" /></a>"
         elif (hasthum):
-            message = "<img src=\"" + id + "_files/" + msgid + "_thum.jpg\" style=\"max-width:100px;max-height:60px\" />"
+            message = "<img src=\"" + _id + "_files/" + msgid + "_thum.jpg\" style=\"max-width:100px;max-height:60px\" />"
         elif (haspic):
-            message = "<img src=\"" + id + "_files/" + msgid + ".jpg\" style=\"max-width:100px;max-height:60px\" />"
+            message = "<img src=\"" + _id + "_files/" + msgid + ".jpg\" style=\"max-width:100px;max-height:60px\" />"
         else:
             message = "[图片]"
     elif type == 48:
-        match1 = re.search(message, "x ?= ?""(.+?)""")
-        match2 = re.search(message, "y ?= ?""(.+?)""")
-        match3 = re.search(message, "label ?= ?""(.+?)""")
-        if (match1.Success and match2.Success and match3.Success):
+        match1 = re.search("x ?= ?""(.+?)""", message)
+        match2 = re.search("y ?= ?""(.+?)""", message)
+        match3 = re.search("label ?= ?""(.+?)""", message)
+        if (match1 and match2 and match3):
             message = "[位置 (" + RemoveCdata( match2.group(1)) + "," + RemoveCdata(match1.group(1)) + ") " + RemoveCdata(match3.group(1)) + "]"
         else:
             message = "[位置]"
@@ -105,18 +113,18 @@ for entry in cursor.fetchall():
         elif (message.find("<type>17<") >= 0):
             message = "[实时位置共享]"
         elif (message.find("<type>6<") >= 0):
-            match1 = re.search(message, "<fileext>(.+?)<\/fileext>")
-            match2 = re.search(message, "<title>(.+?)<\/title>")
-            if (match1.Success and match2.Success):
-                hasfile = RequireResource(MyPath.Combine(userBase, "OpenData", table, msgid + "." + match1.group(1)), Path.Combine(assetsdir, match2.group(1)))
+            match1 = re.search("<fileext>(.+?)<\/fileext>", message)
+            match2 = re.search("<title>(.+?)<\/title>", message)
+            if (match1 and match2):
+                hasfile = os.path.exists(root_dir + _id + "_files/" + match2.group(1))
                 if (hasfile):
-                    message = "<a href=\"" + id + "_files/" + match2.group(1) + "\">" + match2.group(1) + "</a>"
+                    message = "<a href=\"" + _id + "_files/" + match2.group(1) + "\">" + match2.group(1) + "</a>"
                 else:
                     message = match2.group(1) + "(文件丢失)"
             else:
                 message = "[文件]"
         else:
-            match1 = re.search("<title>(.+?)<\/title>", message)
+            match1 = BeautifulSoup(message).find_all("title")[0].text
             match2 = re.search("<des>(.*?)<\/des>", message)
             match3 = re.search("<url>(.+?)<\/url>", message)
             match4 = re.search("<thumburl>(.+?)<\/thumburl>", message)
@@ -124,35 +132,45 @@ for entry in cursor.fetchall():
                 message = ""
                 if match4:
                     message += "<img src=\"" + RemoveCdata(match4.group(1)) + "\" style=\"float:left;max-width:100px;max-height:60px\" />"
-                message += "<a href=\"" + RemoveCdata(match3.group(1)) + "\"><b>" + RemoveCdata(match1.group(1)) + "</b></a>"
+                message += "<a href=\"" + RemoveCdata(match3.group(1)) + "\"><b>" + RemoveCdata(match1) + "</b></a>"
                 if match2:
                     message += "<br />" + RemoveCdata(match2.group(1))
             else:
-                match5 = re.findall("<content>(.*?)<\/content>", message) # content match
-                if len(match5) > 0:
-                    if len(match5[-1]) == 0:
-                        sub_message = html.unescape(BeautifulSoup(message).find_all("content")[-1].text)
-                        quote = BeautifulSoup(sub_message).find_all("title")[0].text
+                try:
+                    sub_message = html.unescape(BeautifulSoup(message).find_all("content")[-1].text)
+                    if sub_message.find('xml') >= 0 or sub_message.find('appmsg') >= 0:
+                        try:
+                            if BeautifulSoup(sub_message).find("img"):
+                                quote = "[图片]"
+                            else:
+                                quote = BeautifulSoup(sub_message).find_all("title")[0].text
+                        except Exception as e:
+                            import pdb
+                            pdb.set_trace()
                     else:
-                        quote = match5[-1]
-                    message = quote + "<br />------------<br />"  + match1.group(1) + "<br/>&nbsp;"
-                else:
+                        quote = sub_message
+                    message = quote + "<br />------------<br />"  + match1 + "<br/>&nbsp;"
+                except Exception as e:
+                    import pdb
+                    pdb.set_trace()
                     message = "[链接]"
     elif type == 42:
-        match1 = re.search(message, "nickname ?= ?\"(.+?)\"")
-        match2=re.search(message, "smallheadimgurl ?= ?\"(.+?)\"")
-        if match1.Success:
+        match1 = re.search("nickname ?= ?\"(.+?)\"", message)
+        match2=re.search("smallheadimgurl ?= ?\"(.+?)\"", message)
+        if match1:
             message = ""
-            if(match2.Success):
-                message+= "<img src=\"" + RemoveCdata(match2.group[1]) + "\" style=\"float:left;max-width:100px;max-height:60px\" />"
-            message += "[名片] " + RemoveCdata(match1.group[1])
+            if(match2):
+                message+= "<img src=\"" + RemoveCdata(match2.group(1)) + "\" style=\"float:left;max-width:100px;max-height:60px\" />"
+            message += "[名片] " + RemoveCdata(match1.group(1))
         else:
             message = "[名片]"
     else:
         message = html.escape(message)
         if message.find("- - - - - - - - - - - - - - -") >= 0:
             message = message.replace("- - - - - - - - - - - - - - -", "<br/>- - - - - - - - - - - - - - -<br/>")
-
+        if message.find("我们换本别的书吧x") >= 0:
+            import pdb
+            pdb.set_trace()
     ts += "<td width=""100"" align=""center"">" + datetime.fromtimestamp(unixtime).strftime("%Y/%m/%d %H:%M:%S").replace(" ","<br />") + "</td>"
     ts += "<td>" + message + "</td></tr>"
     _html += ts
