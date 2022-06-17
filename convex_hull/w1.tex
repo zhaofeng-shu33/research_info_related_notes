@@ -2139,12 +2139,27 @@ Then from \eqref{eq:G_from_F},
 we obtain $G'(x)=-\frac{1}{\pi (1+x^2)}$, which corresponds to
 the pdf of 1d Cauchy.
 
-Suppose $F(x) = x^{-k} L(x)$, then from
-\eqref{eq:G_from_F}
-we can derive
+
 \begin{equation}
-    G(x) \sim \frac{L(x)x^{-k}}{2(k+1)}
+\textcolor{red}{    H(x) = \frac{1}{3}
+    \int_x^{+\infty} (1-\frac{x}{z}) |dF^3(z)|}
 \end{equation}
+In 3d, the formula to compute $\E[F_N]$ is:
+\begin{equation} 
+    \E[F_N] = \binom{N}{3}\int_0^{+\infty}(1-G(x))^{N-3}|dH(x)|   
+\end{equation}
+
+Suppose $F(x) = x^{-k} L(x)$, then from
+\eqref{eq:G_from_F},
+we can derive
+\begin{align}
+    G(x) & \sim \frac{L(x)x^{-k}}{2(k+1)} \\
+    H(x) & \sim \frac{L^3(x)x^{-3k}}{3(3k+1)} 
+    \sim \frac{8(k+1)^3}{3(3k+1)}
+    G^3(x)
+\end{align}
+
+
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
