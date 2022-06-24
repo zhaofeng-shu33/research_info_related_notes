@@ -1470,16 +1470,25 @@ for n dimensional Cauchy.
 \begin{proof}
     The starting integration goes as
     \begin{align}
-        \binom{N}{d} \int_{\R}
+        \E[F_N]=\binom{N}{d} \int_{\R}
         f(x)(\frac{1}{2} + \frac{1}{\pi}
         \arctan x)^{N-d} dx
     \end{align}
     where $f(x)$ is defined in
     \eqref{eq:p_distribution_d_dim_Cauchy}.
-    Using the same techniques as in the deduction for $d=2,3$
+    Then we have (suppose $N-d \to \infty$)
+    \begin{align*}
+        \E[F_N] \sim & \binom{N}{d} k_d \int
+        (x^2+1)^{-(d+1)/2}
+        \left(
+        1-\frac{1}{\pi} \frac{1}{x}\right)^{N-d} dx \\
+        \sim & \binom{N}{d} k_d \frac{\pi^d \Gamma(d)}
+        {(N-d)^d}
+    \end{align*}
+    Or we can use the same techniques as in the deduction for $d=2,3$
     (See \eqref{eq:cauchy_inverse_K_y}), \eqref{eq:N_infty_F_N_d_Cauchy} follows.
 \end{proof}
-\begin{remark}
+\begin{remark}\label{rem:phase_transition}
     When we assume $N,d$ tend to infinity simultaneously,
     but with a relationship such that $N = \omega(\frac{\pi^d}{\sqrt{d}})$,
     then \eqref{eq:N_infty_F_N_d_Cauchy} holds in a since that
@@ -1491,9 +1500,16 @@ for n dimensional Cauchy.
     when $N,d$ tend to infinity but $N = o(\frac{\pi^d}{\sqrt{d}})$,
     can we obtain $P(H_{N}^c) \to 1$?
 \end{remark}
-
+To answer the question put forward in
+Remark \ref{rem:phase_transition},
+we consider a loose bound:
+\begin{equation}
+    F_N \leq \binom{V_N}{d} \leq \frac{V^d_N}{d!}
+\end{equation}
 \subsection{Convex hull in 4d}
-Euler's characteristic (or more generally using Dehn–Sommerville equations):
+Euler's characteristic
+(or more generally using Dehn–Sommerville equations
+for simplicial polytope):
 \begin{equation}
     V_N - E_N + F_N - \tilde{V}_N = 0
 \end{equation}   
