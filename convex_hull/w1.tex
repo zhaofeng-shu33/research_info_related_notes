@@ -1497,7 +1497,7 @@ for n dimensional Cauchy.
 \begin{remark}\label{rem:phase_transition}
     When we assume $N,d$ tend to infinity simultaneously,
     but with a relationship such that $N = \omega(\frac{\pi^d}{\sqrt{d}})$,
-    then \eqref{eq:N_infty_F_N_d_Cauchy} holds in a since that
+    then \eqref{eq:N_infty_F_N_d_Cauchy} holds in a sense that
     the right hand side is the asymptotic order of $\E[F_N]$
     as $d\to \infty$.
     Then using $P(H_{N-1}^c) = \frac{1}{N}\E[V_N] \leq \frac{1}{N}\E[F_N]$
@@ -1508,10 +1508,20 @@ for n dimensional Cauchy.
 \end{remark}
 To answer the question put forward in
 Remark \ref{rem:phase_transition},
-we consider a loose bound:
+we consider a loose bound for $P(H_N)$:
+%\begin{equation}
+%    F_N \leq \binom{V_N}{d} \leq \frac{V^d_N}{d!}
+%\end{equation}
 \begin{equation}
-    F_N \leq \binom{V_N}{d} \leq \frac{V^d_N}{d!}
+    P(H_N) \leq \E[P_r]
 \end{equation}
+where $P_r$ is the probability content of a sphere with radius $r$,
+and $r= \max\{|X_1|, \dots, |X_N|\}$. Suppose the radius CDF is $1-F(x)$,
+then the CDF of $r$ is $(1-F(x))^N$ while $P_x=1-F(x)$.
+Then  $\E[P_r] =N\int P_x(1-F(x))^{N-1} |dF(x)|=\frac{N}{N+1}$.
+Therefore, $P(H_N^C)\geq \frac{1}{N+1}$.
+
+
 \subsection{Convex hull in 4d}
 Euler's characteristic
 (or more generally using Dehn–Sommerville equations
@@ -2011,6 +2021,7 @@ Then
     \int_0^{+\infty} G(x) e^{h(x)N} dx
     \sim \frac{\Gamma(\lambda+1)
     \phi(0)}{N^{\lambda+1} (-h'(0))^{\lambda+1}}  e^{Nh(0)}     
+    \textrm{ as } n \to \infty
 \end{equation}
 \end{theorem}
 The procedure to prove

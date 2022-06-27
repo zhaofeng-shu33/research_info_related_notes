@@ -96,7 +96,7 @@ When $x\to \infty$, the dominant term
 in the summation is $x^{n-1}$. Therefore,
 $\Gamma(n,x) = a_n \sim x^{n-1} e^{-x}$.
 
-We give another proof based on integration by parts.
+Another proof is given based on integration by parts.
 This method is the first example in the textbook of
 asymptotic analysis in \cite{murray2012asymptotic}.
 \end{proof}
@@ -106,6 +106,14 @@ with a bounding hypercube. Then
 $P(||X||\leq R) \leq P(|X_1|\leq R)^n$, which is also of
 exponential decaying rate.
 
+We can also investigate $P(||X||\leq R) $
+when fix $R$ while letting the dimension $n$ to $\infty$.
+From (8.11.5) of \cite{nist}, we have
+\begin{equation}
+    P(a,z) = \frac{\gamma(a,z)}{\Gamma(a)} \sim \frac{z^a e^{-z}}{\Gamma(1+a)}
+\end{equation}
+When $a\to \infty$, $P(a,z) \to 0$. That is, the ball with fixed radius
+has near zero volume in higher dimensions.
 \section{Crofton's formula}
 This part mainly consults \cite{crofton}.
 
