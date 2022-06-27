@@ -1510,7 +1510,11 @@ we consider a loose bound for $P(H_N)$:
     P(H_N) \leq \E[P_r]
 \end{equation}
 where $P_r$ is the probability content of a sphere with radius $r$,
-and $r= \max\{|X_1|, \dots, |X_N|\}$.
+and $r= \max\{|X_1|, \dots, |X_N|\}$. Suppose the radius CDF is $1-F(x)$,
+then the CDF of $r$ is $(1-F(x))^N$ while $P_x=1-F(x)$.
+Then  $\E[P_r] =N\int P_x(1-F(x))^{N-1} |dF(x)|=\frac{N}{N+1}$.
+Therefore, $P(H_N^C)\geq \frac{1}{N+1}$.
+
 
 \subsection{Convex hull in 4d}
 Euler's characteristic
