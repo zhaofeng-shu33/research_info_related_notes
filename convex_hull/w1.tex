@@ -469,6 +469,12 @@ can also be written in a concise form:
 where $f(x,y)$ is the joint distribution while $F(x)$ is the CDF
 of the marginal distribution.
 
+We can show that $G(x)$ is the pdf of a distribution,
+that is:
+\begin{equation}
+    \int_{\R} G(x) dx = 1
+\end{equation}
+
 \section{2D uniform distribution}
 \begin{theorem}
     $\E[V_n] = O(n^{1/3})$ for uniform distribution
@@ -736,7 +742,7 @@ is shown in Figure \ref{fig:transformation}.
 \end{figure}
 Below we prove a necessary conclusion for Gaussian distribution.
 \begin{lemma}
-    The expectation of the random triangles whose
+    The expectation of the area of a triangle
     vertices are drawn independently
     from standard Gaussian distribution is $\frac{\sqrt{3}}{2}$.
 \end{lemma}
