@@ -1,3 +1,3 @@
 [submodule "convex_hull/literature"]
 	path = convex_hull/literature
-	url = git@git.lug.ustc.edu.cn:zhaofeng-shu33/convex_hull_literature.git
+	url = git@gitee.com:freewind201301/convex_hull_literature.git
