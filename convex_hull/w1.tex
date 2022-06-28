@@ -1509,9 +1509,11 @@ for n dimensional Cauchy.
 To answer the question put forward in
 Remark \ref{rem:phase_transition},
 we consider a loose bound for $P(H_N)$:
-%\begin{equation}
-%    F_N \leq \binom{V_N}{d} \leq \frac{V^d_N}{d!}
-%\end{equation}
+
+\begin{equation}
+    F_N \leq \binom{V_N}{d} \leq \frac{V^d_N}{d!}
+\end{equation}
+
 \begin{equation}
     P(H_N) \leq \E[P_r]
 \end{equation}
@@ -1539,6 +1541,24 @@ we can obtain $V_N - E_N + F_N = 0$
 We can use the generalized lower bound theorem
 (See Theorem 1.1 in \cite{juhnke2018balanced} for detail) to obtain the
 inequality relationship between $V_N$ and $F_N$: $F_N \geq 3V_N - 10$.
+
+In higher dimensions, we have:
+\begin{equation}\label{eq:F_V_upper}
+    F_N \geq (d-1) V_N - (d+1)(d-2)
+\end{equation}
+
+Equation \eqref{eq:F_V_upper} comes from
+Corollary 19.6 of \cite{brondsted2012introduction}.
+
+Another inequality comes as:
+\begin{align}
+    F_N & \leq \Phi_0(d, V_N) \\
+    \Phi_0(d,p) & = \binom{p-m-1}{n}
+    + \binom{p-n-1}{m}
+\end{align}
+where $m=\lfloor \frac{d-1}{2} \rfloor$
+and $n=\lfloor \frac{d}{2} \rfloor$.
+See Corollary 18.3 in \cite{brondsted2012introduction}.
 
 \section{Random notes}
 Expected volume and probability content are two different concepts.
