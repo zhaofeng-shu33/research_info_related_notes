@@ -1245,7 +1245,7 @@ The starting point to prove the existence of $g(v)$
 is from \eqref{eq:general_2d}.
 We also need an expansion of the CDF, which is just the tail area
 of the t distribution. Denote the CDF as $F(x)$, then we list the result found in \cite{andrew1976}.
-\begin{equation}
+\begin{equation} \label{eq:eq_dv}
     F(x) \sim 1 - D(v)x^{-v} \textrm{ where } D(v)
     =v^{\frac{v}{2}-1} \frac{\Gamma \left(\frac{v+1}{2} \right)}
     {\sqrt{\pi} \Gamma\left(\frac{v}{2}\right)}
@@ -1442,7 +1442,7 @@ and we modify it to the n-dimensional Cauchy distribution.
     \begin{align}\label{eq:intermediate_f_p_k_d}
         f(p) = k'_d \int_{t_i\geq 0}|\sum_{i=1}^d (-1)^{d-i} t^{d-1}_1 \dots 
         t^{d-2}_i \dots t^{d-1}_d|
-        \prod_{i=1}^d \frac{1}{(1+p^2+t_i^2)^{(1+d)/2}}dt_1 \dots dt_n
+        \prod_{i=1}^d \frac{1}{(1+p^2+t_i^2)^{(1+d)/2}}dt_1 \dots dt_d
     \end{align}
     Notice that the term in the denominator
     comes from \eqref{eq:cauchy_d_dim} by using
@@ -1523,6 +1523,25 @@ then the CDF of $r$ is $(1-F(x))^N$ while $P_x=1-F(x)$.
 Then  $\E[P_r] =N\int P_x(1-F(x))^{N-1} |dF(x)|=\frac{N}{N+1}$.
 Therefore, $P(H_N^C)\geq \frac{1}{N+1}$.
 
+\subsection{N dimensional t distribution}
+Following the same method as in dealing with the N dimensional Cauchy distribution,
+we obtain the distribution for $p$, the distance from the origin to the hyperplane as:
+\begin{align}
+    f(p) & = k_{d,v} \left(1 + \frac{p^2}{v} \right)^{-\frac{vd+1}{2}} \\
+    k_{d,v} & = \frac{2}{\sqrt{v} B(\frac{vd}{2},\frac{1}{2})}
+\end{align}
+Using the expression of $D(v)$ defined in \eqref{eq:eq_dv},
+we have:
+\begin{align}\notag
+    E[F_N] & \sim \binom{N}{d}\int_0^{+\infty} f(p) (1-D(v)p^{-v})^{N-d} dp
+    = \frac{k_{d,v} v^{(vd+1)/2}}{d! v D_v^d} \\
+    & \sim \frac{2 v^{d-1} \pi^{(d-1)/2}
+    \Gamma(\frac{v}{2})^{d} \Gamma(\frac{vd+1}{2})}
+    {d! \cdot \Gamma(\frac{v+1}{2})^d
+    \Gamma(\frac{vd}{2})} \label{eq:F_N_general_d_t}
+\end{align}
+We can verify that \eqref{eq:F_N_general_d_t} is equivalent with
+\eqref{eq:def_g_v} when $d=2$.
 
 \subsection{Convex hull in 4d}
 Euler's characteristic
