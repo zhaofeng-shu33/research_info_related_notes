@@ -2232,11 +2232,17 @@ comes from the solid angle while $|dF(y)|$
 is the volume element of the sphere between the radius
 $y$ and $y+dy$ in the probabilitic space.
 The ratio of the solid angle is computed as follows:
-\begin{align*}
+\begin{align}\label{eq:solid_angle}
     \frac{\int_0^{\theta_0} \sin\theta d\theta d\phi}
     {4\pi} & = \frac{1-\cos \theta_0}{2}
-\end{align*} 
+\end{align} 
 where $\cos\theta_0=\frac{x}{y}$.
+This result can also be computed
+using the formula for the surface area of
+the spherical segment: $S=2\pi R h$. The ratio is given by
+$S/(4\pi R^2)$ where $R=y$ and $h=y-x$. The result is the same
+with \eqref{eq:solid_angle},
+derived from solid angle.
 
 We can verify \eqref{eq:G_from_F} for 3d Cauchy with
 $|F'(y)|=\frac{4y^2}{\pi(1+y^2)^2}$.
