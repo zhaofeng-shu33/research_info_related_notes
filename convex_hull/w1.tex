@@ -2250,13 +2250,30 @@ Then from \eqref{eq:G_from_F},
 we obtain $G'(x)=-\frac{1}{\pi (1+x^2)}$, which corresponds to
 the pdf of 1d Cauchy.
 
+We use $F_1(x)$ to represent the probability that
+the distance from the origin to the line $P_1P_2$
+is larger than $x$.
+then we have
+\begin{align}
+    F_1(x) & = 2 \int_x^{+\infty} |dF(y)|
+    \int_x^y  \sqrt{1-\frac{x^2}{y^2}} \sqrt{1-\frac{x^2}{z^2}}
+    |dF(z)| \\
+    & = \left(\int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
+    d F(y) \right)^2
+\end{align}
 
 \begin{equation}
-\textcolor{red}{    H(x) = \frac{3}{2}
-    \int_x^{+\infty} (1-\frac{x}{z}) |dF(z)|
-    \left( \int_z^{+\infty} \sqrt{1-\frac{x^2}{y^2}}|dF(y)|\right)^2
+\textcolor{red}{    H(x) = 6
+    \int_x^{+\infty} |dF(y)|
+    \int_x^{y}  |dF(z)| \int_{\alpha(y)-\beta(z)}
+    ^{\alpha(y)+\beta(z)}
+    \sin \theta d\theta 
+    \int_x^{z^*(y,z,\theta)} (1-\frac{x}{z_1}) |dF(z_1)|
     }
 \end{equation}
+where $\cos\alpha=\frac{x}{y}, \cos\beta = \frac{x}{z}$.
+and $z^*=\frac{zy\sin \theta }{\sqrt{z^2+y^2-2zy\cos\theta}}$.
+
 In 3d, the formula to compute $\E[F_N]$ is:
 \begin{equation} 
     \E[F_N] = \binom{N}{3}\int_0^{+\infty}(1-G(x))^{N-3}|dH(x)|   

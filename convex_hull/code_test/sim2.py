@@ -33,7 +33,7 @@ if __name__ == '__main__':
     parser.add_argument('--distribution', choices=['gaussian', 'cauchy'], default='gaussian')
     parser.add_argument('--repeat_times', type=int, default=100000)
     args = parser.parse_args()
-    x = 1
+    x = 1.0
     if args.distribution == 'gaussian':
         print(1 - scipy.special.erf(np.sqrt(3/2) * x))
     else:
@@ -61,13 +61,13 @@ if __name__ == '__main__':
         print(allowed / repeat_time)
 
 
-    UPPER = 20
+    UPPER = 30
 
     if args.distribution == 'gaussian':
-        G = lambda z1, z, y: f_g(z1) * f_g(z) * f_g(y) * (1-x/z1) * np.sqrt(1-x**2/z**2) * np.sqrt(1-x**2/y**2) 
+        G = lambda y, z, z1: f_g(z1) * f_g(z) * f_g(y) * (1-x/z1) * np.sqrt(1-x**2/z**2) * np.sqrt(1-x**2/y**2) 
     else:
         G = lambda z1, z, y: f(z1) * f(z) * f(y) * (1-x/z1) * np.sqrt(1-x**2/z**2) * np.sqrt(1-x**2/y**2) 
-    val = integrate.tplquad(G, x, UPPER, lambda z1: z1, lambda z1: UPPER,
-    lambda z1, z: z, lambda z1, z: UPPER)
-    H_x = val[0] * 3
+    val = integrate.tplquad(G, x, UPPER, lambda y: x, lambda y: y,
+    lambda y, z: x, lambda y, z: z)
+    H_x = val[0] * 6
     print(H_x)
