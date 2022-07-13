@@ -3,6 +3,7 @@
 \usepackage{bm}
 \usepackage{bbm}
 \usepackage{amsmath}
+\usepackage{listings}
 \usepackage{amsthm}
 \usepackage{algorithm,algorithmic}
 \usepackage{url}
@@ -2260,8 +2261,24 @@ then we have
     |dF(z)| \\
     & = \left(\int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
     d F(y) \right)^2
+    \label{eq:form_F_1_x}
 \end{align}
-
+We can verify \eqref{eq:form_F_1_x} using 3d 
+Gaussian distribution.
+Since $dF(y)= \sqrt{\frac{2}{\pi}} y^2\exp(-y^2/2)dy$
+we obtain $F_1(x)=e^{-x^2}$ in such a case, which is consistent
+with the Monte Carlo simulation result. The code is listed
+as follows:
+\begin{lstlisting}[language=Python]
+    allowed = 0
+    for i in range(repeat_time):
+        points = np.random.normal(size=(2, 3))
+        a = points[0, :]
+        b = points[1, :]
+        h = np.linalg.norm(np.cross(a, b)) / np.linalg.norm(a-b)
+        allowed += (h > x)
+    print(allowed / repeat_time)
+    \end{lstlisting}
 \begin{equation}
 \textcolor{red}{    H(x) = 6
     \int_x^{+\infty} |dF(y)|
