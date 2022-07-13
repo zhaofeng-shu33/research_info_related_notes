@@ -2279,15 +2279,15 @@ as follows:
         allowed += (h > x)
     print(allowed / repeat_time)
     \end{lstlisting}
-\begin{equation}
-\textcolor{red}{    H(x) = 6
-    \int_x^{+\infty} |dF(y)|
-    \int_x^{y}  |dF(z)| \int_{\alpha(y)-\beta(z)}
-    ^{\alpha(y)+\beta(z)}
-    \sin \theta d\theta 
-    \int_x^{z^*(y,z,\theta)} (1-\frac{x}{z_1}) |dF(z_1)|
-    }
-\end{equation}
+\begin{align}
+    H(x) & = \int_x^{+\infty}|dF_1(y)|
+    \left[
+        \int_x^y (1-\frac{x}{z}) |dF(z)|
+        + \int_y^{+\infty} (1-\frac{x}{y}) |dF(z)|
+    \right]
+    \\
+    & = \int_x^{+\infty}(1-\frac{x}{z}) |d(F_1(z)F(z))|
+\end{align}
 where $\cos\alpha=\frac{x}{y}, \cos\beta = \frac{x}{z}$.
 and $z^*=\frac{zy\sin \theta }{\sqrt{z^2+y^2-2zy\cos\theta}}$.
 
