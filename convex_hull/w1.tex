@@ -2281,12 +2281,12 @@ as follows:
     \end{lstlisting}
 \begin{align}
     H(x) & = \int_x^{+\infty}|dF_1(y)|
-    \left[
-        \int_x^y (1-\frac{x}{z}) |dF(z)|
-        + \int_y^{+\infty} (1-\frac{x}{y}) |dF(z)|
-    \right]
+        \int_x^{+\infty}\sqrt{1-\frac{x^2}{y^2}}
+        \sqrt{1-\frac{x^2}{z^2}} |dF(z)|    
     \\
-    & = \int_x^{+\infty}(1-\frac{x}{z}) |d(F_1(z)F(z))|
+    & = \int_x^{+\infty}\sqrt{1-\frac{x^2}{z^2}}|dF_1(z)|
+    \cdot \int_x^{+\infty}
+    \sqrt{1-\frac{x^2}{z^2}} |dF(z)| 
 \end{align}
 
 In 3d, the formula to compute $\E[F_N]$ is:
