@@ -141,6 +141,37 @@ and $\theta \in [0, 2\pi]$.
     \int_0^{\arccos p} d\theta =
     \int_0^1 \arccos p dp=1$.
 \end{example}
+\section{Spherical triangles}
+We treat the  right spherical triangles. with $C=\frac{\pi}{2}$.
+From Napier's rules
+(See \url{https://en.wikipedia.org/wiki/Spherical_trigonometry#Napier's_rules_for_right_spherical_triangles}),
+R7+R4: $\tan A \sin b = \cos B \tan c$.
+Combined with R3: $\sin b = \sin B \sin c$.
+We have $\tan A = \frac{\cot B}{\cos c}$.
+
+Suppose we have two spheres centered at the origin, with radius $x$ and $z$ respectively.
+Now there is a straight line whose distance to the origin is $y$.
+We have the relationship $x<y<z$.
+We consider two tangent planes to the smaller sphere.
+Both planes pass through the given straight line.
+We are interested in the area
+on the larger sphere,
+intersected by two circles.
+This problem is a special case
+of "the area on a sphere of the intersection of two spherical caps".
+See \url{https://math.stackexchange.com/questions/45788/calculate-the-area-on-a-sphere-of-the-intersection-of-two-spherical-caps}
+for detail.
+The ratio of this area (over the entire sphere surface)
+is given as
+$\frac{\pi - 2\beta - \alpha \cdot x/z}{4\pi}$.
+where
+\begin{align}
+\tan \frac{\alpha}{2} & = \frac{\sqrt{z^2-y^2}}{
+    \sqrt{y^2-x^2}}\\
+\tan \beta &= \frac{z}{ 
+    x  \tan(\alpha/2)}
+\end{align}
+
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
