@@ -144,7 +144,7 @@ and $\theta \in [0, 2\pi]$.
 \section{Spherical triangles}
 We treat the  right spherical triangles. with $C=\frac{\pi}{2}$.
 From Napier's rules
-(See \url{https://en.wikipedia.org/wiki/Spherical_trigonometry#Napier's_rules_for_right_spherical_triangles}),
+(See \cite{Napier}),
 R7+R4: $\tan A \sin b = \cos B \tan c$.
 Combined with R3: $\sin b = \sin B \sin c$.
 We have $\tan A = \frac{\cot B}{\cos c}$.
@@ -159,18 +159,25 @@ on the larger sphere,
 intersected by two circles.
 This problem is a special case
 of "the area on a sphere of the intersection of two spherical caps".
-See \url{https://math.stackexchange.com/questions/45788/calculate-the-area-on-a-sphere-of-the-intersection-of-two-spherical-caps}
+See \cite{intersection}
 for detail.
-The ratio of this area (over the entire sphere surface)
+The area is given as $S=2z^2(\pi - 2\beta - \alpha \cdot x/z)$.
+And the ratio of this area (over the entire sphere surface)
 is given as
-$\frac{\pi - 2\beta - \alpha \cdot x/z}{4\pi}$.
+$\frac{\pi - 2\beta - \alpha \cdot x/z}{2\pi}$.
 where
 \begin{align}
-\tan \frac{\alpha}{2} & = \frac{\sqrt{z^2-y^2}}{
-    \sqrt{y^2-x^2}}\\
+\cos \alpha & = \frac{2y^2 - z^2 - x^2}{
+    z^2 - x^2 }\\
 \tan \beta &= \frac{z}{ 
     x  \tan(\alpha/2)}
 \end{align}
+We can verify numerically that the above result is the same with 
+the one \cite{orthogonal}:
+\begin{equation}
+    A=\big(\frac 12-a-b\big)\pi + 2b\arctan(\frac ac)+2a\arctan(\frac bc)+\arctan(\frac{c^2-a^2 b^2}{2abc})
+\end{equation}
+when $a=b=x, c=\sqrt{1-2a^2}, z=1,y=\sqrt{2}x$ and $x<\frac{\sqrt{2}}{2}$.
 
 \bibliographystyle{plain}
 \bibliography{ref.bib}
