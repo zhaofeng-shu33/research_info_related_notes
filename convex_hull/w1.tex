@@ -2281,13 +2281,18 @@ as follows:
     \end{lstlisting}
 \begin{align}
     H(x) & = \int_x^{+\infty}|dF_1(y)|
-        \int_x^{+\infty}\sqrt{1-\frac{x^2}{y^2}}
-        \sqrt{1-\frac{x^2}{z^2}} |dF(z)|    
-    \\
-    & = \int_x^{+\infty}\sqrt{1-\frac{x^2}{z^2}}|dF_1(z)|
-    \cdot \int_x^{+\infty}
-    \sqrt{1-\frac{x^2}{z^2}} |dF(z)| 
+        \left[\int_x^{y} (1-\frac{x}{z}) |dF(z)|    
+        + \int_y^{+\infty} k(x,y,z)|dF(z)|
+        \right]
 \end{align}
+where
+\begin{equation}
+    k(x,y,z) = \frac{2}{\pi} \arctan \frac{z\sqrt{y^2-x^2}}{x\sqrt{z^2-y^2}}
+    + \frac{x}{z}\left(\frac{1}{\pi} \arccos \frac{2y^2-z^2-x^2}{z^2-x^2}-1
+    \right)
+\end{equation}
+
+For 3D standard Gaussian distribution, $H(x) = 1-\erf(\sqrt{\frac{3}{2}}x)$.
 
 In 3d, the formula to compute $\E[F_N]$ is:
 \begin{equation} 
@@ -2301,7 +2306,11 @@ we can derive
     G(x) & \sim \frac{L(x)x^{-k}}{2(k+1)} \\
     H(x) & \sim \frac{2k^{-3k/2-1}}{3k B(3k/2, 1/2)} x^{-3k}L(3x) ?
 \end{align}
-
+From \eqref{eq:form_F_1_x}, we have
+\begin{equation}
+    F_1(x) \sim \frac{1}{2} L(x) x^{-k} B\left(\frac{1}{2}, \frac{k}{2}+1
+    \right)
+\end{equation}
 
 \bibliographystyle{plain}
 \bibliography{ref.bib}
