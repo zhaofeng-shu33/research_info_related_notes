@@ -1536,14 +1536,14 @@ we have:
 \begin{align}\notag
     E[F_N] & \sim \binom{N}{d}\int_0^{+\infty} f(p)
     (1-D(v)p^{-v})^{N-d} dp
-    = \frac{k_{d,v} v^{(vd+1)/2}\Gamma(d)}{d! v D_v^d} \\
+    = \frac{k_{d,v} v^{(vd+1)/2}\Gamma(d)}{d! v D(v)^d} \\
     & \sim \frac{2 v^{d-1} \pi^{(d-1)/2}
     \Gamma(\frac{v}{2})^{d} \Gamma(\frac{vd+1}{2})}
     {d \cdot \Gamma(\frac{v+1}{2})^d
     \Gamma(\frac{vd}{2})}
     = \frac{2^d \pi^{(d-1)/2}
     \Gamma(\frac{v}{2} +1)^{d} \Gamma(\frac{vd+1}{2})}
-    {\cdot \Gamma(\frac{v+1}{2})^d
+    { \Gamma(\frac{v+1}{2})^d
     \Gamma(\frac{vd}{2} + 1)} =:g_d(v)
     \label{eq:F_N_general_d_t}
 \end{align}
@@ -2303,12 +2303,15 @@ Suppose $F(x) \sim x^{-k} L(x)$, then from
 \eqref{eq:G_from_F},
 we can derive
 \begin{align}
-    G(x) & \sim \frac{L(x)x^{-k}}{2(k+1)} \\
+    G(x) & \sim \frac{L(x)x^{-k}}{2(k+1)} 
+    = \frac{F(x)}{2(k+1)}\\
     H(x) & \sim \frac{2k^{-3k/2-1}}{3k B(3k/2, 1/2)} x^{-3k}L(3x) ?
 \end{align}
 From \eqref{eq:form_F_1_x}, we have
 \begin{equation}
-    F_1(x) \sim \frac{1}{2} L(x) x^{-k} B\left(\frac{1}{2}, \frac{k}{2}+1
+    \sqrt{F_1(x)} \sim \frac{1}{2} L(x) x^{-k} B\left(\frac{1}{2}, \frac{k}{2}+1
+    \right)
+    = \frac{1}{2} F(x) B\left(\frac{1}{2}, \frac{k}{2}+1
     \right)
 \end{equation}
 
