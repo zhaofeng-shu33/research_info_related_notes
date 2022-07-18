@@ -2263,6 +2263,7 @@ then we have
     d F(y) \right)^2
     \label{eq:form_F_1_x}
 \end{align}
+
 We can verify \eqref{eq:form_F_1_x} using 3d 
 Gaussian distribution.
 Since $dF(y)= \sqrt{\frac{2}{\pi}} y^2\exp(-y^2/2)dy$
@@ -2291,11 +2292,21 @@ where
     + \frac{x}{z}\left(\frac{1}{\pi} \arccos \frac{2y^2-z^2-x^2}{z^2-x^2}-1
     \right)
 \end{equation}
-
+The derivative of $k(x,y,z)$ about $y$ is given as:
+\begin{equation*}
+    \frac{\partial k(x,y,z)}{\partial y}
+=\frac{2x \sqrt{z^2-y^2}}{\pi yz \sqrt{y^2-x^2}}
+\end{equation*}
+By integration by parts, we have:
+\begin{align}\label{eq:H_general_simplification}
+    H(x) & = \int_x^{+\infty}|F_1(y)|dy
+\int_y^{+\infty} \frac{\partial k(x,y,z)}{\partial y}
+|dF(z)| 
+\end{align}
 For 3D standard Gaussian distribution, $H(x) = 1-\erf(\sqrt{\frac{3}{2}}x)$.
 
 In 3d, the formula to compute $\E[F_N]$ is:
-\begin{equation} 
+\begin{equation}\label{eq:F_N_H_G_d_3}
     \E[F_N] = \binom{N}{3}\int_0^{+\infty}(1-G(x))^{N-3}|dH(x)|   
 \end{equation}
 
@@ -2304,17 +2315,64 @@ Suppose $F(x) \sim x^{-k} L(x)$, then from
 we can derive
 \begin{align}
     G(x) & \sim \frac{L(x)x^{-k}}{2(k+1)} 
-    = \frac{F(x)}{2(k+1)}\\
-    H(x) & \sim \frac{2k^{-3k/2-1}}{3k B(3k/2, 1/2)} x^{-3k}L(3x) ?
+    = \frac{F(x)}{2(k+1)}
 \end{align}
-From \eqref{eq:form_F_1_x}, we have
-\begin{equation}
-    \sqrt{F_1(x)} \sim \frac{1}{2} L(x) x^{-k} B\left(\frac{1}{2}, \frac{k}{2}+1
-    \right)
-    = \frac{1}{2} F(x) B\left(\frac{1}{2}, \frac{k}{2}+1
+\begin{lemma}\label{lem:F_x_sqrt_11}
+    If $F(x) \sim x^{-k} L(x)$, then
+    \begin{equation}
+        \int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
+        d F(y) \sim \frac{1}{2} L(x) x^{-k} B\left(\frac{1}{2}, \frac{k}{2}+1
+        \right)
+        = \frac{1}{2} F(x) B\left(\frac{1}{2}, \frac{k}{2}+1
+        \right)
+    \end{equation}
+    as $x\to \infty$.
+\end{lemma}
+\begin{proof}
+    The proof idea is the same with the computation
+    of $G(x)$ in Section 2 of \cite{carnal1970konvexe}.
+\end{proof}
+From \eqref{eq:form_F_1_x} and Lemma \ref{lem:F_x_sqrt_11}, we have
+\begin{equation}\label{eq:F_1_formula_1_4}
+    F_1(x) \sim \frac{1}{4} F^2(x) B^2\left(\frac{1}{2}, \frac{k}{2}+1
     \right)
 \end{equation}
 
+
+From \eqref{eq:H_general_simplification},
+we have
+\begin{align}
+    H(x) & = \int_x^{+\infty}\frac{2x }{\pi \sqrt{y^2-x^2}}F_1(y)dy
+\int_y^{+\infty} \sqrt{1-\frac{y^2}{z^2}}
+|dF(z)| 
+\end{align}
+From Lemma \ref{lem:F_x_sqrt_11},
+the inner integration is asymptotically
+computable. Then we have:
+
+\begin{align}
+    H(x)
+    &\sim  B\left(\frac{1}{2},
+    \frac{k}{2}+1\right)\int_x^{+\infty}
+    \frac{x}{\pi y}\frac{1}{\sqrt{y^2-x^2}}
+    F_1(y) F(y) dy\\
+&\sim \frac{x^{-3k}}{8\pi} L^3(x)
+B^3\left(\frac{1}{2}, \frac{k}{2}+1
+\right) B\left(\frac{1}{2}, \frac{3k+1}{2}\right)
+\textrm{ from } \eqref{eq:F_1_formula_1_4} \notag\\
+& \sim\frac{G^3(x) (k+1)^3}{\pi}
+B^3\left(\frac{1}{2}, \frac{k}{2}+1
+\right) B\left(\frac{1}{2}, \frac{3k+1}{2}\right)
+\end{align}
+Then from \eqref{eq:F_N_H_G_d_3}, we obtain:
+\begin{equation}\label{eq:E_F_N_formula_k}
+    \E[F_N] = \frac{(k+1)^3}{\pi}B^3\left(\frac{1}{2}, \frac{k}{2}+1
+    \right) B\left(\frac{1}{2}, \frac{3k+1}{2}\right)    
+\end{equation}
+We can verify \eqref{eq:E_F_N_formula_k} by comparing it to
+a special case of 3d t-distribution. From
+\eqref{eq:F_N_general_d_t}, we can check that when $d=3,v=k$,
+it is the same as \eqref{eq:E_F_N_formula_k}.
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
