@@ -2260,7 +2260,7 @@ then we have
     \int_x^y  \sqrt{1-\frac{x^2}{y^2}} \sqrt{1-\frac{x^2}{z^2}}
     |dF(z)| \\
     & = \left(\int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
-    d F(y) \right)^2
+    |d F(y)| \right)^2
     \label{eq:form_F_1_x}
 \end{align}
 
@@ -2298,9 +2298,12 @@ The derivative of $k(x,y,z)$ about $y$ is given as:
 =\frac{2x \sqrt{z^2-y^2}}{\pi yz \sqrt{y^2-x^2}}
 \end{equation*}
 By integration by parts, we have:
-\begin{align}\label{eq:H_general_simplification}
+\begin{align}
     H(x) & = \int_x^{+\infty}|F_1(y)|dy
 \int_y^{+\infty} \frac{\partial k(x,y,z)}{\partial y}
+|dF(z)| \\
+& = \int_x^{+\infty}\frac{2x }{\pi y \sqrt{y^2-x^2}}F_1(y)dy
+\int_y^{+\infty} \sqrt{1-\frac{y^2}{z^2}}\label{eq:H_general_simplification}
 |dF(z)| 
 \end{align}
 For 3D standard Gaussian distribution, $H(x) = 1-\erf(\sqrt{\frac{3}{2}}x)$.
@@ -2321,7 +2324,7 @@ we can derive
     If $F(x) \sim x^{-k} L(x)$, then
     \begin{equation}
         \int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
-        d F(y) \sim \frac{1}{2} L(x) x^{-k} B\left(\frac{1}{2}, \frac{k}{2}+1
+        |d F(y)| \sim \frac{1}{2} L(x) x^{-k} B\left(\frac{1}{2}, \frac{k}{2}+1
         \right)
         = \frac{1}{2} F(x) B\left(\frac{1}{2}, \frac{k}{2}+1
         \right)
@@ -2331,6 +2334,11 @@ we can derive
 \begin{proof}
     The proof idea is the same with the computation
     of $G(x)$ in Section 2 of \cite{carnal1970konvexe}.
+\begin{align*}
+    \int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
+        |d F(y)| &=\int_x^{+\infty} L(y)y^{-k} \frac{x^2}{y^2\sqrt{y^2-x^2}} dy \\
+&\sim L(x)x^{-k}\int_1^{+\infty} \frac{t^{-k-1}dt}{\sqrt{t^2-1}}
+\end{align*}
 \end{proof}
 From \eqref{eq:form_F_1_x} and Lemma \ref{lem:F_x_sqrt_11}, we have
 \begin{equation}\label{eq:F_1_formula_1_4}
@@ -2339,15 +2347,9 @@ From \eqref{eq:form_F_1_x} and Lemma \ref{lem:F_x_sqrt_11}, we have
 \end{equation}
 
 
-From \eqref{eq:H_general_simplification},
-we have
-\begin{align}
-    H(x) & = \int_x^{+\infty}\frac{2x }{\pi \sqrt{y^2-x^2}}F_1(y)dy
-\int_y^{+\infty} \sqrt{1-\frac{y^2}{z^2}}
-|dF(z)| 
-\end{align}
+
 From Lemma \ref{lem:F_x_sqrt_11},
-the inner integration is asymptotically
+the inner integration in \eqref{eq:H_general_simplification} is asymptotically
 computable. Then we have:
 
 \begin{align}
@@ -2373,6 +2375,60 @@ We can verify \eqref{eq:E_F_N_formula_k} by comparing it to
 a special case of 3d t-distribution. From
 \eqref{eq:F_N_general_d_t}, we can check that when $d=3,v=k$,
 it is the same as \eqref{eq:E_F_N_formula_k}.
+\subsection{Exponential tail in 3d}
+\begin{lemma}\label{lem:F_x_sqrt_11_exp}
+    If the inverse of $1/F(x)$ (denoted as $L(x)$
+    is slowly varying such that $L(x)=\exp\left(
+        \int_1^x \frac{\epsilon(t)}{t}dt
+    \right)$, $v(x)=\epsilon(L^{-1}(x))$ and $\epsilon(t)$ is slowly varying,
+    then
+    \begin{equation}
+        \int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
+        |d F(y)| \sim \sqrt{\frac{\pi}{2}} F(x) \sqrt{v(x)}
+    \end{equation}
+    as $x\to \infty$.
+\end{lemma}
+From \eqref{eq:form_F_1_x} and Lemma \ref{lem:F_x_sqrt_11_exp}, we have
+\begin{equation}\label{eq:F_1_formula_1_4_exp}
+    F_1(x) \sim \frac{\pi}{2}
+    F^2(x)v(x)
+\end{equation}
+
+From Lemma \ref{lem:F_x_sqrt_11_exp},
+the inner integration in \eqref{eq:H_general_simplification} is asymptotically
+computable. Then we have:
+
+\begin{align}
+    H(x)
+    &\sim \sqrt{\frac{2}{\pi}}\int_x^{+\infty}
+    \frac{x}{ y}\frac{1}{\sqrt{y^2-x^2}}
+    F_1(y) F(y)\sqrt{v(y)} dy\\
+&\sim \sqrt{\frac{\pi }{2}}\int_x^{+\infty}
+\frac{x F^3(y)v^{3/2}(y)}{y\sqrt{y^2-x^2}}dy
+\textrm{ from } \eqref{eq:F_1_formula_1_4_exp} \notag\\
+&\sim \frac{\pi}{2\sqrt{3}} v^2(x) F^3(x)\label{eq:H_3d_exp_form}
+\end{align}
+We can use 3d Gaussian to verify
+\eqref{eq:H_3d_exp_form}, which is
+$H(x) = \sqrt{\frac{2}{3\pi }}\frac{1}{x}\exp(-\frac{3}{2}x^2)$.
+Using $F(x) \sim \frac{\sqrt{2}}{\sqrt{\pi}} x\exp(-x^2/2)$
+and $v(x)\sim x^{-2}$, we establish the equivalence.
+
+Furthermore, from (3.8) of \cite{dwyer1991convex}, taking $d=3$, we have
+\begin{equation}
+    G(x) = \frac{1}{2} v(x)F(x)
+\end{equation}
+Therefore,
+\begin{equation}
+    H(x) \sim \frac{4\pi}{\sqrt{3}} \frac{G^3(x)}{v(x)}
+\end{equation}
+Using $v(x) \sim \epsilon(1/G(x))$ as $x\to \infty$,
+from \eqref{eq:F_N_H_G_d_3} we obtain
+\begin{equation}
+    \E[F_N] = \frac{4\pi}{\sqrt{3}} \epsilon^{-1}(N)
+\end{equation}
+For 3d Gaussian, $\E[F_N]=\frac{8\pi \log N}{\sqrt{3}}$,
+which is consistent with (1.11) of \cite{raynaud1970enveloppe}.
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
