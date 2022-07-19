@@ -961,7 +961,8 @@ Therefore, we have
 $\E[F_N] \sim \frac{35\sqrt{3\pi}}{6}\sqrt{N}$.
 The coefficient is approximately 8.95.
 This result is consistent with
-Theorem 1 $n=3$ of \cite{raynaud1970enveloppe}.
+Theorem 1 of \cite{raynaud1970enveloppe}
+when $n=3$.
 
 
 \section{Cauchy distribution in 3d}
@@ -2008,7 +2009,7 @@ $\E[V_N]$ in this case.
 
 The truncated tail is also considered in \cite{carnal1970konvexe}.
 For $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ 
-we can compute $k=\alpha - 1$ in Section 3 of \cite{carnal1970konvexe}
+we can compute $k=\alpha + 1$ in Section 3 of \cite{carnal1970konvexe}
 and the asymptotic order is consistent in (3.4) of \cite{carnal1970konvexe}
 with $N^{1/(2\alpha+3)}$.
 
@@ -2429,6 +2430,42 @@ from \eqref{eq:F_N_H_G_d_3} we obtain
 \end{equation}
 For 3d Gaussian, $\E[F_N]=\frac{8\pi \log N}{\sqrt{3}}$,
 which is consistent with (1.11) of \cite{raynaud1970enveloppe}.
+\subsection{Truncated tail in 3d}
+From (4.1) of \cite{dwyer1991convex}, let $d=3$, then we have,
+\begin{equation}
+    G(1-x) \sim \frac{k}{2}B(k,2)L
+    \left(\frac{1}{x} \right) x^{k+1}
+\end{equation}
+\begin{lemma}\label{lem:F_x_sqrt_11_truncated}
+    Let $K(x)=\int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
+    |d F(y)|$.
+    If $F(1-x) \sim x^k L(1/x)$, then
+    \begin{equation}
+         K(1-x)\sim \frac{1}{\sqrt{2}}
+         B(k+1,\frac{1}{2}) L(1/x) x^{k+\frac{1}{2}}
+    \end{equation}
+    as $x\to 0$.
+\end{lemma}
+Then
+\begin{equation}
+    H(1-x) \sim \frac{1}{2\pi}
+    B^3(k+1,1/2)
+    B\left(3k+\frac{5}{2},\frac{1}{2}\right)L^3(1/x)x^{3k+2}
+\end{equation}
+\begin{equation}
+    \E[F_N] \sim \frac{b}{6}
+    a^{-3+\frac{1}{k+1}}
+    \cdot \Gamma\left(4-\frac{1}{k+1}\right)
+    n^{\frac{1}{k+1}} L^*_{k+1}(n)
+\end{equation}
+where
+\begin{align}
+a &= \frac{k}{2} B(k,2) \\
+b &= \frac{1}{2\pi}B^3(k+1,1/2)
+B\left(3k+\frac{5}{2},\frac{1}{2}\right)\\
+L^*_k(n) & \sim (L(n))^{1/k}
+\end{align}
+Below we verify 
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
