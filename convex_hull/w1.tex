@@ -920,7 +920,9 @@ we obtain that $\E[F_N]
 The contribution of the order comes from $p^3(x)$.
 Using the same method as that used to prove \eqref{eq:gaussian_2d_evn},
 we can show that
-$\E[F_N] \sim C\log n$. For the uniform
+$\E[F_N] \sim C\log n$.
+
+For the uniform
 distribution in the 3d sphere, conditioning on $X_1=X_2=X_3=x$,
 $(Y_i, Z_i) (i=1,2,3)$
 are uniform distribution in a sphere with
@@ -958,7 +960,10 @@ we have
     \sim 3\sqrt{3}\Gamma(\frac{5}{2})\frac{1}{N^{5/2}}
 \end{align*}
 Therefore, we have
-$\E[F_N] \sim \frac{35\sqrt{3\pi}}{6}\sqrt{N}$.
+\begin{equation}\label{eq:3d_uniform_F_N_value}
+    \E[F_N] \sim \frac{35\sqrt{3\pi}}{12}\sqrt{N}     
+\end{equation}
+
 The coefficient is approximately 8.95.
 This result is consistent with
 Theorem 1 of \cite{raynaud1970enveloppe}
