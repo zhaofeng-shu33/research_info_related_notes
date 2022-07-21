@@ -2266,14 +2266,29 @@ then we have
     \int_x^y  \sqrt{1-\frac{x^2}{y^2}} \sqrt{1-\frac{x^2}{z^2}}
     |dF(z)| \\
     & = \left(\int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
-    |d F(y)| \right)^2
+    |d F(y)| \right)^2 = K^2(x)
     \label{eq:form_F_1_x}
 \end{align}
+We can give the geometric meaning of $K(x)$
+as 
+\begin{align}
+K(x) &=P(\sqrt{x_1^2+x_2^2}>x)\\
+&=\int_x^{+\infty} \kappa(x,y) |dF(y)|
+\end{align}
+where $\kappa(x,y)$ represents the ratio of the surface
+area in the sphere $x_1^2+x_2^2+x_3^2=y^2$ where $x_1^2+x_2^2>x^2$.
+Or in other wise, $x_3^2<y^2-x^2$. This ratio corresponds to
+$\frac{2\pi y h}{4\pi y^2}$ where $h=2\sqrt{y^2-x^2}$.
+Notice that $S=2\pi y h$ is the formula of surface area for the spherical segment.
+Then we obtain $\kappa(x,y)=\sqrt{1-\frac{x^2}{y^2}}$.
 
 We can verify \eqref{eq:form_F_1_x} using 3d 
 Gaussian distribution.
 Since $dF(y)= \sqrt{\frac{2}{\pi}} y^2\exp(-y^2/2)dy$
-we obtain $F_1(x)=e^{-x^2}$ in such a case, which is consistent
+we obtain $F_1(x)=e^{-x^2}$ in such a case.
+In fact $1-K(x)$ is the CDF of Rayleigh distribution
+(the scale parameter is 1). 
+This result is consistent
 with the Monte Carlo simulation result. The code is listed
 as follows:
 \begin{lstlisting}[language=Python]
@@ -2310,7 +2325,8 @@ By integration by parts, we have:
 |dF(z)| \\
 & = \int_x^{+\infty}\frac{2x }{\pi y \sqrt{y^2-x^2}}F_1(y)dy
 \int_y^{+\infty} \sqrt{1-\frac{y^2}{z^2}}\label{eq:H_general_simplification}
-|dF(z)| 
+|dF(z)| \\
+& = \int_x^{+\infty}\frac{2x }{\pi y \sqrt{y^2-x^2}}K^3(y)dy
 \end{align}
 For 3D standard Gaussian distribution, $H(x) = 1-\erf(\sqrt{\frac{3}{2}}x)$.
 
@@ -2476,6 +2492,47 @@ Below we verify the result for
 3D uniform distribution. We have $k=1, L(x)=3$
 and obtain the same result with
 \eqref{eq:3d_uniform_F_N_value}.
+\section{4d case}
+\begin{align}
+    \kappa(x,y) &=\frac{1}{2\pi^2 y^3} 
+    \cdot 2\int_{\substack{x_1^2+x_2^2\geq x^2\\
+    x_1^2+x_2^2+x_3^2\leq y^2 }} 
+    \frac{y}{\sqrt{y^2-x_1^2-x_2^2-x_3^2}} dx_1 dx_2 dx_3\\
+&=    1-\frac{x^2}{y^2}
+\end{align}
+Then
+\begin{equation}
+    K(x) = \int_x^{+\infty}
+    (1-\frac{x^2}{y^2}) |dF(y)|
+\end{equation}
+We guess that in 4d,
+\begin{equation}
+    H(x) = \frac{2}{\pi}
+    \int_x^{+\infty} \arccos\frac{x}{y}
+    |d K^4(y)|
+\end{equation}
+
+For 4d Gaussian, we have $|dF(y)| =
+\frac{y^3}{2}\exp(-2y^2)dy$ and $K(x) = \exp(-x^2/2)$.
+
+\section{Higher dimensional case}
+Conjecture:
+\begin{align*}
+    \kappa(x,y) & =(1-\frac{x^2}{y^2})^{\frac{d-2}{2}}\\
+    K(x) &= \int_x^{+\infty} \kappa(x,y)|dF(y)| \\
+    H(x) &= \frac{2}{\pi}
+    \int_x^{+\infty} \arccos\frac{x}{y}
+    |d K^d(y)|
+\end{align*}
+Generally, we have $d$ points in $\mathbb{R}^d$, We
+can concatenate them
+in a $d\times d$ matrix, denoted as $X$.
+These $d$ points form a hyperplane,
+the distance from the hyperplane to the origin is denoted as $d$.
+We have:
+\begin{equation}
+    d = \frac{1}{\sqrt{\mathbf{1}^T (X^T X)^{-1} \mathbf{1}}}
+\end{equation}
 
 \bibliographystyle{plain}
 \bibliography{ref.bib}

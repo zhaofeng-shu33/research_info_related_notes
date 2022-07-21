@@ -59,6 +59,7 @@ if __name__ == '__main__':
             triangle_square = np.linalg.norm(np.cross(a - c, b - c)) / 2
             tetrahedron_volume = np.abs(np.linalg.det(points)) / 6
             h = 3 * tetrahedron_volume / triangle_square
+            
             # test whether the distance from the origin to the plane is larger
             # than x
             allowed += (h > x)
