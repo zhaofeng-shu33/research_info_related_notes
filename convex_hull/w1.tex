@@ -2351,7 +2351,7 @@ In 3d, the formula to compute $\E[F_N]$ is:
 \begin{equation}\label{eq:F_N_H_G_d_3}
     \E[F_N] = \binom{N}{3}\int_0^{+\infty}(1-G(x))^{N-3}|dH(x)|   
 \end{equation}
-
+\subsection{Polynomial tail}
 Suppose $F(x) \sim x^{-k} L(x)$, then from
 \eqref{eq:G_from_F},
 we can derive
@@ -2553,7 +2553,32 @@ We have:
 \begin{equation}
     d = \frac{1}{\sqrt{\mathbf{1}^T (X^T X)^{-1} \mathbf{1}}}
 \end{equation}
-
+For polynomial tail $F(x) \sim x^{-k} L(x)$,
+$K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
+\begin{equation}
+    H(x)
+    \sim \frac{1}{\pi} F^d(x) \left(\frac{d-2}{2}\right)^d
+    B^d\left(\frac{k+2}{2}, \frac{d}{2}-1\right)
+    B\left(\frac{dk+1}{2}, \frac{1}{2}\right)
+\end{equation}
+From (2.2) of \cite{dwyer1991convex},
+we have
+\begin{equation}
+    G(x) \sim \frac{\Gamma(\frac{d}{2})}{2\sqrt{\pi} \Gamma(\frac{d-1}{2})}
+    B\left(\frac{k+1}{2}, \frac{d-1}{2}\right) F(x)
+\end{equation}
+Then
+\begin{equation}
+    H(x) \sim \frac{2^d \pi^{(d-1)/2}\Gamma^d(\frac{k}{2}+1)
+    \Gamma(\frac{dk+1}{2})}{
+        \Gamma^d(\frac{k+1}{2}) \Gamma(\frac{dk}{2}+1)} G(x)^d
+\end{equation}
+and
+\begin{equation}
+    \E[F_N] \sim \frac{2^d \pi^{(d-1)/2}\Gamma^d(\frac{k}{2}+1)
+    \Gamma(\frac{dk+1}{2})}{
+        \Gamma^d(\frac{k+1}{2}) \Gamma(\frac{dk}{2}+1)}
+\end{equation}
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
