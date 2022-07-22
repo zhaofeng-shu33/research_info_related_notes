@@ -1,0 +1,55 @@
+\documentclass{ctexbeamer}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{pifont}
+\usepackage{bm}
+\usepackage{subcaption}
+\def\E{\mathbb{E}}
+\def\R{\mathbb{R}}
+\DeclareMathOperator{\Vol}{Vol}
+\newif\ifbeamer
+\beamertrue
+
+%further improvement
+%background intro added Chen Chuan's work
+%simulation add hierarchical method
+%find suitable dataset to apply info-clustering
+%Yang Li's suggestion: compared with other clustering method, the threshold is the same or not
+%early stopping technique, complexity from n -> log(n)
+\title{The Grand Canonical Ensemble}
+%\author{Feng Zhao}
+\date{\today}
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+\section{3.1 Equilibrium between 
+a system and a particle-energy reservoir
+}
+
+\begin{frame}
+\frametitle{巨正则系综}
+\begin{itemize}
+    \item 自变量：$\mu,V,T$
+    \item 分布函数：$P_{r,s} \propto \exp(-\alpha N_r - \beta E_s)$
+    \item 参数：$\alpha=-\frac{\mu}{kT}, \beta = \frac{1}{kT}$
+\end{itemize}
+
+\end{frame}
+\section{3.2 A system in the grand canonical ensemble
+}
+\begin{frame}
+    \frametitle{巨正则系综概率分布的推导}
+    \begin{enumerate}
+        \item 最可几方法：拉格朗日乘子法求带约束的优化问题的最大值
+        \item 平均值方法
+    \end{enumerate}
+    
+    \end{frame}
+
+\end{document}

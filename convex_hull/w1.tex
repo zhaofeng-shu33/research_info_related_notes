@@ -2262,8 +2262,8 @@ the distance from the origin to the line $P_1P_2$
 is larger than $x$.
 then we have
 \begin{align}
-    F_1(x) & = 2 \int_x^{+\infty} |dF(y)|
-    \int_x^y  \sqrt{1-\frac{x^2}{y^2}} \sqrt{1-\frac{x^2}{z^2}}
+    F_1(x) & =\int_x^{+\infty} |dF(y)|
+    \int_x^{+\infty}  \sqrt{1-\frac{x^2}{y^2}} \sqrt{1-\frac{x^2}{z^2}}
     |dF(z)| \\
     & = \left(\int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
     |d F(y)| \right)^2 = K^2(x)
@@ -2328,6 +2328,23 @@ By integration by parts, we have:
 |dF(z)| \\
 & = \int_x^{+\infty}\frac{2x }{\pi y \sqrt{y^2-x^2}}K^3(y)dy
 \end{align}
+Using integration by parts, we can obtain
+\begin{align}
+    H(x) &=\frac{2}{\pi}\int_x^{+\infty}
+    \arccos\frac{x}{y} |d K^3(y)|\\
+    &=3\cdot \frac{2}{\pi}\int_x^{+\infty}
+    \arccos\frac{x}{y} \cdot F_1(y)|dK(y)|\label{eq:H_eq_3_arccos}
+\end{align}
+On the other hand, starting from
+\begin{equation}\label{eq:H_eq_3_arccos_geometric}
+H(x) = \frac{2}{\pi}\int_x^{+\infty}|dF_1(y)|
+\left[ \int_x^y \arccos\frac{x}{z}|dK(z)|
++\int_y^{+\infty}\arccos\frac{x}{y} |dK(z)|\right]
+\end{equation}
+we can obtain \eqref{eq:H_eq_3_arccos}.
+Notice that \eqref{eq:H_eq_3_arccos_geometric} has
+a geometric meaning from the integration of the cylinder.
+
 For 3D standard Gaussian distribution, $H(x) = 1-\erf(\sqrt{\frac{3}{2}}x)$.
 
 In 3d, the formula to compute $\E[F_N]$ is:
@@ -2511,6 +2528,9 @@ We guess that in 4d,
     \int_x^{+\infty} \arccos\frac{x}{y}
     |d K^4(y)|
 \end{equation}
+In 4d, we also use $F_1(x)$ to represent the probability that
+the distance from the origin to the plane $P_1P_2P_3$
+is larger than $x$. Then we will show that $F_1(x)=K^3(x)$.
 
 For 4d Gaussian, we have $|dF(y)| =
 \frac{y^3}{2}\exp(-2y^2)dy$ and $K(x) = \exp(-x^2/2)$.
