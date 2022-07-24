@@ -2534,12 +2534,13 @@ is larger than $x$. Then we will show that $F_1(x)=K^3(x)$.
 
 For 4d Gaussian, we have $|dF(y)| =
 \frac{y^3}{2}\exp(-2y^2)dy$ and $K(x) = \exp(-x^2/2)$.
+We have used simulation to verify that $F_1(x) = K^3(x)$.
 
 \section{Higher dimensional case}
 Conjecture:
 \begin{align*}
     \kappa(x,y) & =(1-\frac{x^2}{y^2})^{\frac{d-2}{2}}\\
-    K(x) &= \int_x^{+\infty} \kappa(x,y)|dF(y)| \\
+    K(x) K(x) &=P(\sqrt{x_1^2+x_2^2}>x)= \int_x^{+\infty} \kappa(x,y)|dF(y)| \\
     H(x) &= \frac{2}{\pi}
     \int_x^{+\infty} \arccos\frac{x}{y}
     |d K^d(y)|
