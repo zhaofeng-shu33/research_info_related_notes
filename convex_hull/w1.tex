@@ -2536,11 +2536,23 @@ For 4d Gaussian, we have $|dF(y)| =
 \frac{y^3}{2}\exp(-2y^2)dy$ and $K(x) = \exp(-x^2/2)$.
 We have used simulation to verify that $F_1(x) = K^3(x)$.
 
+In this section, we also derive $F_0(x)$,
+the probability that
+the distance from the origin to the straight line
+$P_1P_2$
+is larger than $x$.
+Then
+\begin{equation}
+    F_0(x) =  \frac{4}{\pi}\int_x^{+\infty} |dF(y)|
+    \int_x^{y} \left[\arccos \frac{x}{z}
+    + \sqrt{1-\frac{x^2}{z^2}}\frac{x}{z}
+    \left(1-2\frac{x^2}{y^2} \right) \right] |dF(z)|
+\end{equation}
 \section{Higher dimensional case}
 Conjecture:
 \begin{align*}
     \kappa(x,y) & =(1-\frac{x^2}{y^2})^{\frac{d-2}{2}}\\
-    K(x) K(x) &=P(\sqrt{x_1^2+x_2^2}>x)= \int_x^{+\infty} \kappa(x,y)|dF(y)| \\
+    K(x) &=P(\sqrt{x_1^2+x_2^2}>x)= \int_x^{+\infty} \kappa(x,y)|dF(y)| \\
     H(x) &= \frac{2}{\pi}
     \int_x^{+\infty} \arccos\frac{x}{y}
     |d K^d(y)|
@@ -2554,6 +2566,7 @@ We have:
 \begin{equation}
     d = \frac{1}{\sqrt{\mathbf{1}^T (X^T X)^{-1} \mathbf{1}}}
 \end{equation}
+\subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
 \begin{equation}
@@ -2580,6 +2593,50 @@ and
     \Gamma(\frac{dk+1}{2})}{
         \Gamma^d(\frac{k+1}{2}) \Gamma(\frac{dk}{2}+1)}
 \end{equation}
+\subsection{Exponential tail}
+For exponential tails,
+\begin{equation}
+    K(x) \sim 2^{\frac{d}{2}-1} \Gamma\left(\frac{d}{2}\right)F(x) v(x)^{\frac{d}{2}-1}    
+\end{equation}
+\begin{align*}
+    H(x) & = \frac{2}{\pi} \int_x^{+\infty}\frac{x K^d(y)}{y^2 \sqrt{1-\frac{x^2}{y^2}}}dy\\
+    &=\frac{2}{\pi}\left[m 2^{\frac{d}{2}-1} \Gamma\left(\frac{d}{2}\right)\right]^d
+    \int_s^{+\infty}\frac{L(s) \epsilon^{1+\frac{d(d-2)}{2}}(\sigma)}{L(\sigma) \sqrt{1-\frac{L^2(s)}{L^2(\sigma)}}\sigma^{d+1}} d\sigma
+    \textrm{ since } dy=L(\sigma)\frac{\epsilon(\sigma)}{\sigma}d\sigma \\
+    &\sim  \frac{\sqrt{2}}{\pi}
+    \left[2^{\frac{d}{2}-1} \Gamma\left(\frac{d}{2}\right)\right]^d
+    \epsilon^{\frac{d(d-2)+1}{2}}(s)
+    \int_s^{+\infty} \left(\log\frac{\sigma}{s}
+    \right)^{-\frac{1}{2}}
+    \sigma^{-(d+1)}d\sigma \\
+    &= \frac{\sqrt{2}}{\sqrt{\pi d}}\left[2^{\frac{d}{2}-1} \Gamma\left(\frac{d}{2}\right)\right]^d
+    \epsilon^{\frac{d(d-2)+1}{2}}(s)s^{-d}\\
+    &= \frac{2^{\frac{d(d-2)+1}{2}}}{\sqrt{\pi d}}\Gamma^d\left(\frac{d}{2}\right)
+    v^{\frac{d(d-2)+1}{2}}(x)F^d(x)
+\end{align*}
+From (3.8) of \cite{dwyer1991convex},
+\begin{equation}
+    G(x) \sim \frac{2^{(d-3)/2}}{\sqrt{\pi}}\Gamma(\frac{d}{2}) v^{(d-1)/2}(x) F(x)
+\end{equation}
+Therefore,
+\begin{equation}
+    H(x) \sim \frac{\pi^{\frac{d-1}{2}} 2^{\frac{d+1}{2}}}{\sqrt{d}}v^{\frac{-d+1}{2}}(x)G^d(x)
+\end{equation}
+Then
+\begin{equation}
+    \E[F_N]\sim \frac{\pi^{\frac{d-1}{2}} 2^{\frac{d+1}{2}}}{\sqrt{d}} (\epsilon(N))^{-\frac{d-1}{2}}
+\end{equation}
+For d dimensional Gaussian, we have $\epsilon(s)=\frac{1}{2\log s}$,
+then $\E[F_N]=\frac{2^d}{\sqrt{d}}(\pi \log N)^{\frac{d-1}{2}}$,
+which is consistent with (1.11) of \cite{raynaud1970enveloppe}.
+
+\subsection{Truncated tail}
+For truncated tails, if If $F(1-x) \sim x^k L(1/x)$,
+then
+\begin{equation}
+    K(1-x) \sim (d-2)2^{\frac{d}{2}-2} B(k+1,\frac{d}{2}-1)x^{k+\frac{d}{2}-1}L(\frac{1}{x})
+\end{equation}
+
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
