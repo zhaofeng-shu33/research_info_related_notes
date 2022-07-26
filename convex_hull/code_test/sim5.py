@@ -9,23 +9,7 @@ allowed = 0
 
 for i in range(repeat_time):
     X = np.random.normal(size=[3, 4])
-    a_ = X[0, :]
-    b_ = X[1, :]
-    c_ = X[2, :]
-    a = a_ - b_
-    b = c_ - b_
-    cos_theta = np.dot(a, b) / np.linalg.norm(a) / np.linalg.norm(b)
-    sin_theta = np.sqrt(1 - cos_theta ** 2)
-    triangle_area = 0.5 * np.linalg.norm(a) * np.linalg.norm(b) * sin_theta
-    tmp_matrix = np.zeros([4, 4])
-    tmp_vector = np.zeros(4)
-    tmp_matrix[1:, :] = X
-    for i in range(4):
-        tmp_matrix[0, :] = 0
-        tmp_matrix[0, i] = 1
-        tmp_vector[i] = np.linalg.det(tmp_matrix)
-    tetrahedron_volume = np.linalg.norm(tmp_vector) / 6
-    h = 3 * tetrahedron_volume / triangle_area
+    h = 1 / np.sqrt(np.sum(np.linalg.inv(X @ X.T)))
     # z_prime = z * normal_list / np.linalg.norm(normal_list)
     if h > x:
         allowed += 1

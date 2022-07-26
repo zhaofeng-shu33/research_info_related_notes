@@ -2636,7 +2636,35 @@ then
 \begin{equation}
     K(1-x) \sim (d-2)2^{\frac{d}{2}-2} B(k+1,\frac{d}{2}-1)x^{k+\frac{d}{2}-1}L(\frac{1}{x})
 \end{equation}
-
+and
+\begin{align}
+    H(1-x)  & \sim b
+    L^d(1/x) x^{d(k+\frac{d}{2}-1)+\frac{1}{2}} \\
+    b & = \frac{(d-2)^d}{\pi}
+    2^{\frac{1}{2} + d(\frac{d}{2}-2)} B^d(k+1, \frac{d}{2}-1)
+    B\left( \frac{1}{2},
+    d(k+\frac{d}{2} -1)+1 \right)
+\end{align}
+From (4.1) of \cite{dwyer1991convex}
+\begin{align}
+    G(1-x) &\sim a
+    L\left(\frac{1}{x} \right)
+    x^{k+\frac{d-1}{2}} \\
+    a &=\frac{2^{\frac{d-1}{2}} k \Gamma(\frac{d}{2})}
+    {(d-1) \sqrt{\pi} \Gamma(\frac{d-1}{2})}
+    B\left(k, \frac{d+1}{2}\right)
+\end{align}
+Then
+\begin{equation}
+    H(1-x) \sim ba^{-d} G(1-x)^d x^{\frac{1-d}{2}}
+\end{equation}
+and we obtain
+\begin{equation}
+    \E[F_N] \sim \frac{b}{d!}a^{-d+\frac{d-1}{2k+d-1}}
+    \Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)n^{\frac{d-1}{2k+d-1}}
+    \left[L^*_{k+\frac{d-1}{2}}(n)
+    \right]^{\frac{d-1}{2}}
+\end{equation}
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
