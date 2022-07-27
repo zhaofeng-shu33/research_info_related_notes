@@ -2548,6 +2548,75 @@ Then
     + \sqrt{1-\frac{x^2}{z^2}}\frac{x}{z}
     \left(1-2\frac{x^2}{y^2} \right) \right] |dF(z)|
 \end{equation}
+\begin{equation}
+    K_2(x) = P(x_1^2+x_2^2+x_3^2 \geq x^2)
+    = \frac{2}{\pi} \int_x^{+\infty}
+    \left( \frac{x}{z}\sqrt{1-\frac{x^2}{z^2}} + \arccos\frac{x}{z}\right)|dF(z)|
+\end{equation}
+We can show that
+\begin{equation}
+    \int_x^{+\infty}\sqrt{1-\frac{x^2}{z^2}} |dK_2(z)|
+    =  K(x)
+\end{equation}
+On the other hand, we show that
+\begin{align*}
+    K^2(x) & = 2\int_x^{+\infty} (1-\frac{x^2}{z^2})|dF(z)|
+    \int_z^{+\infty} (1-\frac{x^2}{y^2}) |dF(y)|
+    \\
+    &= 2\int_x^{+\infty} (1-\frac{x^2}{z^2})F(z)|dF(z)|
+    - 2 \int_x^{+\infty} (1-\frac{x^2}{z^2})|dF(z)|
+    \int_z^{+\infty} \frac{x^2}{y^2} |dF(y)|
+\end{align*}
+and
+\begin{align*}
+    F_0(x) &= \frac{4}{\pi} \int_x^{+\infty}
+    F(z)\left(\arccos \frac{x}{z}
+    + \frac{x}{z}\sqrt{1-\frac{x^2}{z^2}}
+    \right)|dF(z)|\\
+    &+ \frac{4}{\pi}
+    \int_x^{+\infty}
+    \sqrt{1-\frac{x^2}{z^2}}
+    \frac{x^3}{z} |dF(z)|
+    \int_z^{+\infty} \frac{-2}{y^2} |dF(y)|
+\end{align*}
+\begin{align*}
+    \frac{|dF_0(x)|}{dx} &= \frac{4}{\pi} \int_x^{+\infty}
+    F(z)\frac{2x^2}{z^2 \sqrt{z^2-x^2}}|dF(z)|\\
+    &+ \frac{4}{\pi}
+    \int_x^{+\infty}
+    \frac{4x^4-3x^2z^2}{z^2 \sqrt{z^2-x^2}} |dF(z)|
+    \int_z^{+\infty} \frac{-2}{y^2} |dF(y)|
+\end{align*}
+\begin{align*}
+    \int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
+    |dF_0(y)| &= \frac{4}{\pi}
+    \int_x^{+\infty}dy \int_y^{+\infty}
+    F(z)\frac{2y\sqrt{y^2-x^2}}{z^2 \sqrt{z^2-y^2}}|dF(z)|\\
+    &+ \frac{4}{\pi}\int_x^{+\infty}dy
+    \int_y^{+\infty}
+    \frac{y(4y^2-3z^2)\sqrt{y^2-x^2}}{z^2 \sqrt{z^2-y^2}} |dF(z)|
+    \int_z^{+\infty} \frac{-2}{y_1^2} |dF(y_1)|\\
+    &= \frac{4}{\pi}
+    \int_x^{+\infty} F(z)|dF(z)|dz \int_x^{z}
+    \frac{2y\sqrt{y^2-x^2}}{z^2 \sqrt{z^2-y^2}}dy\\
+    &+ \frac{4}{\pi}\int_z^{+\infty}|dF(z)|dz
+    \int_x^{z}
+    \frac{y(4y^2-3z^2)\sqrt{y^2-x^2}}{z^2 \sqrt{z^2-y^2}} 
+    \int_z^{+\infty} \frac{-2}{y_1^2} |dF(y_1)|
+\end{align*}
+Using definite integral, we can obtain
+\begin{equation}
+    \int_x^{+\infty} \sqrt{1-\frac{x^2}{y^2}}
+    |dF_0(y)| = K^2(x)
+\end{equation}
+Then
+\begin{equation}
+    F_1(x) = \int_x^{+\infty} |dF_0(y)|
+    \int_x^{+\infty} \sqrt{1-\frac{x^2}{z^2}}
+    \sqrt{1-\frac{x^2}{y^2}} |dK_2(z)|
+    = K^3(x)
+\end{equation}
+
 \section{Higher dimensional case}
 Conjecture:
 \begin{align*}
