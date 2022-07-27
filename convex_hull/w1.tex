@@ -2563,9 +2563,17 @@ in a $d\times d$ matrix, denoted as $X$.
 These $d$ points form a hyperplane,
 the distance from the hyperplane to the origin is denoted as $d$.
 We have:
-\begin{equation}
+\begin{equation}\label{eq:d_XX_transpose}
     d = \frac{1}{\sqrt{\mathbf{1}^T (X^T X)^{-1} \mathbf{1}}}
 \end{equation}
+
+We use $F_1(x)$ to represent the probability that
+the distance from the origin to the plane $P_1P_2\dots P_{d-1}$
+is larger than $x$. We can concatenate them in a $d \times (d-1)$ matrix $X$
+and the distance can be computed with \eqref{eq:d_XX_transpose}.
+
+Then we will show that $F_1(x)=K^{d-1}(x)$.
+
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
