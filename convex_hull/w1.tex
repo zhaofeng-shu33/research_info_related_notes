@@ -2703,6 +2703,13 @@ Then
 \begin{equation}
     \E[F_N]\sim \frac{\pi^{\frac{d-1}{2}} 2^{\frac{d+1}{2}}}{\sqrt{d}} (\epsilon(N))^{-\frac{d-1}{2}}
 \end{equation}
+
+When the following condition satisfies, $P(H_N^c) \to 0$:
+
+\begin{equation}
+    \frac{N}{\epsilon^{\frac{d-1}{2}}(N)} = \omega(\frac{1}{d^\frac{3}{2}} (2\pi)^{d/2})
+\end{equation}
+
 For d dimensional Gaussian, we have $\epsilon(s)=\frac{1}{2\log s}$,
 then $\E[F_N]=\frac{2^d}{\sqrt{d}}(\pi \log N)^{\frac{d-1}{2}}$,
 which is consistent with (1.11) of \cite{raynaud1970enveloppe}.
@@ -2755,7 +2762,16 @@ When $k=q+1, L(n)=\frac{2^{q+1}}{(q+1)B(d/2,q+1)}$,
 we can verify that
 \eqref{eq:efn_truncated_formula} is equivalent with the expression of $c_3$
 in (3.3) of \cite{affentranger1991convex}.
- 
+Using the expression of $c_5$ in (3.5) of 
+\cite{affentranger1991convex},
+for $q=0$(uniform distribution),
+we obtain $P(H_N^c)\sim \frac{c_5}{\kappa_d}
+n^{-2/(d+1)}$ where $\kappa_d$ is the d-dimensional volume of
+the unit sphere $B^d$. Then we obtain $P(H_N^c) \to 0$
+when $N=\omega((\frac{d}{2})^{(d+1)/2})$. If we start from the estimation
+$P(H_N^c) \leq \frac{\E[F_N]}{(d-1)N}$, the estimation is looser, about
+$N=\omega(d^{d^2})$.
+
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
