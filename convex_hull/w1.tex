@@ -2710,15 +2710,20 @@ which is consistent with (1.11) of \cite{raynaud1970enveloppe}.
 \subsection{Truncated tail}
 For truncated tails, if If $F(1-x) \sim x^k L(1/x)$,
 then
-\begin{equation}
-    K(1-x) \sim (d-2)2^{\frac{d}{2}-2} B(k+1,\frac{d}{2}-1)x^{k+\frac{d}{2}-1}L(\frac{1}{x})
-\end{equation}
+\begin{align}
+    K(1-x) & \sim (d-2)2^{\frac{d}{2}-2} B(k+1,\frac{d}{2}-1)x^{k+\frac{d}{2}-1}L(\frac{1}{x})\\
+    & = k 2^{\frac{d}{2}-1} B(k, \frac{d}{2}) x^{k+\frac{d}{2}-1} L(1/x) 
+\end{align}
 and
 \begin{align}
     H(1-x)  & \sim b
     L^d(1/x) x^{d(k+\frac{d}{2}-1)+\frac{1}{2}} \\
     b & = \frac{(d-2)^d}{\pi}
     2^{\frac{1}{2} + d(\frac{d}{2}-2)} B^d(k+1, \frac{d}{2}-1)
+    B\left( \frac{1}{2},
+    d(k+\frac{d}{2} -1)+1 \right) \\
+    &=  \frac{k^d}{\pi}
+    2^{\frac{1}{2} + d(\frac{d}{2}-1)} B^d(k, \frac{d}{2})
     B\left( \frac{1}{2},
     d(k+\frac{d}{2} -1)+1 \right)
 \end{align}
@@ -2736,12 +2741,21 @@ Then
     H(1-x) \sim ba^{-d} G(1-x)^d x^{\frac{1-d}{2}}
 \end{equation}
 and we obtain
-\begin{equation}
+\begin{equation}\label{eq:efn_truncated_formula}
     \E[F_N] \sim \frac{b}{d!}a^{-d+\frac{d-1}{2k+d-1}}
     \Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)n^{\frac{d-1}{2k+d-1}}
     \left[L^*_{k+\frac{d-1}{2}}(n)
     \right]^{\frac{d-1}{2}}
 \end{equation}
+When $k=1, L(n)=d$, we can verify that
+\eqref{eq:efn_truncated_formula} is equivalent with (1.1)
+of \cite{raynaud1970enveloppe}.
+
+When $k=q+1, L(n)=\frac{2^{q+1}}{(q+1)B(d/2,q+1)}$,
+we can verify that
+\eqref{eq:efn_truncated_formula} is equivalent with the expression of $c_3$
+in (3.3) of \cite{affentranger1991convex}.
+ 
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
