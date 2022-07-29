@@ -2665,11 +2665,21 @@ Then
         \Gamma^d(\frac{k+1}{2}) \Gamma(\frac{dk}{2}+1)} G(x)^d
 \end{equation}
 and
-\begin{equation}
+\begin{equation}\label{eq:efn_poly_second_deri}
     \E[F_N] \sim \frac{2^d \pi^{(d-1)/2}\Gamma^d(\frac{k}{2}+1)
     \Gamma(\frac{dk+1}{2})}{
         \Gamma^d(\frac{k+1}{2}) \Gamma(\frac{dk}{2}+1)}
 \end{equation}
+The right hand side of \eqref{eq:efn_poly_second_deri}
+is asymptotically
+equivalent to
+$$
+\sqrt{\frac{2}{\pi}}\frac{1}{d}\left(
+    \frac{\sqrt{\pi}k \Gamma(k/2)}
+    {\Gamma(\frac{k+1}{2})}
+\right)^d
+$$
+
 \subsection{Exponential tail}
 For exponential tails,
 \begin{equation}
@@ -2707,7 +2717,7 @@ Then
 When the following condition satisfies, $P(H_N^c) \to 0$:
 
 \begin{equation}
-    \frac{N}{\epsilon^{\frac{d-1}{2}}(N)} = \omega(\frac{1}{d^\frac{3}{2}} (2\pi)^{d/2})
+    N \epsilon^{\frac{d-1}{2}}(N) = \omega(\frac{1}{d^\frac{3}{2}} (2\pi)^{d/2})
 \end{equation}
 
 For d dimensional Gaussian, we have $\epsilon(s)=\frac{1}{2\log s}$,
@@ -2741,19 +2751,58 @@ From (4.1) of \cite{dwyer1991convex}
     x^{k+\frac{d-1}{2}} \\
     a &=\frac{2^{\frac{d-1}{2}} k \Gamma(\frac{d}{2})}
     {(d-1) \sqrt{\pi} \Gamma(\frac{d-1}{2})}
-    B\left(k, \frac{d+1}{2}\right)
+    B\left(k, \frac{d+1}{2}\right) \\
+    &= \frac{2^{\frac{d-3}{2}} k \Gamma(\frac{d}{2})\Gamma(k)}
+    {\sqrt{\pi} \Gamma\left(k+\frac{d+1}{2}\right)}
 \end{align}
 Then
 \begin{equation}
     H(1-x) \sim ba^{-d} G(1-x)^d x^{\frac{1-d}{2}}
 \end{equation}
 and we obtain
-\begin{equation}\label{eq:efn_truncated_formula}
-    \E[F_N] \sim \frac{b}{d!}a^{-d+\frac{d-1}{2k+d-1}}
+\begin{align}\label{eq:efn_truncated_formula}
+    \E[F_N] &\sim \frac{b}{d!}a^{-d+\frac{d-1}{2k+d-1}}
     \Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)n^{\frac{d-1}{2k+d-1}}
-    \left[L^*_{k+\frac{d-1}{2}}(n)
-    \right]^{\frac{d-1}{2}}
+    L(n)
+    ^{\frac{d-1}{2k+d-1}} \\
+    &\sim \frac{\tilde{b} }{d!}
+    a^{\frac{d-1}{2k+d-1}}\Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)n^{\frac{d-1}{2k+d-1}}
+    L(n)
+    ^{\frac{d-1}{2k+d-1}}
+\end{align}
+where
+\begin{equation}
+    \tilde{b} =ba^{-d}
+    = \frac{\pi^{(d-1)/2} 2^{(d+1)/2}
+    \Gamma^d(k+\frac{d+1}{2})
+    \Gamma(d(k+\frac{d}{2}-1)+1)}{\Gamma^d(k+\frac{d}{2})\Gamma(d(k+\frac{d}{2}-1)+ \frac{3}{2})}
 \end{equation}
+\begin{lemma}
+    For fixed $v>0$, we have
+    \begin{equation}
+        \frac{\Gamma(n+v)}{\Gamma(n)} \sim
+        n^v
+        \textrm{ as } n \to \infty             
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    We can use Stirling's formula or Beta function.
+    For the latter approach, we only need to show
+    $B(n, v) \sim \Gamma(v) n^{-v}$.
+    From the definition of beta function,
+    we have
+    \begin{align*}
+        B(n,v) &=\int_0^1 (1-x)^{n-1} x^{v-1} dx \\
+        &\sim \int_0^{\epsilon} \exp(-nx) x^{v-1}dx \textrm{ for given } \epsilon>0\\
+        & \sim n^{-v} \int_0^{n\epsilon} \exp(-x)x^{v-1}dx\\
+        &\sim \Gamma(v) n^{-v}
+    \end{align*}
+\end{proof}
+When the following condition is satisfied, $P(H_N^c) \to 0$.
+\begin{equation}
+2^{k+\frac{d}{2}} k e^k \Gamma(k) \pi^{(d-2)/2} d^{\frac{d-5}{2} -k} L(n) n^{-2k/d}  \to 0   
+\end{equation}
+
 When $k=1, L(n)=d$, we can verify that
 \eqref{eq:efn_truncated_formula} is equivalent with (1.1)
 of \cite{raynaud1970enveloppe}.
