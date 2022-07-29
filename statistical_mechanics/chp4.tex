@@ -28,7 +28,7 @@
 \begin{frame}{Outline}
     \tableofcontents
 \end{frame}
-\section{3.1 Equilibrium between 
+\section{4.1 Equilibrium between 
 a system and a particle-energy reservoir
 }
 
@@ -41,7 +41,7 @@ a system and a particle-energy reservoir
 \end{itemize}
 
 \end{frame}
-\section{3.2 A system in the grand canonical ensemble
+\section{4.2 A system in the grand canonical ensemble
 }
 \begin{frame}
     \frametitle{巨正则系综概率分布的推导}
@@ -51,5 +51,35 @@ a system and a particle-energy reservoir
     \end{enumerate}
     
     \end{frame}
-
+\section{4.3 Physical significance of the various
+statistical quantities}
+\begin{frame}{巨正则系综的热力学公式}
+    \begin{enumerate}
+        \item 巨配分函数：
+        $\mathcal{Q}(z,V,T)
+         \sum_{N_r=0}^{\infty}
+         z^{N_r} Q_{N_r}(V,T)$，其中
+         $z=\exp(\frac{\mu}{kT})$。
+         \item 压强公式： $P=\frac{kT}{V} \ln \mathcal{Q}$
+         \item 内能公式： $U=-\frac{\partial \ln \mathcal{Q}}{\partial \beta}$
+         \item 粒子数公式：
+         $N=z\frac{\partial \ln \mathcal{Q}}{\partial z}$
+        \end{enumerate}
+\end{frame}
+\section{4.4 Examples}
+\begin{frame}{由巨正则系综推导4个分子系统的热力学公式}
+    \begin{enumerate}
+        \item 动能 $\mathcal{Q} = \exp(zVf(T))$
+        \begin{enumerate}
+            \item 单原子理想气体 $f(T) = (2\pi m kT)^{3/2}/h^3$
+            \item 极度相对性气体 (extreme relativistic gas)
+            $f(T) \propto T^3 $
+        \end{enumerate}
+        \item 势能 $\mathcal{Q} = [1-z\phi(T)]^{-1}$
+        \begin{enumerate}
+            \item 量子力学的谐振子 $\phi(T)=[2\sinh(\frac{\hbar w}{2kT})]^{-1}$
+            \item 经典谐振子 $ \phi(T) = \frac{kT}{\hbar w}$
+        \end{enumerate}
+    \end{enumerate}
+\end{frame}
 \end{document}
