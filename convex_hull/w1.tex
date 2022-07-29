@@ -2642,7 +2642,29 @@ is larger than $x$. We can concatenate them in a $d \times (d-1)$ matrix $X$
 and the distance can be computed with \eqref{eq:d_XX_transpose}.
 
 Then we will show that $F_1(x)=K^{d-1}(x)$.
-
+It is enough to prove
+\begin{equation}
+    \int_x^{+\infty}
+    (1-\frac{x^2}{y^2})^{\frac{d-3}{2}} |dF_0(y)| = K^2(x)
+\end{equation}
+where $F_0$ represents the
+probability that the distance from the origin to the straight line
+$P_1P_2$ is larger than $x$.
+Suppose $x<z<y$,
+let $a_1=\frac{x^2}{y}+\sqrt{z^2-x^2}\sqrt{1-\frac{x^2}{y^2}} > 0$
+$a_2=\frac{x^2}{y}-\sqrt{z^2-x^2}\sqrt{1-\frac{x^2}{y^2}} < 0$.
+They are roots of the following equation system:
+\begin{align*}
+a & = \pm \tan \theta \sqrt{x_1^2+\dots + x_{d-1}^2} + y \\    
+z^2 &= a^2 + x_1^2 + \dots + x_{d-1}^2
+\end{align*}
+Then
+\begin{equation}
+    F_0(y)=\frac{2\Gamma(\frac{d}{2})}
+    {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
+    \int_x^{+\infty} |dF(y)|
+    \int_x^{y} dz \int_{a_1/z}^{a_2/z} (1-u^2)^{\frac{d-3}{2}}du
+\end{equation}
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
