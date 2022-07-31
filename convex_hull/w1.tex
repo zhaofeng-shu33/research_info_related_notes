@@ -2619,13 +2619,13 @@ Then
 
 \section{Higher dimensional case}
 Conjecture:
-\begin{align*}
+\begin{align}
     \kappa(x,y) & =(1-\frac{x^2}{y^2})^{\frac{d-2}{2}}\\
     K(x) &=P(\sqrt{x_1^2+x_2^2}>x)= \int_x^{+\infty} \kappa(x,y)|dF(y)| \\
     H(x) &= \frac{2}{\pi}
     \int_x^{+\infty} \arccos\frac{x}{y}
-    |d K^d(y)|
-\end{align*}
+    |d K^d(y)|\label{eq:H_expression_d_dim}
+\end{align}
 Generally, we have $d$ points in $\mathbb{R}^d$, We
 can concatenate them
 in a $d\times d$ matrix, denoted as $X$.
@@ -2641,16 +2641,43 @@ the distance from the origin to the plane $P_1P_2\dots P_{d-1}$
 is larger than $x$. We can concatenate them in a $d \times (d-1)$ matrix $X$
 and the distance can be computed with \eqref{eq:d_XX_transpose}.
 
-Then we will show that $F_1(x)=K^{d-1}(x)$.
+\begin{align}\label{eq:H_eq_n_arccos_geometric}
+    H(x) &= \frac{2}{\pi}\int_x^{+\infty}|dF_1(y)|
+    \left[ \int_x^y \arccos\frac{x}{z}|dK(z)|
+    +\int_y^{+\infty}\arccos\frac{x}{y} |dK(z)|\right]\\
+    &=\frac{2}{\pi}\int_x^{+\infty} \arccos\frac{x}{z}
+    F_1(z)|dK(z)|+\frac{2}{\pi}\int_{x}^{+\infty} K(y)F_1(y)\arccos\frac{x}{y}|dF_1(y)| \notag 
+\end{align}
+Suppose $F_1(x)=K^{d-1}(x)$,
+then \eqref{eq:H_eq_n_arccos_geometric} reduces to
+$$
+H(x) = \frac{2}{\pi}\int_x^{+\infty}  \arccos\frac{x}{y}\cdot
+d\cdot  K^{d-1}(y) |dK(y)|
+$$
+which is exactly \eqref{eq:H_expression_d_dim}.
+
+Then we only need to show that $F_1(x)=K^{d-1}(x)$.
 It is enough to prove
-\begin{equation}
+\begin{equation}\label{eq:F_0_integration}
     \int_x^{+\infty}
     (1-\frac{x^2}{y^2})^{\frac{d-3}{2}} |dF_0(y)| = K^2(x)
 \end{equation}
 where $F_0$ represents the
 probability that the distance from the origin to the straight line
 $P_1P_2$ is larger than $x$.
-Suppose $x<z<y$,
+
+Suppose \eqref{eq:F_0_integration} is true, 
+by induction we can suppose $F_1(x)=K^{d'-1}(x)$ is true for
+$d'\leq d-1$. Then for $d'=d$, 
+since we specify a straight line, the space perpendicular 
+to this line has $d-1$ dimension. We have
+\begin{equation}
+    F_1(x) = \int_x^{+\infty} K^{d-3}(x) (1-\frac{x^2}{y^2})^{\frac{d-3}{2}}|dF_0(y)|
+    = K^{d-1}(x)
+\end{equation}
+
+To derive \eqref{eq:F_0_integration},
+suppose $x<z<y$,
 let $a_1=\frac{x^2}{y}+\sqrt{z^2-x^2}\sqrt{1-\frac{x^2}{y^2}} > 0$
 $a_2=\frac{x^2}{y}-\sqrt{z^2-x^2}\sqrt{1-\frac{x^2}{y^2}} < 0$.
 They are roots of the following equation system:
