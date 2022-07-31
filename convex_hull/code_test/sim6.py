@@ -1,8 +1,8 @@
 import numpy as np
-from scipy.integrate import quad
-from scipy.special import gammainc
+from scipy.integrate import quad, dblquad
+from scipy.special import gammainc,gamma
 x = 0.5
-d = 4
+d = 5
 
 
 repeat_time = 100000
@@ -20,11 +20,11 @@ for i in range(repeat_time):
 
 print(allowed / repeat_time)
 
+def f_g(r): # pdf of radius 3d gaussian
+    return  r**(d-1) * np.exp(-r**2/2) * 2**(1-d/2) / gamma(d/2)
+
 # theoretical result
-# alpha = np.arccos((2 * y**2 - z**2 - x**2)/(z**2 - x**2))
-# beta = np.arctan(z / x / np.tan(alpha / 2))
-# G = lambda y: np.arccos(x/y) * d * y * np.exp(-d / 2 * y**2)
-# value = quad(G, x, np.inf)[0] * 2 / np.pi
-k = (d-1)/2
-K_x = gammainc(k, x*x/2)
-print((1-K_x) * np.exp(-x*x/2))
+UPPER = 30
+G = lambda z, y: (2* np.sqrt(1-x*x/y**2)*np.sqrt(1-x*x/z**2)-((x*x/y/z+np.sqrt(1-x*x/z**2)*np.sqrt(1-x*x/y**2))**3-(x*x/y/z-np.sqrt(1-x*x/z**2)*np.sqrt(1-x*x/y**2))**3)/3) * f_g(y) * f_g(z)
+val = dblquad(G, x, UPPER, lambda y: x, lambda y: y)
+print(val[0] * 2 * gamma(d/2) / np.sqrt(np.pi) / gamma((d-1)/2))
