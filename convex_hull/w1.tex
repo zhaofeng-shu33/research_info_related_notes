@@ -2692,6 +2692,34 @@ Then
     \int_x^{+\infty} |dF(y)|
     \int_x^{y} |dF(z)|dz \int_{a_2/z}^{a_1 /z} (1-u^2)^{\frac{d-3}{2}}du
 \end{equation}
+To simplify the notation,
+we assume $\cos\theta_1=\frac{x}{z},
+\cos\theta_2=\frac{x}{y}$.
+Then $\frac{a_1}{z} = \cos(\theta_2 - \theta_1),
+\frac{a_2}{z} = \cos(\theta_2+\theta_1)$.
+By chain rule,
+\begin{align*}
+    \frac{d}{dx}\frac{a_1}{z} &
+    = \sin(\theta_2 - \theta_1)
+    \left(\frac{-1}{z\sin\theta_1}
+    +\frac{1}{y\sin \theta_2}\right)\\
+    \frac{d}{dx}\frac{a_2}{z} &
+    = \sin(\theta_2 + \theta_1)
+    \left(\frac{1}{z\sin\theta_1}
+    +\frac{1}{y\sin \theta_2}\right)
+\end{align*}
+Then
+\begin{align*}
+    \frac{d F_0(x)}{dx} & =\frac{2\Gamma(\frac{d}{2})}
+    {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
+    \int_x^{+\infty} f(x,y,z)|dF(y)| \\
+    f(x,y,z) & = \sin^{d-2} (\theta_2 - \theta_1)
+    \left(\frac{-1}{z\sin\theta_1}
+    +\frac{1}{y\sin \theta_2}\right)
+    - \sin^{d-2}(\theta_1 + \theta_2)
+    \left(\frac{1}{z\sin\theta_1}
+    +\frac{1}{y\sin \theta_2}\right)
+\end{align*}
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
