@@ -2602,7 +2602,7 @@ and
     &+ \frac{4}{\pi}\int_z^{+\infty}|dF(z)|dz
     \int_x^{z}
     \frac{y(4y^2-3z^2)\sqrt{y^2-x^2}}{z^2 \sqrt{z^2-y^2}} 
-    \int_z^{+\infty} \frac{-2}{y_1^2} |dF(y_1)|
+    dy\int_z^{+\infty} \frac{-2}{y_1^2} |dF(y_1)|
 \end{align*}
 Using definite integral, we can obtain
 \begin{equation}
@@ -2692,6 +2692,37 @@ Then
     \int_x^{+\infty} |dF(y)|
     \int_x^{y} |dF(z)|dz \int_{a_2/z}^{a_1 /z} (1-u^2)^{\frac{d-3}{2}}du
 \end{equation}
+
+We only need to prove
+\begin{equation}\label{eq:ref_prove_integration}    
+    \frac{2\Gamma(\frac{d}{2})}
+    {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
+    \int_u^z (1-\frac{u^2}{x^2})^{\frac{d-3}{2}}
+    f(x,y,z)dx =
+    2(1-\frac{u^2}{y^2})^{\frac{d-2}{2}}
+    (1-\frac{u^2}{z^2})^{\frac{d-2}{2}}
+\end{equation} 
+Suppose $k\leq d-2$ and $k$ is odd,
+then
+\begin{align*}
+    g(k,x,y,z)&=\int_u^z x
+    (y^2-x^2)^{\frac{k-1}{2}}
+    (z^2-x^2)^{\frac{d-2-k}{2}}
+    (x^2-u^2)^{\frac{d-3}{2}}dx
+    \\
+    &= \frac{1}{2}\sum_{j=0}^{(k-1)/2}
+    (-1)^{\frac{k-1}{2}-j}\binom{(k-1)/2}{j}
+    B(\frac{d+k}{2}-j-1, \frac{d-k}{2})
+    (y^2-u^2)^j (z^2-u^2)^{d-2-j}
+\end{align*}
+To prove \eqref{eq:ref_prove_integration},
+we only need to show that
+\begin{align*}
+    \sum_{k\leq d-2}g(2\lceil(k+1)/2 \rceil -1,x,y,z)
+    =2(y^2-u^2)^{\frac{d-2}{2}}
+    (z^2-u^2)^{\frac{d-2}{2}}
+\end{align*}
+When $j=\frac{d-2}{2}$, we have.
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
