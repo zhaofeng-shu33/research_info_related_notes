@@ -2693,6 +2693,36 @@ Then
     \int_x^{y} |dF(z)|dz \int_{a_2/z}^{a_1 /z} (1-u^2)^{\frac{d-3}{2}}du
 \end{equation}
 
+To simplify the notation,
+we assume $\cos\theta_1=\frac{x}{z},
+\cos\theta_2=\frac{x}{y}$.
+Then $\frac{a_1}{z} = \cos(\theta_2 - \theta_1),
+\frac{a_2}{z} = \cos(\theta_2+\theta_1)$.
+By chain rule,
+\begin{align*}
+    \frac{d}{dx}\frac{a_1}{z} &
+    = \sin(\theta_2 - \theta_1)
+    \left(\frac{-1}{z\sin\theta_1}
+    +\frac{1}{y\sin \theta_2}\right)\\
+    \frac{d}{dx}\frac{a_2}{z} &
+    = \sin(\theta_2 + \theta_1)
+    \left(\frac{1}{z\sin\theta_1}
+    +\frac{1}{y\sin \theta_2}\right)
+\end{align*}
+Then
+\begin{align*}
+    \frac{d F_0(x)}{dx} & =\frac{2\Gamma(\frac{d}{2})}
+    {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
+    \int_x^{+\infty} f(x,y,z)|dF(y)| \\
+    f(x,y,z) & = \sin^{d-2} (\theta_2 - \theta_1)
+    \left(\frac{-1}{z\sin\theta_1}
+    +\frac{1}{y\sin \theta_2}\right)
+    - \sin^{d-2}(\theta_1 + \theta_2)
+    \left(\frac{1}{z\sin\theta_1}
+    +\frac{1}{y\sin \theta_2}\right)
+\end{align*}
+
+
 We only need to prove
 \begin{equation}\label{eq:ref_prove_integration}    
     \frac{2\Gamma(\frac{d}{2})}
@@ -2702,27 +2732,68 @@ We only need to prove
     2(1-\frac{u^2}{y^2})^{\frac{d-2}{2}}
     (1-\frac{u^2}{z^2})^{\frac{d-2}{2}}
 \end{equation} 
-Suppose $k\leq d-2$ and $k$ is odd,
+Suppose $k\leq d-2$ and $d-k$ is odd,
 then
 \begin{align*}
-    g(k,x,y,z)&=\int_u^z x
+    g(k,x,y,z)&=2\int_u^z x
     (y^2-x^2)^{\frac{k-1}{2}}
     (z^2-x^2)^{\frac{d-2-k}{2}}
-    (x^2-u^2)^{\frac{d-3}{2}}dx
-    \\
-    &= \frac{1}{2}\sum_{j=0}^{(k-1)/2}
+    (x^2-u^2)^{\frac{d-3}{2}}dx\\
+    &=\int_{0}^{z^2-u^2}
+    (y^2-u^2-x)^{\frac{k-1}{2}}
+    (z^2-u^2-x)^{\frac{d-2-k}{2}}
+    x^{\frac{d-3}{2}}dx
+\end{align*}
+When $d-k$ is even, we only need to compute
+$g(k+1,x,y,z)$.
+In summarize, to prove \eqref{eq:ref_prove_integration},
+we only need to show that
+\begin{align}\label{eq:intermediate_summation}
+    \sum_{k\leq d-2}\binom{d-2}{k}g(k+\textrm{mod}(d-k+1,2)
+    ,x,y,z)
+    = B(\frac{d-1}{2}, \frac{1}{2})
+    (y^2-u^2)^{\frac{d-2}{2}}
+    (z^2-u^2)^{\frac{d-2}{2}}
+\end{align}
+
+Below we divide the proof into the case whether
+$d$ is even or odd.
+
+\subsection{$d$ is odd}
+Suppose $d$ is odd, by integration by parts, we can first show that
+\begin{equation}
+    \int_0^{z^2-u^2} \sqrt{\frac{z^2-u^2-x}{y^2-u^2-x}}dx
+    + \int_0^{z^2-u^2} \sqrt{\frac{y^2-u^2-x}{z^2-u^2-x}}dx
+    = 2\sqrt{y^2-u^2}\sqrt{z^2-u^2}
+\end{equation}
+Indeed, suppose $a=z^2-u^2, b=y^2-u^2, a<b$, we have
+\begin{align}
+    \int_0^a \sqrt{\frac{a-x}{b-x}}dx
+    &= \int_0^{\sqrt{a/b}} \frac{2(b-a)t^2}{(1-t^2)^2}dt
+    =\sqrt{ab} - \frac{b-a}{2}\ln \frac{1+\sqrt{a/b}}{1-\sqrt{a/b}} \\
+    \int_0^a \sqrt{\frac{b-x}{a-x}}dx
+    &= \int_0^{\sqrt{a/b}} \frac{2(b-a)}{(1-t^2)^2}dt
+    =\sqrt{ab} + \frac{b-a}{2}\ln \frac{1+\sqrt{a/b}}{1-\sqrt{a/b}} \\
+\end{align}
+That is, \eqref{eq:intermediate_summation} holds for $d=3$.
+For $d>3$ we use induction,
+Suppose the result holds for
+$d=d'-2$,
+then
+
+\subsection{$d$ is even}
+Suppose $d$ is even, and $k$ is odd, then
+\begin{align*}
+    g(k,x,y,z)= \sum_{j=0}^{(k-1)/2}
     (-1)^{\frac{k-1}{2}-j}\binom{(k-1)/2}{j}
     B(\frac{d+k}{2}-j-1, \frac{d-k}{2})
     (y^2-u^2)^j (z^2-u^2)^{d-2-j}
 \end{align*}
-To prove \eqref{eq:ref_prove_integration},
-we only need to show that
-\begin{align*}
-    \sum_{k\leq d-2}g(2\lceil(k+1)/2 \rceil -1,x,y,z)
-    =2(y^2-u^2)^{\frac{d-2}{2}}
-    (z^2-u^2)^{\frac{d-2}{2}}
-\end{align*}
-When $j=\frac{d-2}{2}$, we have.
+When $j=\frac{d-2}{2}$, $k=d-1$,
+$g(d-1,x,y,z)$
+contains a term like
+$B(\frac{d-1}{2}, \frac{1}{2})(y^2-u^2)^{(d-2)/2}(z^2-u^2)^{(d-2)/2}$.
+
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
