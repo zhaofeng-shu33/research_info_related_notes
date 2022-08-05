@@ -2713,7 +2713,7 @@ Then
 \begin{align*}
     \frac{d F_0(x)}{dx} & =\frac{2\Gamma(\frac{d}{2})}
     {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
-    \int_x^{+\infty} f(x,y,z)|dF(y)| \\
+    \int_x^{+\infty} |dF(y)| \int_x^y f(x,y,z)|dF(z)| \\
     f(x,y,z) & = \sin^{d-2} (\theta_2 - \theta_1)
     \left(\frac{-1}{z\sin\theta_1}
     +\frac{1}{y\sin \theta_2}\right)
@@ -2755,7 +2755,17 @@ we only need to show that
     (y^2-u^2)^{\frac{d-2}{2}}
     (z^2-u^2)^{\frac{d-2}{2}}
 \end{align}
-
+We can first show that
+\begin{align*}
+    &\binom{d-2}{k}
+    g(k,x,y,z) + \binom{d-2}{k+1}
+    g(k+2,x,y,z)  \\
+    &=\binom{d-2}{k}\frac{d-3}{k+1}
+    \int_{0}^{z^2-u^2}
+    (y^2-u^2-x)^{\frac{k+1}{2}}
+    (z^2-u^2-x)^{\frac{d-2-k}{2}}
+    x^{\frac{d-5}{2}}dx
+\end{align*}
 Below we divide the proof into the case whether
 $d$ is even or odd.
 
@@ -2793,6 +2803,27 @@ When $j=\frac{d-2}{2}$, $k=d-1$,
 $g(d-1,x,y,z)$
 contains a term like
 $B(\frac{d-1}{2}, \frac{1}{2})(y^2-u^2)^{(d-2)/2}(z^2-u^2)^{(d-2)/2}$.
+
+Then we need to show:
+\begin{equation*}
+  \sum_{t=0}^{(d-2)/2}
+\binom{d-1}{2t} \int_0^a
+(b-x)^{t}(a-x)^{(d-1-2t)/2}
+x^{(d-5)/2} dx
+=B(\frac{d-1}{2}, \frac{1}{2})
+b^{\frac{d-2}{2}}
+a^{\frac{d-2}{2}}
+\end{equation*}
+Or equivalently,
+\begin{equation*}
+    \int_0^a[(1+t)^{d-1}-(1-t)^{d-1}] (b-x)^{(d-1)/2}x^{(d-5)/2} dx
+\end{equation*}
+where $t=\sqrt{\frac{a-x}{b-x}}$.
+$x=\frac{a-bt^2}{1-t^2},\frac{dx}{dt} = \frac{2t(a-b)}{(1-t^2)^2}$,
+Then
+\begin{equation*}
+(b-a)^{(d+1)/2}\int_0^{\sqrt{a/b}} [(1+t)^{d-1}-(1-t)^{d-1}] \frac{2t(a-bt^2)^{(d-5)/2}}{(1-t^2)^{d-1}}dt
+\end{equation*}
 
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
