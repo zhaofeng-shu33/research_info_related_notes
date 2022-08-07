@@ -6,7 +6,7 @@ from scipy.integrate import quad
 a = 1.3
 b = 2.2
 c = np.sqrt(a/b)
-d = 6
+d = 3
 n = d - 2
 def g(k):
     f1 = lambda x: np.power(b-x, (k-1)/2) * np.power(a-x, (d-2-k)/2) * np.power(x, (d-3)/2)

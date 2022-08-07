@@ -2821,6 +2821,8 @@ Or equivalently,
 \begin{equation*}
     \int_0^a[(1+t)^{d-1}-(1-t)^{d-1}] (b-x)^{(d-1)/2}x^{(d-5)/2} dx
 \end{equation*}
+We can also obtain the above formula when $d$ is odd.
+
 where $t=\sqrt{\frac{a-x}{b-x}}$.
 $x=\frac{a-bt^2}{1-t^2},\frac{dx}{dt} = \frac{2t(a-b)}{(1-t^2)^2}$,
 Then we need to show that
@@ -2838,14 +2840,40 @@ or equivalently
     = \frac{n+1}{n-1}B(\frac{n+1}{2}, \frac{1}{2})
     \frac{c^n}{(1-c^2)^{(n+3)/2}}
     \end{equation*}
-for $n=d-2\geq 4, c=\sqrt{a/b}<1$.    
-\begin{equation*}
+for $n=d-2\geq 1, c=\sqrt{a/b}<1$.    
+\begin{equation}\label{eq:sim_1tc}
     \int_0^{c}
     [\frac{1}{(1-t)^{n+2}}+\frac{1}{(1+t)^{n+2}}]
     (c^2- t^2)^{(n-1)/2}dt
     =B(\frac{n+1}{2}, \frac{1}{2})
     \frac{c^n}{(1-c^2)^{(n+3)/2}}
-    \end{equation*}
+    \end{equation}
+Let
+\begin{equation}
+ f(n,c)=   \int_0^{c}
+    [\frac{1}{(1-t)^{n+2}}+\frac{1}{(1+t)^{n+2}}]
+    (c^2- t^2)^{(n-1)/2}dt
+\end{equation}
+Firstly, by integration by parts 
+we have 
+\begin{equation}
+    \frac{n+1}{n-1}f(n,c)
+    =\int_0^{c}
+    [(1+t)^{n+1}-(1-t)^{n+1}]
+    \frac{t(c^2- t^2)^{(n-3)/2}}{(1-t^2)^{n+1}}dt
+\end{equation}
+If we can show that
+\begin{equation}
+    f(n,c)=\frac{c^2-1}{2c}\frac{2}{n-1}\frac{\partial f(n,c)}{\partial c}
+    + [2\frac{n+1}{n-1} f(n,c) + f(n-2, c)]
+\end{equation}
+then we can use induction and solve the ODE about $f(n,c)$ to prove
+that (from \eqref{eq:sim_1tc})
+\begin{equation}
+    f(n,c)= B(\frac{n+1}{2}, \frac{1}{2})
+    \frac{c^n}{(1-c^2)^{(n+3)/2}}
+\end{equation}
+
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
