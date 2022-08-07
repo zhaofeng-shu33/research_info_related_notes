@@ -2735,35 +2735,41 @@ We only need to prove
 Suppose $k\leq d-2$ and $d-k$ is odd,
 then
 \begin{align*}
-    g(k,x,y,z)&=2\int_u^z x
+    &2\int_u^z x
     (y^2-x^2)^{\frac{k-1}{2}}
     (z^2-x^2)^{\frac{d-2-k}{2}}
     (x^2-u^2)^{\frac{d-3}{2}}dx\\
     &=\int_{0}^{z^2-u^2}
     (y^2-u^2-x)^{\frac{k-1}{2}}
     (z^2-u^2-x)^{\frac{d-2-k}{2}}
-    x^{\frac{d-3}{2}}dx
+    x^{\frac{d-3}{2}}dx\\
+    &=\int_{0}^{a}
+    (b-x)^{\frac{k-1}{2}}
+    (a-x)^{\frac{d-2-k}{2}}
+    x^{\frac{d-3}{2}}dx=g(k,b,a)
 \end{align*}
+where $a=z^2-u^2, b=y^2-u^2, a<b$.
+
 When $d-k$ is even, we only need to compute
-$g(k+1,x,y,z)$.
+$g(k+1,x,b,a)$.
 In summarize, to prove \eqref{eq:ref_prove_integration},
 we only need to show that
 \begin{align}\label{eq:intermediate_summation}
     \sum_{k\leq d-2}\binom{d-2}{k}g(k+\textrm{mod}(d-k+1,2)
-    ,x,y,z)
+    ,b,a)
     = B(\frac{d-1}{2}, \frac{1}{2})
-    (y^2-u^2)^{\frac{d-2}{2}}
-    (z^2-u^2)^{\frac{d-2}{2}}
+    b^{\frac{d-2}{2}}
+    a^{\frac{d-2}{2}}
 \end{align}
 We can first show that
 \begin{align*}
     &\binom{d-2}{k}
-    g(k,x,y,z) + \binom{d-2}{k+1}
-    g(k+2,x,y,z)  \\
+    g(k,b,a) + \binom{d-2}{k+1}
+    g(k+2,b,a) \\
     &=\binom{d-2}{k}\frac{d-3}{k+1}
-    \int_{0}^{z^2-u^2}
-    (y^2-u^2-x)^{\frac{k+1}{2}}
-    (z^2-u^2-x)^{\frac{d-2-k}{2}}
+    \int_{0}^{a}
+    (b-x)^{\frac{k+1}{2}}
+    (a-x)^{\frac{d-2-k}{2}}
     x^{\frac{d-5}{2}}dx
 \end{align*}
 Below we divide the proof into the case whether
@@ -2776,7 +2782,7 @@ Suppose $d$ is odd, by integration by parts, we can first show that
     + \int_0^{z^2-u^2} \sqrt{\frac{y^2-u^2-x}{z^2-u^2-x}}dx
     = 2\sqrt{y^2-u^2}\sqrt{z^2-u^2}
 \end{equation}
-Indeed, suppose $a=z^2-u^2, b=y^2-u^2, a<b$, we have
+Indeed, we have
 \begin{align}
     \int_0^a \sqrt{\frac{a-x}{b-x}}dx
     &= \int_0^{\sqrt{a/b}} \frac{2(b-a)t^2}{(1-t^2)^2}dt
@@ -2786,27 +2792,24 @@ Indeed, suppose $a=z^2-u^2, b=y^2-u^2, a<b$, we have
     =\sqrt{ab} + \frac{b-a}{2}\ln \frac{1+\sqrt{a/b}}{1-\sqrt{a/b}} \\
 \end{align}
 That is, \eqref{eq:intermediate_summation} holds for $d=3$.
-For $d>3$ we use induction,
-Suppose the result holds for
-$d=d'-2$,
-then
 
 \subsection{$d$ is even}
 Suppose $d$ is even, and $k$ is odd, then
 \begin{align*}
-    g(k,x,y,z)= \sum_{j=0}^{(k-1)/2}
+    g(k,b,a)= \sum_{j=0}^{(k-1)/2}
     (-1)^{\frac{k-1}{2}-j}\binom{(k-1)/2}{j}
     B(\frac{d+k}{2}-j-1, \frac{d-k}{2})
-    (y^2-u^2)^j (z^2-u^2)^{d-2-j}
+    b^j a^{d-2-j}
 \end{align*}
 When $j=\frac{d-2}{2}$, $k=d-1$,
-$g(d-1,x,y,z)$
+$g(d-1,b,a)$
 contains a term like
-$B(\frac{d-1}{2}, \frac{1}{2})(y^2-u^2)^{(d-2)/2}(z^2-u^2)^{(d-2)/2}$.
+$B(\frac{d-1}{2}, \frac{1}{2})b^{(d-2)/2}
+a^{(d-2)/2}$.
 
 Then we need to show:
 \begin{equation*}
-  \sum_{t=0}^{(d-2)/2}
+ \frac{d-3}{d-1} \sum_{t=0}^{(d-2)/2}
 \binom{d-1}{2t} \int_0^a
 (b-x)^{t}(a-x)^{(d-1-2t)/2}
 x^{(d-5)/2} dx
@@ -2820,11 +2823,29 @@ Or equivalently,
 \end{equation*}
 where $t=\sqrt{\frac{a-x}{b-x}}$.
 $x=\frac{a-bt^2}{1-t^2},\frac{dx}{dt} = \frac{2t(a-b)}{(1-t^2)^2}$,
-Then
+Then we need to show that
 \begin{equation*}
-(b-a)^{(d+1)/2}\int_0^{\sqrt{a/b}} [(1+t)^{d-1}-(1-t)^{d-1}] \frac{2t(a-bt^2)^{(d-5)/2}}{(1-t^2)^{d-1}}dt
+\frac{d-3}{2(d-1)} (b-a)^{(d+1)/2}\int_0^{\sqrt{a/b}} [(1+t)^{d-1}-(1-t)^{d-1}] \frac{2t(a-bt^2)^{(d-5)/2}}{(1-t^2)^{d-1}}dt
+= B(\frac{d-1}{2}, \frac{1}{2})
+b^{\frac{d-2}{2}}
+a^{\frac{d-2}{2}}
 \end{equation*}
-
+or equivalently
+\begin{equation*}
+    \int_0^{c}
+    [(1+t)^{n+1}-(1-t)^{n+1}]
+    \frac{t(c^2- t^2)^{(n-3)/2}}{(1-t^2)^{n+1}}dt
+    = \frac{n+1}{n-1}B(\frac{n+1}{2}, \frac{1}{2})
+    \frac{c^n}{(1-c^2)^{(n+3)/2}}
+    \end{equation*}
+for $n=d-2\geq 4, c=\sqrt{a/b}<1$.    
+\begin{equation*}
+    \int_0^{c}
+    [\frac{1}{(1-t)^{n+2}}+\frac{1}{(1+t)^{n+2}}]
+    (c^2- t^2)^{(n-1)/2}dt
+    =B(\frac{n+1}{2}, \frac{1}{2})
+    \frac{c^n}{(1-c^2)^{(n+3)/2}}
+    \end{equation*}
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
