@@ -2902,7 +2902,13 @@ that (from \eqref{eq:sim_1tc})
     f(n,c)= B(\frac{n+1}{2}, \frac{1}{2})
     \frac{c^n}{(1-c^2)^{(n+3)/2}}
 \end{equation}
-
+Indeed, with initial condition $f(n,0)=0$ and
+\begin{equation}
+    \frac{\partial f(n,c)}{\partial c}
+    - \frac{(n+3)c}{1-c^2} f(n,c)
+    = B((n-1)/2, 1/2)\frac{(n-1)c^{n-1}}{(1-c^2)^{(n+3)/2}}
+\end{equation}
+积分因子是 $I(c)=(1-c^2)^{(n+3)/2}$.
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
