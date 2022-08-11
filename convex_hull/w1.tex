@@ -24,14 +24,15 @@
 \section{General statement}
 $p_i$ are points sampled with independent identical distribution in $d$ dimensional space
 for $i=1,2,\dots, n, n+1$. We consider the event
-$A_n =\{p_{n+1} \in ConvexHull\{p_1,
-\dots, p_n\} \}$. $P(A_n)$ is also called
-the probability content while $P(A_n^c)
-=1-P(A_n)$.
-$P(A_n^c)$ increases if $d$ increases,
+$H_n =\{p_{n+1} \in ConvexHull\{p_1,
+\dots, p_n\} \}$. $P(H_n)$ is also called
+the probability content while
+$P(H_n^c)
+=1-P(H_n)$.
+$P(H_n^c)$ increases if $d$ increases,
 and it decreases if $d$ increases.
 
-Notice that the event $A^c_n$ is different
+Notice that the event $H^c_n$ is different
 from the event that $p_1, \dots, p_{n+1}$
 are in convex position.
 
@@ -42,7 +43,7 @@ in 1864. Then there are two directions afterwards.
 One is studying the probability of all points are in convex
 position, denoted as $p(n, K)$ in $d$ dimension where $K$ is the convex body
 and $n$ is the number of points.
-The other direction is to study $P(A_n)$.
+The other direction is to study $P(H_n)$, the probability content of the convex hull.
 The second direction diverges from the first direction
 from the paper of Rényi in 1963 \cite{renyi1963konvexe}.
 
@@ -54,11 +55,22 @@ in a unit circle, the asymptotic behavior
 of the number of vertices is $cn^{1/3}$.
 For the standard normal distribution in a plane,
 $\E[V_n] \sim 2\sqrt{2\pi \log n}$.
+Carnal \cite{carnal1970konvexe} studied  general symmetric distribution in 2d,
+and obtained the asymptotic expression of $\E[V_N]$
+in three different distribution families.
+
 
 Later on, in the paper of Hervé Raynaud (in the year 1970)
 \cite{raynaud1970enveloppe},
 the results
 of Rényi are extended to higher dimensions.
+However, this extension is restricted to the
+computation of $\E[F_N]$, the expected number of
+$d-1$ dimensional hyperplanes.
+
+Exact formula of $P(H_N^c)$
+for Gaussian distribution is obtained in \cite{kabluchko2020absorption}.
+
 Both Rényi and Raynaud
 based their deductions on integration techniques.
 Afterwards, discrete mathematics has been
