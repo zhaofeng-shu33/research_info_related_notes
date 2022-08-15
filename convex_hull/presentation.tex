@@ -95,12 +95,41 @@ as $n\to\infty$
 \end{frame}
 \begin{frame}
     \frametitle{Three types of spherically symmetric distribution}
-    Depending on how $\Pr(R>r)$ decreases as $r\to \infty$
+    Depending on how $F(r)=\Pr(R>r)$ decreases as $r\to \infty$
     \begin{itemize}
-        \item Algebraic tails: $\Pr(R>r) = r^{-\alpha} L(r)$ where $L(r)$ is a slowly varying function
-        \item Exponential tails: $\Pr(R>r) = r^{\alpha} \exp(-\gamma r^{\beta})$, $\gamma$ is scale factor
-        \item Truncated tails: $\Pr(R>r) = (1-r)^{\alpha}$ for $r<1$ and $\Pr(R>r)=1$ for $r>1$
+        \item Algebraic tails: $F(r)= r^{-k} L(r)$ where $L(r)$ is a slowly varying function
+        \item Exponential tails: $L(y):=\textrm{Inverse}(F(1/y))$ is slowly varying
+        \item Truncated tails: $F(1-r) \sim r^k L(\frac{1}{r})$ as $r\to 0$, $F(r)=0$ for $r>1$
     \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{Asymptotic expression for the expected number of $d-1$ dimensional faces}
+    Suppose $N,d \to \infty$ in a certain way
+    \begin{table}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        distribution family & $\E[F_N]$ & Condition for $P(H_N^c) \to 0$ \\
+        \hline
+       Algebraic tails & $\sqrt{\frac{2}{\pi}}
+       c^d$
+       & $N\gg \frac{c^d}{d^2}$ \\
+       \hline
+       Exponential tails & $\frac{2}{\sqrt{d}} (\frac{2\pi}{\epsilon(N)})^{(d-1)/2}$
+       & $ N (\epsilon(N))^{(d-1)/2} \gg \frac{(2\pi)^{d/2}}{d^{3/2}}$ \\
+       \hline
+       Truncated tails & 
+       & $\frac{N^{2k/d}}{L(N)}
+       \gg (2\pi)^{d/2}d^{(d-5)/2}$\\
+       \hline
+    \end{tabular}
+\end{table}
+Some extra definitions:
+\begin{itemize}
+\item $\epsilon(s):=\frac{sL'(s)}{L(s)}$
+\item $c:=\frac{\sqrt{\pi}k\Gamma(k/2)}{\Gamma(\frac{k+1}{2})}>1$
+\item $\epsilon(s)=\frac{1}{2\log s}$ for Gaussian distribution.
+\item $L(N)=d,k=1$ for uniform distribution within the sphere
+\end{itemize}
 \end{frame}
 \begin{frame}
     \frametitle{
