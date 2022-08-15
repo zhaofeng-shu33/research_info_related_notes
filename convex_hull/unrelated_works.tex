@@ -180,10 +180,22 @@ the one \cite{orthogonal}:
 when $a=b=x, c=\sqrt{1-2a^2}, z=1,y=\sqrt{2}x$ and $x<\frac{\sqrt{2}}{2}$.
 \section{Special function for Cauchy distribution}
 \begin{equation}
-    g_n(\frac{1}{r}) = \frac{\Gamma((r+1)/2)}{\sqrt{\pi} \Gamma(r/2)}
-    \int_{\mathbb{R}} \Phi^n(x)(x^2+1)^{-(r+1)/2}dx
+    g_n(r) = \frac{\Gamma((r+1)/2)}{\pi^{(d+1)/2}|\Sigma|^{1/2}}
+    \int_{\bm{x}\geq 0}\frac{1}{(1+\bm{x}^T\Sigma^{-1}\bm{x})^{(1+d)/2}}d\bm{x}
 \end{equation}
 where $\Phi$ is the CDF of Cauchy distribution.
+By integration techniques, we can show that 
+$g_2(r)=\frac{1}{2\pi}\arccos(-\frac{r}{1+r})
+=\frac{1}{2}-\arccos\frac{r}{1+r}$,
+which is the same with property f of Proposition 1.4 in \cite{kabluchko2020absorption}
+
+It seems that the conic version of Crofton formula only
+works for Gaussian distribution mentioned in \cite{kabluchko2020absorption}.
+Thus the method could not be generalized to
+other spherically symmetric distribution.
+\section{Limit distribution of the number of points}
+See \cite{aldous1991number}
+
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
