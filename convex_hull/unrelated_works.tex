@@ -178,7 +178,12 @@ the one \cite{orthogonal}:
     A=\big(\frac 12-a-b\big)\pi + 2b\arctan(\frac ac)+2a\arctan(\frac bc)+\arctan(\frac{c^2-a^2 b^2}{2abc})
 \end{equation}
 when $a=b=x, c=\sqrt{1-2a^2}, z=1,y=\sqrt{2}x$ and $x<\frac{\sqrt{2}}{2}$.
-
+\section{Special function for Cauchy distribution}
+\begin{equation}
+    g_n(\frac{1}{r}) = \frac{\Gamma((r+1)/2)}{\sqrt{\pi} \Gamma(r/2)}
+    \int_{\mathbb{R}} \Phi^n(x)(x^2+1)^{-(r+1)/2}dx
+\end{equation}
+where $\Phi$ is the CDF of Cauchy distribution.
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
