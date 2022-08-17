@@ -3002,6 +3002,18 @@ For d dimensional Gaussian, we have $\epsilon(s)=\frac{1}{2\log s}$,
 then $\E[F_N]\sim \frac{2^d}{\sqrt{d}}(\pi \log N)^{\frac{d-1}{2}}$,
 which is consistent with (1.11) of \cite{raynaud1970enveloppe}.
 
+We can compare our result with that in \cite{kabluchko2020absorption}.
+In our consideration,
+\begin{enumerate}
+    \item $p_{n,d}(1) \leq d b_{n,d-1}(1)$
+    \item $g_{d-1}(-\frac{1}{d})\sim \frac{1}{2^{d-1}}$
+    \item $\sqrt{\frac{2d}{\pi}} \binom{n}{d}
+    \int_0^{+\infty} \Phi^{n-d}(x) \exp(-\frac{d}{2}x^2)dx
+    \sim \frac{2^d}{\sqrt{d}}(\pi \log n)^{(d-1)/2}$
+\end{enumerate}
+then we can obtain $p_{N,d}(1) \leq \frac{(\pi \log N)^{(d-1)/2}d^{3/2}}{N }<\frac{\E[F_N]}{dN}$.
+Therefore, our estimation of $P(H_N^c)$ based on $\E[F_N]$
+is a loose upper bound.
 \subsection{Truncated tail}
 For truncated tails, if If $F(1-x) \sim x^k L(1/x)$,
 then
