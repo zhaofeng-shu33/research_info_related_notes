@@ -1,5 +1,6 @@
 import argparse
 import numpy as np
+from numpy import random
 import pickle
 from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
@@ -103,8 +104,14 @@ def countVertex(n):
 def testN(n, nTrial=20):
     return np.array( [ countVertex(n) for i in range(nTrial) ])
 
-def testAllN(n_list):
-    
+def testAllN(n_list, poisson=False):
+    if poisson:
+        result = 0
+        for i in range(NTRIAL):
+            n = random.poisson()
+            result += countVertex(n)
+        result /= NTRIAL
+        return [result]
     nN = len(n_list)
     result = np.zeros(nN)
     for i, n in enumerate(n_list):
