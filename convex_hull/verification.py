@@ -109,9 +109,13 @@ def testAllN(n_list, poisson=False):
         result = 0
         for i in range(NTRIAL):
             n = random.poisson()
-            result += countVertex(n)
+            if n > 3:
+                result += countVertex(n)
+            else:
+                result += n
         result /= NTRIAL
-        return [result]
+        return [result] * len(n_list)
+
     nN = len(n_list)
     result = np.zeros(nN)
     for i, n in enumerate(n_list):
