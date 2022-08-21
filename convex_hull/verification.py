@@ -43,6 +43,14 @@ def random_points_2d_cauchy(n):
     theta *= 2 * np.pi
     return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
 
+def random_2d_poisson_process(a):
+    n = random.poisson(np.power(a, -DOF))
+    y = np.random.random(n)
+    r = a / np.power(1 - y, 1 / DOF)
+    theta = np.random.random(n)
+    theta *= 2 * np.pi
+    return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
+    
 def random_points_2d_t_distribution(n, v):
     y = np.random.random(n)
     r = np.sqrt(v) * np.sqrt(np.power(1-y, -2/v) - 1)
@@ -105,22 +113,25 @@ def testN(n, nTrial=20):
     return np.array( [ countVertex(n) for i in range(nTrial) ])
 
 def testAllN(n_list, poisson=False):
-    if poisson:
-        result = 0
-        for i in range(NTRIAL):
-            n = random.poisson()
-            if n > 3:
-                result += countVertex(n)
-            else:
-                result += n
-        result /= NTRIAL
-        return [result] * len(n_list)
-
     nN = len(n_list)
     result = np.zeros(nN)
-    for i, n in enumerate(n_list):
-        print(i)
-        result[i] = np.mean(testN(n, NTRIAL))
+    if poisson:
+        for j in range(nN):
+            result_j = 0
+            a = 1 / n_list[j]
+            for i in range(NTRIAL):
+                points = random_2d_poisson_process(a)     
+                if points.shape[0] <= 3:
+                    result_j += points.shape[0]
+                else:
+                    hull = ConvexHull(points)
+                    result_j += hull.nsimplex
+            result_j /= NTRIAL
+            result[j] = result_j
+    else:
+        for i, n in enumerate(n_list):
+            print(i)
+            result[i] = np.mean(testN(n, NTRIAL))
     return result
 
 if __name__ == '__main__':
@@ -136,6 +147,7 @@ if __name__ == '__main__':
     parser.add_argument('--max_points', help='maximal N', default=100, type=int)
     parser.add_argument('--interval', default=5, type=int)
     parser.add_argument('--num_trials', default=1000, type=int)
+    parser.add_argument('--poisson', type=bool, const=True, nargs='?', default=False)
 
     args = parser.parse_args()
     DISTRIBUTION = args.distribution
@@ -143,10 +155,13 @@ if __name__ == '__main__':
     TWOPIC1 = args.TWOPIC1
     NTRIAL = args.num_trials
     n_list = np.array(range(5, args.max_points, args.interval))
-    result = testAllN(n_list)
+    result = testAllN(n_list, args.poisson)
     with open('build/sim_data_0.pickle', 'wb') as f:
         pickle.dump({'n_list': n_list, 'result': result}, f)
-    result = transform(n_list, result)
+    if not args.poisson:
+        result = transform(n_list, result)
+    else:
+        args.distribution = '2d-t-distribution'
     # if args.distribution.find('cauchy') < 0:
         # model = LinearRegression()        
         # reg = model.fit(np.log(transformed_n_list.reshape(-1, 1)), np.log(result))
