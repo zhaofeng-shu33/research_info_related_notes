@@ -195,7 +195,8 @@ Thus the method could not be generalized to
 other spherically symmetric distribution.
 \section{Limit distribution of the number of points}
 See \cite{aldous1991number}
-\section{Notes on Poission process}
+\section{Notes on Poisson process}
+This section is axillary to Lemma 4.3 of \cite{davis1987convex}.
 For $y>a$,
 \begin{equation}
     g_a(y) = \frac{\alpha a^{\alpha}}{2\pi}
@@ -204,6 +205,29 @@ For $y>a$,
 $F_{1a}(x)$ represents marginal distribution,
 \begin{equation}
     1-F_{1a}(x)=\frac{a^{\alpha}}{2\pi}x^{-\alpha}B(\frac{1}{2}, \frac{\alpha + 1}{2})
+\end{equation}
+Using symmetric property, we can show that
+\begin{align}
+G(x) &= 2\pi \iint_{\R^2} |y_2 - y_1| p(x,y_1) p(x,y_2)dy_1dy_2\\
+&=16\pi \int_0^{+\infty} p(x,y_1) dy_1 \int_{y_1}^{+\infty} y_2 p(x,y_2)dy_2
+\end{align}
+Then
+\begin{equation}
+    \E[V_N]= \binom{N}{2} \int_{\R} F_{1a}(x)^{N-2} G(x) dx
+\end{equation}
+Using the formula
+\begin{equation}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\tan \theta - \tan \psi|
+    \cos^v\theta \cos^v \psi
+    d\theta d\psi \notag\\
+    = \frac{4}{v} B\left(v+\frac{1}{2}, \frac{1}{2}
+    \right)
+\end{equation}
+we can obtain
+\begin{equation}
+    G(x) = \frac{2\alpha a^{2\alpha}}{\pi x^{2\alpha+1}}
+    B(\alpha+\frac{1}{2},\frac{1}{2})
 \end{equation}
 \bibliographystyle{plain}
 \bibliography{ref.bib}
