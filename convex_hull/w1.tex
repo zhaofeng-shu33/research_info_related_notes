@@ -2698,11 +2698,28 @@ a & = \pm \tan \theta \sqrt{x_1^2+\dots + x_{d-1}^2} + y \\
 z^2 &= a^2 + x_1^2 + \dots + x_{d-1}^2
 \end{align*}
 Then
-\begin{equation}
+\begin{equation}\label{eq:F0_formula}
     F_0(x)=\frac{2\Gamma(\frac{d}{2})}
     {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
     \int_x^{+\infty} |dF(y)|
     \int_x^{y} |dF(z)|dz \int_{a_2/z}^{a_1 /z} (1-u^2)^{\frac{d-3}{2}}du
+\end{equation}
+At this point, we prove the formula of
+$\kappa(r)$ defined in (1.1) of \cite{dwyer1991convex}.
+From $\kappa(r)$ it is easy to derive \eqref{eq:F0_formula}.
+
+Our starting point is Example 8.7 of \cite{surfaceArea}.
+the element of surface area $d\sigma = \frac{1}{1-|y|^2}dy$
+for a unit sphere parameterized by $y=(x_1, \dots, x_{d-1})$.
+Therefore,
+\begin{align*}
+    \kappa(r) &= \frac{1}{\kappa_d}\int_{x_1^2 + \dots + x_{d-1}^2 \leq 1-r^2}
+    \frac{dx_1 \dots dx_{d-1}}{\sqrt{1-x_1^2-\dots -x_{d-1}^2}}\\
+    &=\frac{\kappa_{d-1}}{\kappa_d}\int_0^{\sqrt{1-r^2}} \frac{x^{d-2}}{\sqrt{1-x^2}}dx
+\end{align*}
+Now make a change of variable by $u^2=1-x^2$ we obtain
+\begin{equation}
+    \kappa(r)=\frac{\kappa_{d-1}}{\kappa_d}\int_r^1 (1-u^2)^{(d-3)/2}du
 \end{equation}
 
 To simplify the notation,
