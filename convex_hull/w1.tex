@@ -2702,7 +2702,7 @@ Then
     F_0(x)=\frac{2\Gamma(\frac{d}{2})}
     {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
     \int_x^{+\infty} |dF(y)|
-    \int_x^{y} |dF(z)|dz \int_{a_2/z}^{a_1 /z} (1-u^2)^{\frac{d-3}{2}}du
+    \int_x^{y} |dF(z)|\int_{a_2/z}^{a_1 /z} (1-u^2)^{\frac{d-3}{2}}du
 \end{equation}
 At this point, we prove the formula of
 $\kappa(r)$ defined in (1.1) of \cite{dwyer1991convex}.
@@ -2742,7 +2742,7 @@ Then
 \begin{align*}
     \frac{d F_0(x)}{dx} & =\frac{2\Gamma(\frac{d}{2})}
     {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
-    \int_x^{+\infty} |dF(y)| \int_x^y f(x,y,z)|dF(z)| \\
+    \int_x^{+\infty} |dF(y)| \int_x^y |f(x,y,z)| |dF(z)| \\
     f(x,y,z) & = \sin^{d-2} (\theta_2 - \theta_1)
     \left(\frac{-1}{z\sin\theta_1}
     +\frac{1}{y\sin \theta_2}\right)
@@ -2757,7 +2757,7 @@ We only need to prove
     \frac{2\Gamma(\frac{d}{2})}
     {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
     \int_u^z (1-\frac{u^2}{x^2})^{\frac{d-3}{2}}
-    f(x,y,z)dx =
+    |f(x,y,z)|dx =
     2(1-\frac{u^2}{y^2})^{\frac{d-2}{2}}
     (1-\frac{u^2}{z^2})^{\frac{d-2}{2}}
 \end{equation} 
@@ -2811,7 +2811,7 @@ Suppose $d$ is odd, by integration by parts, we can first show that
     + \int_0^{z^2-u^2} \sqrt{\frac{y^2-u^2-x}{z^2-u^2-x}}dx
     = 2\sqrt{y^2-u^2}\sqrt{z^2-u^2}
 \end{equation}
-Indeed, we have
+Indeed, let $\sqrt{\frac{a-x}{b-x}}$, we have
 \begin{align}
     \int_0^a \sqrt{\frac{a-x}{b-x}}dx
     &= \int_0^{\sqrt{a/b}} \frac{2(b-a)t^2}{(1-t^2)^2}dt
@@ -2897,7 +2897,7 @@ we have
 Let $t=\frac{(1+t)-(1-t)}{2}$ in the right hand side,
 of \eqref{eq:tmp_n_u_d_f_n}, then
 \begin{equation}
-    \frac{n+1}{n-1}f(n,c)
+    2\frac{n+1}{n-1}f(n,c)
 =    -f(n-2,c)  
 + \int_0^{c}
 \left[\frac{1+t}{(1-t)^{n+1}}
