@@ -3032,10 +3032,11 @@ then we can obtain $p_{N,d}(1) \leq \frac{(\pi \log N)^{(d-1)/2}d^{3/2}}{N }<\fr
 Therefore, our estimation of $P(H_N^c)$ based on $\E[F_N]$
 is a loose upper bound.
 \subsection{Truncated tail}
-For truncated tails, if If $F(1-x) \sim x^k L(1/x)$,
+For truncated tails, if $F(1-x) \sim x^k L(1/x)$,
 then
 \begin{align}
-    K(1-x) & \sim (d-2)2^{\frac{d}{2}-2} B(k+1,\frac{d}{2}-1)x^{k+\frac{d}{2}-1}L(\frac{1}{x})\\
+    K(1-x)
+    & \sim (d-2)2^{\frac{d}{2}-2} B(k+1,\frac{d}{2}-1)x^{k+\frac{d}{2}-1}L(\frac{1}{x})\\
     & = k 2^{\frac{d}{2}-1} B(k, \frac{d}{2}) x^{k+\frac{d}{2}-1} L(1/x) 
 \end{align}
 and
@@ -3069,12 +3070,13 @@ Then
 and we obtain
 \begin{align}\label{eq:efn_truncated_formula}
     \E[F_N] &\sim \frac{b}{d!}a^{-d+\frac{d-1}{2k+d-1}}
-    \Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)n^{\frac{d-1}{2k+d-1}}
-    L(n)
+    \Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)N^{\frac{d-1}{2k+d-1}}
+    L(N)
     ^{\frac{d-1}{2k+d-1}} \\
     &\sim \frac{\tilde{b} }{d!}
-    a^{\frac{d-1}{2k+d-1}}\Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)n^{\frac{d-1}{2k+d-1}}
-    L(n)
+    a^{\frac{d-1}{2k+d-1}}\Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)
+    N^{\frac{d-1}{2k+d-1}}
+    L(N)
     ^{\frac{d-1}{2k+d-1}}
 \end{align}
 where
@@ -3083,6 +3085,16 @@ where
     = \frac{\pi^{(d-1)/2} 2^{(d+1)/2}
     \Gamma^d(k+\frac{d+1}{2})
     \Gamma(d(k+\frac{d}{2}-1)+1)}{\Gamma^d(k+\frac{d}{2})\Gamma(d(k+\frac{d}{2}-1)+ \frac{3}{2})}
+\end{equation}
+When $d\to \infty$, using the 
+following lemma, we obtain the asymptotic value of $\tilde{b}$ as
+\begin{equation}
+    \tilde{b} \sim 2\pi^{(d-1)/2}
+    d^{-1}e^kd^{d/2}
+\end{equation}
+The asymptotic value of $a$ is given as
+\begin{equation}
+    a \sim \pi^{-1/2} 2^{\frac{d-2+2k}{2}} k \Gamma(k) d^{-k-\frac{1}{2}}
 \end{equation}
 \begin{lemma}
     For fixed $v>0$, we have
