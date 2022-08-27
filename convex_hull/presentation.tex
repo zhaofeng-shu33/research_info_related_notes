@@ -30,69 +30,72 @@
 
 \begin{frame}
 \frametitle{Problems}
-Compute the probability content $P(H_n)$ of the convex hull $H_n$
-of $n$ random points in $\mathbb{R}^d$
+Compute the probability content $P(H_N)$ of the convex hull $H_N$
+of $N$ random points in $\mathbb{R}^d$
 \begin{itemize}
-\item the random points are i.i.d. sampled from a given distribution $\Gamma$
-\item we are more interested in the asymptotic behavior of $P(H_n)$
-as $n\to\infty$
-\item $P(H_n)$ is different from the expected volume $\mathbb{E}[\Vol]$
+\item the random points are i.i.d. sampled from a given spherically symmetric distribution $\Gamma$
+\item we are more interested in the asymptotic behavior of $P(H_N)$
+as $N,d\to\infty$
+\item under which condition $P(H_N) \to 0$ (or $\to 1$)?
 \end{itemize}
 \end{frame}
 \begin{frame}
 	\frametitle{Equivalent problem}
+    \begin{itemize}
+        \item $V_N$ the number of vertices
+        \item $F_N$ the number of $d-1$ dimensional faces
+    \end{itemize}
     \begin{align}
-        P(H_n^c) & = \frac{1}{n+1}\mathbb{E}[V_{n+1}]\\
-        F_{n+1} & = V_{n+1} (d-1) - d^2 + d + 2 \textrm{ \textcolor{red}{\ding{55}}}
+        P(H_N^c) & = \frac{1}{N+1}\mathbb{E}[V_{n+1}]\\
+        F_N &\geq (d-1) V_N - (d+1)(d-2)
         \label{eq:FV_d}
     \end{align}   
     \begin{itemize}
-    \item We can obtain
-    $\mathbb{E}[F_{n+1}]$ and $\mathbb{E}[\Vol]$ for any $d$, 
-    \item \eqref{eq:FV_d} comes from Raynaud 1970
+    \item We can obtain an upper bound of $P(H_N^c)$ once
+    $\mathbb{E}[F_{N}]$ is known
+    \item Explicit formula for $\mathbb{E}[F_{N}]$
+    has been obtained by Raynaud 1970
     \end{itemize}
-    Revision: $V_N \leq F_N + C$,
-    
 \end{frame}   
 
 
-\begin{frame}
-    \frametitle{Geometric counting in 4d}
-    Euler's characteristic (Dehn–Sommerville equations):
-    \begin{equation}
-        V_N - E_N + F_N - \widetilde{V}_N = 0
-    \end{equation}   
-    \begin{itemize}
-        \item $E_N$: the number of edges
-        \item $F_N$: the number of triangular faces
-        \item $\widetilde{V}_N$: the number of tetrahedras (tetrahedra)
-    \end{itemize}    
-    Using $F_N = 2 \widetilde{V}_N$,
-    we can obtain $V_N - E_N + F_N = 0$
-\end{frame}
+% \begin{frame}
+%     \frametitle{Geometric counting in 4d}
+%     Euler's characteristic (Dehn–Sommerville equations):
+%     \begin{equation}
+%         V_N - E_N + F_N - \widetilde{V}_N = 0
+%     \end{equation}   
+%     \begin{itemize}
+%         \item $E_N$: the number of edges
+%         \item $F_N$: the number of triangular faces
+%         \item $\widetilde{V}_N$: the number of tetrahedras (tetrahedra)
+%     \end{itemize}    
+%     Using $F_N = 2 \widetilde{V}_N$,
+%     we can obtain $V_N - E_N + F_N = 0$
+% \end{frame}
 
-\begin{frame}
-    \frametitle{The limit of equivalent distribution for convex hull of spherically symmetric samples}
-    \begin{itemize}
-        \item Eddy and Gale 1981
-        \item one to one mapping from a convex hull and functions defined on unit sphere
-    \end{itemize}
-    \begin{block}{2d example}
-        \begin{itemize}
-        \item Given random samples $X_1, \dots, X_n$,
-        \item The function is defined on $\gamma \in [0,2\pi]$
-        $X_i$
-        \item Define $b_k(\gamma) =  k_1\cos\gamma + k_2 \sin \gamma$
-        \item $D_n(\gamma):=\max_{1\leq i \leq n}\{b_{X_i}(\gamma)\}$
-        \end{itemize}
-    \end{block}
-    Studies the limit distribution of $D_n(\gamma)$ for three types of distributions
+% \begin{frame}
+%     \frametitle{The limit of equivalent distribution for convex hull of spherically symmetric samples}
+%     \begin{itemize}
+%         \item Eddy and Gale 1981
+%         \item one to one mapping from a convex hull and functions defined on unit sphere
+%     \end{itemize}
+%     \begin{block}{2d example}
+%         \begin{itemize}
+%         \item Given random samples $X_1, \dots, X_n$,
+%         \item The function is defined on $\gamma \in [0,2\pi]$
+%         $X_i$
+%         \item Define $b_k(\gamma) =  k_1\cos\gamma + k_2 \sin \gamma$
+%         \item $D_n(\gamma):=\max_{1\leq i \leq n}\{b_{X_i}(\gamma)\}$
+%         \end{itemize}
+%     \end{block}
+%     Studies the limit distribution of $D_n(\gamma)$ for three types of distributions
 
-    \footnotesize{William~F Eddy and James~D Gale.
-     The convex hull of a spherically symmetric sample.
-    {\em Advances in Applied Probability}, 13(4):751--763, 1981.
-    }
-\end{frame}
+%     \footnotesize{William~F Eddy and James~D Gale.
+%      The convex hull of a spherically symmetric sample.
+%     {\em Advances in Applied Probability}, 13(4):751--763, 1981.
+%     }
+% \end{frame}
 \begin{frame}
     \frametitle{Three types of spherically symmetric distribution}
     Depending on how $F(r)=\Pr(R>r)$ decreases as $r\to \infty$
@@ -101,9 +104,16 @@ as $n\to\infty$
         \item Exponential tails: $L(y):=\textrm{Inverse}(F(1/y))$ is slowly varying
         \item Truncated tails: $F(1-r) \sim r^k L(\frac{1}{r})$ as $r\to 0$, $F(r)=0$ for $r>1$
     \end{itemize}
+    \begin{block}
+    {Slowly varying function}
+    For given $\lambda >0$,
+     \begin{equation}
+          \lim_{x\to \infty}  \frac{L(\lambda x)}{L(x)} = 1
+        \end{equation}
+    \end{block}
 \end{frame}
 \begin{frame}
-    \frametitle{Asymptotic expression for the expected number of $d-1$ dimensional faces}
+    \frametitle{Asymptotic expression for $\E[F_N]$}
     Suppose $N,d \to \infty$ in a certain way
     \begin{table}
     \begin{tabular}{|c|c|c|}
@@ -115,7 +125,7 @@ as $n\to\infty$
        & $N\gg \frac{c^d}{d^2}$ \\
        \hline
        Exponential tails & $\frac{2}{\sqrt{d}} (\frac{2\pi}{\epsilon(N)})^{(d-1)/2}$
-       & $ N (\epsilon(N))^{(d-1)/2} \gg \frac{(2\pi)^{d/2}}{d^{3/2}}$ \\
+       & $ N\cdot                                                                    (\epsilon(N))^{(d-1)/2} \gg \frac{(2\pi)^{d/2}}{d^{3/2}}$ \\
        \hline
        Truncated tails & 
        & $\frac{N^{2k/d}}{L(N)}
@@ -150,6 +160,7 @@ Some extra definitions:
         \item Truncated tails: $p(x,y) = C_{\alpha}(1-x^2-y^2)^{\alpha}$ for $r\leq 1$ and $p(x,y)=0$ for $r>1$
         ,$\E[V_N] \sim D_{\alpha} N^{1/(2\alpha + 3)}$ [Affentranger, 1991]
     \end{itemize}
+
 \end{frame}
 \begin{frame}{Algebraic tails family}
     \begin{itemize}
