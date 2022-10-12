@@ -699,7 +699,7 @@ if $y_i = -1$ the data $x_i^{(j)}$ are sampled from $p_1$.
 
 We multiply the above equation by $2$ and subtract $y^T(J_n-I_n)y$. We then can get
 $$
-2\sum_{i=1}^n h_iy_i + \sum_{(i,j)\in E} y_i y_j - (2\kappa+1) \sum_{(i,j)\in E} y_i y_j
+2\sum_{i=1}^n h_iy_i + \sum_{(i,j)\in E} y_i y_j - (2\kappa+1) \sum_{(i,j)\not\in E} y_i y_j
 $$
 
 The matrix $B$ is defined as in \cite{abbe} as
