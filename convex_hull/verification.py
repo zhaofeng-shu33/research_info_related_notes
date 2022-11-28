@@ -84,9 +84,19 @@ def random_points_in_unit_circle(n):
     theta *= 2 * np.pi
     return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
 
+def random_points_in_unit_sphere(n):
+    r = np.random.random(n)
+    r = np.power(r, 1 / DIM)
+    points = np.random.normal(size=(n, DIM))
+    norm_list = np.linalg.norm(points, axis=1) / r
+    points = (points.T / norm_list).T
+    return points
+
 def transform(n_list, result):
     if DISTRIBUTION == 'unit_circle':
         result = result / n_list ** (1/3)
+    elif DISTRIBUTION == 'unit_sphere':
+        result = result / n_list ** ((DIM - 1) / (DIM + 1))
     elif DISTRIBUTION == '2d-gaussian':
         result = result / np.sqrt(np.log(n_list))
     elif DISTRIBUTION == 'exponential-tail':
@@ -111,8 +121,10 @@ def countVertex(n):
         points = mixture_t_1_2(n, TWOPIC1 / (2 * np.pi))
     elif DISTRIBUTION == '2d-t-distribution':
         points = random_points_2d_t_distribution(n, DOF)
-    elif DISTRIBUTION == 'random_points_t_distribution':
+    elif DISTRIBUTION == 't_distribution':
         points = random_points_t_distribution(n)
+    elif DISTRIBUTION == 'unit_sphere':
+        points = random_points_in_unit_sphere(n)
     else:
         raise ValueError("")
     hull = ConvexHull(points)
@@ -149,7 +161,7 @@ if __name__ == '__main__':
             choices=['unit_circle', '2d-gaussian',
                      '2d-cauchy', '3d-cauchy',
                      '2d-t-distribution', 'exponential-tail',
-                     'mixture_t_1_2', 'random_points_t_distribution'],
+                     'mixture_t_1_2', 't_distribution', 'unit_sphere'],
             default='unit_circle')
     parser.add_argument('--dof', help='degree of freedom for t distribution', default=1, type=float)
     parser.add_argument('--dim', help='dimension', type=int, default=2)
