@@ -5,6 +5,7 @@ import pickle
 from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
 from scipy.integrate import dblquad
+from scipy.stats import chi2
 from scipy.special import gamma, gammainc
 # from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
@@ -12,7 +13,7 @@ NTRIAL = 1000
 DISTRIBUTION = 'unit_circle'
 DOF = 1.0
 TWOPIC1 = 1.0
-
+DIM = 2
 def exponential_tail(n, beta=1):
     # beta=1: gaussian
     y = np.random.random(n)
@@ -42,6 +43,12 @@ def random_points_2d_cauchy(n):
     theta = np.random.random(n)
     theta *= 2 * np.pi
     return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
+
+def random_points_t_distribution(n):
+    x = np.random.normal(size=(n, DIM))
+    y = chi2.rvs(DOF, size=n)
+    y = np.sqrt(y / DOF)
+    return (x.T / y).T
 
 def random_2d_poisson_process(a):
     n = random.poisson(np.power(a, -DOF))
@@ -104,6 +111,8 @@ def countVertex(n):
         points = mixture_t_1_2(n, TWOPIC1 / (2 * np.pi))
     elif DISTRIBUTION == '2d-t-distribution':
         points = random_points_2d_t_distribution(n, DOF)
+    elif DISTRIBUTION == 'random_points_t_distribution':
+        points = random_points_t_distribution(n)
     else:
         raise ValueError("")
     hull = ConvexHull(points)
@@ -140,9 +149,10 @@ if __name__ == '__main__':
             choices=['unit_circle', '2d-gaussian',
                      '2d-cauchy', '3d-cauchy',
                      '2d-t-distribution', 'exponential-tail',
-                     'mixture_t_1_2'],
+                     'mixture_t_1_2', 'random_points_t_distribution'],
             default='unit_circle')
     parser.add_argument('--dof', help='degree of freedom for t distribution', default=1, type=float)
+    parser.add_argument('--dim', help='dimension', type=int, default=2)
     parser.add_argument('--TWOPIC1', help='mixture coefficient for Cauchy distribution', default=1.0, type=float)
     parser.add_argument('--max_points', help='maximal N', default=100, type=int)
     parser.add_argument('--interval', default=5, type=int)
@@ -152,6 +162,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     DISTRIBUTION = args.distribution
     DOF = args.dof
+    DIM = args.dim
     TWOPIC1 = args.TWOPIC1
     NTRIAL = args.num_trials
     n_list = np.array(range(5, args.max_points, args.interval))
