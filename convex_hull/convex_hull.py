@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.spatial import ConvexHull as ConvexHullRef
+import matplotlib.pyplot as plt
 
 class ConvexHull:
     def __init__(self, coordinates):
@@ -24,19 +25,22 @@ class ConvexHull:
             # check whether the new point is outside of the existing convex hull
             if self.check_out(self._coordinates[i, :]):
                 new_simplices = []
-                start_found = False
                 for indices in self.simplices:
-                    if not self.check_left(indices[0], indices[1], self._coordinates[i, :]):
-                        if not start_found:
-                            start_index = indices[0]
-                            end_index = indices[1]
-                            start_found = True
-                        else:
-                            end_index = indices[1]
-                    else:
+                    if self.check_left(indices[0], indices[1], self._coordinates[i, :]):
                         new_simplices.append(indices)
-                new_simplices.append([start_index, i])
-                new_simplices.append([i, end_index])
+                start_index = new_simplices[-1][1]
+                end_index = new_simplices[0][0]
+                if start_index == end_index:
+                    for j in range(len(new_simplices)-1):
+                        if new_simplices[j][1] != new_simplices[j + 1][0]:
+                            end_index = new_simplices[j + 1][0]
+                            start_index = new_simplices[j][1]
+                            new_simplices.insert(j + 1, [i, end_index])
+                            new_simplices.insert(j + 1, [start_index, i])
+                            break
+                else:
+                    new_simplices.append([start_index, i])
+                    new_simplices.append([i, end_index])
                 self.simplices = new_simplices
         for indices in self.simplices:
             self.vertices.append(indices[0])
@@ -57,11 +61,16 @@ class ConvexHull:
 
 
 if __name__ == '__main__':
-    np.random.seed(122)
-    A = np.random.randn(5, 2)
+    # np.random.seed(122)
+    A = np.random.randn(15, 2)
+    # print(A)
+    #for i in range(5):
+    #    plt.scatter(A[i, 0], A[i, 1], label=str(i))
+    #plt.legend()
+    #plt.show()
     ch = ConvexHull(A)
-    print(ch.simplices)
-    print(ch.vertices)
+    # print(ch.simplices)
+    print(len(ch.vertices))
     ch_ref = ConvexHullRef(A)
-    print(ch_ref.simplices)
-    print(ch_ref.vertices)
+    print(len(ch_ref.vertices))
+    # print(ch_ref.vertices)
