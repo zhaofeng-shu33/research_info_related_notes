@@ -62,7 +62,7 @@ class ConvexHull:
 
 if __name__ == '__main__':
     # np.random.seed(122)
-    A = np.random.randn(15, 2)
+    A = np.random.randn(115, 2)
     # print(A)
     #for i in range(5):
     #    plt.scatter(A[i, 0], A[i, 1], label=str(i))
