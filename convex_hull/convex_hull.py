@@ -1,16 +1,30 @@
 import numpy as np
 from scipy.spatial import ConvexHull as ConvexHullRef
 import matplotlib.pyplot as plt
+from scipy.spatial import HalfspaceIntersection
 
 class ConvexHull:
-    def __init__(self, coordinates):
+    def __init__(self, coordinates, run=True):
         # coordinates are numpy array, we assume no three points are colinear
         self.simplices = []
         self.vertices = []
         self._coordinates = coordinates
         self.ndim = len(coordinates[0, :])
-        if self.ndim == 2:
+        if self.ndim == 2 and run:
             self.run_2d()
+
+    def run_2d_wrapper(self):
+        # convert the problem to half space intersections
+        feasible_point = np.array([0.0, 0])
+        A = self._coordinates - np.average(self._coordinates, axis=0)
+        n = self._coordinates.shape[0]
+        b = np.ones([n, 1])
+        halfspaces = np.hstack((A, -b))
+        hs = HalfspaceIntersection(halfspaces, feasible_point)
+        self.vertices = hs.dual_vertices
+        for i in range(len(self.vertices) - 1):
+            self.simplices.append([self.vertices[i], self.vertices[i+1]])
+        self.simplices.append([self.vertices[-1], self.vertices[0]])
 
     def run_2d(self):
         # find the vertex and facial representation in 2D
@@ -62,13 +76,14 @@ class ConvexHull:
 
 if __name__ == '__main__':
     # np.random.seed(122)
-    A = np.random.randn(115, 2)
+    A = np.random.randn(114, 2)
     # print(A)
     #for i in range(5):
     #    plt.scatter(A[i, 0], A[i, 1], label=str(i))
     #plt.legend()
     #plt.show()
-    ch = ConvexHull(A)
+    ch = ConvexHull(A, run=False)
+    ch.run_2d_wrapper()
     # print(ch.simplices)
     print(len(ch.vertices))
     ch_ref = ConvexHullRef(A)
