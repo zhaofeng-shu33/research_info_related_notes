@@ -697,9 +697,9 @@ Let $h_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{p_0(x_i^{(j)})}{p_1(x_i^{(j
 The data $x_i^{(j)}$ are sampled from $p_0$ if $\sigma_i = 1 (y_i = 1)$. On the contrary,
 if $y_i = -1$ the data $x_i^{(j)}$ are sampled from $p_1$.
 
-We multiply the above equation by $2$ and subtract $y^T(J_n-I_n)y$. We then can get
+We multiply the above equation by $2$ and subtract $\frac{1}{2}y^T(J_n-I_n)y$. We then can get
 $$
-2\sum_{i=1}^n h_iy_i + \sum_{(i,j)\in E} y_i y_j - (2\kappa+1) \sum_{(i,j)\in E} y_i y_j
+2\sum_{i=1}^n h_iy_i + \sum_{(i,j)\in E} y_i y_j - (2\kappa+1) \sum_{(i,j)\not\in E} y_i y_j
 $$
 
 The matrix $B$ is defined as in \cite{abbe} as
@@ -711,7 +711,7 @@ B_{ij} = \begin{cases}
 \end{cases}
 \end{equation}
 
-Then the problem is $2\max h^T y + \frac{1}{2}y^T B y$ (omit $\kappa=o(1)$).
+Then the problem is $2\max h^T y + \frac{1}{4}y^T B y$ (omit $\kappa=o(1)$).
 
 Following \cite{wang2019tightness}, we use the relaxation
 technique to get a SDP problem as follows:
@@ -875,8 +875,9 @@ Similar results are obtained when $g_i=-1$. Finally,
 $P(\Xi_{ii} \leq c\sqrt{\log n}, \exists 1\leq i \leq n)$ is bounded by $n^{1-\theta_1^*+o(1)}$, and Theorem \ref{thm:sdp} follows.
 \section{Gärtner Ellis Theorem}
 In this section, we use Gärtner Ellis Theorem to compute the limit\linebreak
-$\lim_{n\to \infty} \frac{1}{\log n} P(\sum_{i=1}^n (X_i - Z_i)  \geq 0)$.
-when $p=\A$ and $q=\B$.
+$\lim_{n\to \infty} \frac{1}{\log n} P(\sum_{i=1}^n (X_i - Z_i)  \geq 0)$ for
+$X_i \sim \Bern(q), Z_i \sim \Bern(p)$ while $p=\A$ and $q=\B$.
+
 We first give a simplified version of Gärtner Ellis theorem.
 Let $S_n$ be a series of random variables, $\gamma_n >0, \lim_{n\to \infty}\gamma_n \to 0$.
 $\Lambda_n(t)=\log \E[\exp(t S_n)]$ represents the log moment generating function of $S_n$ (log-MGF).

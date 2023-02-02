@@ -1,9 +1,11 @@
 import argparse
 import numpy as np
+from numpy import random
 import pickle
 from scipy.optimize import fsolve
 from scipy.spatial import ConvexHull
 from scipy.integrate import dblquad
+from scipy.stats import chi2
 from scipy.special import gamma, gammainc
 # from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
@@ -11,7 +13,7 @@ NTRIAL = 1000
 DISTRIBUTION = 'unit_circle'
 DOF = 1.0
 TWOPIC1 = 1.0
-
+DIM = 2
 def exponential_tail(n, beta=1):
     # beta=1: gaussian
     y = np.random.random(n)
@@ -42,6 +44,20 @@ def random_points_2d_cauchy(n):
     theta *= 2 * np.pi
     return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
 
+def random_points_t_distribution(n):
+    x = np.random.normal(size=(n, DIM))
+    y = chi2.rvs(DOF, size=n)
+    y = np.sqrt(y / DOF)
+    return (x.T / y).T
+
+def random_2d_poisson_process(a):
+    n = random.poisson(np.power(a, -DOF))
+    y = np.random.random(n)
+    r = a / np.power(1 - y, 1 / DOF)
+    theta = np.random.random(n)
+    theta *= 2 * np.pi
+    return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
+    
 def random_points_2d_t_distribution(n, v):
     y = np.random.random(n)
     r = np.sqrt(v) * np.sqrt(np.power(1-y, -2/v) - 1)
@@ -68,9 +84,19 @@ def random_points_in_unit_circle(n):
     theta *= 2 * np.pi
     return np.vstack((r * np.cos(theta), r * np.sin(theta))).T
 
+def random_points_in_unit_sphere(n):
+    r = np.random.random(n)
+    r = np.power(r, 1 / DIM)
+    points = np.random.normal(size=(n, DIM))
+    norm_list = np.linalg.norm(points, axis=1) / r
+    points = (points.T / norm_list).T
+    return points
+
 def transform(n_list, result):
     if DISTRIBUTION == 'unit_circle':
         result = result / n_list ** (1/3)
+    elif DISTRIBUTION == 'unit_sphere':
+        result = result / n_list ** ((DIM - 1) / (DIM + 1))
     elif DISTRIBUTION == '2d-gaussian':
         result = result / np.sqrt(np.log(n_list))
     elif DISTRIBUTION == 'exponential-tail':
@@ -95,6 +121,10 @@ def countVertex(n):
         points = mixture_t_1_2(n, TWOPIC1 / (2 * np.pi))
     elif DISTRIBUTION == '2d-t-distribution':
         points = random_points_2d_t_distribution(n, DOF)
+    elif DISTRIBUTION == 't_distribution':
+        points = random_points_t_distribution(n)
+    elif DISTRIBUTION == 'unit_sphere':
+        points = random_points_in_unit_sphere(n)
     else:
         raise ValueError("")
     hull = ConvexHull(points)
@@ -103,13 +133,26 @@ def countVertex(n):
 def testN(n, nTrial=20):
     return np.array( [ countVertex(n) for i in range(nTrial) ])
 
-def testAllN(n_list):
-    
+def testAllN(n_list, poisson=False):
     nN = len(n_list)
     result = np.zeros(nN)
-    for i, n in enumerate(n_list):
-        print(i)
-        result[i] = np.mean(testN(n, NTRIAL))
+    if poisson:
+        for j in range(nN):
+            result_j = 0
+            a = 1 / n_list[j]
+            for i in range(NTRIAL):
+                points = random_2d_poisson_process(a)     
+                if points.shape[0] <= 3:
+                    result_j += points.shape[0]
+                else:
+                    hull = ConvexHull(points)
+                    result_j += hull.nsimplex
+            result_j /= NTRIAL
+            result[j] = result_j
+    else:
+        for i, n in enumerate(n_list):
+            print(i)
+            result[i] = np.mean(testN(n, NTRIAL))
     return result
 
 if __name__ == '__main__':
@@ -118,24 +161,30 @@ if __name__ == '__main__':
             choices=['unit_circle', '2d-gaussian',
                      '2d-cauchy', '3d-cauchy',
                      '2d-t-distribution', 'exponential-tail',
-                     'mixture_t_1_2'],
+                     'mixture_t_1_2', 't_distribution', 'unit_sphere'],
             default='unit_circle')
     parser.add_argument('--dof', help='degree of freedom for t distribution', default=1, type=float)
+    parser.add_argument('--dim', help='dimension', type=int, default=2)
     parser.add_argument('--TWOPIC1', help='mixture coefficient for Cauchy distribution', default=1.0, type=float)
     parser.add_argument('--max_points', help='maximal N', default=100, type=int)
     parser.add_argument('--interval', default=5, type=int)
     parser.add_argument('--num_trials', default=1000, type=int)
+    parser.add_argument('--poisson', type=bool, const=True, nargs='?', default=False)
 
     args = parser.parse_args()
     DISTRIBUTION = args.distribution
     DOF = args.dof
+    DIM = args.dim
     TWOPIC1 = args.TWOPIC1
     NTRIAL = args.num_trials
     n_list = np.array(range(5, args.max_points, args.interval))
-    result = testAllN(n_list)
+    result = testAllN(n_list, args.poisson)
     with open('build/sim_data_0.pickle', 'wb') as f:
         pickle.dump({'n_list': n_list, 'result': result}, f)
-    result = transform(n_list, result)
+    if not args.poisson:
+        result = transform(n_list, result)
+    else:
+        args.distribution = '2d-t-distribution'
     # if args.distribution.find('cauchy') < 0:
         # model = LinearRegression()        
         # reg = model.fit(np.log(transformed_n_list.reshape(-1, 1)), np.log(result))

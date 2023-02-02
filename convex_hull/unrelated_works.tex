@@ -178,7 +178,57 @@ the one \cite{orthogonal}:
     A=\big(\frac 12-a-b\big)\pi + 2b\arctan(\frac ac)+2a\arctan(\frac bc)+\arctan(\frac{c^2-a^2 b^2}{2abc})
 \end{equation}
 when $a=b=x, c=\sqrt{1-2a^2}, z=1,y=\sqrt{2}x$ and $x<\frac{\sqrt{2}}{2}$.
+\section{Special function for Cauchy distribution}
+\begin{equation}
+    g_n(r) = \frac{\Gamma((r+1)/2)}{\pi^{(d+1)/2}|\Sigma|^{1/2}}
+    \int_{\bm{x}\geq 0}\frac{1}{(1+\bm{x}^T\Sigma^{-1}\bm{x})^{(1+d)/2}}d\bm{x}
+\end{equation}
+where $\Phi$ is the CDF of Cauchy distribution.
+By integration techniques, we can show that 
+$g_2(r)=\frac{1}{2\pi}\arccos(-\frac{r}{1+r})
+=\frac{1}{2}-\arccos\frac{r}{1+r}$,
+which is the same with property f of Proposition 1.4 in \cite{kabluchko2020absorption}
 
+It seems that the conic version of Crofton formula only
+works for Gaussian distribution mentioned in \cite{kabluchko2020absorption}.
+Thus the method could not be generalized to
+other spherically symmetric distribution.
+\section{Limit distribution of the number of points}
+See \cite{aldous1991number}
+\section{Notes on Poisson process}
+This section is axillary to Lemma 4.3 of \cite{davis1987convex}.
+For $y>a$,
+\begin{equation}
+    g_a(y) = \frac{\alpha a^{\alpha}}{2\pi}
+    y^{-\alpha-1} B(\frac{1}{2}, \frac{\alpha + 1}{2})
+\end{equation}
+$F_{1a}(x)$ represents marginal distribution,
+\begin{equation}
+    1-F_{1a}(x)=\frac{a^{\alpha}}{2\pi}x^{-\alpha}B(\frac{1}{2}, \frac{\alpha + 1}{2})
+\end{equation}
+Using symmetric property, we can show that
+\begin{align}
+G(x) &= 2\pi \iint_{\R^2} |y_2 - y_1| p(x,y_1) p(x,y_2)dy_1dy_2\\
+&=16\pi \int_0^{+\infty} p(x,y_1) dy_1 \int_{y_1}^{+\infty} y_2 p(x,y_2)dy_2
+\end{align}
+Then
+\begin{equation}
+    \E[V_N]= \binom{N}{2} \int_{\R} F_{1a}(x)^{N-2} G(x) dx
+\end{equation}
+Using the formula
+\begin{equation}
+    \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+    |\tan \theta - \tan \psi|
+    \cos^v\theta \cos^v \psi
+    d\theta d\psi \notag\\
+    = \frac{4}{v} B\left(v+\frac{1}{2}, \frac{1}{2}
+    \right)
+\end{equation}
+we can obtain
+\begin{equation}
+    G(x) = \frac{2\alpha a^{2\alpha}}{\pi x^{2\alpha+1}}
+    B(\alpha+\frac{1}{2},\frac{1}{2})
+\end{equation}
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}

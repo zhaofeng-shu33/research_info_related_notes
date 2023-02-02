@@ -24,14 +24,15 @@
 \section{General statement}
 $p_i$ are points sampled with independent identical distribution in $d$ dimensional space
 for $i=1,2,\dots, n, n+1$. We consider the event
-$A_n =\{p_{n+1} \in ConvexHull\{p_1,
-\dots, p_n\} \}$. $P(A_n)$ is also called
-the probability content while $P(A_n^c)
-=1-P(A_n)$.
-$P(A_n^c)$ increases if $d$ increases,
+$H_n =\{p_{n+1} \in ConvexHull\{p_1,
+\dots, p_n\} \}$. $P(H_n)$ is also called
+the probability content while
+$P(H_n^c)
+=1-P(H_n)$.
+$P(H_n^c)$ increases if $d$ increases,
 and it decreases if $d$ increases.
 
-Notice that the event $A^c_n$ is different
+Notice that the event $H^c_n$ is different
 from the event that $p_1, \dots, p_{n+1}$
 are in convex position.
 
@@ -42,7 +43,7 @@ in 1864. Then there are two directions afterwards.
 One is studying the probability of all points are in convex
 position, denoted as $p(n, K)$ in $d$ dimension where $K$ is the convex body
 and $n$ is the number of points.
-The other direction is to study $P(A_n)$.
+The other direction is to study $P(H_n)$, the probability content of the convex hull.
 The second direction diverges from the first direction
 from the paper of Rényi in 1963 \cite{renyi1963konvexe}.
 
@@ -54,11 +55,22 @@ in a unit circle, the asymptotic behavior
 of the number of vertices is $cn^{1/3}$.
 For the standard normal distribution in a plane,
 $\E[V_n] \sim 2\sqrt{2\pi \log n}$.
+Carnal \cite{carnal1970konvexe} studied  general symmetric distribution in 2d,
+and obtained the asymptotic expression of $\E[V_N]$
+in three different distribution families.
+
 
 Later on, in the paper of Hervé Raynaud (in the year 1970)
 \cite{raynaud1970enveloppe},
 the results
 of Rényi are extended to higher dimensions.
+However, this extension is restricted to the
+computation of $\E[F_N]$, the expected number of
+$d-1$ dimensional hyperplanes.
+
+Exact formula of $P(H_N^c)$
+for Gaussian distribution is obtained in \cite{kabluchko2020absorption}.
+
 Both Rényi and Raynaud
 based their deductions on integration techniques.
 Afterwards, discrete mathematics has been
@@ -1312,7 +1324,7 @@ We can verify that $g(1) = \frac{\pi^2}{2}$,
 which is consistent with Lemma \ref{lem:lim_V_N_2d_cauchy}.
 Without too much difficulty, we obtain $g(2)=6>g(1)$.
 This result is the same with (2.5) in \cite{carnal1970konvexe}
-($k$ is the same with $v$).
+($k$ is the same with $v$) or Theorem 4 in \cite{davis1987convex}.
 
 Though the distribution is not defined at $v=0$,
 we can compute formally the value $g(0)=4$.
@@ -1455,7 +1467,7 @@ and we modify it to the n-dimensional Cauchy distribution.
     comes from \eqref{eq:cauchy_d_dim} by using
     the Pythagoras' theorem.
     Let $p_1^2=1+p^2$
-    Then we make the change of variables $t_i = p_1d_i$.
+    Then we make the change of variables $t_i = p_1t'_i$.
     By the scaling effect, we can count the number of $p_1$
     in the two terms of \eqref{eq:intermediate_f_p_k_d}
     respectively. That is, $p_1^{(d-1)d-1}p_1^d / p_1^{(1+d)d}$.
@@ -2602,7 +2614,7 @@ and
     &+ \frac{4}{\pi}\int_z^{+\infty}|dF(z)|dz
     \int_x^{z}
     \frac{y(4y^2-3z^2)\sqrt{y^2-x^2}}{z^2 \sqrt{z^2-y^2}} 
-    \int_z^{+\infty} \frac{-2}{y_1^2} |dF(y_1)|
+    dy\int_z^{+\infty} \frac{-2}{y_1^2} |dF(y_1)|
 \end{align*}
 Using definite integral, we can obtain
 \begin{equation}
@@ -2618,7 +2630,7 @@ Then
 \end{equation}
 
 \section{Higher dimensional case}
-Conjecture:
+
 \begin{align}
     \kappa(x,y) & =(1-\frac{x^2}{y^2})^{\frac{d-2}{2}}\\
     K(x) &=P(\sqrt{x_1^2+x_2^2}>x)= \int_x^{+\infty} \kappa(x,y)|dF(y)| \\
@@ -2686,12 +2698,30 @@ a & = \pm \tan \theta \sqrt{x_1^2+\dots + x_{d-1}^2} + y \\
 z^2 &= a^2 + x_1^2 + \dots + x_{d-1}^2
 \end{align*}
 Then
-\begin{equation}
+\begin{equation}\label{eq:F0_formula}
     F_0(x)=\frac{2\Gamma(\frac{d}{2})}
     {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
     \int_x^{+\infty} |dF(y)|
-    \int_x^{y} |dF(z)|dz \int_{a_2/z}^{a_1 /z} (1-u^2)^{\frac{d-3}{2}}du
+    \int_x^{y} |dF(z)|\int_{a_2/z}^{a_1 /z} (1-u^2)^{\frac{d-3}{2}}du
 \end{equation}
+At this point, we prove the formula of
+$\kappa(r)$ defined in (1.1) of \cite{dwyer1991convex}.
+From $\kappa(r)$ it is easy to derive \eqref{eq:F0_formula}.
+
+Our starting point is Example 8.7 of \cite{surfaceArea}.
+the element of surface area $d\sigma = \frac{1}{1-|y|^2}dy$
+for a unit sphere parameterized by $y=(x_1, \dots, x_{d-1})$.
+Therefore,
+\begin{align*}
+    \kappa(r) &= \frac{1}{\kappa_d}\int_{x_1^2 + \dots + x_{d-1}^2 \leq 1-r^2}
+    \frac{dx_1 \dots dx_{d-1}}{\sqrt{1-x_1^2-\dots -x_{d-1}^2}}\\
+    &=\frac{\kappa_{d-1}}{\kappa_d}\int_0^{\sqrt{1-r^2}} \frac{x^{d-2}}{\sqrt{1-x^2}}dx
+\end{align*}
+Now make a change of variable by $u^2=1-x^2$ we obtain
+\begin{equation}
+    \kappa(r)=\frac{\kappa_{d-1}}{\kappa_d}\int_r^1 (1-u^2)^{(d-3)/2}du
+\end{equation}
+
 To simplify the notation,
 we assume $\cos\theta_1=\frac{x}{z},
 \cos\theta_2=\frac{x}{y}$.
@@ -2712,7 +2742,7 @@ Then
 \begin{align*}
     \frac{d F_0(x)}{dx} & =\frac{2\Gamma(\frac{d}{2})}
     {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
-    \int_x^{+\infty} f(x,y,z)|dF(y)| \\
+    \int_x^{+\infty} |dF(y)| \int_x^y |f(x,y,z)| |dF(z)| \\
     f(x,y,z) & = \sin^{d-2} (\theta_2 - \theta_1)
     \left(\frac{-1}{z\sin\theta_1}
     +\frac{1}{y\sin \theta_2}\right)
@@ -2720,6 +2750,194 @@ Then
     \left(\frac{1}{z\sin\theta_1}
     +\frac{1}{y\sin \theta_2}\right)
 \end{align*}
+
+
+We only need to prove
+\begin{equation}\label{eq:ref_prove_integration}    
+    \frac{2\Gamma(\frac{d}{2})}
+    {\sqrt{\pi}\Gamma(\frac{d-1}{2})}
+    \int_u^z (1-\frac{u^2}{x^2})^{\frac{d-3}{2}}
+    |f(x,y,z)|dx =
+    2(1-\frac{u^2}{y^2})^{\frac{d-2}{2}}
+    (1-\frac{u^2}{z^2})^{\frac{d-2}{2}}
+\end{equation} 
+Suppose $k\leq d-2$ and $d-k$ is odd,
+then
+\begin{align*}
+    &2\int_u^z x
+    (y^2-x^2)^{\frac{k-1}{2}}
+    (z^2-x^2)^{\frac{d-2-k}{2}}
+    (x^2-u^2)^{\frac{d-3}{2}}dx\\
+    &=\int_{0}^{z^2-u^2}
+    (y^2-u^2-x)^{\frac{k-1}{2}}
+    (z^2-u^2-x)^{\frac{d-2-k}{2}}
+    x^{\frac{d-3}{2}}dx\\
+    &=\int_{0}^{a}
+    (b-x)^{\frac{k-1}{2}}
+    (a-x)^{\frac{d-2-k}{2}}
+    x^{\frac{d-3}{2}}dx=g(k,b,a)
+\end{align*}
+where $a=z^2-u^2, b=y^2-u^2, a<b$.
+
+When $d-k$ is even, we only need to compute
+$g(k+1,x,b,a)$.
+In summarize, to prove \eqref{eq:ref_prove_integration},
+we only need to show that
+\begin{align}\label{eq:intermediate_summation}
+    \sum_{k\leq d-2}\binom{d-2}{k}g(k+\textrm{mod}(d-k+1,2)
+    ,b,a)
+    = B(\frac{d-1}{2}, \frac{1}{2})
+    b^{\frac{d-2}{2}}
+    a^{\frac{d-2}{2}}
+\end{align}
+We can first show that
+\begin{align*}
+    &\binom{d-2}{k}
+    g(k,b,a) + \binom{d-2}{k+1}
+    g(k+2,b,a) \\
+    &=\binom{d-2}{k}\frac{d-3}{k+1}
+    \int_{0}^{a}
+    (b-x)^{\frac{k+1}{2}}
+    (a-x)^{\frac{d-2-k}{2}}
+    x^{\frac{d-5}{2}}dx
+\end{align*}
+Below we divide the proof into the case whether
+$d$ is even or odd.
+
+\subsection{$d$ is odd}
+Suppose $d$ is odd, by integration by parts, we can first show that
+\begin{equation}
+    \int_0^{z^2-u^2} \sqrt{\frac{z^2-u^2-x}{y^2-u^2-x}}dx
+    + \int_0^{z^2-u^2} \sqrt{\frac{y^2-u^2-x}{z^2-u^2-x}}dx
+    = 2\sqrt{y^2-u^2}\sqrt{z^2-u^2}
+\end{equation}
+Indeed, let $\sqrt{\frac{a-x}{b-x}}$, we have
+\begin{align}
+    \int_0^a \sqrt{\frac{a-x}{b-x}}dx
+    &= \int_0^{\sqrt{a/b}} \frac{2(b-a)t^2}{(1-t^2)^2}dt
+    =\sqrt{ab} - \frac{b-a}{2}\ln \frac{1+\sqrt{a/b}}{1-\sqrt{a/b}} \\
+    \int_0^a \sqrt{\frac{b-x}{a-x}}dx
+    &= \int_0^{\sqrt{a/b}} \frac{2(b-a)}{(1-t^2)^2}dt
+    =\sqrt{ab} + \frac{b-a}{2}\ln \frac{1+\sqrt{a/b}}{1-\sqrt{a/b}} \\
+\end{align}
+That is, \eqref{eq:intermediate_summation} holds for $d=3$.
+
+\subsection{$d$ is even}
+Suppose $d$ is even, and $k$ is odd, then
+\begin{align*}
+    g(k,b,a)= \sum_{j=0}^{(k-1)/2}
+    (-1)^{\frac{k-1}{2}-j}\binom{(k-1)/2}{j}
+    B(\frac{d+k}{2}-j-1, \frac{d-k}{2})
+    b^j a^{d-2-j}
+\end{align*}
+When $j=\frac{d-2}{2}$, $k=d-1$,
+$g(d-1,b,a)$
+contains a term like
+$B(\frac{d-1}{2}, \frac{1}{2})b^{(d-2)/2}
+a^{(d-2)/2}$.
+
+Then we need to show:
+\begin{equation*}
+ \frac{d-3}{d-1} \sum_{t=0}^{(d-2)/2}
+\binom{d-1}{2t} \int_0^a
+(b-x)^{t}(a-x)^{(d-1-2t)/2}
+x^{(d-5)/2} dx
+=B(\frac{d-1}{2}, \frac{1}{2})
+b^{\frac{d-2}{2}}
+a^{\frac{d-2}{2}}
+\end{equation*}
+Or equivalently,
+\begin{equation*}
+    \int_0^a[(1+t)^{d-1}-(1-t)^{d-1}] (b-x)^{(d-1)/2}x^{(d-5)/2} dx
+\end{equation*}
+We can also obtain the above formula when $d$ is odd.
+
+where $t=\sqrt{\frac{a-x}{b-x}}$.
+$x=\frac{a-bt^2}{1-t^2},\frac{dx}{dt} = \frac{2t(a-b)}{(1-t^2)^2}$,
+Then we need to show that
+\begin{equation*}
+\frac{d-3}{2(d-1)} (b-a)^{(d+1)/2}\int_0^{\sqrt{a/b}} [(1+t)^{d-1}-(1-t)^{d-1}] \frac{2t(a-bt^2)^{(d-5)/2}}{(1-t^2)^{d-1}}dt
+= B(\frac{d-1}{2}, \frac{1}{2})
+b^{\frac{d-2}{2}}
+a^{\frac{d-2}{2}}
+\end{equation*}
+or equivalently
+\begin{equation*}
+    \int_0^{c}
+    [(1+t)^{n+1}-(1-t)^{n+1}]
+    \frac{t(c^2- t^2)^{(n-3)/2}}{(1-t^2)^{n+1}}dt
+    = \frac{n+1}{n-1}B(\frac{n+1}{2}, \frac{1}{2})
+    \frac{c^n}{(1-c^2)^{(n+3)/2}}
+    \end{equation*}
+for $n=d-2\geq 1, c=\sqrt{a/b}<1$.    
+\begin{equation}
+    \int_0^{c}
+    [\frac{1}{(1-t)^{n+2}}+\frac{1}{(1+t)^{n+2}}]
+    (c^2- t^2)^{(n-1)/2}dt
+    =B(\frac{n+1}{2}, \frac{1}{2})
+    \frac{c^n}{(1-c^2)^{(n+3)/2}}
+    \end{equation}
+Let
+\begin{equation}\label{eq:f_n_c_def}
+ f(n,c)=   \int_0^{c}
+    [\frac{1}{(1-t)^{n+2}}+\frac{1}{(1+t)^{n+2}}]
+    (c^2- t^2)^{(n-1)/2}dt
+\end{equation}
+Firstly, by integration by parts 
+we have 
+\begin{equation}\label{eq:tmp_n_u_d_f_n}
+    \frac{n+1}{n-1}f(n,c)
+    =\int_0^{c}
+    \left[\frac{1}{(1-t)^{n+1}}
+    -\frac{1}{(1+t)^{n+1}}
+    \right]
+    t(c^2- t^2)^{(n-3)/2}
+    dt
+\end{equation}
+Let $t=\frac{(1+t)-(1-t)}{2}$ in the right hand side,
+of \eqref{eq:tmp_n_u_d_f_n}, then
+\begin{equation}
+    2\frac{n+1}{n-1}f(n,c)
+=    -f(n-2,c)  
++ \int_0^{c}
+\left[\frac{1+t}{(1-t)^{n+1}}
++\frac{1-t}{(1+t)^{n+1}}
+\right]
+(c^2- t^2)^{(n-3)/2}
+dt
+\end{equation}
+On the other hand,
+From \eqref{eq:f_n_c_def},
+$(c^2-t^2)^{(n-1)/2}
+=[(c^2-1)+(1-t^2)](c^2-t^2)^{(n-3)/2}$
+\begin{equation}
+    f(n, c) = \frac{c^2-1}{2c}\frac{2}{n-1}\frac{\partial f(n,c)}{\partial c}
+    +  \int_0^{c}
+    \left[\frac{1+t}{(1-t)^{n+1}}
+    +\frac{1-t}{(1+t)^{n+1}}
+    \right]
+    (c^2- t^2)^{(n-3)/2}
+    dt
+\end{equation}
+Therefore,
+\begin{equation}\label{eq:sim_1tc}
+    f(n,c)=\frac{c^2-1}{2c}\frac{2}{n-1}\frac{\partial f(n,c)}{\partial c}
+    + [2\frac{n+1}{n-1} f(n,c) + f(n-2, c)]
+\end{equation}
+then we can use induction and solve this
+first order linear ODE about $f(n,c)$ to prove
+that (from \eqref{eq:sim_1tc})
+\begin{equation}
+    f(n,c)= B(\frac{n+1}{2}, \frac{1}{2})
+    \frac{c^n}{(1-c^2)^{(n+3)/2}}
+\end{equation}
+Indeed, with initial condition $f(n,0)=0$ and
+\begin{equation}
+    \frac{\partial f(n,c)}{\partial c}
+    - \frac{(n+3)c}{1-c^2} f(n,c)
+    = B((n-1)/2, 1/2)\frac{(n-1)c^{n-1}}{(1-c^2)^{(n+3)/2}}
+\end{equation}
+积分因子是 $I(c)=(1-c^2)^{(n+3)/2}$.
 \subsection{Polynomial tail}
 For polynomial tail $F(x) \sim x^{-k} L(x)$,
 $K(x) \sim F(x) \frac{d-2}{2} B\left(\frac{k+2}{2}, \frac{d}{2}-1\right)$
@@ -2751,7 +2969,7 @@ The right hand side of \eqref{eq:efn_poly_second_deri}
 is asymptotically
 equivalent to
 $$
-\sqrt{\frac{2}{\pi}}\frac{1}{d}\left(
+\sqrt{\frac{2}{\pi dk}}\left(
     \frac{\sqrt{\pi}k \Gamma(k/2)}
     {\Gamma(\frac{k+1}{2})}
 \right)^d
@@ -2764,7 +2982,7 @@ For exponential tails,
 \end{equation}
 \begin{align*}
     H(x) & = \frac{2}{\pi} \int_x^{+\infty}\frac{x K^d(y)}{y^2 \sqrt{1-\frac{x^2}{y^2}}}dy\\
-    &=\frac{2}{\pi}\left[m 2^{\frac{d}{2}-1} \Gamma\left(\frac{d}{2}\right)\right]^d
+    &=\frac{2}{\pi}\left[ 2^{\frac{d}{2}-1} \Gamma\left(\frac{d}{2}\right)\right]^d
     \int_s^{+\infty}\frac{L(s) \epsilon^{1+\frac{d(d-2)}{2}}(\sigma)}{L(\sigma) \sqrt{1-\frac{L^2(s)}{L^2(\sigma)}}\sigma^{d+1}} d\sigma
     \textrm{ since } dy=L(\sigma)\frac{\epsilon(\sigma)}{\sigma}d\sigma \\
     &\sim  \frac{\sqrt{2}}{\pi}
@@ -2798,14 +3016,27 @@ When the following condition satisfies, $P(H_N^c) \to 0$:
 \end{equation}
 
 For d dimensional Gaussian, we have $\epsilon(s)=\frac{1}{2\log s}$,
-then $\E[F_N]=\frac{2^d}{\sqrt{d}}(\pi \log N)^{\frac{d-1}{2}}$,
+then $\E[F_N]\sim \frac{2^d}{\sqrt{d}}(\pi \log N)^{\frac{d-1}{2}}$,
 which is consistent with (1.11) of \cite{raynaud1970enveloppe}.
 
+We can compare our result with that in \cite{kabluchko2020absorption}.
+In our consideration,
+\begin{enumerate}
+    \item $p_{n,d}(1) \leq d b_{n,d-1}(1)$
+    \item $g_{d-1}(-\frac{1}{d})\sim \frac{1}{2^{d-1}}$
+    \item $\sqrt{\frac{2d}{\pi}} \binom{n}{d}
+    \int_0^{+\infty} \Phi^{n-d}(x) \exp(-\frac{d}{2}x^2)dx
+    \sim \frac{2^d}{\sqrt{d}}(\pi \log n)^{(d-1)/2}$
+\end{enumerate}
+then we can obtain $p_{N,d}(1) \leq \frac{(\pi \log N)^{(d-1)/2}d^{3/2}}{N }<\frac{\E[F_N]}{dN}$.
+Therefore, our estimation of $P(H_N^c)$ based on $\E[F_N]$
+is a loose upper bound.
 \subsection{Truncated tail}
-For truncated tails, if If $F(1-x) \sim x^k L(1/x)$,
+For truncated tails, if $F(1-x) \sim x^k L(1/x)$,
 then
 \begin{align}
-    K(1-x) & \sim (d-2)2^{\frac{d}{2}-2} B(k+1,\frac{d}{2}-1)x^{k+\frac{d}{2}-1}L(\frac{1}{x})\\
+    K(1-x)
+    & \sim (d-2)2^{\frac{d}{2}-2} B(k+1,\frac{d}{2}-1)x^{k+\frac{d}{2}-1}L(\frac{1}{x})\\
     & = k 2^{\frac{d}{2}-1} B(k, \frac{d}{2}) x^{k+\frac{d}{2}-1} L(1/x) 
 \end{align}
 and
@@ -2839,12 +3070,13 @@ Then
 and we obtain
 \begin{align}\label{eq:efn_truncated_formula}
     \E[F_N] &\sim \frac{b}{d!}a^{-d+\frac{d-1}{2k+d-1}}
-    \Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)n^{\frac{d-1}{2k+d-1}}
-    L(n)
+    \Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)N^{\frac{d-1}{2k+d-1}}
+    L(N)
     ^{\frac{d-1}{2k+d-1}} \\
     &\sim \frac{\tilde{b} }{d!}
-    a^{\frac{d-1}{2k+d-1}}\Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)n^{\frac{d-1}{2k+d-1}}
-    L(n)
+    a^{\frac{d-1}{2k+d-1}}\Gamma\left(d+1-\frac{d-1}{2k+d-1}\right)
+    N^{\frac{d-1}{2k+d-1}}
+    L(N)
     ^{\frac{d-1}{2k+d-1}}
 \end{align}
 where
@@ -2853,6 +3085,16 @@ where
     = \frac{\pi^{(d-1)/2} 2^{(d+1)/2}
     \Gamma^d(k+\frac{d+1}{2})
     \Gamma(d(k+\frac{d}{2}-1)+1)}{\Gamma^d(k+\frac{d}{2})\Gamma(d(k+\frac{d}{2}-1)+ \frac{3}{2})}
+\end{equation}
+When $d\to \infty$, using the 
+following lemma, we obtain the asymptotic value of $\tilde{b}$ as
+\begin{equation}
+    \tilde{b} \sim 2\pi^{(d-1)/2}
+    d^{-1}e^kd^{d/2}
+\end{equation}
+The asymptotic value of $a$ is given as
+\begin{equation}
+    a \sim \pi^{-1/2} 2^{\frac{d-2+2k}{2}} k \Gamma(k) d^{-k-\frac{1}{2}}
 \end{equation}
 \begin{lemma}
     For fixed $v>0$, we have
@@ -2877,14 +3119,14 @@ where
 \end{proof}
 When the following condition is satisfied, $P(H_N^c) \to 0$.
 \begin{equation}
-2^{k+\frac{d}{2}} k e^k \Gamma(k) \pi^{(d-2)/2} d^{\frac{d-5}{2} -k} L(n) n^{-2k/d}  \to 0   
+2^{k+\frac{d}{2}} k e^k \Gamma(k) \pi^{(d-2)/2} d^{\frac{d-5}{2} -k} L(N) N^{-2k/d}  \to 0   
 \end{equation}
 
-When $k=1, L(n)=d$, we can verify that
+When $k=1, L(N)=d$, we can verify that
 \eqref{eq:efn_truncated_formula} is equivalent with (1.1)
 of \cite{raynaud1970enveloppe}.
 
-When $k=q+1, L(n)=\frac{2^{q+1}}{(q+1)B(d/2,q+1)}$,
+When $k=q+1, L(N)=\frac{2^{q+1}}{(q+1)B(d/2,q+1)}$,
 we can verify that
 \eqref{eq:efn_truncated_formula} is equivalent with the expression of $c_3$
 in (3.3) of \cite{affentranger1991convex}.
@@ -2898,6 +3140,10 @@ when $N=\omega((\frac{d}{2})^{(d+1)/2})$. If we start from the estimation
 $P(H_N^c) \leq \frac{\E[F_N]}{(d-1)N}$, the estimation is looser, about
 $N=\omega(d^{d^2})$.
 
+The relationship of $N$ with $k$ for fished $d$ is inverse to
+those other two tails(polynomial and exponential tails).
+The larger $k$ becomes, the smaller $N$ is. That is, faster decay to 0 at $x=1^{-1}$
+leads to smaller sample size.
 \bibliographystyle{plain}
 \bibliography{ref.bib}
 \end{document}
